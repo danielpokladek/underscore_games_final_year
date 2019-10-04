@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private float viewPortFactor;
-    [SerializeField] private float followDuration;
-    [SerializeField] private float maximumFollowSpeed;
     [SerializeField] private Transform playerTransform;
+    [SerializeField] private float maximumFollowSpeed   = 10f;
+    [SerializeField] private float viewPortFactor       = .5f;
+    [SerializeField] private float followDuration       = .1f;
 
-    Vector2 viewPortSize;
-    Camera mainCamera;
+    private Vector2 viewPortSize;
+    private Camera mainCamera;
 
-    Vector3 targetPosition;
-    Vector3 currentVelocity;
+    private Vector3 targetPosition;
+    private Vector3 currentVelocity;
 
-    Vector2 distance;
+    private Vector2 distance;
 
     // Start is called before the first frame update
     void Start()
