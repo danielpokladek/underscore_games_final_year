@@ -18,9 +18,10 @@ public class RoomTemplates : MonoBehaviour
 
     [HideInInspector] public List<GameObject> spawnPointsInRoom;
     [HideInInspector] public List<GameObject> levelRooms;
+    [HideInInspector] public bool spawned = false;
 
-    private bool spawnedBoss;
-    private bool spawnedShop;
+    private bool spawnedBoss    = false;
+    private bool spawnedShop    = false;
 
     private void Update()
     {
@@ -41,6 +42,10 @@ public class RoomTemplates : MonoBehaviour
                 Instantiate(shop, levelRooms[randRoom].transform.position, Quaternion.identity);
                 spawnedShop = true;
             }
+
+            // By this point the dungeon is generated, and we can clear the spawn points to save memory.
+            // Ideally there should be a function that tells the script the generation is done, and we can clear the list.
+            spawned = true;
         }
         else
         {

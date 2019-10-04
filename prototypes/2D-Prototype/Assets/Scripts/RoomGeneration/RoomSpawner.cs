@@ -24,6 +24,18 @@ public class RoomSpawner : MonoBehaviour
         Invoke("SpawnRoom", 0.1f);
     }
 
+    public void Clear()
+    {
+        templates.spawnPointsInRoom.Remove(this.gameObject);
+        Destroy(this.gameObject);
+    }
+
+    private void Update()
+    {
+        if (templates.spawned)
+            Clear();
+    }
+
     private void SpawnRoom()
     {
         if (spawned == false)
