@@ -23,6 +23,8 @@ public class ARG_LevelGeneration : MonoBehaviour
         "This should only be assigned to the prefab used in generation, and anything else should be adjusted in the script.")]
     public GameObject roomWhiteObj;
 
+    public GameObject roomPref;
+
     [Tooltip("This is the size of the grid in halfs, so for example by default, if set to (4,4) this will create an 8x8 grid of rooms." +
         "This can be adjusted on the go, and can be used to generate bigger grids later on in the game.")]
     public Vector2 worldSize = new Vector2(4, 4);
@@ -291,18 +293,26 @@ public class ARG_LevelGeneration : MonoBehaviour
 
             // Ideally allow users to select the size of the room in generation script,
             //  this will allow designers to mess about with this without adjusting the code.
-            drawPos.x *= 16;
-            drawPos.y *= 8;
+            drawPos.x *= 20;
+            drawPos.y *= 10;
 
-            ARG_SpriteSelector selector = Object.Instantiate(roomWhiteObj, drawPos, Quaternion.identity).GetComponent<ARG_SpriteSelector>();
+            ARG_RoomSelector roomSelector = Object.Instantiate(roomPref, drawPos, Quaternion.identity).GetComponent<ARG_RoomSelector>();
 
-            selector.type   = room.roomType;
-            selector.up     = room.doorTop;
-            selector.down   = room.doorBot;
-            selector.right  = room.doorRight;
-            selector.left   = room.doorLeft;
+            roomSelector.type   = room.roomType;
+            roomSelector.up     = room.doorTop;
+            roomSelector.down   = room.doorBot;
+            roomSelector.right  = room.doorRight;
+            roomSelector.left   = room.doorLeft;
 
-            selector.gameObject.transform.parent = mapRoot;
+            //ARG_SpriteSelector selector = Object.Instantiate(roomWhiteObj, drawPos, Quaternion.identity).GetComponent<ARG_SpriteSelector>();
+
+            //selector.type   = room.roomType;
+            //selector.up     = room.doorTop;
+            //selector.down   = room.doorBot;
+            //selector.right  = room.doorRight;
+            //selector.left   = room.doorLeft;
+
+            //selector.gameObject.transform.parent = mapRoot;
         }
     }
 }
