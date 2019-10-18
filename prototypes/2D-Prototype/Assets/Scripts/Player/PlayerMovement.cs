@@ -34,8 +34,8 @@ public class PlayerMovement : MonoBehaviour
         //rb.velocity = playerInput.normalized * moveSpeed; // looks laggy
         rb.MovePosition(rb.position + playerInput * moveSpeed * Time.deltaTime);
 
-        Vector2 lookDir = mousePos - rb.position;
-        float playerAngle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90.0f;
-        rb.rotation = playerAngle;
+        //Vector2 lookDir = mousePos - rb.position;
+        //float playerAngle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90.0f;
+        //rb.rotation = playerAngle;
     }
 }
