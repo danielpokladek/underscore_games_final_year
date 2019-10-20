@@ -6,6 +6,8 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private GameObject hitEffect;
 
+    [HideInInspector] public float damageAmount;
+
     private void Start()
     {
         Destroy(gameObject, 3.5f);
@@ -15,8 +17,16 @@ public class Bullet : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            EnemyController enemy = other.GetComponent<EnemyController>();
-            
+            EnemyController enemyController = other.GetComponent<EnemyController>();
+            enemyController.TakeDamage(damageAmount);
+
+            Debug.Log("Damaged enemy: " + other.name + ". With " + damageAmount + " damage!");
+        }
+
+        if (other.gameObject.CompareTag("Player"))
+        {
+            PlayerController playerController = other.GetComponent<PlayerController>();
+            playerController.TakeDamage(damageAmount);
         }
 
         GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);

@@ -9,9 +9,10 @@ public class EnemyController : MonoBehaviour
     [Tooltip("This is the maximum speed at which the enemy will be able to move.")]
     [SerializeField] protected float movementSpeed = 2.5f;
     [Tooltip("This is enemy's maximum health points")]
-    [SerializeField] protected float maximumHealth = 100f;
+    [SerializeField] protected float maximumHealth = 10f;
     [SerializeField] protected float shootDelay = .5f;
     [SerializeField] protected GameObject projectile;
+    [SerializeField] protected float damageAmount;
 
     [Header("Other")]
     [SerializeField] protected Transform aiArmPivot;
@@ -19,23 +20,35 @@ public class EnemyController : MonoBehaviour
     [SerializeField] protected SpriteRenderer weaponRend;
 
     [Header("Temporary")]
+    public Transform goToMiddle;
     public Transform playerTransform;
+    public bool isDummy;
 
     private float currentHealth;
-    [SerializeField] private float delay;
-    private AIPath aiPath;
+    private float delay;
     private bool canShoot = false;
+
+    private AIPath aiPath;
+    private AIDestinationSetter aiDestinationSetter;
 
     private void Start()
     {
+        // REMOVE THIS LATER ON - THIS IS BAD DANIEL.
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+
         InitiateEnemy();
     }
 
     private void InitiateEnemy()
     {
-        aiPath = GetComponent<AIPath>();
+        if (!isDummy)
+        {
+            aiPath = GetComponent<AIPath>();
+            aiDestinationSetter = GetComponent<AIDestinationSetter>();
 
-        aiPath.maxSpeed = movementSpeed;
+            aiPath.maxSpeed = movementSpeed;
+            aiDestinationSetter.target = playerTransform;
+        }
 
         currentHealth = maximumHealth;
         delay = shootDelay;
@@ -43,9 +56,20 @@ public class EnemyController : MonoBehaviour
 
     public virtual void Update()
     {
+        if (isDummy)
+            return;
+
         GunDrawLayer();
         AIRaycast();
         ShootDelay();
+    }
+
+    public void TakeDamage(float _dmgAmnt)
+    {
+        currentHealth = currentHealth - _dmgAmnt;
+
+        if (currentHealth <= 0)
+            Destroy(gameObject);
     }
 
     private void GunDrawLayer()
@@ -67,7 +91,7 @@ public class EnemyController : MonoBehaviour
 
         if (rayHit.collider != null)
         {
-            Debug.Log(rayHit.collider.name);
+            //Debug.Log(rayHit.collider.name);
 
             if (rayHit.collider.CompareTag("Player"))
                 ShootPlayer();
@@ -82,7 +106,10 @@ public class EnemyController : MonoBehaviour
         {
             GameObject instBullet = Instantiate(projectile, firePoint.position, firePoint.rotation);
             Rigidbody2D instRB = instBullet.GetComponent<Rigidbody2D>();
+            Bullet bullet = instBullet.GetComponent<Bullet>();
+
             instRB.AddForce(firePoint.up * 10, ForceMode2D.Impulse);
+            bullet.damageAmount = damageAmount;
 
             canShoot = false;
             delay = shootDelay;

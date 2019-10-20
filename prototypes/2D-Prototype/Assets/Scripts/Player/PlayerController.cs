@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] protected float moveSpeed = 8.0f;
 
     [Header("Player Settings")]
-    [SerializeField] protected int maxHealth = 8;
+    [SerializeField] protected float maxHealth = 20;
 
     protected Rigidbody2D playerRB;
     protected Vector2 playerInput;
@@ -17,9 +17,10 @@ public class PlayerController : MonoBehaviour
     protected Vector2 mousePosition;
     protected Vector2 mouseVector;
 
-    private int playerHealth;
+    private float playerHealth;
+    private bool playerAlive = true;
 
-    private void Start()
+    public virtual void Start()
     {
         InitiatePlayer();
     }
@@ -29,12 +30,16 @@ public class PlayerController : MonoBehaviour
         playerRB = GetComponent<Rigidbody2D>();
 
         playerHealth = maxHealth;
+        playerAlive = true;
     }
 
     public virtual void Update()
     {
-        PlayerMovement();
-        GetMouseInput();
+        if (playerAlive)
+        {
+            PlayerMovement();
+            GetMouseInput();
+        }
 
         //
         // Attacks, skills, etc.
@@ -51,6 +56,19 @@ public class PlayerController : MonoBehaviour
     public virtual void FixedUpdate()
     {
         MoveCharacter(playerInput);
+    }
+
+    public void TakeDamage(float _dmgAmnt)
+    {
+        playerHealth = playerHealth - _dmgAmnt;
+
+        // Check player health
+        if (playerHealth <= 0)
+        {
+            Debug.Log("Player is det. Try again?");
+            playerAlive = false;
+            this.gameObject.SetActive(false);
+        }
     }
 
     private void PlayerMovement()
@@ -73,18 +91,18 @@ public class PlayerController : MonoBehaviour
     // Primary Attack for the character
     public virtual void PrimAttack()
     {
-        Debug.Log("Primary Attack");
+        //Debug.Log("Primary Attack");
     }
 
     // Secondary Attack for the character
     public virtual void SecAttack()
     {
-        Debug.Log("Secondary Attack");
+        //Debug.Log("Secondary Attack");
     }
 
     // Dodge Ability for the character
     public virtual void Dodge()
     {
-        Debug.Log("Dodge");
+        //Debug.Log("Dodge");
     }
 }

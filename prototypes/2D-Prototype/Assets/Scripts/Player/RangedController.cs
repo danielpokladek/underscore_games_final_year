@@ -9,6 +9,7 @@ public class RangedController : PlayerController
     public SpriteRenderer weaponRend;
     public Transform firePoint;
     public GameObject projectilePrefab;
+    public float damageAmount;
 
     private Vector2 shootDir;
 
@@ -41,7 +42,6 @@ public class RangedController : PlayerController
 
         if (weaponAngle > 0)
             weaponRend.sortingOrder = 0 + 1;
-
     }
 
     private void ShootProjectile()
@@ -52,6 +52,9 @@ public class RangedController : PlayerController
 
         GameObject instProjectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D instRB = instProjectile.GetComponent<Rigidbody2D>();
+        Bullet instBullet = instProjectile.GetComponent<Bullet>();
+
         instRB.AddForce(firePoint.up * 20, ForceMode2D.Impulse);
+        instBullet.damageAmount = damageAmount;
     }
 }
