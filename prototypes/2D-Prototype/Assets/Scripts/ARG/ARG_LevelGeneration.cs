@@ -19,13 +19,14 @@ using UnityEngine;
 public class ARG_LevelGeneration : MonoBehaviour
 {
     [Header("Level Generation Settings")]
-    [Tooltip("This is the prefab of a blank room, from this object the generator will create rooms and assign appropriate parameters." +
-        "This should only be assigned to the prefab used in generation, and anything else should be adjusted in the script.")]
-    public GameObject roomWhiteObj;
-
+    [Tooltip("This is the root transform of the map, inside of this object the map will be created." +
+             "If left empty, the map objects will flood the hierarchy, while using this will allow to keep the hierarchy tidy.")]
+    public Transform mapRoot;
+    
+    [Tooltip("This is the game object which will be used by level generator to spawn new rooms. This field should be populated with the room prefab.")]
     public GameObject roomPref;
 
-    [Tooltip("This is the size of the grid in halfs, so for example by default, if set to (4,4) this will create an 8x8 grid of rooms." +
+    [Tooltip("This is the size of the grid in halves, so for example by default, if set to (4,4) this will create an 8x8 grid of rooms." +
         "This can be adjusted on the go, and can be used to generate bigger grids later on in the game.")]
     public Vector2 worldSize = new Vector2(4, 4);
 
@@ -35,12 +36,14 @@ public class ARG_LevelGeneration : MonoBehaviour
         "This ideally should be used together with 'worldSize' to create bigger maps for players to play on.")]
     public int numberOfRooms = 20;
 
-    public Transform mapRoot;
+    [Tooltip("This is the X & Y room size, in Unity's units, so by default this is set to 20x10 Unity units.")]
+    public int roomSizeX, roomSizeY;
+    
+    
 
-    ARG_Room[,] rooms;                                      // Reference to a 2D array of rooms in the level.
-
-    List<Vector2> takenPositions = new List<Vector2>();     // Although we already have an array of rooms,
-                                                            //  a List<> allows to find rooms using 'contains' method.
+    private ARG_Room[,] rooms;                                      // Reference to a 2D array of rooms in the level.
+    private List<Vector2> takenPositions = new List<Vector2>();     // Although we already have an array of rooms,
+                                                                    //  a List<> allows to find rooms using 'contains' method.
 
     private int gridSizeX, gridSizeY;
 
@@ -74,12 +77,12 @@ public class ARG_LevelGeneration : MonoBehaviour
         // Add Rooms
         for (int i = 0; i < numberOfRooms - 1; i++)
         {
-            // This generator will determine wether the rooms should be clumped together, or branched out.
+            // This generator will determine whether the rooms should be clumped together, or branched out.
             // The randomCompare also will make it, so that the more rooms there are, the less chance for the level to branch out.
             // Changing the magic numbers, will allow for more/less clumped levels.
 
-            float randomPerc = ((float)i) / (((float)numberOfRooms - 1));
-            randomCompare = Mathf.Lerp(randomCompareStart, randomCompareEnd, randomPerc);
+            float randomPercent = i / (((float)numberOfRooms - 1));
+            randomCompare = Mathf.Lerp(randomCompareStart, randomCompareEnd, randomPercent);
 
             // Grab New Room Position
             checkPos = NewPosition();
@@ -123,10 +126,10 @@ public class ARG_LevelGeneration : MonoBehaviour
             x = (int)takenPositions[index].x;
             y = (int)takenPositions[index].y;
 
-            bool UpDown = (Random.value < .5f);
+            bool upDown = (Random.value < .5f);
             bool positive = (Random.value < .5f);
 
-            if (UpDown)
+            if (upDown)
             {
                 if (positive)
                 {
@@ -176,10 +179,10 @@ public class ARG_LevelGeneration : MonoBehaviour
 
             x = (int)takenPositions[index].x;
             y = (int)takenPositions[index].y;
-            bool UpDown = (Random.value < .5f);
+            bool upDown = (Random.value < .5f);
             bool positive = (Random.value < .5f);
 
-            if (UpDown)
+            if (upDown)
             {
                 if (positive)
                 {
@@ -293,8 +296,8 @@ public class ARG_LevelGeneration : MonoBehaviour
 
             // Ideally allow users to select the size of the room in generation script,
             //  this will allow designers to mess about with this without adjusting the code.
-            drawPos.x *= 20;
-            drawPos.y *= 10;
+            drawPos.x *= roomSizeX;
+            drawPos.y *= roomSizeY;
 
             ARG_RoomSelector roomSelector = Object.Instantiate(roomPref, drawPos, Quaternion.identity).GetComponent<ARG_RoomSelector>();
 
@@ -303,16 +306,8 @@ public class ARG_LevelGeneration : MonoBehaviour
             roomSelector.down   = room.doorBot;
             roomSelector.right  = room.doorRight;
             roomSelector.left   = room.doorLeft;
-
-            //ARG_SpriteSelector selector = Object.Instantiate(roomWhiteObj, drawPos, Quaternion.identity).GetComponent<ARG_SpriteSelector>();
-
-            //selector.type   = room.roomType;
-            //selector.up     = room.doorTop;
-            //selector.down   = room.doorBot;
-            //selector.right  = room.doorRight;
-            //selector.left   = room.doorLeft;
-
-            //selector.gameObject.transform.parent = mapRoot;
+            
+            roomSelector.gameObject.transform.SetParent(mapRoot);
         }
     }
 }
