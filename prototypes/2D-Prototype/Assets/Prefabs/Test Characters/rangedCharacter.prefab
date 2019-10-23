@@ -69,7 +69,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 5
   m_Sprite: {fileID: -1930786425789448780, guid: e573e6cf1d9a3ac4494fa781ada02ae8,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -150,7 +150,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 5619165966657897192, guid: e573e6cf1d9a3ac4494fa781ada02ae8,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -309,7 +309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 8
-  maxHealth: 2
+  maxHealth: 150
   playerArmPivot: {fileID: 7318236443010002084}
   weaponRend: {fileID: 7318236441241899901}
   firePoint: {fileID: 7318236442515607555}

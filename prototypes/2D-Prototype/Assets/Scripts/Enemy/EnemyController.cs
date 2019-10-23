@@ -20,7 +20,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] protected SpriteRenderer weaponRend;
 
     [Header("Temporary")]
-    public Transform goToMiddle;
+    public Transform stopPoint;
     public Transform playerTransform;
     public bool isDummy;
 
@@ -34,7 +34,9 @@ public class EnemyController : MonoBehaviour
     private void Start()
     {
         // REMOVE THIS LATER ON - THIS IS BAD DANIEL.
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        if (GameObject.FindGameObjectWithTag("Player"))
+            playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        else playerTransform = stopPoint;
 
         InitiateEnemy();
     }
@@ -60,7 +62,7 @@ public class EnemyController : MonoBehaviour
             return;
 
         GunDrawLayer();
-        AIRaycast();
+        AiRaycast();
         ShootDelay();
     }
 
@@ -74,22 +76,24 @@ public class EnemyController : MonoBehaviour
 
     private void GunDrawLayer()
     {
-        Vector2 playerVector = ((Vector2)playerTransform.position - (Vector2)transform.position).normalized;
+        if (!playerTransform)
+            return;
+        
+        Vector2 playerVector = ((Vector2) playerTransform.position - (Vector2) transform.position).normalized;
         float weaponAngle = -1 * Mathf.Atan2(playerVector.y, playerVector.x) * Mathf.Rad2Deg;
         aiArmPivot.rotation = Quaternion.AngleAxis(weaponAngle, Vector3.back);
         weaponRend.sortingOrder = 0 - 1;
 
         if (weaponAngle > 0)
             weaponRend.sortingOrder = 0 + 1;
-
     }
 
-    private void AIRaycast()
+    private void AiRaycast()
     {
         Debug.DrawLine(firePoint.position, playerTransform.position, Color.red);
         RaycastHit2D rayHit = Physics2D.Raycast(firePoint.position, playerTransform.position);
 
-        if (rayHit.collider != null)
+        if (rayHit.collider)
         {
             //Debug.Log(rayHit.collider.name);
 

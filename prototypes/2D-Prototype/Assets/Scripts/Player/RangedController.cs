@@ -38,10 +38,10 @@ public class RangedController : PlayerController
     {
         float weaponAngle = -1 * Mathf.Atan2(mouseVector.y, mouseVector.x) * Mathf.Rad2Deg;
         playerArmPivot.transform.rotation = Quaternion.AngleAxis(weaponAngle, Vector3.back);
-        weaponRend.sortingOrder = 0 - 1;
+        weaponRend.sortingOrder = 5 - 1;
 
         if (weaponAngle > 0)
-            weaponRend.sortingOrder = 0 + 1;
+            weaponRend.sortingOrder = 5 + 1;
     }
 
     private void ShootProjectile()
