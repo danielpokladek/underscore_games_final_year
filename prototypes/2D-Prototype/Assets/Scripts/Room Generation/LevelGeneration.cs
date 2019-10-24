@@ -167,7 +167,7 @@ public class LevelGeneration : MonoBehaviour
         do
         {
             // Find a room which only has one neighbour.
-            // This fucntion will add to the branching effect, whenever wanted.
+            // This function will add to the branching effect, whenever wanted.
 
             inc = 0;
             do

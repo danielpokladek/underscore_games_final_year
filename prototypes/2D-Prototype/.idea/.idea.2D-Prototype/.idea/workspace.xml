@@ -112,50 +112,50 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Room Generation/LevelGeneration.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="194">
-              <caret line="40" column="36" selection-start-line="40" selection-start-column="36" selection-end-line="40" selection-end-column="36" />
+            <state relative-caret-position="758">
+              <caret line="165" lean-forward="true" selection-start-line="165" selection-end-line="165" />
               <folding>
-                <marker date="1571831459285" expanded="true" signature="6:97" ph="..." />
-                <marker date="1571831459285" expanded="true" signature="99:302" ph="/* Level Generation Script ... */" />
-                <marker date="1571831459285" expanded="true" signature="348:11196" ph="{...}" />
-                <marker date="1571831459285" expanded="true" signature="397:625" ph="[...]" />
-                <marker date="1571831459285" expanded="true" signature="850:1091" ph="[...]" />
-                <marker date="1571831459285" expanded="true" signature="1147:1649" ph="[...]" />
-                <marker date="1571831459285" expanded="true" signature="2256:2619" ph="{...}" />
-                <marker date="1571831459285" expanded="true" signature="2330:2435" ph="{...}" />
-                <marker date="1571831459285" expanded="true" signature="2651:4779" ph="{...}" />
-                <marker date="1571831459285" expanded="true" signature="3113:4773" ph="{...}" />
-                <marker date="1571831459285" expanded="true" signature="3136:3446" ph="/* This generator will determine whether the rooms should be clumped together, or branched out. ... */" />
-                <marker date="1571831459285" expanded="true" signature="3817:4411" ph="{...}" />
-                <marker date="1571831459285" expanded="true" signature="4425:4614" ph="/* Finalize Position, add to list and calculate the offset. ... */" />
-                <marker date="1571831459285" expanded="true" signature="4814:6122" ph="{...}" />
-                <marker date="1571831459285" expanded="true" signature="4937:5181" ph="/* Grab a random taken position from the list, ... */" />
-                <marker date="1571831459285" expanded="true" signature="5483:5690" ph="{...}" />
-                <marker date="1571831459285" expanded="true" signature="5527:5591" ph="{...}" />
-                <marker date="1571831459285" expanded="true" signature="5612:5676" ph="{...}" />
-                <marker date="1571831459285" expanded="true" signature="5707:5914" ph="{...}" />
-                <marker date="1571831459285" expanded="true" signature="5751:5815" ph="{...}" />
-                <marker date="1571831459285" expanded="true" signature="5836:5900" ph="{...}" />
-                <marker date="1571831459285" expanded="true" signature="6166:7706" ph="{...}" />
-                <marker date="1571831459285" expanded="true" signature="6333:6457" ph="/* Find a room which only has one neighbour. ... */" />
-                <marker date="1571831459285" expanded="true" signature="6930:7137" ph="{...}" />
-                <marker date="1571831459285" expanded="true" signature="6974:7038" ph="{...}" />
-                <marker date="1571831459285" expanded="true" signature="7059:7123" ph="{...}" />
-                <marker date="1571831459285" expanded="true" signature="7154:7361" ph="{...}" />
-                <marker date="1571831459285" expanded="true" signature="7198:7262" ph="{...}" />
-                <marker date="1571831459285" expanded="true" signature="7283:7347" ph="{...}" />
-                <marker date="1571831459285" expanded="true" signature="7560:7671" ph="{...}" />
-                <marker date="1571831459285" expanded="true" signature="7792:8315" ph="{...}" />
-                <marker date="1571831459285" expanded="true" signature="8321:8466" ph="/// Loop through all rooms in the level, checking if they have neighbours, and select which doors they need. ... " />
-                <marker date="1571831459285" expanded="true" signature="8498:9908" ph="{...}" />
-                <marker date="1571831459285" expanded="true" signature="8513:8714" ph="/* Use a nested for loop to check each slot in the grid, to check for neighbours of the room. ... */" />
-                <marker date="1571831459285" expanded="true" signature="8767:9902" ph="{...}" />
-                <marker date="1571831459285" expanded="true" signature="8833:9892" ph="{...}" />
-                <marker date="1571831459285" expanded="true" signature="9936:11038" ph="{...}" />
-                <marker date="1571831459285" expanded="true" signature="9951:10073" ph="/* Loop through each room on the gird, ... */" />
-                <marker date="1571831459285" expanded="true" signature="10110:10944" ph="{...}" />
-                <marker date="1571831459285" expanded="true" signature="10235:10404" ph="/* Ideally allow users to select the size of the room in generation script, ... */" />
-                <marker date="1571831459285" expanded="true" signature="11071:11194" ph="{...}" />
+                <marker date="1571920417404" expanded="true" signature="6:97" ph="..." />
+                <marker date="1571920417404" expanded="true" signature="99:302" ph="/* Level Generation Script ... */" />
+                <marker date="1571920417404" expanded="true" signature="348:11196" ph="{...}" />
+                <marker date="1571920417404" expanded="true" signature="397:625" ph="[...]" />
+                <marker date="1571920417404" expanded="true" signature="850:1091" ph="[...]" />
+                <marker date="1571920417404" expanded="true" signature="1147:1649" ph="[...]" />
+                <marker date="1571920417404" expanded="true" signature="2256:2619" ph="{...}" />
+                <marker date="1571920417404" expanded="true" signature="2330:2435" ph="{...}" />
+                <marker date="1571920417404" expanded="true" signature="2651:4779" ph="{...}" />
+                <marker date="1571920417404" expanded="true" signature="3113:4773" ph="{...}" />
+                <marker date="1571920417404" expanded="true" signature="3136:3446" ph="/* This generator will determine whether the rooms should be clumped together, or branched out. ... */" />
+                <marker date="1571920417404" expanded="true" signature="3817:4411" ph="{...}" />
+                <marker date="1571920417404" expanded="true" signature="4425:4614" ph="/* Finalize Position, add to list and calculate the offset. ... */" />
+                <marker date="1571920417404" expanded="true" signature="4814:6122" ph="{...}" />
+                <marker date="1571920417404" expanded="true" signature="4937:5181" ph="/* Grab a random taken position from the list, ... */" />
+                <marker date="1571920417404" expanded="true" signature="5483:5690" ph="{...}" />
+                <marker date="1571920417404" expanded="true" signature="5527:5591" ph="{...}" />
+                <marker date="1571920417404" expanded="true" signature="5612:5676" ph="{...}" />
+                <marker date="1571920417404" expanded="true" signature="5707:5914" ph="{...}" />
+                <marker date="1571920417404" expanded="true" signature="5751:5815" ph="{...}" />
+                <marker date="1571920417404" expanded="true" signature="5836:5900" ph="{...}" />
+                <marker date="1571920417404" expanded="true" signature="6166:7706" ph="{...}" />
+                <marker date="1571920417404" expanded="true" signature="6333:6457" ph="/* Find a room which only has one neighbour. ... */" />
+                <marker date="1571920417404" expanded="true" signature="6930:7137" ph="{...}" />
+                <marker date="1571920417404" expanded="true" signature="6974:7038" ph="{...}" />
+                <marker date="1571920417404" expanded="true" signature="7059:7123" ph="{...}" />
+                <marker date="1571920417404" expanded="true" signature="7154:7361" ph="{...}" />
+                <marker date="1571920417404" expanded="true" signature="7198:7262" ph="{...}" />
+                <marker date="1571920417404" expanded="true" signature="7283:7347" ph="{...}" />
+                <marker date="1571920417404" expanded="true" signature="7560:7671" ph="{...}" />
+                <marker date="1571920417404" expanded="true" signature="7792:8315" ph="{...}" />
+                <marker date="1571920417404" expanded="true" signature="8321:8466" ph="/// Loop through all rooms in the level, checking if they have neighbours, and select which doors they need. ... " />
+                <marker date="1571920417404" expanded="true" signature="8498:9908" ph="{...}" />
+                <marker date="1571920417404" expanded="true" signature="8513:8714" ph="/* Use a nested for loop to check each slot in the grid, to check for neighbours of the room. ... */" />
+                <marker date="1571920417404" expanded="true" signature="8767:9902" ph="{...}" />
+                <marker date="1571920417404" expanded="true" signature="8833:9892" ph="{...}" />
+                <marker date="1571920417404" expanded="true" signature="9936:11038" ph="{...}" />
+                <marker date="1571920417404" expanded="true" signature="9951:10073" ph="/* Loop through each room on the gird, ... */" />
+                <marker date="1571920417404" expanded="true" signature="10110:10944" ph="{...}" />
+                <marker date="1571920417404" expanded="true" signature="10235:10404" ph="/* Ideally allow users to select the size of the room in generation script, ... */" />
+                <marker date="1571920417404" expanded="true" signature="11071:11194" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -543,50 +543,50 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Room Generation/LevelGeneration.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="40" column="36" selection-start-line="40" selection-start-column="36" selection-end-line="40" selection-end-column="36" />
+        <state relative-caret-position="758">
+          <caret line="165" lean-forward="true" selection-start-line="165" selection-end-line="165" />
           <folding>
-            <marker date="1571831459285" expanded="true" signature="6:97" ph="..." />
-            <marker date="1571831459285" expanded="true" signature="99:302" ph="/* Level Generation Script ... */" />
-            <marker date="1571831459285" expanded="true" signature="348:11196" ph="{...}" />
-            <marker date="1571831459285" expanded="true" signature="397:625" ph="[...]" />
-            <marker date="1571831459285" expanded="true" signature="850:1091" ph="[...]" />
-            <marker date="1571831459285" expanded="true" signature="1147:1649" ph="[...]" />
-            <marker date="1571831459285" expanded="true" signature="2256:2619" ph="{...}" />
-            <marker date="1571831459285" expanded="true" signature="2330:2435" ph="{...}" />
-            <marker date="1571831459285" expanded="true" signature="2651:4779" ph="{...}" />
-            <marker date="1571831459285" expanded="true" signature="3113:4773" ph="{...}" />
-            <marker date="1571831459285" expanded="true" signature="3136:3446" ph="/* This generator will determine whether the rooms should be clumped together, or branched out. ... */" />
-            <marker date="1571831459285" expanded="true" signature="3817:4411" ph="{...}" />
-            <marker date="1571831459285" expanded="true" signature="4425:4614" ph="/* Finalize Position, add to list and calculate the offset. ... */" />
-            <marker date="1571831459285" expanded="true" signature="4814:6122" ph="{...}" />
-            <marker date="1571831459285" expanded="true" signature="4937:5181" ph="/* Grab a random taken position from the list, ... */" />
-            <marker date="1571831459285" expanded="true" signature="5483:5690" ph="{...}" />
-            <marker date="1571831459285" expanded="true" signature="5527:5591" ph="{...}" />
-            <marker date="1571831459285" expanded="true" signature="5612:5676" ph="{...}" />
-            <marker date="1571831459285" expanded="true" signature="5707:5914" ph="{...}" />
-            <marker date="1571831459285" expanded="true" signature="5751:5815" ph="{...}" />
-            <marker date="1571831459285" expanded="true" signature="5836:5900" ph="{...}" />
-            <marker date="1571831459285" expanded="true" signature="6166:7706" ph="{...}" />
-            <marker date="1571831459285" expanded="true" signature="6333:6457" ph="/* Find a room which only has one neighbour. ... */" />
-            <marker date="1571831459285" expanded="true" signature="6930:7137" ph="{...}" />
-            <marker date="1571831459285" expanded="true" signature="6974:7038" ph="{...}" />
-            <marker date="1571831459285" expanded="true" signature="7059:7123" ph="{...}" />
-            <marker date="1571831459285" expanded="true" signature="7154:7361" ph="{...}" />
-            <marker date="1571831459285" expanded="true" signature="7198:7262" ph="{...}" />
-            <marker date="1571831459285" expanded="true" signature="7283:7347" ph="{...}" />
-            <marker date="1571831459285" expanded="true" signature="7560:7671" ph="{...}" />
-            <marker date="1571831459285" expanded="true" signature="7792:8315" ph="{...}" />
-            <marker date="1571831459285" expanded="true" signature="8321:8466" ph="/// Loop through all rooms in the level, checking if they have neighbours, and select which doors they need. ... " />
-            <marker date="1571831459285" expanded="true" signature="8498:9908" ph="{...}" />
-            <marker date="1571831459285" expanded="true" signature="8513:8714" ph="/* Use a nested for loop to check each slot in the grid, to check for neighbours of the room. ... */" />
-            <marker date="1571831459285" expanded="true" signature="8767:9902" ph="{...}" />
-            <marker date="1571831459285" expanded="true" signature="8833:9892" ph="{...}" />
-            <marker date="1571831459285" expanded="true" signature="9936:11038" ph="{...}" />
-            <marker date="1571831459285" expanded="true" signature="9951:10073" ph="/* Loop through each room on the gird, ... */" />
-            <marker date="1571831459285" expanded="true" signature="10110:10944" ph="{...}" />
-            <marker date="1571831459285" expanded="true" signature="10235:10404" ph="/* Ideally allow users to select the size of the room in generation script, ... */" />
-            <marker date="1571831459285" expanded="true" signature="11071:11194" ph="{...}" />
+            <marker date="1571920417404" expanded="true" signature="6:97" ph="..." />
+            <marker date="1571920417404" expanded="true" signature="99:302" ph="/* Level Generation Script ... */" />
+            <marker date="1571920417404" expanded="true" signature="348:11196" ph="{...}" />
+            <marker date="1571920417404" expanded="true" signature="397:625" ph="[...]" />
+            <marker date="1571920417404" expanded="true" signature="850:1091" ph="[...]" />
+            <marker date="1571920417404" expanded="true" signature="1147:1649" ph="[...]" />
+            <marker date="1571920417404" expanded="true" signature="2256:2619" ph="{...}" />
+            <marker date="1571920417404" expanded="true" signature="2330:2435" ph="{...}" />
+            <marker date="1571920417404" expanded="true" signature="2651:4779" ph="{...}" />
+            <marker date="1571920417404" expanded="true" signature="3113:4773" ph="{...}" />
+            <marker date="1571920417404" expanded="true" signature="3136:3446" ph="/* This generator will determine whether the rooms should be clumped together, or branched out. ... */" />
+            <marker date="1571920417404" expanded="true" signature="3817:4411" ph="{...}" />
+            <marker date="1571920417404" expanded="true" signature="4425:4614" ph="/* Finalize Position, add to list and calculate the offset. ... */" />
+            <marker date="1571920417404" expanded="true" signature="4814:6122" ph="{...}" />
+            <marker date="1571920417404" expanded="true" signature="4937:5181" ph="/* Grab a random taken position from the list, ... */" />
+            <marker date="1571920417404" expanded="true" signature="5483:5690" ph="{...}" />
+            <marker date="1571920417404" expanded="true" signature="5527:5591" ph="{...}" />
+            <marker date="1571920417404" expanded="true" signature="5612:5676" ph="{...}" />
+            <marker date="1571920417404" expanded="true" signature="5707:5914" ph="{...}" />
+            <marker date="1571920417404" expanded="true" signature="5751:5815" ph="{...}" />
+            <marker date="1571920417404" expanded="true" signature="5836:5900" ph="{...}" />
+            <marker date="1571920417404" expanded="true" signature="6166:7706" ph="{...}" />
+            <marker date="1571920417404" expanded="true" signature="6333:6457" ph="/* Find a room which only has one neighbour. ... */" />
+            <marker date="1571920417404" expanded="true" signature="6930:7137" ph="{...}" />
+            <marker date="1571920417404" expanded="true" signature="6974:7038" ph="{...}" />
+            <marker date="1571920417404" expanded="true" signature="7059:7123" ph="{...}" />
+            <marker date="1571920417404" expanded="true" signature="7154:7361" ph="{...}" />
+            <marker date="1571920417404" expanded="true" signature="7198:7262" ph="{...}" />
+            <marker date="1571920417404" expanded="true" signature="7283:7347" ph="{...}" />
+            <marker date="1571920417404" expanded="true" signature="7560:7671" ph="{...}" />
+            <marker date="1571920417404" expanded="true" signature="7792:8315" ph="{...}" />
+            <marker date="1571920417404" expanded="true" signature="8321:8466" ph="/// Loop through all rooms in the level, checking if they have neighbours, and select which doors they need. ... " />
+            <marker date="1571920417404" expanded="true" signature="8498:9908" ph="{...}" />
+            <marker date="1571920417404" expanded="true" signature="8513:8714" ph="/* Use a nested for loop to check each slot in the grid, to check for neighbours of the room. ... */" />
+            <marker date="1571920417404" expanded="true" signature="8767:9902" ph="{...}" />
+            <marker date="1571920417404" expanded="true" signature="8833:9892" ph="{...}" />
+            <marker date="1571920417404" expanded="true" signature="9936:11038" ph="{...}" />
+            <marker date="1571920417404" expanded="true" signature="9951:10073" ph="/* Loop through each room on the gird, ... */" />
+            <marker date="1571920417404" expanded="true" signature="10110:10944" ph="{...}" />
+            <marker date="1571920417404" expanded="true" signature="10235:10404" ph="/* Ideally allow users to select the size of the room in generation script, ... */" />
+            <marker date="1571920417404" expanded="true" signature="11071:11194" ph="{...}" />
           </folding>
         </state>
       </provider>
