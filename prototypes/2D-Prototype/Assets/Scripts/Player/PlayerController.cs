@@ -14,8 +14,8 @@ public class PlayerController : MonoBehaviour
     protected Vector2 playerInput;
 
     // Used by characters
-    protected Vector2 mousePosition;
-    protected Vector2 mouseVector;
+    protected Vector2 mousePosition    = new Vector2(0, 0);
+    protected Vector2 mouseVector      = new Vector2(0,0);
 
     private float playerHealth;
     private bool playerAlive = true;
@@ -79,7 +79,9 @@ public class PlayerController : MonoBehaviour
 
     private void GetMouseInput()
     {
-        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (Camera.main)
+            mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        
         mouseVector = (mousePosition - (Vector2)transform.position).normalized;
     }
 

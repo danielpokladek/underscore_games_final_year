@@ -29,6 +29,11 @@ public class Bullet : MonoBehaviour
             playerController.TakeDamage(damageAmount);
         }
 
+        if (other.gameObject.CompareTag("BossHitPoint"))
+        {
+            other.transform.parent.transform.parent.GetComponent<BossController>().DealDamage(damageAmount);
+        }
+
         GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
         Destroy(effect, 0.4f);
         Destroy(gameObject);

@@ -25,8 +25,6 @@ public class RangedController : PlayerController
         base.Update();
 
         GunDrawLayer();
-
-        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
 
     public override void FixedUpdate()
