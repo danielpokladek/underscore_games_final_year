@@ -4,27 +4,23 @@ using UnityEngine;
 
 public class IntroBehaviour : StateMachineBehaviour
 {
-    private int rand;
+    [SerializeField] private float animationLength;
+
+    private float timer;
     
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        rand = Random.Range(0, 3);
         
-        if (rand == 0)
-            animator.SetTrigger("idle");
-        
-        if (rand == 1)
-            animator.SetTrigger("attack");
-        
-        if (rand == 2)
-            animator.SetTrigger("spawnEnemy");
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
+        if (timer >= animationLength)
+            animator.SetTrigger("idle");
+        else
+            timer += Time.deltaTime;
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

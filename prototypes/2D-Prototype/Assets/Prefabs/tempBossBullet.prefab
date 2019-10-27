@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 4729260153567274747}
   - component: {fileID: 3866972696158352780}
   - component: {fileID: 7777649821390545390}
-  - component: {fileID: 3506930013998591018}
+  - component: {fileID: 5398182471892805792}
   m_Layer: 0
-  m_Name: tempBullet
-  m_TagString: Finish
+  m_Name: tempBossBullet
+  m_TagString: BossProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4729260153567274746}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.662, y: 1.063, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children:
   - {fileID: 4729260153966533442}
   m_Father: {fileID: 0}
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: -2346302928887187388, guid: 6a165b7fc0c20584d8a28a7ad53bccd3,
     type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8962264, g: 0.30015132, b: 0.30015132, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -132,7 +132,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.10273147, y: 0.2945627}
   m_EdgeRadius: 0
---- !u!114 &3506930013998591018
+--- !u!114 &5398182471892805792
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,12 +141,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4729260153567274746}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8a81e3b06210e8458dd4c8331636386, type: 3}
+  m_Script: {fileID: 11500000, guid: 056520d4caa851e43a467f0be42edbeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitEffect: {fileID: 7583490791312444778, guid: f8dd09c622411ca4fa4f5eb4eef765f1,
-    type: 3}
-  damageAmount: 0
 --- !u!1 &4729260153966533441
 GameObject:
   m_ObjectHideFlags: 0

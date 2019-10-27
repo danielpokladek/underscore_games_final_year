@@ -7,12 +7,15 @@ public class AttackBehaviour : StateMachineBehaviour
     [Tooltip("Ideally the length of an animation")]
     [SerializeField] private float stateLength;
 
+    [SerializeField] private float minLength;
+    [SerializeField] private float maxLength;
+
     private float timer;
     
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        timer = stateLength;
+        timer = Random.Range(minLength, maxLength);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

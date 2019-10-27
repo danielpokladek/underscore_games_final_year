@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IdleBehaviour : StateMachineBehaviour
+public class DeathBehaviour : StateMachineBehaviour
 {
     [SerializeField] private float minLength;
     [SerializeField] private float maxLength;
@@ -21,7 +21,7 @@ public class IdleBehaviour : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (timer <= 0)
-            SelectState(animator);
+            animator.transform.gameObject.GetComponent<BossController>().BossDeath();
         else
             timer -= Time.deltaTime;
     }
@@ -30,19 +30,5 @@ public class IdleBehaviour : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         
-    }
-
-    private void SelectState(Animator animator)
-    {
-        int randState;
-
-        randState = Random.Range(0, 2);
-        //randState = 0;
-        
-        if (randState == 0)
-            animator.SetTrigger("thumpUP");
-        
-        if (randState == 1)
-            animator.SetTrigger("shoot");
     }
 }

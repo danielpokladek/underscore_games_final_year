@@ -1,27 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
-public class IdleBehaviour : StateMachineBehaviour
+public class ThumpBehaviour : StateMachineBehaviour
 {
-    [SerializeField] private float minLength;
-    [SerializeField] private float maxLength;
-    
+
+    [SerializeField] private float animLength;
+
     private float timer;
-    private float rand;
+    
     
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        rand = Random.Range(minLength, maxLength);
-        timer = rand;
+        timer = animLength;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (timer <= 0)
-            SelectState(animator);
+            animator.SetTrigger("thumpDOWN");
         else
             timer -= Time.deltaTime;
     }
@@ -30,19 +30,5 @@ public class IdleBehaviour : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         
-    }
-
-    private void SelectState(Animator animator)
-    {
-        int randState;
-
-        randState = Random.Range(0, 2);
-        //randState = 0;
-        
-        if (randState == 0)
-            animator.SetTrigger("thumpUP");
-        
-        if (randState == 1)
-            animator.SetTrigger("shoot");
     }
 }

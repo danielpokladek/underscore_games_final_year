@@ -8,7 +8,9 @@
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="AttackBehaviour.cs" t="Include" />
+        <e p="DeathBehaviour.cs" t="Include" />
         <e p="IdleBehaviour.cs" t="Include" />
+        <e p="IdleTwoBehaviour.cs" t="Include" />
         <e p="Imported Assets" t="Include">
           <e p="AstarPathfindingProject" t="Include">
             <e p="AstarPathfindingProject.asmdef" t="Include" />
@@ -201,6 +203,7 @@
             <e p="BossController.cs" t="Include" />
             <e p="TempBoss" t="Include">
               <e p="IntroBehaviour.cs" t="Include" />
+              <e p="TempBossController.cs" t="Include" />
             </e>
           </e>
           <e p="Bullet.cs" t="Include" />
@@ -228,7 +231,10 @@
             <e p="RoomManager.cs" t="Include" />
           </e>
         </e>
+        <e p="SetIdle.cs" t="Include" />
         <e p="SpawnOneBehaviour.cs" t="Include" />
+        <e p="tempBossBullet.cs" t="Include" />
+        <e p="ThumpBehaviour.cs" t="Include" />
       </e>
       <e p="AstarPathfindingProject.csproj" t="IncludeRecursive" />
       <e p="AstarPathfindingProjectEditor.csproj" t="IncludeRecursive" />

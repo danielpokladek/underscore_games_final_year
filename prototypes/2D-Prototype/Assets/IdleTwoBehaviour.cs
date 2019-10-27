@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IdleBehaviour : StateMachineBehaviour
+public class IdleTwoBehaviour : StateMachineBehaviour
 {
     [SerializeField] private float minLength;
     [SerializeField] private float maxLength;
@@ -39,10 +39,10 @@ public class IdleBehaviour : StateMachineBehaviour
         randState = Random.Range(0, 2);
         //randState = 0;
         
-        if (randState == 0)
-            animator.SetTrigger("thumpUP");
-        
-        if (randState == 1)
-            animator.SetTrigger("shoot");
+//        if (randState == 0)
+//            animator.SetTrigger("thumpUP");
+//        
+//        if (randState == 1)
+//            animator.SetTrigger("shoot");
     }
 }

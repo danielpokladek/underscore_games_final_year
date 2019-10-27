@@ -31,9 +31,23 @@ public class Bullet : MonoBehaviour
 
         if (other.gameObject.CompareTag("BossHitPoint"))
         {
-            other.transform.parent.transform.parent.GetComponent<BossController>().DealDamage(damageAmount);
+            other.transform.parent.GetComponent<BossController>().DealDamage(damageAmount);
         }
 
+        if (other.gameObject.CompareTag("BossProjectile"))
+            other.gameObject.GetComponent<tempBossBullet>().Damage(5.0f);
+
+
+        if (other.gameObject.CompareTag("Boss"))
+            return;
+        
+        GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
+        Destroy(effect, 0.4f);
+        Destroy(gameObject);
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
         GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
         Destroy(effect, 0.4f);
         Destroy(gameObject);
