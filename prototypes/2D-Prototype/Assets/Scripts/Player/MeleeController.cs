@@ -14,14 +14,14 @@ public class MeleeController : PlayerController
 
     private float timeBtwAttack;
 
-    public override void Start()
+    override public void Start()
     {
         base.Start();
 
         timeBtwAttack = attackDelay;
     }
 
-    public override void Update()
+    override public void Update()
     {
         base.Update();
 
@@ -39,13 +39,9 @@ public class MeleeController : PlayerController
         playerArmPivot.transform.rotation = Quaternion.AngleAxis(weaponAngle, Vector3.back);
     }
 
-    public override void PrimAttack()
+    override protected void PrimAttack()
     {
-        base.PrimAttack();
-
-        Debug.Log("Swoooosh! Swing delay: " + attackDelay + " seconds!");
-
-        if (timeBtwAttack <= 0)
+        if (_delayAttack >= delayLength)
         {
             Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemiesLayer);
             for (int i = 0; i < enemiesToDamage.Length; i++)
@@ -54,7 +50,7 @@ public class MeleeController : PlayerController
                 Debug.Log("Damaged enemy: " + enemiesToDamage[i].name + ". With " + damageAmount + " damage!");
             }
 
-            timeBtwAttack = attackDelay;
+            _delayAttack = 0;
         }
     }
 

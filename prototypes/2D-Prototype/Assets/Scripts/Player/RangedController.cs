@@ -10,26 +10,19 @@ public class RangedController : PlayerController
     public Transform firePoint;
     public GameObject projectilePrefab;
     public float damageAmount;
-
+    
     private Vector2 shootDir;
 
-    public override void PrimAttack()
-    {
+    override protected void PrimAttack()
+    {       
         base.PrimAttack();
-
         ShootProjectile();
     }
 
-    public override void Update()
+    override public void Update()
     {
         base.Update();
-
         GunDrawLayer();
-    }
-
-    public override void FixedUpdate()
-    {
-        base.FixedUpdate();
     }
 
     private void GunDrawLayer()
@@ -43,16 +36,16 @@ public class RangedController : PlayerController
     }
 
     private void ShootProjectile()
-    {
+    {        
         shootDir = mousePosition - playerRB.position;
         float proAngle = Mathf.Atan2(shootDir.y, shootDir.x) * Mathf.Rad2Deg - 90f;
         //firePoint.GetComponent<Rigidbody2D>().rotation = proAngle;
 
         GameObject instProjectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D instRB = instProjectile.GetComponent<Rigidbody2D>();
-        Bullet instBullet = instProjectile.GetComponent<Bullet>();
+        PlayerBullet instBullet = instProjectile.GetComponent<PlayerBullet>();
 
         instRB.AddForce(firePoint.up * 20, ForceMode2D.Impulse);
-        instBullet.damageAmount = damageAmount;
+        instBullet.SetDamage(damageAmount);
     }
 }

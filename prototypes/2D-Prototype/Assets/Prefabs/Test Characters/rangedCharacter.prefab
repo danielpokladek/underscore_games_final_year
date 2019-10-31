@@ -172,7 +172,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7318236442386029683}
-  - component: {fileID: 7318236442386029695}
   - component: {fileID: 7318236442386029680}
   - component: {fileID: 7318236442386029681}
   - component: {fileID: 7318236442386029682}
@@ -199,56 +198,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &7318236442386029695
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7318236442386029684}
-  m_Enabled: 0
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: -6898485715014378537, guid: e573e6cf1d9a3ac4494fa781ada02ae8,
-    type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
 --- !u!50 &7318236442386029680
 Rigidbody2D:
   serializedVersion: 4
@@ -310,12 +259,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 8
   maxHealth: 150
+  delayLength: 0.25
   playerArmPivot: {fileID: 7318236443010002084}
   weaponRend: {fileID: 7318236441241899901}
   firePoint: {fileID: 7318236442515607555}
   projectilePrefab: {fileID: 4729260153567274746, guid: f5b27cdd946361045817bd4351c6aa6a,
     type: 3}
-  damageAmount: 2
+  damageAmount: 4
 --- !u!1 &7318236442515607556
 GameObject:
   m_ObjectHideFlags: 0

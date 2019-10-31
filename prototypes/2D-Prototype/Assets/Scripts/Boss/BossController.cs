@@ -7,38 +7,40 @@ using Vector2 = UnityEngine.Vector2;
 
 public class BossController : MonoBehaviour
 {
-    [SerializeField] protected float maxHealth = 100f;
-    [SerializeField] protected ParticleSystem deathParticles;
-    [SerializeField] protected Collider2D[] hitPoints;
+    [Header("Base Boss Settings")]
+    [SerializeField] protected float             maxHealth = 100f;
+    [SerializeField] protected ParticleSystem    deathParticles;
     
+    // ----------------
     protected Transform player;
-    
-    [SerializeField] private float currentHealth;
-    private Animator animator;
-    
+    protected Animator  animator;
+    protected float     currentHealth;
+    protected bool      canBeDamaged;
     
     private void Start()
     {
         currentHealth = maxHealth;
         animator = GetComponent<Animator>();
-
+        
+        // Probably get this from the stage/gameManager once its been made.
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
-    public void DealDamage(float damageAmount)
+    virtual public void DealDamage(float damageAmount)
     {
-        currentHealth -= damageAmount;
-
-        if (currentHealth <= 50)
-        {
-            animator.SetTrigger("stageTwo");
-
-            foreach (Collider2D col in hitPoints)
-                col.enabled = false;
-        }
-
+        if (canBeDamaged)
+            currentHealth -= damageAmount;
+        
         if (currentHealth <= 0)
-            animator.SetTrigger("dead");
+        {
+            animator.SetTrigger("bossDeath");
+            canBeDamaged = false;
+        }
+    }
+
+    public void EnableDamage()
+    {
+        canBeDamaged = true;
     }
 
     public void BossDeath()
@@ -50,4 +52,6 @@ public class BossController : MonoBehaviour
         Destroy(deathParticle, 4.0f);
         Destroy(gameObject);
     }
+    
+    public float GetHealth() { return currentHealth; }
 }

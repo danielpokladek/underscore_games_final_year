@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Movement Settings")]
+    [Header("Base Settings")]
     [SerializeField] protected float moveSpeed = 8.0f;
-
-    [Header("Player Settings")]
     [SerializeField] protected float maxHealth = 20;
-
+    [Tooltip("Delay between player's attacks, for example this is the delay between ranger's projectiles." +
+             "Increasing this value, will mean, that players will wait longer before next attack is performed." +
+             "Leave this value to zero, to have no delay.")]
+    [SerializeField] protected float delayLength;
+    
     protected Rigidbody2D playerRB;
     protected Vector2 playerInput;
+    protected float _delayAttack;
 
     // Used by characters
     protected Vector2 mousePosition    = new Vector2(0, 0);
@@ -20,7 +23,7 @@ public class PlayerController : MonoBehaviour
     private float playerHealth;
     private bool playerAlive = true;
 
-    public virtual void Start()
+    virtual public void Start()
     {
         InitiatePlayer();
     }
@@ -31,29 +34,39 @@ public class PlayerController : MonoBehaviour
 
         playerHealth = maxHealth;
         playerAlive = true;
+
+        _delayAttack = delayLength;
     }
 
-    public virtual void Update()
+    virtual public void Update()
     {
         if (playerAlive)
         {
             PlayerMovement();
             GetMouseInput();
+
+            if (Input.GetButton("LMB"))
+            {
+                if (_delayAttack > delayLength)
+                    PrimAttack();
+            }
+            
+            if (Input.GetButton("RMB"))
+                SecAttack();
+            
+            if (Input.GetButton("Dodge"))
+                Dodge();
         }
-
-        //
-        // Attacks, skills, etc.
-        if (Input.GetButtonDown("LMB"))
-            PrimAttack();
-
-        if (Input.GetButtonDown("RMB"))
-            SecAttack();
-
-        if (Input.GetButtonDown("Dodge"))
-            Dodge();
+        
+        
+        if (delayLength == 0)
+            _delayAttack = delayLength;
+        
+        if (_delayAttack <= delayLength)
+            _delayAttack += Time.deltaTime;
     }
 
-    public virtual void FixedUpdate()
+    virtual public void FixedUpdate()
     {
         MoveCharacter(playerInput);
     }
@@ -89,22 +102,12 @@ public class PlayerController : MonoBehaviour
     {
         playerRB.MovePosition((Vector2)transform.position + (input * moveSpeed * Time.deltaTime));
     }
+    
+    // Only the definitions for the attacks, need to be updated per character (in their own scripts).
+    // Also reset the delay when shooting., might as well be done here to keep inherits clean.
+    virtual protected void PrimAttack() { _delayAttack = 0; }
 
-    // Primary Attack for the character
-    public virtual void PrimAttack()
-    {
-        //Debug.Log("Primary Attack");
-    }
+    virtual protected void SecAttack() { /* Secondary Attack for the character. */ }
 
-    // Secondary Attack for the character
-    public virtual void SecAttack()
-    {
-        //Debug.Log("Secondary Attack");
-    }
-
-    // Dodge Ability for the character
-    public virtual void Dodge()
-    {
-        //Debug.Log("Dodge");
-    }
+    virtual protected void Dodge() { /* Dodge Ability for the character. */ }
 }

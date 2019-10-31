@@ -66,9 +66,9 @@ public class EnemyController : MonoBehaviour
         ShootDelay();
     }
 
-    public void TakeDamage(float _dmgAmnt)
+    public void TakeDamage(float dmgAmount)
     {
-        currentHealth = currentHealth - _dmgAmnt;
+        currentHealth = currentHealth - dmgAmount;
 
         if (currentHealth <= 0)
             Destroy(gameObject);
@@ -110,10 +110,10 @@ public class EnemyController : MonoBehaviour
         {
             GameObject instBullet = Instantiate(projectile, firePoint.position, firePoint.rotation);
             Rigidbody2D instRB = instBullet.GetComponent<Rigidbody2D>();
-            Bullet bullet = instBullet.GetComponent<Bullet>();
+            PlayerBullet bullet = instBullet.GetComponent<PlayerBullet>();
 
             instRB.AddForce(firePoint.up * 10, ForceMode2D.Impulse);
-            bullet.damageAmount = damageAmount;
+            bullet.SetDamage(damageAmount);
 
             canShoot = false;
             delay = shootDelay;

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4729260153567274747}
   - component: {fileID: 3866972696158352780}
   - component: {fileID: 7777649821390545390}
-  - component: {fileID: 3506930013998591018}
+  - component: {fileID: -8920838921880691332}
   m_Layer: 0
   m_Name: tempBullet
   m_TagString: Finish
@@ -132,7 +132,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.10273147, y: 0.2945627}
   m_EdgeRadius: 0
---- !u!114 &3506930013998591018
+--- !u!114 &-8920838921880691332
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,12 +141,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4729260153567274746}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8a81e3b06210e8458dd4c8331636386, type: 3}
+  m_Script: {fileID: 11500000, guid: eb01b335b15adcc4f8b1d8479bcc7134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hitEffect: {fileID: 7583490791312444778, guid: f8dd09c622411ca4fa4f5eb4eef765f1,
     type: 3}
-  damageAmount: 0
 --- !u!1 &4729260153966533441
 GameObject:
   m_ObjectHideFlags: 0
