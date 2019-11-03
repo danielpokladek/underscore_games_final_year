@@ -233,9 +233,12 @@ MonoBehaviour:
   maxHealth: 900
   deathParticles: {fileID: 1640565276510398622, guid: 7796874d55da1cc4ea01b2f78e9b1acb,
     type: 3}
+  bossDamage: 10
   firstStageDeathParticles: {fileID: 212232618681928571, guid: f70826774952cc14d80a1c7bd0313160,
     type: 3}
   projectileSpawnPoint: {fileID: 743510049865714018}
+  thumpRange: 9
+  thumpForce: 450
   stageOneProjectile: {fileID: 3521693105631811606, guid: 1f06ee0e4a868484a86d0e23d1ab68f7,
     type: 3}
   stageTwoProjectile: {fileID: 4729260153567274746, guid: e5dcd99a9f21f394cb619c5a87f307a1,
@@ -249,7 +252,6 @@ MonoBehaviour:
   enemyPrefab: {fileID: 2648387158925246708, guid: c7e82a6e7e4edb4469b592c344e28da4,
     type: 3}
   bulletSpeed: 8.5
-  bulletDamage: 10
 --- !u!1 &743510048380867892
 GameObject:
   m_ObjectHideFlags: 0

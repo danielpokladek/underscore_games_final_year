@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerBullet : Bullet
-{
+{   
     private void Start()
     {
         Destroy(gameObject, 3.5f);
@@ -16,7 +16,6 @@ public class PlayerBullet : Bullet
             EnemyController enemyController = other.GetComponent<EnemyController>();
             enemyController.TakeDamage(bulletDamage);
 
-            Debug.Log("Damaged enemy: " + other.name + ". With " + bulletDamage + " damage!");
         }
 
         if (other.gameObject.CompareTag("Player"))
@@ -26,10 +25,10 @@ public class PlayerBullet : Bullet
         }
 
         if (other.gameObject.CompareTag("BossHitPoint"))
-            other.transform.parent.GetComponent<BossController>().DealDamage(bulletDamage);
+            other.transform.parent.GetComponent<BossController>().DamageBoss(bulletDamage);
 
         if (other.gameObject.CompareTag("BossProjectile"))
-            other.gameObject.GetComponent<BossBullet>().DamageBullet(5.0f);
+            other.gameObject.GetComponent<BossBullet>().DamageBullet(bulletDamage);
         
         // Instantiate a hit effect.
         GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
@@ -40,8 +39,8 @@ public class PlayerBullet : Bullet
     private void OnCollisionEnter2D(Collision2D other)
     {
         // ???
-        GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
-        Destroy(effect, 0.4f);
-        Destroy(gameObject);
+//        GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
+//        Destroy(effect, 0.4f);
+//        Destroy(gameObject);
     }
 }

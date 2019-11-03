@@ -5,6 +5,7 @@ using UnityEngine;
 public class RoomManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] enemySpawners;
+    [SerializeField] private GameObject boss;
 
     private bool enemiesSpawned = false;
 
@@ -12,6 +13,12 @@ public class RoomManager : MonoBehaviour
     {
         Instantiate(GameManager.instance.playerPrefab, transform.position, Quaternion.identity);
     }
+
+    public void SpawnBoss()
+    {
+        Instantiate(boss, transform.position, Quaternion.identity);
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.gameObject.CompareTag("Player") || enemiesSpawned) return;

@@ -7,21 +7,21 @@ public class TempBossController : BossController
     [Header("Temp Boss Settings")]
     [SerializeField] private ParticleSystem firstStageDeathParticles;
     [SerializeField] private Transform      projectileSpawnPoint;
+    [SerializeField] private float          thumpRange;
+    [SerializeField] private float          thumpForce;
     [SerializeField] private GameObject     stageOneProjectile;
     [SerializeField] private GameObject     stageTwoProjectile;
     [SerializeField] private float          secondStageHealth = 50f;
     [SerializeField] private GameObject[]   enemySpawnPoints;
     [SerializeField] private GameObject     enemyPrefab;
     [SerializeField] private float          bulletSpeed;
-    [SerializeField] private float          bulletDamage;
-    
 
     private List<GameObject> projectiles;
     private bool             secondStage = false;
     
-    override public void DealDamage(float damage)
+    override public void DamageBoss(float damage)
     {
-        base.DealDamage(damage);
+        base.DamageBoss(damage);
         
         if (currentHealth <= secondStageHealth && !secondStage)
         {
@@ -31,53 +31,53 @@ public class TempBossController : BossController
         }
     }
     
-    // Functions below are called by the animations of the boss object.
-    // These functions shouldn't be called by the script.
     #region Animation Functions
-    
-    // Function called by animation.
     public void ThumpAttack_MoveToPlayer()
     {
         transform.position = new Vector3(player.transform.position.x, transform.position.y, transform.position.z);
-        //transform.position = Vector2.MoveTowards(transform.position, new Vector2(player.transform.position.x, transform.position.y), .1f);
     }
     
-    // Function called by animation.
     public void ThumpImpact()
     {
-        // Instantiate some dust particles.
-        // Check if player is in range, if they are, push them back from the impact zone.
-        // Also damage the player if they are too close.
+        // Instantiate some dust particles upon hit.
+        
+        if (Vector2.Distance(transform.position, player.position) < thumpRange)
+        {         
+            DamagePlayer(bossDamage);
+            
+            Vector2 direction = player.position - transform.position;
+            direction = direction.normalized;
+            
+            StartCoroutine(PushBack(direction, thumpForce));
+        }
     }
     
-    // Function called by animation.
     public void ThrowProjectile()
     {
         GameObject projectile = Instantiate(stageOneProjectile, projectileSpawnPoint.position, Quaternion.identity);
         BossNormalBullet bossBullet = projectile.GetComponent<BossNormalBullet>();
         
-        bossBullet.Bullet(player.transform, bulletSpeed, bulletDamage);
-
+        bossBullet.Bullet(player.transform, bulletSpeed, bossDamage);
         Destroy(projectile, 2.5f);
     }
     
-    // Function called by animation.
     public void StageOneDeath()
     {
         Debug.Log("Stage one done!");
 
         ParticleSystem deathParticle = Instantiate(firstStageDeathParticles, transform.position, Quaternion.identity);
-        
         Destroy(deathParticle, 4.0f);
     }
     
-    // Function called by animation.
     public void ShootProjectile()
     {
-        
+        GameObject projectile = Instantiate(stageTwoProjectile, transform.position + new Vector3(0, .5f, 0), Quaternion.identity);
+        BossHoamingBullet bossBullet = projectile.GetComponent<BossHoamingBullet>();
+
+        bossBullet.Bullet(player.transform, bulletSpeed, bossDamage);
+        //Destroy(projectile, 4.5f);
     }
     
-    // Function called by animation.
     public void SpawnEnemies()
     {
         foreach (GameObject _go in enemySpawnPoints)
@@ -85,5 +85,20 @@ public class TempBossController : BossController
             Instantiate(enemyPrefab, _go.transform.position, Quaternion.identity);
         }
     }
+
+    IEnumerator PushBack(Vector2 direction, float force)
+    {
+        playerController.CanMove = false;
+        playerRigidbody.AddForce(direction * force);
+        
+        yield return new WaitForSeconds(.5f);
+        playerController.CanMove = true;
+    }
     #endregion
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, thumpRange);
+    }
 }

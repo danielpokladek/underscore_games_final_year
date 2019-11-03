@@ -45,6 +45,9 @@ public class BossBullet : Bullet
     virtual public void DamageBullet(float damage)
     {
         currentHealth -= damage;
+        
+        if (currentHealth < 0)
+            Destroy(gameObject);
     }
 
     private void OnCollisionEnter2D(Collision2D other)

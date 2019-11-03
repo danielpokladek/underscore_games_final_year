@@ -40,7 +40,7 @@ public class LevelGeneration : MonoBehaviour
     [Tooltip("This is the X & Y room size, in Unity's units, so by default this is set to 20x10 Unity units.")]
     public int roomSizeX, roomSizeY;
 
-    private Room[,] rooms;                                      // Reference to a 2D array of rooms in the level.
+    private Room[,] rooms;                                          // Reference to a 2D array of rooms in the level.
     private List<Vector2> takenPositions = new List<Vector2>();     // Although we already have an array of rooms,
                                                                     //  a List<> allows to find rooms using 'contains' method.
 
@@ -106,6 +106,14 @@ public class LevelGeneration : MonoBehaviour
             rooms[(int)checkPos.x + gridSizeX, (int)checkPos.y + gridSizeY] = new Room(checkPos, 0);
             takenPositions.Insert(0, checkPos);
         }
+        
+        // Creating a boss room.
+        int roomNo            = Random.Range(1, takenPositions.Count-1);
+        Vector2 bossRoomPos   = takenPositions[roomNo];
+        Room bossRoom         = rooms[(int)bossRoomPos.x, (int)bossRoomPos.y];
+        bossRoom.roomType     = 2;
+        
+        Debug.Log("Boss room at: " + bossRoomPos.x + "/" + bossRoomPos.y);
     }
 
     private Vector2 NewPosition()
@@ -301,10 +309,10 @@ public class LevelGeneration : MonoBehaviour
             RoomSelector roomSelector = Object.Instantiate(roomPref, drawPos, Quaternion.identity).GetComponent<RoomSelector>();
 
             roomSelector.roomType   = room.roomType;
-            roomSelector.up     = room.doorTop;
-            roomSelector.down   = room.doorBot;
-            roomSelector.right  = room.doorRight;
-            roomSelector.left   = room.doorLeft;
+            roomSelector.up         = room.doorTop;
+            roomSelector.down       = room.doorBot;
+            roomSelector.right      = room.doorRight;
+            roomSelector.left       = room.doorLeft;
             
             roomSelector.gameObject.transform.SetParent(mapRoot);
         }

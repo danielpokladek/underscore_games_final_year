@@ -178,5 +178,8 @@ public class RoomSelector : MonoBehaviour
         
         if (roomType == 1)
             tempRoom.GetComponent<RoomManager>().SpawnPlayer();
+
+        if (roomType == 2)
+            tempRoom.GetComponent<RoomManager>().SpawnBoss();
     }
 }

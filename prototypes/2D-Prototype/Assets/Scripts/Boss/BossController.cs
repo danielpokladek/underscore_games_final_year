@@ -10,23 +10,35 @@ public class BossController : MonoBehaviour
     [Header("Base Boss Settings")]
     [SerializeField] protected float             maxHealth = 100f;
     [SerializeField] protected ParticleSystem    deathParticles;
+    [SerializeField] protected float             bossDamage;
     
     // ----------------
-    protected Transform player;
     protected Animator  animator;
     protected float     currentHealth;
     protected bool      canBeDamaged;
     
+    // ----------------------------------------
+    protected Transform        player;
+    protected PlayerController playerController;
+    protected Rigidbody2D      playerRigidbody;
+    
     private void Start()
     {
         currentHealth = maxHealth;
-        animator = GetComponent<Animator>();
+        animator      = GetComponent<Animator>();
         
-        // Probably get this from the stage/gameManager once its been made.
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        // --- Player Stuff --- //
+        player             = GameObject.FindGameObjectWithTag("Player").transform;
+        playerController   = player.GetComponent<PlayerController>();
+        playerRigidbody    = player.GetComponent<Rigidbody2D>();
     }
 
-    virtual public void DealDamage(float damageAmount)
+    virtual protected void DamagePlayer(float damageAmount)
+    {
+        playerController.TakeDamage(damageAmount);
+    }
+
+    virtual public void DamageBoss(float damageAmount)
     {
         if (canBeDamaged)
             currentHealth -= damageAmount;
