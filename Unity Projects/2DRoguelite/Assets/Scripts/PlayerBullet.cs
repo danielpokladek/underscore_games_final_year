@@ -10,7 +10,7 @@ public class PlayerBullet : Bullet
     }
 
     private void OnTriggerEnter2D(Collider2D other)
-    {
+    {     
         if (other.gameObject.CompareTag("Enemy"))
         {
             EnemyController enemyController = other.GetComponent<EnemyController>();
@@ -20,17 +20,7 @@ public class PlayerBullet : Bullet
             Destroy(effect, 0.4f);
             Destroy(gameObject);
         }
-
-        if (other.gameObject.CompareTag("Player"))
-        {
-            PlayerController playerController = other.GetComponent<PlayerController>();
-            playerController.TakeDamage(bulletDamage);
-
-            GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
-            Destroy(effect, 0.4f);
-            Destroy(gameObject);
-        }
-
+        
         if (other.gameObject.CompareTag("BossHitPoint"))
         {
             other.transform.parent.GetComponent<BossController>().DamageBoss(bulletDamage);

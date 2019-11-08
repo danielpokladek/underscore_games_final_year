@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 5562476675142948829}
   - component: {fileID: 5562476675142948828}
   - component: {fileID: 6190332219961207393}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: tilemapCollideable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14767,6 +14767,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3343976084118627591}
     m_Modifications:
+    - target: {fileID: 7960282616360328762, guid: 84ce4182d4782c14091b554100b1e5ec,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemySpawnPoint
+      objectReference: {fileID: 0}
     - target: {fileID: 7960282616360328761, guid: 84ce4182d4782c14091b554100b1e5ec,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14822,11 +14827,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7960282616360328762, guid: 84ce4182d4782c14091b554100b1e5ec,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemySpawnPoint
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84ce4182d4782c14091b554100b1e5ec, type: 3}
 --- !u!1 &8302489020899315107 stripped
@@ -14848,6 +14848,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3343976084118627591}
     m_Modifications:
+    - target: {fileID: 7960282616360328762, guid: 84ce4182d4782c14091b554100b1e5ec,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemySpawnPoint
+      objectReference: {fileID: 0}
     - target: {fileID: 7960282616360328761, guid: 84ce4182d4782c14091b554100b1e5ec,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14903,11 +14908,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7960282616360328762, guid: 84ce4182d4782c14091b554100b1e5ec,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemySpawnPoint
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84ce4182d4782c14091b554100b1e5ec, type: 3}
 --- !u!1 &5047568969369515536 stripped
@@ -14929,6 +14929,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3343976084118627591}
     m_Modifications:
+    - target: {fileID: 7960282616360328762, guid: 84ce4182d4782c14091b554100b1e5ec,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemySpawnPoint (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 7960282616360328761, guid: 84ce4182d4782c14091b554100b1e5ec,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14984,11 +14989,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7960282616360328762, guid: 84ce4182d4782c14091b554100b1e5ec,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemySpawnPoint (1)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84ce4182d4782c14091b554100b1e5ec, type: 3}
 --- !u!4 &148594771551887610 stripped
@@ -15004,6 +15004,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3343976084118627591}
     m_Modifications:
+    - target: {fileID: 7960282616360328762, guid: 84ce4182d4782c14091b554100b1e5ec,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemySpawnPoint (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 7960282616360328761, guid: 84ce4182d4782c14091b554100b1e5ec,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15058,11 +15063,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7960282616360328762, guid: 84ce4182d4782c14091b554100b1e5ec,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemySpawnPoint (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84ce4182d4782c14091b554100b1e5ec, type: 3}

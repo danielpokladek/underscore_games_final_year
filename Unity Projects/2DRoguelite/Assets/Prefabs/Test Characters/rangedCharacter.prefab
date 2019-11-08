@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 7318236442386029680}
   - component: {fileID: 7318236442386029681}
   - component: {fileID: 7318236442386029682}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: rangedCharacter
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -258,7 +258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 8
-  maxHealth: 150
+  playerHealth: 20
   delayLength: 0.25
   playerArmPivot: {fileID: 7318236443010002084}
   weaponRend: {fileID: 7318236441241899901}

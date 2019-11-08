@@ -91,16 +91,16 @@ public class EnemyController : MonoBehaviour
     private void AiRaycast()
     {
         Debug.DrawLine(firePoint.position, playerTransform.position, Color.red);
-        RaycastHit2D rayHit = Physics2D.Raycast(firePoint.position, playerTransform.position);
+
+        Vector2 rayDirection = playerTransform.position - firePoint.position;
+        rayDirection = rayDirection.normalized;
+        
+        RaycastHit2D rayHit = Physics2D.Raycast(firePoint.position, rayDirection, 10, LayerMask.GetMask("AI Raycast"));
 
         if (rayHit.collider)
         {
-            Debug.Log(rayHit.collider.name, rayHit.collider.gameObject);
-
             if (rayHit.collider.CompareTag("Player"))
                 ShootPlayer();
-            else
-                return;
         }
     }
 
@@ -110,7 +110,7 @@ public class EnemyController : MonoBehaviour
         {
             GameObject instBullet = Instantiate(projectile, firePoint.position, firePoint.rotation);
             Rigidbody2D instRB = instBullet.GetComponent<Rigidbody2D>();
-            PlayerBullet bullet = instBullet.GetComponent<PlayerBullet>();
+            Bullet bullet = instBullet.GetComponent<Bullet>();
 
             instRB.AddForce(firePoint.up * 10, ForceMode2D.Impulse);
             bullet.SetDamage(damageAmount);
