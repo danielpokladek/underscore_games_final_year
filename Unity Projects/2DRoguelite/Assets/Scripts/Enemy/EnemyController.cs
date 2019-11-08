@@ -95,7 +95,7 @@ public class EnemyController : MonoBehaviour
 
         if (rayHit.collider)
         {
-            //Debug.Log(rayHit.collider.name);
+            Debug.Log(rayHit.collider.name, rayHit.collider.gameObject);
 
             if (rayHit.collider.CompareTag("Player"))
                 ShootPlayer();
