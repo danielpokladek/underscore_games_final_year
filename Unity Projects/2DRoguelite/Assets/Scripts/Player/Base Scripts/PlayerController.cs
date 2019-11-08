@@ -8,24 +8,23 @@ public class PlayerController : MonoBehaviour
     protected float moveSpeed = 8.0f;
 
     [SerializeField] protected float playerHealth = 20;
-
-    [Tooltip("Delay between player's attacks, for example this is the delay between ranger's projectiles." +
-             "Increasing this value, will mean, that players will wait longer before next attack is performed." +
-             "Leave this value to zero, to have no delay.")]
-    [SerializeField]
-    protected float delayLength;
-
+    
+    [Tooltip("Damage that the player will deal to the enemies, later this will be determined by the weapon.")]
+    [SerializeField] protected float playerDamage;
+    
+    // ---------------------------
     protected Rigidbody2D playerRB;
-    protected Vector2 playerInput;
-    protected float _delayAttack;
+    protected Vector2     playerInput;
+    protected Camera      playerCamera;
 
-    // Used by characters
+    // -----------------------------
     protected Vector2 mousePosition = new Vector2(0, 0);
-    protected Vector2 mouseVector = new Vector2(0, 0);
-    protected bool canMove;
-
-    private float currentHealth;
-    private bool playerAlive = true;
+    protected Vector2 mouseVector   = new Vector2(0, 0);
+    protected bool    canMove;
+    
+    // -------------------------
+    protected float currentHealth;
+    protected bool  playerAlive = true;
 
     virtual public void Start()
     {
@@ -34,51 +33,34 @@ public class PlayerController : MonoBehaviour
 
     private void InitiatePlayer()
     {
-        playerRB = GetComponent<Rigidbody2D>();
-
+        playerRB      = GetComponent<Rigidbody2D>();
+        playerCamera  = Camera.main;
+        
         currentHealth = playerHealth;
-        playerAlive = true;
-        canMove = true;
-
-        _delayAttack = delayLength;
+        playerAlive   = true;
+        canMove       = true;
     }
 
-    virtual public void Update()
+    virtual protected void Update()
     {
         if (playerAlive)
         {
-            PlayerMovement();
             GetMouseInput();
-
-            if (Input.GetButton("LMB"))
-            {
-                if (_delayAttack > delayLength)
-                    PrimAttack();
-            }
-
-            if (Input.GetButton("RMB"))
-                SecAttack();
-
-            if (Input.GetButton("Dodge"))
-                Dodge();
         }
-
-
-        if (delayLength == 0)
-            _delayAttack = delayLength;
-
-        if (_delayAttack <= delayLength)
-            _delayAttack += Time.deltaTime;
     }
 
     virtual public void FixedUpdate()
     {
-        MoveCharacter(playerInput);
+        if (playerAlive)
+        {
+            PlayerMovement();
+            MoveCharacter(playerInput);
+        }
     }
 
-    public void TakeDamage(float _dmgAmnt)
+    public void TakeDamage(float damageAmount)
     {
-        currentHealth = currentHealth - _dmgAmnt;
+        currentHealth = currentHealth - damageAmount;
 
         // Check player health
         if (currentHealth <= 0)
@@ -97,8 +79,8 @@ public class PlayerController : MonoBehaviour
 
     private void GetMouseInput()
     {
-        if (Camera.main)
-            mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (playerCamera)
+            mousePosition = playerCamera.ScreenToWorldPoint(Input.mousePosition);
 
         mouseVector = (mousePosition - (Vector2) transform.position).normalized;
     }
@@ -124,11 +106,10 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region PlayerAttacks
-    // Only the definitions for the attacks, need to be updated per character (in their own scripts).
-    // Also reset the delay when shooting., might as well be done here to keep inherits clean.
+    // Only the declarations for the attacks, need to be declared per characters.
     virtual protected void PrimAttack()
     {
-        _delayAttack = 0;
+        
     }
 
     virtual protected void SecAttack()

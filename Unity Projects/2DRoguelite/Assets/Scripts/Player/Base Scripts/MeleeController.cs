@@ -11,8 +11,10 @@ public class MeleeController : PlayerController
     [SerializeField] protected Transform attackPoint;
     [SerializeField] protected Transform playerArmPivot;
     [SerializeField] protected LayerMask enemiesLayer;
-
+    public float delayLength;
+    
     private float timeBtwAttack;
+    private float curretDelayAttack;
 
     override public void Start()
     {
@@ -21,7 +23,7 @@ public class MeleeController : PlayerController
         timeBtwAttack = attackDelay;
     }
 
-    override public void Update()
+    override protected void Update()
     {
         base.Update();
 
@@ -41,7 +43,7 @@ public class MeleeController : PlayerController
 
     override protected void PrimAttack()
     {
-        if (_delayAttack >= delayLength)
+        if (curretDelayAttack >= delayLength)
         {
             Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemiesLayer);
             for (int i = 0; i < enemiesToDamage.Length; i++)
@@ -50,7 +52,7 @@ public class MeleeController : PlayerController
                 Debug.Log("Damaged enemy: " + enemiesToDamage[i].name + ". With " + damageAmount + " damage!");
             }
 
-            _delayAttack = 0;
+            curretDelayAttack = 0;
         }
     }
 

@@ -227,11 +227,16 @@
           <e p="GameManager.cs" t="Include" />
           <e p="GunLaser.cs" t="Include" />
           <e p="Player" t="Include">
-            <e p="MeleeController.cs" t="Include" />
-            <e p="PlayerController.cs" t="Include" />
+            <e p="Archer" t="Include">
+              <e p="ArcherCharacter.cs" t="Include" />
+            </e>
+            <e p="Base Scripts" t="Include">
+              <e p="MeleeController.cs" t="Include" />
+              <e p="PlayerController.cs" t="Include" />
+              <e p="RangedController.cs" t="Include" />
+            </e>
             <e p="PlayerMovement.cs" t="Include" />
             <e p="PlayerShooting.cs" t="Include" />
-            <e p="RangedController.cs" t="Include" />
           </e>
           <e p="PlayerBullet.cs" t="Include" />
           <e p="Room Generation" t="Include">
