@@ -48,7 +48,7 @@ public class MeleeController : PlayerController
             Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemiesLayer);
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
-                enemiesToDamage[i].GetComponent<EnemyController>().TakeDamage(damageAmount);
+                enemiesToDamage[i].GetComponent<EnemyController>().Damage(damageAmount);
                 Debug.Log("Damaged enemy: " + enemiesToDamage[i].name + ". With " + damageAmount + " damage!");
             }
 

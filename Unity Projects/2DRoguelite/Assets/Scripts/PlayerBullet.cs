@@ -14,7 +14,7 @@ public class PlayerBullet : Bullet
         if (other.gameObject.CompareTag("Enemy"))
         {
             EnemyController enemyController = other.GetComponent<EnemyController>();
-            enemyController.TakeDamage(bulletDamage);
+            enemyController.Damage(bulletDamage);
 
             GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
             Destroy(effect, 0.4f);

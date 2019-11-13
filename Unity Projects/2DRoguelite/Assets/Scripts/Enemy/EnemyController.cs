@@ -6,125 +6,91 @@ using Pathfinding;
 public class EnemyController : MonoBehaviour
 {
     [Header("Enemy Settings")]
-    [Tooltip("This is the maximum speed at which the enemy will be able to move.")]
-    [SerializeField] protected float movementSpeed = 2.5f;
+    [Tooltip("This is enemy's maximum movement speed.")]
+    [SerializeField] protected float moveSpeed = 2.5f;
+
     [Tooltip("This is enemy's maximum health points")]
-    [SerializeField] protected float maximumHealth = 10f;
-    [SerializeField] protected float shootDelay = .5f;
-    [SerializeField] protected GameObject projectile;
+    [SerializeField] protected float enemyHealth = 10f;
+    
+    [Tooltip("This is enemy's damage points; set to 0 (zero) for dummy AI")]
     [SerializeField] protected float damageAmount;
 
-    [Header("Other")]
-    [SerializeField] protected Transform aiArmPivot;
-    [SerializeField] protected Transform firePoint;
-    [SerializeField] protected SpriteRenderer weaponRend;
+    [Tooltip("Toggle this bool to set the current enemy to a dummy AI." +
+        "A dummy AI will not follow, or attack the player, and it will stand in same place." +
+        "This is mainly used for debugging, and checking that the AI script is working." +
+        "This can be used to test new effects, such as impact effects.")]
+    [SerializeField] protected bool isDummy;
 
-    [Header("Temporary")]
-    public Transform stopPoint;
-    public Transform playerTransform;
-    public bool isDummy;
+    // --- PLAYER & MOVEMENT -----------
+    protected Transform     playerTrans;
+    protected GameObject    playerGO;
+    protected Vector2       stopPoint       = new Vector2(0, 0);
 
-    private float currentHealth;
-    private float delay;
-    private bool canShoot = false;
+    // --- ATTACK & HEALTH -------
+    protected float currentHealth;
+    protected float currentDelay;
+    protected bool  canAttack       = false;
 
-    private AIPath aiPath;
-    private AIDestinationSetter aiDestinationSetter;
+    // --- PATHFINDING SETTINGS --------------------
+    protected AIDestinationSetter aiDestinationSetter;
+    protected AIPath              aiPath;
 
     private void Start()
     {
-        // REMOVE THIS LATER ON - THIS IS BAD DANIEL.
-        if (GameObject.FindGameObjectWithTag("Player"))
-            playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        else playerTransform = stopPoint;
-
         InitiateEnemy();
     }
 
     private void InitiateEnemy()
     {
-        if (!isDummy)
-        {
-            aiPath = GetComponent<AIPath>();
-            aiDestinationSetter = GetComponent<AIDestinationSetter>();
-
-            aiPath.maxSpeed = movementSpeed;
-            aiDestinationSetter.target = playerTransform;
-        }
-
-        currentHealth = maximumHealth;
-        delay = shootDelay;
-    }
-
-    public virtual void Update()
-    {
+        // No need to initiate anything if the object is a dummy,
+        //  so simply skip this part and move to the update loop.
         if (isDummy)
             return;
 
-        GunDrawLayer();
-        AiRaycast();
-        ShootDelay();
+        if (!GameObject.FindGameObjectWithTag("Player"))
+            Debug.LogError("Could not find a player, make sure they are tagged and present in the current scene.", gameObject);
+        
+        playerGO    = GameObject.FindGameObjectWithTag("Player");
+        playerTrans = playerGO.transform;
+
+        aiDestinationSetter = GetComponent<AIDestinationSetter>();
+        aiPath              = GetComponent<AIPath>();
+
+        aiDestinationSetter.target  = playerTrans;
+        aiPath.maxSpeed             = moveSpeed;
+
+        currentHealth = enemyHealth;
     }
 
-    public void TakeDamage(float dmgAmount)
+    virtual protected void Update()
     {
-        currentHealth = currentHealth - dmgAmount;
+        if (isDummy)
+            return;
+    }
+
+    virtual protected void FixedUpdate()
+    {
+        if (isDummy)
+            return;
+    }
+
+    public void Damage(float damageAmount)
+    {
+        currentHealth -= damageAmount;
 
         if (currentHealth <= 0)
             Destroy(gameObject);
     }
 
-    private void GunDrawLayer()
+    virtual protected bool CanSeePlayer()
     {
-        if (!playerTransform)
-            return;
-        
-        Vector2 playerVector = ((Vector2) playerTransform.position - (Vector2) transform.position).normalized;
-        float weaponAngle = -1 * Mathf.Atan2(playerVector.y, playerVector.x) * Mathf.Rad2Deg;
-        aiArmPivot.rotation = Quaternion.AngleAxis(weaponAngle, Vector3.back);
-        weaponRend.sortingOrder = 0 - 1;
+        Vector2 rayDirection = (playerTrans.position - transform.position).normalized;
 
-        if (weaponAngle > 0)
-            weaponRend.sortingOrder = 0 + 1;
-    }
+        RaycastHit2D rayHit2D = Physics2D.Raycast(transform.position, rayDirection, 10, LayerMask.GetMask("AI Raycast"));
 
-    private void AiRaycast()
-    {
-        Debug.DrawLine(firePoint.position, playerTransform.position, Color.red);
+        if (rayHit2D.collider.CompareTag("Player"))
+            return true;
 
-        Vector2 rayDirection = playerTransform.position - firePoint.position;
-        rayDirection = rayDirection.normalized;
-        
-        RaycastHit2D rayHit = Physics2D.Raycast(firePoint.position, rayDirection, 10, LayerMask.GetMask("AI Raycast"));
-
-        if (rayHit.collider)
-        {
-            if (rayHit.collider.CompareTag("Player"))
-                ShootPlayer();
-        }
-    }
-
-    private void ShootPlayer()
-    {
-        if (canShoot)
-        {
-            GameObject instBullet = Instantiate(projectile, firePoint.position, firePoint.rotation);
-            Rigidbody2D instRB = instBullet.GetComponent<Rigidbody2D>();
-            Bullet bullet = instBullet.GetComponent<Bullet>();
-
-            instRB.AddForce(firePoint.up * 10, ForceMode2D.Impulse);
-            bullet.SetDamage(damageAmount);
-
-            canShoot = false;
-            delay = shootDelay;
-        }
-    }
-
-    private void ShootDelay()
-    {
-        delay -= Time.deltaTime;
-
-        if (delay <= 0.0f)
-            canShoot = true;
+        return false;
     }
 }
