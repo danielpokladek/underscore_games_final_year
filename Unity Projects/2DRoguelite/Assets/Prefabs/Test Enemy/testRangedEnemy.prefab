@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2648387157459998504}
   - component: {fileID: 2648387157459998505}
   m_Layer: 9
-  m_Name: playerGun
+  m_Name: gunSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -92,7 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2648387158659941387}
   m_Layer: 9
-  m_Name: playerArmPivot (1)
+  m_Name: armPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 2648387158925246704}
   - component: {fileID: 2648387158925246706}
   - component: {fileID: 2648387158925246707}
-  - component: {fileID: 2648387158925246705}
+  - component: {fileID: 5448182903151528506}
   m_Layer: 9
   m_Name: testRangedEnemy
   m_TagString: Enemy
@@ -277,7 +277,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   target: {fileID: 0}
---- !u!114 &2648387158925246705
+--- !u!114 &5448182903151528506
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -286,21 +286,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 2648387158925246708}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6061e2fad79f6f64bbaacab035fbd7c7, type: 3}
+  m_Script: {fileID: 11500000, guid: 34ad6676a50f62e45a1d6642588e68ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 2.5
-  maximumHealth: 10
-  shootDelay: 1.5
-  projectile: {fileID: 4729260153567274746, guid: e297da7b2d5beb24eb64bdfb225d5cdc,
-    type: 3}
-  damageAmount: 2
-  aiArmPivot: {fileID: 2648387158659941387}
-  firePoint: {fileID: 2648387159445091027}
-  weaponRend: {fileID: 2648387157459998505}
-  stopPoint: {fileID: 4816090786911746147}
-  playerTransform: {fileID: 0}
+  moveSpeed: 2.5
+  enemyHealth: 10
+  damageAmount: 10
   isDummy: 0
+  shotDelay: 0.7
+  projectilePrefab: {fileID: 4729260153567274746, guid: e297da7b2d5beb24eb64bdfb225d5cdc,
+    type: 3}
+  weaponSprite: {fileID: 2648387157459998505}
+  firePoint: {fileID: 2648387159445091027}
+  armPivot: {fileID: 2648387158659941387}
 --- !u!1 &2648387159400037837
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,7 +310,7 @@ GameObject:
   - component: {fileID: 2648387159400037836}
   - component: {fileID: 2648387159400037835}
   m_Layer: 9
-  m_Name: body
+  m_Name: enemyBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

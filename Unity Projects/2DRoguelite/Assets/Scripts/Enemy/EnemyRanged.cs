@@ -20,6 +20,7 @@ public class EnemyRanged : EnemyController
     protected override void Update()
     {
         base.Update();
+        AttackPlayer();
 
         if (!canAttack)
         {
@@ -33,9 +34,7 @@ public class EnemyRanged : EnemyController
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-
         DrawGunLayer();
-        AttackPlayer();
     }
 
     private void DrawGunLayer()

@@ -20,7 +20,10 @@ public class PlayerController : MonoBehaviour
     // -----------------------------
     protected Vector2 mousePosition = new Vector2(0, 0);
     protected Vector2 mouseVector   = new Vector2(0, 0);
-    protected bool    canMove;
+
+    // ---
+    private bool      canMove;
+    private int       playerDirection;
     
     // -------------------------
     protected float currentHealth;
@@ -38,7 +41,7 @@ public class PlayerController : MonoBehaviour
         
         currentHealth = playerHealth;
         playerAlive   = true;
-        canMove       = true;
+        CanMove       = true;
     }
 
     virtual protected void Update()

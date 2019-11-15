@@ -42,6 +42,8 @@ public class EnemyController : MonoBehaviour
 
     private void InitiateEnemy()
     {
+        currentHealth = enemyHealth;
+
         // No need to initiate anything if the object is a dummy,
         //  so simply skip this part and move to the update loop.
         if (isDummy)
@@ -58,8 +60,6 @@ public class EnemyController : MonoBehaviour
 
         aiDestinationSetter.target  = playerTrans;
         aiPath.maxSpeed             = moveSpeed;
-
-        currentHealth = enemyHealth;
     }
 
     virtual protected void Update()
@@ -88,8 +88,11 @@ public class EnemyController : MonoBehaviour
 
         RaycastHit2D rayHit2D = Physics2D.Raycast(transform.position, rayDirection, 10, LayerMask.GetMask("AI Raycast"));
 
-        if (rayHit2D.collider.CompareTag("Player"))
-            return true;
+        if (rayHit2D.collider)
+        {
+            if (rayHit2D.collider.CompareTag("Player"))
+                return true;
+        }
 
         return false;
     }
