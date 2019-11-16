@@ -107,6 +107,7 @@ public class ArcherCharacter : RangedController
         {
             playerDamage /= 2;
             moveSpeed    *= 2;
+            extraShot = false;
         }
     }
 
@@ -167,6 +168,14 @@ public class ArcherCharacter : RangedController
         moveSpeed += 20f;
         yield return new WaitForSeconds(.3f);
         moveSpeed -= 20f;
+    }
+
+    // --- TEMP STUFF --- //
+    private void OnGUI()
+    {
+        GUI.Label(new Rect(10, 40, 200, 20), "HP: " + currentHealth.ToString("000"));
+        GUI.Label(new Rect(10, 55, 200, 20), "Bow: " + currentBowDraw.ToString("0.0") + " / " + bowDrawLength.ToString("0.0"));
+        GUI.Label(new Rect(10, 70, 500, 20), "Pos: " + transform.position.ToString("0.000"));
     }
 
     public float GetCurrentHealth { get { return currentHealth; } }

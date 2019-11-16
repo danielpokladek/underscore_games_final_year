@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
         get { return canMove; }
     }
 
-    public float GetHealth
+    public float GetCurrentHealth
     {
         get { return currentHealth; }
     }

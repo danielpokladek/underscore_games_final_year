@@ -9,26 +9,30 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float viewPortFactor       = .5f;
     [SerializeField] private float followDuration       = .1f;
 
-    private Vector2 viewPortSize;
+    // --------------------------
     private Camera mainCamera;
-
+    private Vector2 viewPortSize;
     private Vector3 targetPosition;
     private Vector3 currentVelocity;
 
     private Vector2 distance;
 
+    private bool follow = false;
+
     // Start is called before the first frame update
     void Start()
     {
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        StartCoroutine(CameraInit());
 
         mainCamera = Camera.main;
-        targetPosition = playerTransform.position;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+        if (!follow)
+            return;
+
         viewPortSize = (mainCamera.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height)) - mainCamera.ScreenToWorldPoint(Vector2.zero)) * viewPortFactor;
 
         distance = playerTransform.position - transform.position;
@@ -45,12 +49,12 @@ public class CameraController : MonoBehaviour
         transform.position = Vector3.SmoothDamp(transform.position, targetPosition - new Vector3(0, 0, 10), ref currentVelocity, followDuration, maximumFollowSpeed);
     }
 
-    private void OnDrawGizmos()
+    IEnumerator CameraInit()
     {
-        Color c = Color.red;
-        c.a = 0.3f;
-        Gizmos.color = c;
+        yield return new WaitForFixedUpdate();
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        targetPosition = playerTransform.position;
 
-        Gizmos.DrawCube(transform.position, viewPortSize);
+        follow = true;
     }
 }

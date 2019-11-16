@@ -7,7 +7,16 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private GameObject[] enemySpawners;
     [SerializeField] private GameObject boss;
 
+    LevelManager levelManager;
+    GameObject bossIconGO;
+    bool bossRoom;
+
     private bool enemiesSpawned = false;
+
+    private void Start()
+    {
+        levelManager = LevelManager.instance;
+    }
 
     public void SpawnPlayer()
     {
@@ -16,19 +25,36 @@ public class RoomManager : MonoBehaviour
 
     public void SpawnBoss(GameObject bossIcon)
     {
-        Instantiate(bossIcon, transform.position, Quaternion.identity);
+        bossIconGO = Instantiate(bossIcon, transform.position, Quaternion.identity);
+        bossIconGO.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (levelManager.GetCurrentState == "Night")
+            ShowBoss();
+    }
+
+    private void ShowBoss()
+    {
+        bossIconGO.SetActive(true);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.gameObject.CompareTag("Player") || enemiesSpawned) return;
-        
-        foreach (GameObject spawner in enemySpawners)
+        if (other.CompareTag("Player"))
         {
-            EnemySpawnPoint spawnPoint = spawner.GetComponent<EnemySpawnPoint>();
-            spawnPoint.SpawnEnemy();
-        }
+            // It is daytime, and enemies have been spawned.
+            if (levelManager.GetCurrentState == "Day" && enemiesSpawned)
+                return;
 
-        enemiesSpawned = true;
+            foreach (GameObject spawner in enemySpawners)
+            {
+                EnemySpawnPoint spawnPoint = spawner.GetComponent<EnemySpawnPoint>();
+                spawnPoint.SpawnEnemy();
+            }
+
+            enemiesSpawned = true;
+        }    
     }
 }

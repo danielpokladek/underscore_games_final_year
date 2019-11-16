@@ -16,17 +16,17 @@ public class ArcherGameUI : MonoBehaviour
 
     private void Start()
     {
-        maxBowDraw.text = playerObject.GetBowDraw.ToString("0.0");
+        //maxBowDraw.text = playerObject.GetBowDraw.ToString("0.0");
     }
 
     private void Update()
     {
-        currentBowDraw.text         = playerObject.GetCurrentBowDraw.ToString("0.0");
+        //currentBowDraw.text         = playerObject.GetCurrentBowDraw.ToString("0.0");
 
         dodgeSkill.fillAmount       = playerObject.GetCurrentDodge  / playerObject.GetDodge;
         tripleShotSkill.fillAmount  = playerObject.GetTripleCurrent / playerObject.GetTripleCooldown;
         extraDamageSkill.fillAmount = playerObject.GetExtraCurrent  / playerObject.GetExtraCooldown;
 
-        playerHealth.text           = playerObject.GetCurrentHealth.ToString("000");
+        //playerHealth.text           = playerObject.GetCurrentHealth.ToString("000");
     }
 }
