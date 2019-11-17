@@ -679,6 +679,7 @@ GameObject:
   m_Component:
   - component: {fileID: 686111275}
   - component: {fileID: 686111274}
+  - component: {fileID: 686111276}
   - component: {fileID: 686111273}
   m_Layer: 0
   m_Name: '- Scripts Container -'
@@ -774,6 +775,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &686111276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 686111272}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab42d7d80f9b5404e8f1ad4cfc328697, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: 0
+  dayLength: 0
+  nightLength: 0
+  midnightLength: 0
+  playerPrefab: {fileID: 0}
 --- !u!1001 &727236340
 PrefabInstance:
   m_ObjectHideFlags: 0

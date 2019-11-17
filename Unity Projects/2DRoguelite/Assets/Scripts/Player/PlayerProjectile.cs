@@ -17,7 +17,7 @@ public class PlayerProjectile : Projectile
         if (other.gameObject.CompareTag("Enemy"))
         {
             EnemyController enemyController = other.GetComponent<EnemyController>();
-            enemyController.Damage(projectileDamage);
+            enemyController.TakeDamage(projectileDamage);
 
             GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
             gameUIManager.DamageIndicator(other.transform.position, projectileDamage);

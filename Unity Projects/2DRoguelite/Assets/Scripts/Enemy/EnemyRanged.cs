@@ -58,7 +58,7 @@ public class EnemyRanged : EnemyController
             Rigidbody2D projectileRB    = projectile.GetComponent<Rigidbody2D>();
 
             projectileRB.AddForce(firePoint.up * 10, ForceMode2D.Impulse);
-            projectileBullet.SetDamage(damageAmount);
+            projectileBullet.SetDamage(currentDamage);
 
             currentDelay = shotDelay;
             canAttack    = !canAttack;

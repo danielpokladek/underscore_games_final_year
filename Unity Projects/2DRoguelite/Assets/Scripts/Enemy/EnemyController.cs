@@ -28,6 +28,7 @@ public class EnemyController : MonoBehaviour
 
     // --- ATTACK & HEALTH -------
     protected float currentHealth;
+    protected float currentDamage;
     protected float currentDelay;
     protected bool  canAttack       = false;
     protected bool  isBleeding      = false;
@@ -67,6 +68,11 @@ public class EnemyController : MonoBehaviour
     {
         if (isDummy)
             return;
+
+        if (LevelManager.instance.GetCurrentState == "Midnight")
+            currentDamage = damageAmount * 2;
+        else
+            currentDamage = damageAmount;
     }
 
     virtual protected void FixedUpdate()
@@ -75,7 +81,7 @@ public class EnemyController : MonoBehaviour
             return;
     }
 
-    public void Damage(float damageAmount)
+    public void TakeDamage(float damageAmount)
     {
         currentHealth -= damageAmount;
 
