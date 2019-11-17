@@ -26,7 +26,7 @@ public class IndicatorText : MonoBehaviour
 
     public void SetValues(string text, Vector2 position)
     {
-        damageText.text = "-" + text;
+        damageText.text = text;
         textPosition = position;
     }
 }

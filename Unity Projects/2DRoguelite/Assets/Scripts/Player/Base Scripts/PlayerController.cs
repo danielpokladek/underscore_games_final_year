@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
         if (playerAlive)
         {
             GetMouseInput();
+            DebugInputs();
         }
     }
 
@@ -84,6 +85,18 @@ public class PlayerController : MonoBehaviour
             playerAlive = false;
             this.gameObject.SetActive(false);
         }
+    }
+
+    public void HealPlayer(float healAmount)
+    {
+        // If player's health will be higher than max amount, set health to max.
+        if ((currentHealth + healAmount) > playerHealth)
+        {
+            currentHealth = playerHealth;
+            return;
+        }
+
+        currentHealth += healAmount;
     }
 
     private void PlayerMovement()
@@ -143,5 +156,20 @@ public class PlayerController : MonoBehaviour
         /* Dodge Ability for the character. */
     }
     #endregion
+
+    private void DebugInputs()
+    {
+        if (Debug.isDebugBuild)
+        {
+            if (Input.GetKeyDown(KeyCode.M))
+                TakeDamage(10);
+
+            if (Input.GetKeyDown(KeyCode.N))
+                HealPlayer(10);
+
+            if (Input.GetKeyDown(KeyCode.Backspace))
+                LevelManager.instance.Restart();
+        }
+    }
 }
     

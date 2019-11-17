@@ -102,4 +102,9 @@ public class LevelManager : MonoBehaviour
 
     public string GetCurrentState { get { return currentStateString; } }
     public float GetStateTimer { get { return stateTimer; } }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 }

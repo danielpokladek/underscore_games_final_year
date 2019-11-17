@@ -8,6 +8,7 @@ public class GameUIManager : MonoBehaviour
     public class Effects
     {
         public GameObject damageIndicator;
+        public GameObject healIndicator;
     }
 
     [SerializeField] private Canvas gameCanvas;
@@ -28,6 +29,18 @@ public class GameUIManager : MonoBehaviour
         GameObject text = Instantiate(effectsContainer.damageIndicator);
 
         text.transform.parent = gameCanvas.transform;
-        text.GetComponent<IndicatorText>().SetValues(damageAmount.ToString(), position);
+
+        string damageText = "-" + damageAmount;
+        text.GetComponent<IndicatorText>().SetValues(damageText, position);
+    }
+
+    public void HealIndicator(Vector2 position, float healAmount)
+    {
+        GameObject text = Instantiate(effectsContainer.healIndicator);
+
+        text.transform.parent = gameCanvas.transform;
+
+        string healText = "+" + healAmount;
+        text.GetComponent<IndicatorText>().SetValues(healText, position);
     }
 }
