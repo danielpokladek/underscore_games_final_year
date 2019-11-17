@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBullet : Bullet
-{   
+public class PlayerProjectile : Projectile
+{
+    GameUIManager gameUIManager;
+
     private void Start()
     {
+        gameUIManager = GameUIManager.currentInstance;
         Destroy(gameObject, 3.5f);
     }
 
@@ -14,16 +17,18 @@ public class PlayerBullet : Bullet
         if (other.gameObject.CompareTag("Enemy"))
         {
             EnemyController enemyController = other.GetComponent<EnemyController>();
-            enemyController.Damage(bulletDamage);
+            enemyController.Damage(projectileDamage);
 
             GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
+            gameUIManager.DamageIndicator(other.transform.position, projectileDamage);
+
             Destroy(effect, 0.4f);
             Destroy(gameObject);
         }
         
         if (other.gameObject.CompareTag("BossHitPoint"))
         {
-            other.transform.parent.GetComponent<BossController>().DamageBoss(bulletDamage);
+            other.transform.parent.GetComponent<BossController>().DamageBoss(projectileDamage);
 
             GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
             Destroy(effect, 0.4f);
@@ -32,7 +37,7 @@ public class PlayerBullet : Bullet
 
         if (other.gameObject.CompareTag("BossProjectile"))
         {
-            other.gameObject.GetComponent<BossBullet>().DamageBullet(bulletDamage);
+            other.gameObject.GetComponent<BossBullet>().DamageBullet(projectileDamage);
 
             GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
             Destroy(effect, 0.4f);

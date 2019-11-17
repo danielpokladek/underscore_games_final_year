@@ -19,6 +19,6 @@ public class BossHoamingBullet : BossBullet
         angle     = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90.0f;
         
         // Apply the rotation to the rigidbody.
-        bulletRb.rotation = angle;
+        projectileRb.rotation = angle;
     }
 }

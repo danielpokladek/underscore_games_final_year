@@ -5,7 +5,6 @@ using UnityEngine;
 public class RangedController : PlayerController
 {
     [Header("Ranger Settings")]
-    [SerializeField] protected GameObject     playerArm;
     [SerializeField] protected SpriteRenderer weaponSprite;
     [SerializeField] protected Transform      firePoint;
     [SerializeField] protected GameObject     projectilePrefab;
@@ -24,12 +23,9 @@ public class RangedController : PlayerController
 
     private void GunDrawLayer()
     {
-        float weaponAngle             = -1 * Mathf.Atan2(mouseVector.y, mouseVector.x) * Mathf.Rad2Deg;
-        playerArm.transform.rotation  = Quaternion.AngleAxis(weaponAngle, Vector3.back);
-        
         weaponSprite.sortingOrder     = 5 - 1;
 
-        if (weaponAngle > 0)
+        if (armAngle > 0)
             weaponSprite.sortingOrder = 5 + 1;
     }
 }

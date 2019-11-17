@@ -24,6 +24,8 @@ public class ArcherCharacter : RangedController
     private float currentDodgeCooldown;
     private float selectedSpecial;
 
+    private bool showDebug = true;
+
     override protected void Update()
     {
         base.Update();
@@ -33,6 +35,9 @@ public class ArcherCharacter : RangedController
 
         if (Input.GetKey(KeyCode.Alpha2))
             currentSpecial = 2;
+
+        if (Input.GetKeyDown(KeyCode.F3))
+            showDebug = !showDebug;
 
         #region Primary Attack
 
@@ -96,16 +101,16 @@ public class ArcherCharacter : RangedController
     {
         shootDirection = mousePosition - playerRB.position;
 
-        GameObject tempProjectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
-        Rigidbody2D projectileRB = tempProjectile.GetComponent<Rigidbody2D>();
-        PlayerBullet bulletScript = tempProjectile.GetComponent<PlayerBullet>();
+        GameObject tempProjectile     = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+        Rigidbody2D projectileRB      = tempProjectile.GetComponent<Rigidbody2D>();
+        PlayerProjectile bulletScript = tempProjectile.GetComponent<PlayerProjectile>();
 
         projectileRB.AddForce(firePoint.up * 20, ForceMode2D.Impulse);
-        bulletScript.SetDamage(playerDamage);
+        bulletScript.SetDamage(damageAmount);
 
         if (extraShot)
         {
-            playerDamage /= 2;
+            damageAmount /= 2;
             moveSpeed    *= 2;
             extraShot = false;
         }
@@ -132,10 +137,10 @@ public class ArcherCharacter : RangedController
         if (extraShot)
             return;
 
-        playerDamage *= 2;
+        damageAmount *= 2;
         moveSpeed    /= 2;
 
-        extraShot = true;
+        extraShot            = true;
         currentExtraCooldown = 0;
     }
 
@@ -143,21 +148,22 @@ public class ArcherCharacter : RangedController
     {
         shootDirection = mousePosition - playerRB.position;
 
-        GameObject tempProjectile;
-        Rigidbody2D projectileRB;
-        PlayerBullet bulletScript;
+        GameObject       playerProjectile;
+        Rigidbody2D      projectileRB;
+        PlayerProjectile bulletScript;
 
         foreach (Transform _firePoint in specialFirePoints)
         {
-            tempProjectile = Instantiate(projectilePrefab, _firePoint.position, firePoint.rotation);
-            projectileRB = tempProjectile.GetComponent<Rigidbody2D>();
-            bulletScript = tempProjectile.GetComponent<PlayerBullet>();
+            playerProjectile  = Instantiate(projectilePrefab, _firePoint.position, firePoint.rotation);
+
+            projectileRB    = playerProjectile.GetComponent<Rigidbody2D>();
+            bulletScript    = playerProjectile.GetComponent<PlayerProjectile>();
 
             projectileRB.AddForce(firePoint.up * 20, ForceMode2D.Impulse);
-            bulletScript.SetDamage(playerDamage);
+            bulletScript.SetDamage(damageAmount);
 
-            tempProjectile.GetComponent<TrailRenderer>().startColor = Color.blue;
-            tempProjectile.GetComponent<TrailRenderer>().endColor = Color.blue;
+            playerProjectile.GetComponent<TrailRenderer>().startColor = Color.blue;
+            playerProjectile.GetComponent<TrailRenderer>().endColor = Color.blue;
         }
 
         currentTripleCooldown = 0;
@@ -173,14 +179,14 @@ public class ArcherCharacter : RangedController
     // --- TEMP STUFF --- //
     private void OnGUI()
     {
+        if (!showDebug)
+            return;
+
         GUI.Label(new Rect(10, 40, 200, 20), "HP: " + currentHealth.ToString("000"));
         GUI.Label(new Rect(10, 55, 200, 20), "Bow: " + currentBowDraw.ToString("0.0") + " / " + bowDrawLength.ToString("0.0"));
         GUI.Label(new Rect(10, 70, 500, 20), "Pos: " + transform.position.ToString("0.000"));
     }
 
-    public float GetCurrentHealth { get { return currentHealth; } }
-    public float GetBowDraw { get { return bowDrawLength; } }
-    public float GetCurrentBowDraw { get { return currentBowDraw; } }
     public float GetDodge { get { return dodgeCooldown; } }
     public float GetCurrentDodge { get { return currentDodgeCooldown; } }
     public float GetTripleCurrent { get { return currentTripleCooldown; } }

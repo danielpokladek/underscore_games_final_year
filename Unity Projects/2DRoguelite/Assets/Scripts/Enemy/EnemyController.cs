@@ -30,6 +30,7 @@ public class EnemyController : MonoBehaviour
     protected float currentHealth;
     protected float currentDelay;
     protected bool  canAttack       = false;
+    protected bool  isBleeding      = false;
 
     // --- PATHFINDING SETTINGS --------------------
     protected AIDestinationSetter aiDestinationSetter;

@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class EnemyBullet : Bullet
+public class EnemyProjectile : Projectile
 {
     private void Start()
     {
@@ -14,7 +12,7 @@ public class EnemyBullet : Bullet
         if (other.CompareTag("Player"))
         {
             PlayerController playerController = other.GetComponent<PlayerController>();
-            playerController.TakeDamage(bulletDamage);
+            playerController.TakeDamage(projectileDamage);
 
             GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
             Destroy(effect, 0.4f);
