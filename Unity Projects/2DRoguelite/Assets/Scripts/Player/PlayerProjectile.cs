@@ -1,14 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerProjectile : Projectile
 {
-    GameUIManager gameUIManager;
-
     private void Start()
     {
-        gameUIManager = GameUIManager.currentInstance;
         Destroy(gameObject, 3.5f);
     }
 
@@ -20,7 +15,7 @@ public class PlayerProjectile : Projectile
             enemyController.TakeDamage(projectileDamage);
 
             GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
-            gameUIManager.DamageIndicator(other.transform.position, projectileDamage);
+            //gameUIManager.DamageIndicator(other.transform.position, projectileDamage);
 
             Destroy(effect, 0.4f);
             Destroy(gameObject);

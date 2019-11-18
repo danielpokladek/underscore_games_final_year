@@ -5,7 +5,7 @@ using UnityEngine;
 public class RogueCharacter : MeleeController
 {
     [Header("Rogue Settings")]
-    [SerializeField] private float foo;
+    [SerializeField] private GameObject rangerArrow;
 
     // ------------------------------
     private bool showDebug = true;
@@ -23,10 +23,19 @@ public class RogueCharacter : MeleeController
         for (int i = 0; i < enemiesInRange.Length; i++)
         {
             DamageEnemy(enemiesInRange[i].gameObject);
-            gameUIManager.DamageIndicator(enemiesInRange[i].transform.position, damageAmount);
         }
 
         currentAttackDelay = 0;
+    }
+
+    protected override void SecAttack()
+    {
+        Vector2 shootDirection = mousePosition - playerRB.position;
+
+        GameObject projectile           = Instantiate(rangerArrow, attackPoint.position, attackPoint.rotation);
+        Rigidbody2D projectileRB        = projectile.GetComponent<Rigidbody2D>();
+
+        projectileRB.AddForce(attackPoint.up * 20, ForceMode2D.Impulse);
     }
 
     private void OnGUI()

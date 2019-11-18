@@ -769,7 +769,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 686111272}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1082.2491, y: 403.6679, z: -84.311}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1369,6 +1369,85 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 727236340}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1331398271
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2648387158925246708, guid: c7e82a6e7e4edb4469b592c344e28da4,
+        type: 3}
+      propertyPath: m_Name
+      value: testRangedEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648387158925246708, guid: c7e82a6e7e4edb4469b592c344e28da4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648387158925246701, guid: c7e82a6e7e4edb4469b592c344e28da4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648387158925246701, guid: c7e82a6e7e4edb4469b592c344e28da4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648387158925246701, guid: c7e82a6e7e4edb4469b592c344e28da4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648387158925246701, guid: c7e82a6e7e4edb4469b592c344e28da4,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648387158925246701, guid: c7e82a6e7e4edb4469b592c344e28da4,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648387158925246701, guid: c7e82a6e7e4edb4469b592c344e28da4,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648387158925246701, guid: c7e82a6e7e4edb4469b592c344e28da4,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648387158925246701, guid: c7e82a6e7e4edb4469b592c344e28da4,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648387158925246701, guid: c7e82a6e7e4edb4469b592c344e28da4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648387158925246701, guid: c7e82a6e7e4edb4469b592c344e28da4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648387158925246701, guid: c7e82a6e7e4edb4469b592c344e28da4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5448182903151528506, guid: c7e82a6e7e4edb4469b592c344e28da4,
+        type: 3}
+      propertyPath: enemyHealth
+      value: 40
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c7e82a6e7e4edb4469b592c344e28da4, type: 3}
 --- !u!1001 &1562743573
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1938,6 +2017,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6722522608199497178, guid: 8726c738fabf2824ea243684f9cd53fe,
+        type: 3}
+      propertyPath: rangerArrow
+      value: 
+      objectReference: {fileID: 4729260153567274746, guid: e618ad4f45a3d244e98524c158fbf912,
+        type: 3}
     m_RemovedComponents:
     - {fileID: 6722522607547617762, guid: 8726c738fabf2824ea243684f9cd53fe, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8726c738fabf2824ea243684f9cd53fe, type: 3}

@@ -28,7 +28,7 @@ public class GameUIManager : MonoBehaviour
     {      
         GameObject text = Instantiate(effectsContainer.damageIndicator);
 
-        text.transform.parent = gameCanvas.transform;
+        text.transform.SetParent(gameCanvas.transform);
 
         string damageText = "-" + damageAmount;
         text.GetComponent<IndicatorText>().SetValues(damageText, position);

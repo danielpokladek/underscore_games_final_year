@@ -27,6 +27,9 @@ public class MeleeController : PlayerController
         {
             currentAttackDelay += Time.deltaTime;
         }
+
+        if (Input.GetButtonDown("RMB"))
+            SecAttack();
     }
 
     protected void DamageEnemy(GameObject enemyObject)
