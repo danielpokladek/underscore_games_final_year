@@ -10,8 +10,8 @@ public class RoomManager : MonoBehaviour
     LevelManager levelManager;
     GameObject bossIconGO;
     bool bossRoom;
-
-    private bool enemiesSpawned = false;
+    private bool spawnRoom;
+    public bool enemiesSpawned;
 
     private void Start()
     {
@@ -20,6 +20,7 @@ public class RoomManager : MonoBehaviour
 
     public void SpawnPlayer()
     {
+        spawnRoom = true;
         Instantiate(GameManager.instance.playerPrefab, transform.position, Quaternion.identity);
     }
 
@@ -52,6 +53,9 @@ public class RoomManager : MonoBehaviour
             if (levelManager.GetCurrentState == "Day" && enemiesSpawned)
                 return;
 
+            if (spawnRoom)
+                return;
+            
             foreach (GameObject spawner in enemySpawners)
             {
                 EnemySpawnPoint spawnPoint = spawner.GetComponent<EnemySpawnPoint>();

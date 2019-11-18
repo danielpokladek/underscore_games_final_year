@@ -194,12 +194,15 @@
             </e>
           </e>
         </e>
+        <e p="IndicatorText.cs" t="Include" />
+        <e p="ItemPickup.cs" t="Include" />
         <e p="Scripts" t="Include">
           <e p="Boss" t="Include">
             <e p="BossBullet.cs" t="Include" />
             <e p="BossController.cs" t="Include" />
             <e p="BossHoamingBullet.cs" t="Include" />
             <e p="BossNormalBullet.cs" t="Include" />
+            <e p="StageTwoShoot.cs" t="Include" />
             <e p="TempBoss" t="Include">
               <e p="State Beahviours" t="Include">
                 <e p="AttackBehaviour.cs" t="Include" />
@@ -217,28 +220,30 @@
               <e p="TempBossController.cs" t="Include" />
             </e>
           </e>
-          <e p="Bullet.cs" t="Include" />
-          <e p="CameraController.cs" t="Include" />
           <e p="Enemy" t="Include">
             <e p="EnemyController.cs" t="Include" />
-            <e p="EnemyControllerAlt.cs" t="Include" />
+            <e p="EnemyProjectile.cs" t="Include" />
+            <e p="EnemyRanged.cs" t="Include" />
+            <e p="TestDummy.cs" t="Include" />
           </e>
-          <e p="EnemyBullet.cs" t="Include" />
           <e p="GameManager.cs" t="Include" />
-          <e p="GunLaser.cs" t="Include" />
+          <e p="LevelManager.cs" t="Include" />
           <e p="Player" t="Include">
-            <e p="Archer" t="Include">
-              <e p="ArcherCharacter.cs" t="Include" />
-            </e>
+            <e p="ArcherCharacter.cs" t="Include" />
             <e p="Base Scripts" t="Include">
               <e p="MeleeController.cs" t="Include" />
               <e p="PlayerController.cs" t="Include" />
               <e p="RangedController.cs" t="Include" />
             </e>
-            <e p="PlayerMovement.cs" t="Include" />
-            <e p="PlayerShooting.cs" t="Include" />
+            <e p="Other" t="Include">
+              <e p="ArcherGameUI.cs" t="Include" />
+              <e p="CameraController.cs" t="Include" />
+            </e>
+            <e p="PlayerProjectile.cs" t="Include" />
+            <e p="RogueCharacter.cs" t="Include" />
+            <e p="RogueProjectile.cs" t="Include" />
           </e>
-          <e p="PlayerBullet.cs" t="Include" />
+          <e p="Projectile.cs" t="Include" />
           <e p="Room Generation" t="Include">
             <e p="LevelGeneration.cs" t="Include" />
             <e p="Room.cs" t="Include" />
@@ -248,9 +253,11 @@
             <e p="EnemySpawnPoint.cs" t="Include" />
             <e p="RoomManager.cs" t="Include" />
           </e>
+          <e p="UI" t="Include">
+            <e p="DebugUI.cs" t="Include" />
+            <e p="GameUIManager.cs" t="Include" />
+          </e>
         </e>
-        <e p="StageTwoShoot.cs" t="Include" />
-        <e p="TempUIManager.cs" t="Include" />
         <e p="TextMesh Pro" t="Include">
           <e p="Fonts" t="Include">
             <e p="LiberationSans - OFL.txt" t="Include" />

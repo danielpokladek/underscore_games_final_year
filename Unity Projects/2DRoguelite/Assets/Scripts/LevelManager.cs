@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    enum DayState { Day, Night, Midnight };
+    public enum DayState { Day, Night, Midnight, Boss };
 
-    [SerializeField] private DayState currentState;
+    [SerializeField] public DayState currentState;
     [SerializeField] private float dayLength;
     [SerializeField] private float nightLength;
     [SerializeField] private float midnightLength;
@@ -50,6 +50,9 @@ public class LevelManager : MonoBehaviour
     {
         switch (currentState)
         {
+            case DayState.Boss:
+                break;
+            
             // Handle Day.
             case DayState.Day:
                 if (stateTimer >= dayLength)

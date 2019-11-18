@@ -30,10 +30,10 @@ public class ArcherCharacter : RangedController
     {
         base.Update();
 
-        if (Input.GetKey(KeyCode.Alpha1))
+        if (Input.GetKey(KeyCode.Q))
             currentSpecial = 1;
 
-        if (Input.GetKey(KeyCode.Alpha2))
+        if (Input.GetKey(KeyCode.E))
             currentSpecial = 2;
 
         if (Input.GetKeyDown(KeyCode.F3))
