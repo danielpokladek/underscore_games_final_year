@@ -27,6 +27,7 @@ public class RoomManager : MonoBehaviour
     {
         bossIconGO = Instantiate(bossIcon, transform.position, Quaternion.identity);
         bossIconGO.SetActive(false);
+        bossRoom = true;
     }
 
     private void Update()
@@ -37,7 +38,10 @@ public class RoomManager : MonoBehaviour
 
     private void ShowBoss()
     {
-        bossIconGO.SetActive(true);
+        if (bossRoom)
+            bossIconGO.SetActive(true);
+        else
+            return;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

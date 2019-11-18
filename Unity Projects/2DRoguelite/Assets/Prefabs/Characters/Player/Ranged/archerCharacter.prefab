@@ -202,7 +202,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7368213390279314161
 Transform:
   m_ObjectHideFlags: 0
@@ -280,8 +280,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 12
-  playerHealth: 999
-  playerDamage: 4
+  playerHealth: 80
+  damageAmount: 4
   playerArm: {fileID: 7368213389689043494}
   weaponSprite: {fileID: 7368213391151072767}
   firePoint: {fileID: 7368213389864781441}
