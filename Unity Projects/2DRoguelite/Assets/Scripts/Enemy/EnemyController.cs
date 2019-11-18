@@ -11,7 +11,7 @@ public class EnemyController : MonoBehaviour
 
     [Tooltip("This is enemy's maximum health points")]
     [SerializeField] protected float enemyHealth = 10f;
-    
+
     [Tooltip("This is enemy's damage points; set to 0 (zero) for dummy AI")]
     [SerializeField] protected float damageAmount;
 
@@ -22,18 +22,23 @@ public class EnemyController : MonoBehaviour
     [SerializeField] protected bool isDummy;
 
     // --- PLAYER & MOVEMENT -----------
-    protected Transform     playerTrans;
-    protected GameObject    playerGO;
-    protected Vector2       stopPoint       = new Vector2(0, 0);
+    protected Transform playerTrans;
+    protected GameObject playerGO;
+    protected Vector2 stopPoint = new Vector2(0, 0);
 
     // --- ATTACK & HEALTH -------
     protected float currentHealth;
+    protected float currentDamage;
     protected float currentDelay;
-    protected bool  canAttack       = false;
+    private float bleedingLength;
+
+    protected bool canAttack    = false;
+    protected bool isBleeding   = false;
+    private float bleedingTimer = 0;
 
     // --- PATHFINDING SETTINGS --------------------
     protected AIDestinationSetter aiDestinationSetter;
-    protected AIPath              aiPath;
+    protected AIPath aiPath;
 
     private void Start()
     {
@@ -51,21 +56,38 @@ public class EnemyController : MonoBehaviour
 
         if (!GameObject.FindGameObjectWithTag("Player"))
             Debug.LogError("Could not find a player, make sure they are tagged and present in the current scene.", gameObject);
-        
-        playerGO    = GameObject.FindGameObjectWithTag("Player");
+
+        playerGO = GameObject.FindGameObjectWithTag("Player");
         playerTrans = playerGO.transform;
 
         aiDestinationSetter = GetComponent<AIDestinationSetter>();
-        aiPath              = GetComponent<AIPath>();
+        aiPath = GetComponent<AIPath>();
 
-        aiDestinationSetter.target  = playerTrans;
-        aiPath.maxSpeed             = moveSpeed;
+        aiDestinationSetter.target = playerTrans;
+        aiPath.maxSpeed = moveSpeed;
     }
 
     virtual protected void Update()
     {
         if (isDummy)
             return;
+
+        if (LevelManager.instance.GetCurrentState == "Midnight")
+            currentDamage = damageAmount * 2;
+        else
+            currentDamage = damageAmount;
+
+        if (isBleeding)
+        {
+            if (bleedingTimer >= bleedingLength)
+            {
+                isBleeding = false;
+                CancelInvoke("BleedingDamage");
+            }
+
+            if (isBleeding == true)
+                bleedingTimer += Time.deltaTime;
+        }
     }
 
     virtual protected void FixedUpdate()
@@ -74,12 +96,26 @@ public class EnemyController : MonoBehaviour
             return;
     }
 
-    public void Damage(float damageAmount)
+    public void TakeDamage(float damageAmount)
     {
         currentHealth -= damageAmount;
 
+        GameUIManager.currentInstance.DamageIndicator(transform.position, damageAmount);
+
         if (currentHealth <= 0)
             Destroy(gameObject);
+    }
+
+    public void BleedingEffect(float effectLength)
+    {
+        if (isBleeding)
+            return;
+
+        InvokeRepeating("BleedingDamage", 0.0f, 1.0f);
+
+        bleedingTimer = 0;
+        bleedingLength = effectLength;
+        isBleeding = true;
     }
 
     virtual protected bool CanSeePlayer()
@@ -95,5 +131,10 @@ public class EnemyController : MonoBehaviour
         }
 
         return false;
+    }
+
+    private void BleedingDamage()
+    {
+        TakeDamage(1);
     }
 }

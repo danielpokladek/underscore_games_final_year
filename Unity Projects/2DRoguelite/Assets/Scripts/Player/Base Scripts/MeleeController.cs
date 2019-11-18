@@ -5,55 +5,46 @@ using UnityEngine;
 public class MeleeController : PlayerController
 {
     [Header("Melee Settings")]
-    [SerializeField] protected float damageAmount;
     [SerializeField] protected float attackDelay;
     [SerializeField] protected float attackRange;
     [SerializeField] protected Transform attackPoint;
-    [SerializeField] protected Transform playerArmPivot;
     [SerializeField] protected LayerMask enemiesLayer;
-    public float delayLength;
     
-    private float timeBtwAttack;
-    private float curretDelayAttack;
-
-    override public void Start()
-    {
-        base.Start();
-
-        timeBtwAttack = attackDelay;
-    }
+    // ------------------------------
+    protected float currentAttackDelay;
+    protected Collider2D[] enemiesInRange;
 
     override protected void Update()
     {
         base.Update();
 
-        Aim();
-
-        if (timeBtwAttack <= 0)
-            return;
-        else
-            timeBtwAttack -= Time.deltaTime;
-    }
-
-    private void Aim()
-    {
-        float weaponAngle = -1 * Mathf.Atan2(mouseVector.y, mouseVector.x) * Mathf.Rad2Deg;
-        playerArmPivot.transform.rotation = Quaternion.AngleAxis(weaponAngle, Vector3.back);
-    }
-
-    override protected void PrimAttack()
-    {
-        if (curretDelayAttack >= delayLength)
+        if (currentAttackDelay >= attackDelay)
         {
-            Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemiesLayer);
-            for (int i = 0; i < enemiesToDamage.Length; i++)
-            {
-                enemiesToDamage[i].GetComponent<EnemyController>().Damage(damageAmount);
-                Debug.Log("Damaged enemy: " + enemiesToDamage[i].name + ". With " + damageAmount + " damage!");
-            }
-
-            curretDelayAttack = 0;
+            if (Input.GetButtonDown("LMB"))
+                PrimAttack();
         }
+        else
+        {
+            currentAttackDelay += Time.deltaTime;
+        }
+
+        if (Input.GetButtonDown("RMB"))
+            SecAttack();
+    }
+
+    protected void DamageEnemy(GameObject enemyObject)
+    {
+        if (enemyObject.CompareTag("Enemy"))
+        {
+            enemyObject.GetComponent<EnemyController>().TakeDamage(damageAmount);
+        }
+    }
+
+    override protected void PlayerAim()
+    {
+        base.PlayerAim();
+
+        enemiesInRange = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemiesLayer);
     }
 
     private void OnDrawGizmosSelected()

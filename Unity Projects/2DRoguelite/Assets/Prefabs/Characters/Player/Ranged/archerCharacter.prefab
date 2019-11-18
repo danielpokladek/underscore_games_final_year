@@ -280,14 +280,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 12
-  playerHealth: 999
-  playerDamage: 4
+  playerHealth: 80
+  damageAmount: 4
   playerArm: {fileID: 7368213389689043494}
   weaponSprite: {fileID: 7368213391151072767}
   firePoint: {fileID: 7368213389864781441}
   projectilePrefab: {fileID: 4729260153567274746, guid: f5b27cdd946361045817bd4351c6aa6a,
     type: 3}
-  bowDrawLength: 0.7
+  bowDrawLength: 0.4
   dodgeCooldown: 1.2
   specialFirePoints:
   - {fileID: 2045450087}
@@ -576,16 +576,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4178499887627839139, guid: 70e17d47722b7184194f5ddaedc41985,
-        type: 3}
-      propertyPath: playerObject
-      value: 
-      objectReference: {fileID: 6928827130408796320}
-    - target: {fileID: 8816721838508701268, guid: 70e17d47722b7184194f5ddaedc41985,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 25.130127
-      objectReference: {fileID: 0}
     - target: {fileID: 1488456709748414585, guid: 70e17d47722b7184194f5ddaedc41985,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -595,6 +585,71 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 31.900146
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816721838508701268, guid: 70e17d47722b7184194f5ddaedc41985,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 25.130127
+      objectReference: {fileID: 0}
+    - target: {fileID: 7231988028628796785, guid: 70e17d47722b7184194f5ddaedc41985,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4178499887627839139, guid: 70e17d47722b7184194f5ddaedc41985,
+        type: 3}
+      propertyPath: playerObject
+      value: 
+      objectReference: {fileID: 6928827130408796320}
+    - target: {fileID: 3458327139102672930, guid: 70e17d47722b7184194f5ddaedc41985,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 453240066340902344, guid: 70e17d47722b7184194f5ddaedc41985,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 730092891553352776, guid: 70e17d47722b7184194f5ddaedc41985,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 787437256220789576, guid: 70e17d47722b7184194f5ddaedc41985,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5326039054526612332, guid: 70e17d47722b7184194f5ddaedc41985,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4118001292834262333, guid: 70e17d47722b7184194f5ddaedc41985,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4165771848307967447, guid: 70e17d47722b7184194f5ddaedc41985,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4165771848307967447, guid: 70e17d47722b7184194f5ddaedc41985,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4165771848307967447, guid: 70e17d47722b7184194f5ddaedc41985,
+        type: 3}
+      propertyPath: m_textAlignment
+      value: 514
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998286606297453319, guid: 70e17d47722b7184194f5ddaedc41985,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70e17d47722b7184194f5ddaedc41985, type: 3}

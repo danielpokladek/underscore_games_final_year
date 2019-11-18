@@ -54,11 +54,11 @@ public class EnemyRanged : EnemyController
         if (canAttack && CanSeePlayer())
         {
             GameObject projectile       = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
-            Bullet projectileBullet     = projectile.GetComponent<Bullet>();
+            Projectile projectileBullet = projectile.GetComponent<Projectile>();
             Rigidbody2D projectileRB    = projectile.GetComponent<Rigidbody2D>();
 
             projectileRB.AddForce(firePoint.up * 10, ForceMode2D.Impulse);
-            projectileBullet.SetDamage(damageAmount);
+            projectileBullet.SetDamage(currentDamage);
 
             currentDelay = shotDelay;
             canAttack    = !canAttack;

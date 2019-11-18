@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Base Settings")] [SerializeField]
-    protected float moveSpeed = 8.0f;
+    [Header("Base Settings")]
+    [Tooltip("Speed at which the player will move")]
+    [SerializeField] protected float moveSpeed = 8.0f;
 
+    [Tooltip("Player's maximum health points.")]
     [SerializeField] protected float playerHealth = 20;
     
     [Tooltip("Damage that the player will deal to the enemies, later this will be determined by the weapon.")]
-    [SerializeField] protected float playerDamage;
+    [SerializeField] protected float damageAmount;
+
+    [Tooltip("This is player's 'arm' which will be used to aiming, shooting, etc. It rotates towards the mouse.")]
+    [SerializeField] protected GameObject playerArm;
     
     // ---------------------------
     protected Rigidbody2D playerRB;
@@ -20,6 +25,7 @@ public class PlayerController : MonoBehaviour
     // -----------------------------
     protected Vector2 mousePosition = new Vector2(0, 0);
     protected Vector2 mouseVector   = new Vector2(0, 0);
+    protected float   armAngle;
 
     // ---
     private bool      canMove;
@@ -28,6 +34,9 @@ public class PlayerController : MonoBehaviour
     // -------------------------
     protected float currentHealth;
     protected bool  playerAlive = true;
+
+    // --- MANAGERS --- //
+    protected GameUIManager gameUIManager;
 
     virtual public void Start()
     {
@@ -42,6 +51,8 @@ public class PlayerController : MonoBehaviour
         currentHealth = playerHealth;
         playerAlive   = true;
         CanMove       = true;
+
+        gameUIManager = GameUIManager.currentInstance;
     }
 
     virtual protected void Update()
@@ -49,15 +60,17 @@ public class PlayerController : MonoBehaviour
         if (playerAlive)
         {
             GetMouseInput();
+            DebugInputs();
         }
     }
 
-    virtual public void FixedUpdate()
+    virtual protected void FixedUpdate()
     {
         if (playerAlive)
         {
             PlayerMovement();
             MoveCharacter(playerInput);
+            PlayerAim();
         }
     }
 
@@ -72,6 +85,18 @@ public class PlayerController : MonoBehaviour
             playerAlive = false;
             this.gameObject.SetActive(false);
         }
+    }
+
+    public void HealPlayer(float healAmount)
+    {
+        // If player's health will be higher than max amount, set health to max.
+        if ((currentHealth + healAmount) > playerHealth)
+        {
+            currentHealth = playerHealth;
+            return;
+        }
+
+        currentHealth += healAmount;
     }
 
     private void PlayerMovement()
@@ -94,6 +119,12 @@ public class PlayerController : MonoBehaviour
             playerRB.MovePosition((Vector2) transform.position + (input * moveSpeed * Time.deltaTime));
     }
 
+    virtual protected void PlayerAim()
+    {
+        armAngle                     = -1 * Mathf.Atan2(mouseVector.y, mouseVector.x) * Mathf.Rad2Deg;
+        playerArm.transform.rotation = Quaternion.AngleAxis(armAngle, Vector3.back);
+    }
+
     #region Getters/Setters
     public bool CanMove
     {
@@ -101,7 +132,7 @@ public class PlayerController : MonoBehaviour
         get { return canMove; }
     }
 
-    public float GetHealth
+    public float GetCurrentHealth
     {
         get { return currentHealth; }
     }
@@ -125,5 +156,20 @@ public class PlayerController : MonoBehaviour
         /* Dodge Ability for the character. */
     }
     #endregion
+
+    private void DebugInputs()
+    {
+        if (Debug.isDebugBuild)
+        {
+            if (Input.GetKeyDown(KeyCode.M))
+                TakeDamage(10);
+
+            if (Input.GetKeyDown(KeyCode.N))
+                HealPlayer(10);
+
+            if (Input.GetKeyDown(KeyCode.Backspace))
+                LevelManager.instance.Restart();
+        }
+    }
 }
     

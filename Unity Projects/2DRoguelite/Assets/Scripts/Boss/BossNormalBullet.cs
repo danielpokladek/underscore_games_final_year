@@ -8,9 +8,9 @@ public class BossNormalBullet : BossBullet
 {
     private Vector2 targetPos;
 
-    override protected void InitBullet()
+    override protected void InitProjectile()
     {
-        base.InitBullet();
+        base.InitProjectile();
 
         targetPos = (Vector2)bulletTarget.position;
     }
@@ -33,6 +33,6 @@ public class BossNormalBullet : BossBullet
         angle     = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90.0f;
         
         // Apply the rotation to the rigidbody.
-        bulletRb.rotation = angle;
+        projectileRb.rotation = angle;
     }
 }

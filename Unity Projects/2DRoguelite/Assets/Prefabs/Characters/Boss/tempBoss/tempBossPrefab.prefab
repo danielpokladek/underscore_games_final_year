@@ -230,20 +230,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365b38f2377e0084fb932087005816ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 900
+  maxHealth: 250
   deathParticles: {fileID: 1640565276510398622, guid: 7796874d55da1cc4ea01b2f78e9b1acb,
     type: 3}
   bossDamage: 10
   firstStageDeathParticles: {fileID: 212232618681928571, guid: f70826774952cc14d80a1c7bd0313160,
     type: 3}
   projectileSpawnPoint: {fileID: 743510049865714018}
-  thumpRange: 9
+  thumpRange: 12
   thumpForce: 450
   stageOneProjectile: {fileID: 3521693105631811606, guid: 1f06ee0e4a868484a86d0e23d1ab68f7,
     type: 3}
   stageTwoProjectile: {fileID: 4729260153567274746, guid: e5dcd99a9f21f394cb619c5a87f307a1,
     type: 3}
-  secondStageHealth: 450
+  secondStageHealth: 125
   enemySpawnPoints:
   - {fileID: 7427157644621063719}
   - {fileID: 7491344577328573144}
@@ -1169,7 +1169,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3467595136295540620}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -8, y: -6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6584004532642920132}
@@ -1233,7 +1233,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7427157644621063719}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -7, y: 6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6584004532642920132}
@@ -1263,7 +1263,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7491344577328573144}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 10, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6584004532642920132}
@@ -1293,7 +1293,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9144983887168820129}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 8, y: -6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6584004532642920132}

@@ -31,6 +31,8 @@ public class BossController : MonoBehaviour
         player             = GameObject.FindGameObjectWithTag("Player").transform;
         playerController   = player.GetComponent<PlayerController>();
         playerRigidbody    = player.GetComponent<Rigidbody2D>();
+
+        LevelManager.instance.currentState = LevelManager.DayState.Boss;
     }
 
     virtual protected void DamagePlayer(float damageAmount)

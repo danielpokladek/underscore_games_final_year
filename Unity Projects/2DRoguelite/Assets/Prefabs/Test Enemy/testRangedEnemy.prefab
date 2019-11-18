@@ -293,7 +293,7 @@ MonoBehaviour:
   enemyHealth: 10
   damageAmount: 10
   isDummy: 0
-  shotDelay: 0.7
+  shotDelay: 1.2
   projectilePrefab: {fileID: 4729260153567274746, guid: e297da7b2d5beb24eb64bdfb225d5cdc,
     type: 3}
   weaponSprite: {fileID: 2648387157459998505}

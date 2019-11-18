@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossBullet : Bullet
+public class BossBullet : Projectile
 {
     [Tooltip("Health points of the bullet. Set to 0 to make the bullet indestructible.")]
     [SerializeField] protected float bulletHealth;
@@ -26,14 +26,14 @@ public class BossBullet : Bullet
     {
         bulletTarget = target;
         bulletSpeed  = speed;
-        bulletDamage = damage;
+        projectileDamage = damage;
 
-        InitBullet();
+        InitProjectile();
     }
 
-    override protected void InitBullet()
+    override protected void InitProjectile()
     {
-        base.InitBullet();
+        base.InitProjectile();
         
         currentHealth = bulletHealth;
     }
@@ -54,7 +54,7 @@ public class BossBullet : Bullet
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            other.gameObject.GetComponent<PlayerController>().TakeDamage(bulletDamage);
+            other.gameObject.GetComponent<PlayerController>().TakeDamage(projectileDamage);
             DestroyBullet(0);
         }
     }

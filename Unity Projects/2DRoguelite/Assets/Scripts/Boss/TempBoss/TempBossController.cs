@@ -101,4 +101,13 @@ public class TempBossController : BossController
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, thumpRange);
     }
+
+    private void OnGUI()
+    {
+        GUI.Label(new Rect(10, 10, 200, 20), "Boss HP: " + currentHealth);
+        if (!secondStage)
+            GUI.Label(new Rect(10, 25, 200, 20), "Stage 1!");
+        else
+            GUI.Label(new Rect(10, 25, 200, 20), "Stage 2!");
+    }
 }
