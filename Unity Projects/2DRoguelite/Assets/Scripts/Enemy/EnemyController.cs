@@ -6,6 +6,17 @@ using Pathfinding;
 public class EnemyController : MonoBehaviour
 {
     [Header("Enemy Settings")]
+    [Tooltip("Toggle this bool to set the current enemy to a dummy AI." +
+        "A dummy AI will not follow, or attack the player, and it will stand in same place." +
+        "This is mainly used for debugging, and checking that the AI script is working." +
+        "This can be used to test new effects, such as impact effects.")]
+    [SerializeField] protected bool isDummy;
+
+    [SerializeField] protected Transform armPivot;
+    [SerializeField] protected Transform attackPoint;
+
+    [SerializeField] protected LayerMask playerLayer;
+
     [Tooltip("This is enemy's maximum movement speed.")]
     [SerializeField] protected float moveSpeed = 2.5f;
 
@@ -15,30 +26,29 @@ public class EnemyController : MonoBehaviour
     [Tooltip("This is enemy's damage points; set to 0 (zero) for dummy AI")]
     [SerializeField] protected float damageAmount;
 
-    [Tooltip("Toggle this bool to set the current enemy to a dummy AI." +
-        "A dummy AI will not follow, or attack the player, and it will stand in same place." +
-        "This is mainly used for debugging, and checking that the AI script is working." +
-        "This can be used to test new effects, such as impact effects.")]
-    [SerializeField] protected bool isDummy;
+    [SerializeField] protected float attackDelay;
 
     // --- PLAYER & MOVEMENT -----------
-    protected Transform playerTrans;
+    protected Transform  playerTrans;
     protected GameObject playerGO;
-    protected Vector2 stopPoint = new Vector2(0, 0);
+    protected Vector2    stopPoint = new Vector2(0, 0);
 
     // --- ATTACK & HEALTH -------
     protected float currentHealth;
     protected float currentDamage;
-    protected float currentDelay;
-    private float bleedingLength;
+    protected float currentAttackDelay;
+    private float   bleedingLength;
 
     protected bool canAttack    = false;
     protected bool isBleeding   = false;
-    private float bleedingTimer = 0;
+    private float  bleedingTimer = 0;
 
     // --- PATHFINDING SETTINGS --------------------
     protected AIDestinationSetter aiDestinationSetter;
     protected AIPath aiPath;
+
+    protected Vector2 playerVector;
+    protected float   aimAngle;
 
     private void Start()
     {
@@ -57,14 +67,14 @@ public class EnemyController : MonoBehaviour
         if (!GameObject.FindGameObjectWithTag("Player"))
             Debug.LogError("Could not find a player, make sure they are tagged and present in the current scene.", gameObject);
 
-        playerGO = GameObject.FindGameObjectWithTag("Player");
+        playerGO    = GameObject.FindGameObjectWithTag("Player");
         playerTrans = playerGO.transform;
 
         aiDestinationSetter = GetComponent<AIDestinationSetter>();
-        aiPath = GetComponent<AIPath>();
+        aiPath              = GetComponent<AIPath>();
 
         aiDestinationSetter.target = playerTrans;
-        aiPath.maxSpeed = moveSpeed;
+        aiPath.maxSpeed            = moveSpeed;
     }
 
     virtual protected void Update()
@@ -94,6 +104,18 @@ public class EnemyController : MonoBehaviour
     {
         if (isDummy)
             return;
+
+        AIAim();
+    }
+
+    virtual protected void AttackPlayer() { /* Define in the enemy script */ }
+
+    virtual protected void AIAim()
+    {
+        playerVector = ((Vector2)playerTrans.position - (Vector2)transform.position).normalized;
+        aimAngle     = -1 * Mathf.Atan2(playerVector.y, playerVector.x) * Mathf.Rad2Deg;
+
+        armPivot.rotation = Quaternion.AngleAxis(aimAngle, Vector3.back);
     }
 
     public void TakeDamage(float damageAmount)
@@ -122,7 +144,7 @@ public class EnemyController : MonoBehaviour
     {
         Vector2 rayDirection = (playerTrans.position - transform.position).normalized;
 
-        RaycastHit2D rayHit2D = Physics2D.Raycast(transform.position, rayDirection, 10, LayerMask.GetMask("AI Raycast"));
+        RaycastHit2D rayHit2D = Physics2D.Raycast(transform.position, rayDirection, 10, playerLayer);
 
         if (rayHit2D.collider)
         {
