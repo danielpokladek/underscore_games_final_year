@@ -194,6 +194,7 @@
             </e>
           </e>
         </e>
+        <e p="ImprovedCameraController.cs" t="Include" />
         <e p="IndicatorText.cs" t="Include" />
         <e p="ItemPickup.cs" t="Include" />
         <e p="Scripts" t="Include">
@@ -222,6 +223,7 @@
           </e>
           <e p="Enemy" t="Include">
             <e p="EnemyController.cs" t="Include" />
+            <e p="EnemyMelee.cs" t="Include" />
             <e p="EnemyProjectile.cs" t="Include" />
             <e p="EnemyRanged.cs" t="Include" />
             <e p="TestDummy.cs" t="Include" />
