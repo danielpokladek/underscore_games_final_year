@@ -762,10 +762,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 743510048362500264, guid: c331771d51f3c9a4ca2a478abf761396,
-        type: 3}
-      propertyPath: secondStageHealth
-      value: 125
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c331771d51f3c9a4ca2a478abf761396, type: 3}

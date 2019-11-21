@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class ArcherCharacter : RangedController
 {
-    [Header("Archer Settings")]
     [SerializeField] private float bowDrawLength;
+    [SerializeField] private float dodgeLength;
     [SerializeField] private float dodgeCooldown;
     [SerializeField] private Transform[] specialFirePoints;
     [SerializeField] private float tripleShotCooldown;
     [SerializeField] private float extraShotCooldown;
-
+    [SerializeField] private int   specialsNumber = 2;
     [SerializeField] private float specialCooldown;
 
     // ------------------
-    private int   currentSpecial = 1;
+    [SerializeField] private int   currentSpecial = 1;
     private float currentBowDraw;
     private float currentTripleCooldown;
     private float currentExtraCooldown;
@@ -38,6 +38,9 @@ public class ArcherCharacter : RangedController
 
         if (Input.GetKeyDown(KeyCode.F3))
             showDebug = !showDebug;
+
+        if (Input.GetButtonDown("CTRL"))
+            ChangeSpecial();
 
         #region Primary Attack
 
@@ -65,7 +68,7 @@ public class ArcherCharacter : RangedController
         #endregion
 
         #region Secondary Attack
-        if (Input.GetButtonDown("RMB"))
+        if (Input.GetButtonDown("SPACE"))
         {
             SecAttack();
         }
@@ -75,7 +78,7 @@ public class ArcherCharacter : RangedController
 
         if (currentDodgeCooldown >= dodgeCooldown)
         {
-            if (Input.GetButtonDown("Dodge"))
+            if (Input.GetButtonDown("RMB"))
             {
                 StartCoroutine(Dodge());
                 currentDodgeCooldown = 0;
@@ -95,6 +98,14 @@ public class ArcherCharacter : RangedController
         if (currentExtraCooldown <= extraShotCooldown || extraShot)
             currentExtraCooldown += Time.deltaTime;
         #endregion
+    }
+
+    protected void ChangeSpecial()
+    {
+        currentSpecial += 1;
+
+        if (currentSpecial > specialsNumber)
+            currentSpecial = 1;
     }
 
     override protected void PrimAttack()
@@ -166,14 +177,23 @@ public class ArcherCharacter : RangedController
             playerProjectile.GetComponent<TrailRenderer>().endColor = Color.blue;
         }
 
+        if (extraShot)
+        {
+            extraShot     = false;
+            damageAmount /= 2;
+            moveSpeed    *= 2;
+        }
+
         currentTripleCooldown = 0;
     }
 
-    IEnumerator Dodge()
+    override protected IEnumerator Dodge()
     {
-        moveSpeed += 20f;
-        yield return new WaitForSeconds(.3f);
-        moveSpeed -= 20f;
+        allowMovement = false;
+        moveSpeed += 15f;
+        yield return new WaitForSeconds(dodgeLength);
+        moveSpeed -= 15f;
+        allowMovement = true;
     }
 
     // --- TEMP STUFF --- //

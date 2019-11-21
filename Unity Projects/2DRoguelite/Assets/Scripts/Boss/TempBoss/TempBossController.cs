@@ -12,8 +12,10 @@ public class TempBossController : BossController
     [SerializeField] private GameObject     stageOneProjectile;
     [SerializeField] private GameObject     stageTwoProjectile;
     [SerializeField] private float          secondStageHealth = 50f;
-    [SerializeField] private GameObject[]   enemySpawnPoints;
-    [SerializeField] private GameObject     enemyPrefab;
+    [SerializeField] private GameObject[]   meleeEnemies;
+    [SerializeField] private GameObject[]   rangedEnemies;
+    [SerializeField] private GameObject     meleeEnemy;
+    [SerializeField] private GameObject     rangedEnemy;
     [SerializeField] private float          bulletSpeed;
 
     private List<GameObject> projectiles;
@@ -44,11 +46,11 @@ public class TempBossController : BossController
         if (Vector2.Distance(transform.position, player.position) < thumpRange)
         {         
             DamagePlayer(bossDamage);
-            
+
             Vector2 direction = player.position - transform.position;
             direction = direction.normalized;
-            
-            StartCoroutine(PushBack(direction, thumpForce));
+
+            playerController.AddForce(direction, thumpForce, .5f);
         }
     }
     
@@ -80,19 +82,15 @@ public class TempBossController : BossController
     
     public void SpawnEnemies()
     {
-        foreach (GameObject _go in enemySpawnPoints)
+        foreach (GameObject _go in meleeEnemies)
         {
-            Instantiate(enemyPrefab, _go.transform.position, Quaternion.identity);
+            Instantiate(meleeEnemy, _go.transform.position, Quaternion.identity);
         }
-    }
 
-    IEnumerator PushBack(Vector2 direction, float force)
-    {
-        playerController.CanMove = false;
-        playerRigidbody.AddForce(direction * force);
-        
-        yield return new WaitForSeconds(.5f);
-        playerController.CanMove = true;
+        foreach (GameObject _go in meleeEnemies)
+        {
+            Instantiate(rangedEnemy, _go.transform.position, Quaternion.identity);
+        }
     }
     #endregion
 

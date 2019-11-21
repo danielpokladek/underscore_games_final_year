@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 4729260153567274748}
   - component: {fileID: 3866972696158352780}
   - component: {fileID: 4187459077959440915}
-  - component: {fileID: -8920838921880691332}
   - component: {fileID: 3091335250733579987}
+  - component: {fileID: -8920838921880691332}
   m_Layer: 0
   m_Name: playerArrow
   m_TagString: Finish
@@ -82,20 +82,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.18829288, y: 1.003071}
   m_EdgeRadius: 0
---- !u!114 &-8920838921880691332
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4729260153567274746}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb01b335b15adcc4f8b1d8479bcc7134, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitEffect: {fileID: 7583490791312444778, guid: f8dd09c622411ca4fa4f5eb4eef765f1,
-    type: 3}
 --- !u!96 &3091335250733579987
 TrailRenderer:
   serializedVersion: 2
@@ -201,6 +187,20 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &-8920838921880691332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4729260153567274746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb01b335b15adcc4f8b1d8479bcc7134, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitEffect: {fileID: 7583490791312444778, guid: f8dd09c622411ca4fa4f5eb4eef765f1,
+    type: 3}
 --- !u!1 &8129446538814266073
 GameObject:
   m_ObjectHideFlags: 0

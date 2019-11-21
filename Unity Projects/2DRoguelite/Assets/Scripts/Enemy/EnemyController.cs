@@ -28,6 +28,9 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] protected float attackDelay;
 
+    [SerializeField] private GameObject healthDrop;
+    [SerializeField] protected float dropPercentage;
+
     // --- PLAYER & MOVEMENT -----------
     protected Transform  playerTrans;
     protected GameObject playerGO;
@@ -125,7 +128,7 @@ public class EnemyController : MonoBehaviour
         GameUIManager.currentInstance.DamageIndicator(transform.position, damageAmount);
 
         if (currentHealth <= 0)
-            Destroy(gameObject);
+            KillCharacter();
     }
 
     public void BleedingEffect(float effectLength)
@@ -153,6 +156,16 @@ public class EnemyController : MonoBehaviour
         }
 
         return false;
+    }
+
+    private void KillCharacter()
+    {
+        if (Random.value >= dropPercentage)
+        {
+            Instantiate(healthDrop, transform.position, Quaternion.identity);
+        }
+
+        Destroy(gameObject);
     }
 
     private void BleedingDamage()

@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     protected Vector2 mousePosition = new Vector2(0, 0);
     protected Vector2 mouseVector   = new Vector2(0, 0);
     protected float   armAngle;
+    protected bool    allowMovement;
 
     // ---
     private bool      canMove;
@@ -53,6 +54,9 @@ public class PlayerController : MonoBehaviour
         CanMove       = true;
 
         gameUIManager = GameUIManager.currentInstance;
+
+        // ---
+        allowMovement = true;
     }
 
     virtual protected void Update()
@@ -74,19 +78,27 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float damageAmount)
+    #region External Calls
+    /// <summary>
+    /// Temporarily disables player's movement and adds force to the Rigidbody2D in specified direcion and with specified force.
+    /// </summary>
+    /// <param name="forceDirection">Vector2 direction in which the force should be applied on player.</param>
+    /// <param name="forceStrength">Amount of force that should be applied to the player.</param>
+    /// <param name="moveDelay">Determines how long player's movement will be disabled for.</param>
+    public IEnumerator AddForce(Vector2 forceDirection, float forceStrength, float moveDelay)
     {
-        currentHealth = currentHealth - damageAmount;
+        canMove = false;
 
-        // Check player health
-        if (currentHealth <= 0)
-        {
-            Debug.Log("Player is det. Try again?");
-            playerAlive = false;
-            this.gameObject.SetActive(false);
-        }
+        playerRB.AddForce(forceDirection * forceStrength);
+
+        yield return new WaitForSeconds(moveDelay);
+        canMove = true;
     }
 
+    /// <summary>
+    /// Heals player (adds health), by the amount specified in the parameter.
+    /// </summary>
+    /// <param name="healAmount">Amount of health points that will be added to the player's health.</param>
     public void HealPlayer(float healAmount)
     {
         // If player's health will be higher than max amount, set health to max.
@@ -99,10 +111,31 @@ public class PlayerController : MonoBehaviour
         currentHealth += healAmount;
     }
 
+    /// <summary>
+    /// Damages player (removes health), by the amount specified in the parameter.
+    /// </summary>
+    /// <param name="damageAmount">Amount of health points that will be deducted from the player.</param>
+    public void TakeDamage(float damageAmount)
+    {
+        currentHealth = currentHealth - damageAmount;
+
+        // Check player health
+        if (currentHealth <= 0)
+        {
+            Debug.Log("Player is det. Try again?");
+            playerAlive = false;
+            this.gameObject.SetActive(false);
+        }
+    }
+    #endregion
+
     private void PlayerMovement()
     {
-        playerInput.x = Input.GetAxisRaw("Horizontal");
-        playerInput.y = Input.GetAxisRaw("Vertical");
+        if (allowMovement)
+        {
+            playerInput.x = Input.GetAxisRaw("Horizontal");
+            playerInput.y = Input.GetAxisRaw("Vertical");
+        }
     }
 
     private void GetMouseInput()
@@ -139,22 +172,15 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
-    #region PlayerAttacks
-    // Only the declarations for the attacks, need to be declared per characters.
-    virtual protected void PrimAttack()
-    {
-        
-    }
+    #region Attack/Dodge/Skill Declarations
+    virtual protected void PrimAttack()   { /* Only declaration for the function, needs to be defined per character. */
+                                            throw new System.NotImplementedException(); }
 
-    virtual protected void SecAttack()
-    {
-        /* Secondary Attack for the character. */
-    }
+    virtual protected void SecAttack()    { /* Only declaration for the function, needs to be defined per character. */
+                                            throw new System.NotImplementedException(); }
 
-    virtual protected void Dodge()
-    {
-        /* Dodge Ability for the character. */
-    }
+    virtual protected IEnumerator Dodge() { /* Only declaration for the function, needs to be defined per character. */
+                                            throw new System.NotImplementedException(); }
     #endregion
 
     private void DebugInputs()
