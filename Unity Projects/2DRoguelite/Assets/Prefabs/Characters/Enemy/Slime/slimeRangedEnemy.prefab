@@ -398,7 +398,8 @@ MonoBehaviour:
   enemyHealth: 4
   damageAmount: 5
   attackDelay: 1.8
-  healthDrop: {fileID: 0}
+  healthDrop: {fileID: 2511877264795001674, guid: 4f71a14180282054fbb4189adf44bc24,
+    type: 3}
   dropPercentage: 0.75
   projectilePrefab: {fileID: 442335749978805841, guid: 8023802798a43a94ebb43e675740deef,
     type: 3}

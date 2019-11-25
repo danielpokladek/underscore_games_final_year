@@ -288,6 +288,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 4729260153567274746, guid: f5b27cdd946361045817bd4351c6aa6a,
     type: 3}
   bowDrawLength: 0.4
+  dodgeLength: 0.25
   dodgeCooldown: 1.2
   specialFirePoints:
   - {fileID: 2045450087}
@@ -295,7 +296,9 @@ MonoBehaviour:
   - {fileID: 761383608}
   tripleShotCooldown: 3
   extraShotCooldown: 4
+  specialsNumber: 2
   specialCooldown: 0
+  currentSpecial: 1
 --- !u!1 &7368213391151072765
 GameObject:
   m_ObjectHideFlags: 0
@@ -466,11 +469,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7368213390279314161}
     m_Modifications:
-    - target: {fileID: 1844283188940379383, guid: 70e17d47722b7184194f5ddaedc41985,
-        type: 3}
-      propertyPath: m_Name
-      value: playerUI
-      objectReference: {fileID: 0}
     - target: {fileID: 5191194217874097435, guid: 70e17d47722b7184194f5ddaedc41985,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -575,6 +573,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844283188940379383, guid: 70e17d47722b7184194f5ddaedc41985,
+        type: 3}
+      propertyPath: m_Name
+      value: playerUI
       objectReference: {fileID: 0}
     - target: {fileID: 1488456709748414585, guid: 70e17d47722b7184194f5ddaedc41985,
         type: 3}
