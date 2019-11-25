@@ -43,7 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeb824156330b9f4984641152f98861c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomParent: {fileID: 0}
   roomList:
     roomUp:
     - {fileID: 1790630878376632901, guid: c09cb810e992b9f4d9805a87e014a73a, type: 3}
@@ -61,6 +60,10 @@ MonoBehaviour:
     roomUpRightDown: []
     roomRightDownLeft: []
     roomUpDownRightLeft: []
+  bossIcon: {fileID: 2605526240753731375, guid: ec1084493e3b25446b9dded2acdec101,
+    type: 3}
+  sceneToLoad: 0
+  roomParent: {fileID: 0}
   up: 0
   down: 0
   left: 0

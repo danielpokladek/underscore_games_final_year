@@ -1,9 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
 using UnityEngine;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
 
 public class ImprovedCameraController : MonoBehaviour
 {
@@ -31,7 +28,7 @@ public class ImprovedCameraController : MonoBehaviour
         thisCamera = GetComponent<Camera>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (!follow)
             return;

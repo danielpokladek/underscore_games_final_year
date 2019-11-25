@@ -1,20 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Pathfinding;
 
-/*
- * Level Generation Script
- * 
- * Description:
- * Not done.
- * 
- * Room Types List:
- *  -   0: Normal Room
- *  -   1: (starting) Entrance Room
- *  -   2: (boss) Final Room
- *  -   3: Shop Room
- * 
+/*  Room Types:
+ *  0 - Normal Room
+ *  1 - Spawn Room (for player)
+ *  2 - Boss Room (takes player to boss battle)
+ *  3 - Shop Room (allows player to purchase items)
  */
 
 public class LevelGeneration : MonoBehaviour
@@ -24,7 +16,8 @@ public class LevelGeneration : MonoBehaviour
              "If left empty, the map objects will flood the hierarchy, while using this will allow to keep the hierarchy tidy.")]
     public Transform mapRoot;
     
-    [Tooltip("This is the game object which will be used by level generator to spawn new rooms. This field should be populated with the room prefab.")]
+    [Tooltip("This is the game object which will be used by level generator to spawn new rooms." +
+        "This field should be populated with the room prefab.")]
     public GameObject roomPref;
 
     [Tooltip("This is the size of the grid in halves, so for example by default, if set to (4,4) this will create an 8x8 grid of rooms." +
@@ -44,7 +37,11 @@ public class LevelGeneration : MonoBehaviour
     private List<Vector2> takenPositions = new List<Vector2>();     // Reference to taken positions in the grid.
     private Room[,] rooms;                                          // Reference to a 2D array of rooms in the level.
 
-    private int gridSizeX, gridSizeY;
+    private int gridSizeX;                                          
+    private int gridSizeY;                                          
+
+    private int bossRoomNo;
+    private int shopRoomNo;
 
     private void Start()
     {
@@ -58,7 +55,6 @@ public class LevelGeneration : MonoBehaviour
         
         CreateRooms();
         SetRoomDoors();
-        FindLevelBoss();
         DrawMap();
     }
 
@@ -74,7 +70,6 @@ public class LevelGeneration : MonoBehaviour
         float randomCompareStart = 0.2f;
         float randomCompareEnd = 0.01f;
 
-        // Add Rooms
         for (int i = 0; i < numberOfRooms - 1; i++)
         {
             // This generator will determine whether the rooms should be clumped together, or branched out.
@@ -83,15 +78,13 @@ public class LevelGeneration : MonoBehaviour
 
             float randomPercent = i / (((float)numberOfRooms - 1));
             randomCompare = Mathf.Lerp(randomCompareStart, randomCompareEnd, randomPercent);
-
-            // Grab New Room Position
             checkPos = NewPosition();
 
-            // Test New Position
             if (NumberOfNeighbours(checkPos, takenPositions) > 1 && Random.value > randomCompare)
             {
                 // If we do want to branch out, the generator will look for a new position with 1 neighbour that connects it.
                 int iterations = 0;
+
                 do
                 {
                     checkPos = SelectiveNewPosition();
@@ -106,7 +99,6 @@ public class LevelGeneration : MonoBehaviour
             // Once it is finalized, construct the new room position with roomType '0' (normal room - check above for room types)
             rooms[(int)checkPos.x + gridSizeX, (int)checkPos.y + gridSizeY] = new Room(checkPos, 0);
             takenPositions.Insert(0, checkPos);
-            //Debug.Log(checkPos);
         }
     }
 
@@ -120,6 +112,7 @@ public class LevelGeneration : MonoBehaviour
         {
             // Grab a random taken position from the list,
             //  and select if going up/down, left/right.
+
             // Keep going until position is not already taken,
             //  and make sure it is inside our grid (within room boundaries).
 
@@ -238,9 +231,7 @@ public class LevelGeneration : MonoBehaviour
         return retValue;
     }
 
-    /// <summary>
     /// Loop through all rooms in the level, checking if they have neighbours, and select which doors they need.
-    /// </summary>
     private void SetRoomDoors()
     {
         // Use a nested for loop to check each slot in the grid, to check for neighbours of the room.
@@ -250,7 +241,6 @@ public class LevelGeneration : MonoBehaviour
         {
             for (int y = 0; y < ((gridSizeY * 2)); y++)
             {
-                // If there is no room in this grid slot, move on.
                 if (rooms[x, y] == null)
                     continue;
 
@@ -283,31 +273,18 @@ public class LevelGeneration : MonoBehaviour
         }
     }
 
-    private void FindLevelBoss()
-    {
-        // Creating a boss room.
-        int roomNo = Random.Range(1, takenPositions.Count - 1);
-        Vector2 bossRoomPos = takenPositions[roomNo];
-
-        int x = (int)bossRoomPos.x;
-        int y = (int)bossRoomPos.y;
-
-        //Debug.Log("Boss Room: " + bossRoomPos);
-
-        //Room bossRoom = rooms[x, y];
-        //bossRoom.roomType     = 2;
-    }
-
     private void DrawMap()
     {
-        int bossRoomNo = Random.Range(1, takenPositions.Count - 1);
-        int p = 0;
+        // Grab a random room number, from the list of taken rooms,
+        //  and assign them to the shop room and boss room.
+        int bossRoomNo = Random.Range(2, takenPositions.Count - 1);
+        int shopRoomNo = Random.Range(2, takenPositions.Count - 1);
 
-        Debug.Log(bossRoomNo);
+        int iteration = 0;
 
-        // Loop through each room on the gird,
-        //  multiply by size of room,
-        //  instantiate and assign variables.
+        // Loop through each of the rooms in the grid,
+        //  calculate the room size (in world coordinates),
+        //  instantiate the room and assign the exits and room variables.
         foreach (Room room in rooms)
         {
             if (room == null)
@@ -315,18 +292,24 @@ public class LevelGeneration : MonoBehaviour
 
             Vector2 drawPos = room.gridPos;
 
-            // Ideally allow users to select the size of the room in generation script,
-            //  this will allow designers to mess about with this without adjusting the code.
+            // Multipley the current room position (on the grid),
+            //  to get the room position in real world coordinates.
             drawPos.x *= roomSizeX;
             drawPos.y *= roomSizeY;
 
-            RoomSelector roomSelector = Object.Instantiate(roomPref, drawPos, Quaternion.identity).GetComponent<RoomSelector>();
+            // Instantiate the template room, and grab the room selector script.
+            RoomSelector roomSelector = Instantiate(roomPref, drawPos, Quaternion.identity).GetComponent<RoomSelector>();
 
-            if (p == bossRoomNo)
-            {
+            // If the bossRoom is the same as shopRoom, find a new room for the boss.
+            //  After assign the variables to the room, and pass them through to RoomSelector.
+            if (bossRoomNo == shopRoomNo)
+                bossRoomNo = Random.Range(2, takenPositions.Count - 1);
+
+            if (iteration == bossRoomNo)
                 room.roomType = 2;
-                Debug.Log("Boss room set at: " + drawPos);
-            }
+
+            if (iteration == shopRoomNo)
+                room.roomType = 3;
 
             roomSelector.roomType   = room.roomType;
             roomSelector.up         = room.doorTop;
@@ -334,22 +317,26 @@ public class LevelGeneration : MonoBehaviour
             roomSelector.right      = room.doorRight;
             roomSelector.left       = room.doorLeft;
             
+            // Move the room to the root folder (to keep hierarchy cleaner),
+            //  and add one to the iteration.
             roomSelector.gameObject.transform.SetParent(mapRoot);
-
-            p++;
+            iteration++;
         }
 
-        // Too early to run A* re-scan here.
-
+        // Update the navmesh at the start of FixedUpdate(),
+        //  this way the generator waits for everything to be instantiated properly.
+        //  Once everything is done, the navmesh is updated and the AI works properly.
         StartCoroutine("UpdateNavmesh");
     }
 
     IEnumerator UpdateNavmesh()
     {
+        // Navmesh update needs to be carried out at the end of room generation,
+        //  and currently the easiest way to do so is to do it at the FixedUpdate.
+        //  Later ideally have a check, which will return true once generation is done.
         yield return new WaitForFixedUpdate();
 
         AstarPath.active.Scan();
-        
         yield break;
     }
 }

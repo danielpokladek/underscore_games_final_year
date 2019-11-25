@@ -5,17 +5,24 @@ using UnityEngine;
 public class RoomManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] enemySpawners;
-    [SerializeField] private GameObject boss;
+    [SerializeField] private GameObject   boss;
 
-    LevelManager levelManager;
-    GameObject bossIconGO;
-    bool bossRoom;
+    // -------------------------------
+    private LevelManager levelManager;
+    private GameObject bossIconGO;
+    private bool enemiesSpawned;
+
+    // -------------------
+    private bool bossRoom;
     private bool spawnRoom;
-    public bool enemiesSpawned;
+
+    // ------------------------------
+    private string m_currentDayState;
 
     private void Start()
     {
         levelManager = LevelManager.instance;
+        levelManager.onDayStateChangeCallback += UpdateRoomState;
     }
 
     public void SpawnPlayer()
@@ -31,24 +38,51 @@ public class RoomManager : MonoBehaviour
         bossRoom = true;
     }
 
-    private void Update()
+    public void UpdateRoomState()
     {
-        if (levelManager.GetCurrentState == "Night")
-            ShowBoss();
+        // At the moment nothing happens in daytime; monsters only respawn at night.
+        //  At night, the boss will also spawn.
+
+        switch (levelManager.currentState)
+        {
+            case LevelManager.DayState.Day:
+                if (bossRoom)
+                    DisplayBoss(false);
+
+                m_currentDayState = LevelManager.instance.GetCurrentState;
+                break;
+
+            case LevelManager.DayState.Night:
+                if (bossRoom)
+                    DisplayBoss(true);
+
+                m_currentDayState = LevelManager.instance.GetCurrentState;
+                break;
+
+            case LevelManager.DayState.Midnight:
+                // Boss is still visible at midnight.
+
+                m_currentDayState = LevelManager.instance.GetCurrentState;
+                break;
+        }
     }
 
-    private void ShowBoss()
+    private void DisplayBoss(bool condition)
     {
+        // Check if room is a boss room, and update the room.
+        //  At the moment, only boss icon will appear,
+        //  more functionality will be added later.
         if (bossRoom)
-            bossIconGO.SetActive(true);
-        else
-            return;
+            bossIconGO.SetActive(condition);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
+            if (bossRoom && m_currentDayState == "Night" || m_currentDayState == "Midnight")
+                LevelManager.instance.LoadBossBattle();
+
             // It is daytime, and enemies have been spawned.
             if (levelManager.GetCurrentState == "Day" && enemiesSpawned)
                 return;

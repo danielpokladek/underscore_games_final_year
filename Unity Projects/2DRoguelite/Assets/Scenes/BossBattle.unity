@@ -213,13 +213,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 818216592}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc4720556cdda9b4f8690b293edd3553, type: 3}
+  m_Script: {fileID: 11500000, guid: c694c555667efc549b960007222a7403, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 0}
-  maximumFollowSpeed: 10
-  viewPortFactor: 0.2
-  followDuration: 0.1
+  cameraDist: 4.5
+  smoothTime: 0.2
 --- !u!1 &1200922076
 GameObject:
   m_ObjectHideFlags: 0
@@ -568,6 +566,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7056648950674954746, guid: ec5d65a572afc014b972d4823372553d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 144.7998
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec5d65a572afc014b972d4823372553d, type: 3}

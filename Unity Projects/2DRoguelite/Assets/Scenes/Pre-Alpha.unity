@@ -213,13 +213,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 106211961}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc4720556cdda9b4f8690b293edd3553, type: 3}
+  m_Script: {fileID: 11500000, guid: c694c555667efc549b960007222a7403, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 0}
-  maximumFollowSpeed: 20
-  viewPortFactor: 0.1
-  followDuration: 0.1
+  cameraDist: 3.5
+  smoothTime: 0.2
 --- !u!1 &106427083
 GameObject:
   m_ObjectHideFlags: 0

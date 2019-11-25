@@ -1460,21 +1460,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5448182903151528506, guid: c7e82a6e7e4edb4469b592c344e28da4,
-        type: 3}
-      propertyPath: attackPoint
-      value: 
-      objectReference: {fileID: 1921467078}
-    - target: {fileID: 5448182903151528506, guid: c7e82a6e7e4edb4469b592c344e28da4,
-        type: 3}
-      propertyPath: playerLayer.m_Bits
-      value: 6144
-      objectReference: {fileID: 0}
-    - target: {fileID: 5448182903151528506, guid: c7e82a6e7e4edb4469b592c344e28da4,
-        type: 3}
-      propertyPath: attackDelay
-      value: 1.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7e82a6e7e4edb4469b592c344e28da4, type: 3}
 --- !u!4 &1331398272 stripped
@@ -1724,12 +1709,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1921467078 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2648387159445091027, guid: c7e82a6e7e4edb4469b592c344e28da4,
-    type: 3}
-  m_PrefabInstance: {fileID: 1331398271}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2034488559 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 820044748670082817, guid: 0661664873cc40242b0c91987f7bbeff,

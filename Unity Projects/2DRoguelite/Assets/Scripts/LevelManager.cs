@@ -5,19 +5,25 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    public enum DayState { Day, Night, Midnight, Boss };
-
-    [SerializeField] public DayState currentState;
     [SerializeField] private float dayLength;
     [SerializeField] private float nightLength;
     [SerializeField] private float midnightLength;
 
+    // -------------------------------------------------
+    public enum DayState { Day, Night, Midnight, Boss };
+    public DayState currentState;
+
+    // -------------------------------------
+    public delegate void OnDayStateChange();
+    public OnDayStateChange onDayStateChangeCallback;
+
+    public GameObject playerPrefab;
+
     private string currentStateString;
     private float stateTimer;
 
+    #region Singleton
     public static LevelManager instance = null;
-
-    public GameObject playerPrefab;
 
     private void Awake()
     {
@@ -26,6 +32,7 @@ public class LevelManager : MonoBehaviour
         else
             Destroy(gameObject);
     }
+    #endregion
 
     private void Start()
     {
@@ -33,17 +40,20 @@ public class LevelManager : MonoBehaviour
         currentStateString = "Day";
     }
 
+    public void LoadBossBattle()
+    {
+        SceneManager.LoadScene(1);
+    }
+
     private void Update()
     {
         UpdateDayState();
 
-        if (Input.GetKeyDown(KeyCode.F5))
-            LoadBossBattle();
-    }
-
-    private void LoadBossBattle()
-    {
-        SceneManager.LoadScene(1);
+        if (Debug.isDebugBuild)
+        {
+            if (Input.GetKeyDown(KeyCode.F5))
+                LoadBossBattle();
+        }
     }
 
     private void UpdateDayState()
@@ -51,56 +61,46 @@ public class LevelManager : MonoBehaviour
         switch (currentState)
         {
             case DayState.Boss:
+                // No day/night transition in the boss battle stage.
                 break;
             
             // Handle Day.
             case DayState.Day:
                 if (stateTimer >= dayLength)
-                {
-                    // Day is up, spooky time!
-                    currentStateString = "Night";
-                    SetState(DayState.Night);
-                }
+                    SetState(DayState.Night, "Night");
                 else
-                {
                     stateTimer += Time.deltaTime;
-                }
+
                 break;
 
             // Handle Night.
             case DayState.Night:
                 if (stateTimer >= nightLength)
-                {
-                    // Night is up, the blood moon is upon you!... or something
-                    currentStateString = "Midnight";
-                    SetState(DayState.Midnight);
-                }
+                    SetState(DayState.Midnight, "Midnight");
                 else
-                {
                     stateTimer += Time.deltaTime;
-                }
+
                 break;
 
             // Handle Midnight.
             case DayState.Midnight:
                 if (stateTimer >= midnightLength)
-                {
-                    // Midnight is up, time to chill out!
-                    currentStateString = "Day";
-                    SetState(DayState.Day);
-                }
+                    SetState(DayState.Day, "Day");
                 else
-                {
                     stateTimer += Time.deltaTime;
-                }
+
                 break;
         }
     }
 
-    private void SetState(DayState state)
+    private void SetState(DayState state, string stateString)
     {
-        currentState = state;
-        stateTimer = 0;
+        currentStateString = stateString;
+        currentState       = state;
+        stateTimer         = 0;
+
+        if (onDayStateChangeCallback != null)
+            onDayStateChangeCallback.Invoke();
     }
 
     public string GetCurrentState { get { return currentStateString; } }

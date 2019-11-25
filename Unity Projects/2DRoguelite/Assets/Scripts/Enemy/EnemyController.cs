@@ -53,9 +53,14 @@ public class EnemyController : MonoBehaviour
     protected Vector2 playerVector;
     protected float   aimAngle;
 
+    // ---
+    private LevelManager levelManager;
+
     private void Start()
     {
         InitiateEnemy();
+
+        levelManager.onDayStateChangeCallback += NightBuff;
     }
 
     private void InitiateEnemy()
@@ -78,17 +83,14 @@ public class EnemyController : MonoBehaviour
 
         aiDestinationSetter.target = playerTrans;
         aiPath.maxSpeed            = moveSpeed;
+
+        levelManager = LevelManager.instance;
     }
 
     virtual protected void Update()
     {
         if (isDummy)
             return;
-
-        if (LevelManager.instance.GetCurrentState == "Midnight")
-            currentDamage = damageAmount * 2;
-        else
-            currentDamage = damageAmount;
 
         if (isBleeding)
         {
@@ -101,6 +103,14 @@ public class EnemyController : MonoBehaviour
             if (isBleeding == true)
                 bleedingTimer += Time.deltaTime;
         }
+    }
+
+    private void NightBuff()
+    {
+        if (levelManager.currentState == LevelManager.DayState.Midnight)
+            currentDamage = damageAmount * 2;
+        else
+            currentDamage = damageAmount;
     }
 
     virtual protected void FixedUpdate()

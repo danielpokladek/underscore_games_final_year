@@ -291,17 +291,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDummy: 0
   armPivot: {fileID: 2648387158659941387}
-  attackPoint: {fileID: 0}
+  attackPoint: {fileID: 2648387159445091027}
   playerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 6144
   moveSpeed: 2.5
-  enemyHealth: 40
+  enemyHealth: 10
   damageAmount: 10
-  attackDelay: 1.2
+  attackDelay: 1.5
   healthDrop: {fileID: 2511877264795001674, guid: 4f71a14180282054fbb4189adf44bc24,
     type: 3}
-  dropPercentage: 0
+  dropPercentage: 0.75
   projectilePrefab: {fileID: 4729260153567274746, guid: e297da7b2d5beb24eb64bdfb225d5cdc,
     type: 3}
   weaponSprite: {fileID: 2648387157459998505}
