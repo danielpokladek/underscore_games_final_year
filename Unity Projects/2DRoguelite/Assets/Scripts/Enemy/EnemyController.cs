@@ -78,6 +78,8 @@ public class EnemyController : MonoBehaviour
         playerGO    = GameObject.FindGameObjectWithTag("Player");
         playerTrans = playerGO.transform;
 
+        currentDamage = damageAmount;
+
         aiDestinationSetter = GetComponent<AIDestinationSetter>();
         aiPath              = GetComponent<AIPath>();
 

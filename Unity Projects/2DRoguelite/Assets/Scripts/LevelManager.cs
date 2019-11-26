@@ -53,6 +53,9 @@ public class LevelManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.F5))
                 LoadBossBattle();
+
+            if (Input.GetKeyDown(KeyCode.Backspace))
+                Restart();
         }
     }
 
