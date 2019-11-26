@@ -6,16 +6,18 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Base Settings")]
     [Tooltip("Speed at which the player will move")]
-    [SerializeField] protected float moveSpeed = 8.0f;
+    [SerializeField] protected float playerMoveSpeed = 8.0f;
 
     [Tooltip("Player's maximum health points.")]
     [SerializeField] protected float playerHealth = 20;
     
     [Tooltip("Damage that the player will deal to the enemies, later this will be determined by the weapon.")]
-    [SerializeField] protected float damageAmount;
+    [SerializeField] protected float playerDamage;
 
     [Tooltip("This is player's 'arm' which will be used to aiming, shooting, etc. It rotates towards the mouse.")]
     [SerializeField] protected GameObject playerArm;
+
+    [SerializeField] private SpriteRenderer playerSprite;
     
     // ---------------------------
     protected Rigidbody2D playerRB;
@@ -31,13 +33,19 @@ public class PlayerController : MonoBehaviour
     // ---
     private bool      canMove;
     private int       playerDirection;
+    protected float   currentMoveSpeed;
     
     // -------------------------
     protected float currentHealth;
-    protected bool  playerAlive = true;
+    protected float currentDamage;
+    protected bool  playerAlive  = true;
+    protected bool  canBeDamaged = true;
 
     // --- MANAGERS --- //
     protected GameUIManager gameUIManager;
+
+    public delegate void OnUIChange();
+    public OnUIChange onUIChangeCallback;
 
     virtual public void Start()
     {
@@ -49,7 +57,10 @@ public class PlayerController : MonoBehaviour
         playerRB      = GetComponent<Rigidbody2D>();
         playerCamera  = Camera.main;
         
-        currentHealth = playerHealth;
+        currentHealth    = playerHealth;
+        currentDamage    = playerDamage;
+        currentMoveSpeed = playerMoveSpeed;
+
         playerAlive   = true;
         CanMove       = true;
 
@@ -57,6 +68,8 @@ public class PlayerController : MonoBehaviour
 
         // ---
         allowMovement = true;
+
+        onUIChangeCallback.Invoke();
     }
 
     virtual protected void Update()
@@ -117,15 +130,22 @@ public class PlayerController : MonoBehaviour
     /// <param name="damageAmount">Amount of health points that will be deducted from the player.</param>
     public void TakeDamage(float damageAmount)
     {
-        currentHealth = currentHealth - damageAmount;
+        if (!canBeDamaged)
+            return;
+
+        currentHealth -= damageAmount;
 
         // Check player health
         if (currentHealth <= 0)
         {
-            Debug.Log("Player is det. Try again?");
-            playerAlive = false;
-            this.gameObject.SetActive(false);
+            playerAlive        = false;
+            gameObject.SetActive(false);
         }
+
+        if (canBeDamaged) 
+            StartCoroutine(DamageCooldown());
+
+        onUIChangeCallback.Invoke();
     }
     #endregion
 
@@ -149,13 +169,24 @@ public class PlayerController : MonoBehaviour
     private void MoveCharacter(Vector2 input)
     {
         if (canMove)
-            playerRB.MovePosition((Vector2) transform.position + (input * moveSpeed * Time.deltaTime));
+            playerRB.MovePosition((Vector2) transform.position + (input * playerMoveSpeed * Time.deltaTime));
     }
 
     virtual protected void PlayerAim()
     {
         armAngle                     = -1 * Mathf.Atan2(mouseVector.y, mouseVector.x) * Mathf.Rad2Deg;
         playerArm.transform.rotation = Quaternion.AngleAxis(armAngle, Vector3.back);
+    }
+
+    private IEnumerator DamageCooldown()
+    {
+        canBeDamaged = false;
+        playerSprite.color = Color.red;
+
+        yield return new WaitForSeconds(1.8f);
+
+        canBeDamaged = true;
+        playerSprite.color = Color.white;
     }
 
     #region Getters/Setters
@@ -165,15 +196,14 @@ public class PlayerController : MonoBehaviour
         get { return canMove; }
     }
 
-    public float GetCurrentHealth
-    {
-        get { return currentHealth; }
-    }
+    public float GetCurrentHealth { get { return currentHealth; } }
+
+    public float GetMaxHealth     { get { return playerHealth; } }
 
     #endregion
 
     #region Attack/Dodge/Skill Declarations
-    virtual protected void PrimAttack()   { /* Only declaration for the function, needs to be defined per character. */
+    virtual protected void PrimAttack(float _damageAmount)   { /* Only declaration for the function, needs to be defined per character. */
                                             throw new System.NotImplementedException(); }
 
     virtual protected void SecAttack()    { /* Only declaration for the function, needs to be defined per character. */

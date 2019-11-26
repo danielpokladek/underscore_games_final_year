@@ -21,7 +21,7 @@ public class MeleeController : PlayerController
         if (currentAttackDelay >= attackDelay)
         {
             if (Input.GetButtonDown("LMB"))
-                PrimAttack();
+                PrimAttack(playerDamage);
         }
         else
         {
@@ -36,7 +36,7 @@ public class MeleeController : PlayerController
     {
         if (enemyObject.CompareTag("Enemy"))
         {
-            enemyObject.GetComponent<EnemyController>().TakeDamage(damageAmount);
+            enemyObject.GetComponent<EnemyController>().TakeDamage(playerDamage);
         }
     }
 
