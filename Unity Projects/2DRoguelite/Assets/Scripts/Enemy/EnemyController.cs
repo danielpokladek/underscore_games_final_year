@@ -24,7 +24,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] protected float enemyHealth = 10f;
 
     [Tooltip("This is enemy's damage points; set to 0 (zero) for dummy AI")]
-    [SerializeField] protected float enemyDamage;
+    [SerializeField] protected float damageAmount;
 
     [SerializeField] protected float attackDelay;
 
@@ -60,14 +60,12 @@ public class EnemyController : MonoBehaviour
     {
         InitiateEnemy();
 
-        if (!isDummy)
-            levelManager.onDayStateChangeCallback += NightBuff;
+        levelManager.onDayStateChangeCallback += NightBuff;
     }
 
     private void InitiateEnemy()
     {
         currentHealth = enemyHealth;
-        currentDamage = enemyDamage;
 
         // No need to initiate anything if the object is a dummy,
         //  so simply skip this part and move to the update loop.
@@ -112,9 +110,9 @@ public class EnemyController : MonoBehaviour
     private void NightBuff()
     {
         if (levelManager.currentState == LevelManager.DayState.Midnight)
-            currentDamage = enemyDamage * 2;
+            currentDamage = damageAmount * 2;
         else
-            currentDamage = enemyDamage;
+            currentDamage = damageAmount;
     }
 
     virtual protected void FixedUpdate()

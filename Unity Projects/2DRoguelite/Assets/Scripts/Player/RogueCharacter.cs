@@ -18,7 +18,7 @@ public class RogueCharacter : MeleeController
             showDebug = !showDebug;
     }
 
-    override protected void PrimAttack(float _damageAmount)
+    override protected void PrimAttack()
     {
         for (int i = 0; i < enemiesInRange.Length; i++)
         {
@@ -50,8 +50,8 @@ public class RogueCharacter : MeleeController
 
     IEnumerator Dodge()
     {
-        playerMoveSpeed += 20f;
+        moveSpeed += 20f;
         yield return new WaitForSeconds(.3f);
-        playerMoveSpeed -= 20f;
+        moveSpeed -= 20f;
     }
 }

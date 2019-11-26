@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ArcherCharacter : RangedController
 {
-    [SerializeField] private float maxBowDraw;
+    [SerializeField] private float bowDrawLength;
     [SerializeField] private float dodgeLength;
     [SerializeField] private float dodgeCooldown;
     [SerializeField] private Transform[] specialFirePoints;
@@ -15,7 +15,7 @@ public class ArcherCharacter : RangedController
 
     // ------------------
     [SerializeField] private int   currentSpecial = 1;
-    [SerializeField] private float currentBowDraw;
+    private float currentBowDraw;
     private float currentTripleCooldown;
     private float currentExtraCooldown;
     private bool  extraShot;
@@ -24,31 +24,54 @@ public class ArcherCharacter : RangedController
     private float currentDodgeCooldown;
     private float selectedSpecial;
 
+    private bool showDebug = true;
+
     override protected void Update()
     {
         base.Update();
 
+        if (Input.GetKey(KeyCode.Q))
+            currentSpecial = 1;
+
+        if (Input.GetKey(KeyCode.E))
+            currentSpecial = 2;
+
+        if (Input.GetKeyDown(KeyCode.F3))
+            showDebug = !showDebug;
+
+        if (Input.GetButtonDown("CTRL"))
+            ChangeSpecial();
+
         #region Primary Attack
 
-        if (Input.GetButton("LMB"))
+        if (currentBowDraw < bowDrawLength)
         {
-            currentBowDraw += Time.deltaTime;
+            if (Input.GetButton("LMB"))
+            {
+                currentBowDraw += Time.deltaTime;
+            }
 
-            if (currentBowDraw > maxBowDraw)
-                currentBowDraw = maxBowDraw;
+            if (Input.GetButtonUp("LMB"))
+            {
+                currentBowDraw = 0;
+            }
         }
 
-        if (Input.GetButtonUp("LMB"))
-            PrimAttack(currentDamage);
-
+        if (currentBowDraw >= bowDrawLength)
+        {
+            if (Input.GetButtonUp("LMB"))
+            {
+                PrimAttack();
+                currentBowDraw = 0;
+            }
+        }
         #endregion
 
-        #region Specials
-        if (Input.GetKey(KeyCode.Q) && currentExtraCooldown >= extraShotCooldown)
-            ArrowNock();
-
-        if (Input.GetKey(KeyCode.E) && currentTripleCooldown >= tripleShotCooldown)
-            TripleShot();
+        #region Secondary Attack
+        if (Input.GetButtonDown("SPACE"))
+        {
+            SecAttack();
+        }
         #endregion
 
         #region Dodge
@@ -77,7 +100,15 @@ public class ArcherCharacter : RangedController
         #endregion
     }
 
-    override protected void PrimAttack(float _damageAmount)
+    protected void ChangeSpecial()
+    {
+        currentSpecial += 1;
+
+        if (currentSpecial > specialsNumber)
+            currentSpecial = 1;
+    }
+
+    override protected void PrimAttack()
     {
         shootDirection = mousePosition - playerRB.position;
 
@@ -86,44 +117,42 @@ public class ArcherCharacter : RangedController
         PlayerProjectile bulletScript = tempProjectile.GetComponent<PlayerProjectile>();
 
         projectileRB.AddForce(firePoint.up * 20, ForceMode2D.Impulse);
-        bulletScript.SetDamage(CalculateDamage());
+        bulletScript.SetDamage(damageAmount);
 
         if (extraShot)
         {
-            currentDamage    = playerDamage;
-            currentMoveSpeed = playerMoveSpeed;
-            extraShot        = false;
+            damageAmount /= 2;
+            moveSpeed    *= 2;
+            extraShot = false;
         }
-
-        currentBowDraw = 0;
     }
 
-    private float CalculateDamage()
+    protected override void SecAttack()
     {
-        // Calculate the bow draw percentage (based on currentDraw & maxDraw),
-        //  using that percentage calculate player's damage (using damageAmount),
-        //  and return the damage player's will deal.
+        switch (currentSpecial)
+        {
+            case 1:
+                if (currentExtraCooldown >= extraShotCooldown)
+                    ExtraDamageShot();
+                break;
 
-        float drawPerc = (currentBowDraw / maxBowDraw) * 100;
-        float damage = (currentDamage / 100) * drawPerc;
-        print(damage);
-
-        damage = (float)System.Math.Round(damage);
-        damage = Mathf.Clamp(damage, 1, 999);
-
-        return damage;
+            case 2:
+                if (currentTripleCooldown >= tripleShotCooldown)
+                    TripleShot();
+                break;
+        }
     }
 
-    private void ArrowNock()
+    private void ExtraDamageShot()
     {
         if (extraShot)
             return;
 
-        currentDamage    *= 2;
-        currentMoveSpeed /= 2;
+        damageAmount *= 2;
+        moveSpeed    /= 2;
 
-        currentExtraCooldown = 0;
         extraShot            = true;
+        currentExtraCooldown = 0;
     }
 
     private void TripleShot()
@@ -142,7 +171,7 @@ public class ArcherCharacter : RangedController
             bulletScript    = playerProjectile.GetComponent<PlayerProjectile>();
 
             projectileRB.AddForce(firePoint.up * 20, ForceMode2D.Impulse);
-            bulletScript.SetDamage(playerDamage);
+            bulletScript.SetDamage(damageAmount);
 
             playerProjectile.GetComponent<TrailRenderer>().startColor = Color.blue;
             playerProjectile.GetComponent<TrailRenderer>().endColor = Color.blue;
@@ -150,9 +179,9 @@ public class ArcherCharacter : RangedController
 
         if (extraShot)
         {
-            extraShot            = false;
-            currentDamage       /= playerDamage;
-            currentMoveSpeed    *= playerMoveSpeed;
+            extraShot     = false;
+            damageAmount /= 2;
+            moveSpeed    *= 2;
         }
 
         currentTripleCooldown = 0;
@@ -161,10 +190,21 @@ public class ArcherCharacter : RangedController
     override protected IEnumerator Dodge()
     {
         allowMovement = false;
-        playerMoveSpeed += 15f;
+        moveSpeed += 15f;
         yield return new WaitForSeconds(dodgeLength);
-        playerMoveSpeed -= 15f;
+        moveSpeed -= 15f;
         allowMovement = true;
+    }
+
+    // --- TEMP STUFF --- //
+    private void OnGUI()
+    {
+        if (!showDebug)
+            return;
+
+        GUI.Label(new Rect(10, 40, 200, 20), "HP: " + currentHealth.ToString("000"));
+        GUI.Label(new Rect(10, 55, 200, 20), "Bow: " + currentBowDraw.ToString("0.0") + " / " + bowDrawLength.ToString("0.0"));
+        GUI.Label(new Rect(10, 70, 500, 20), "Pos: " + transform.position.ToString("0.000"));
     }
 
     public float GetDodge { get { return dodgeCooldown; } }

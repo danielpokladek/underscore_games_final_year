@@ -13,7 +13,7 @@ public class EnemyRanged : EnemyController
     override protected void Update()
     {
         base.Update();
-
+        
         if (canAttack && CanSeePlayer())
             AttackPlayer();
 

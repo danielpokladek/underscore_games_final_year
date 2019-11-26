@@ -41,7 +41,7 @@ public class EnemyMelee : EnemyController
 
             for (int i = 0; i < playerInRange.Length; i++)
             {
-                playerInRange[i].GetComponent<PlayerController>().TakeDamage(enemyDamage);
+                playerInRange[i].GetComponent<PlayerController>().TakeDamage(damageAmount);
             }
 
             currentAttackDelay = 0;

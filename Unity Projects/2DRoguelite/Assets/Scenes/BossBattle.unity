@@ -762,10 +762,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab42d7d80f9b5404e8f1ad4cfc328697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentState: 0
   dayLength: 0
   nightLength: 0
   midnightLength: 0
-  currentState: 0
   playerPrefab: {fileID: 0}
 --- !u!1001 &743510048712317288
 PrefabInstance:
