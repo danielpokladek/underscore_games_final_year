@@ -289,6 +289,7 @@ MonoBehaviour:
     type: 3}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   maxBowDraw: 0.9
   dodgeLength: 0.2
   dodgeCooldown: 0.4
@@ -301,6 +302,10 @@ MonoBehaviour:
   bowDrawLength: 0.4
   dodgeCooldown: 1.2
 >>>>>>> parent of 120eabc... Archer Changes
+=======
+  bowDrawLength: 0.4
+  dodgeCooldown: 1.2
+>>>>>>> parent of 120eabc... Archer Changes
   specialFirePoints:
   - {fileID: 2045450087}
   - {fileID: 672336184}
@@ -309,11 +314,14 @@ MonoBehaviour:
   extraShotCooldown: 4
   specialCooldown: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
   currentSpecial: 1
 <<<<<<< HEAD
   currentBowDraw: 0
 =======
 >>>>>>> dffab3e3ea82afa9e1df3bcd3a9f9b2f917bd196
+=======
+>>>>>>> parent of 120eabc... Archer Changes
 =======
 >>>>>>> parent of 120eabc... Archer Changes
 --- !u!1 &7368213391151072765
