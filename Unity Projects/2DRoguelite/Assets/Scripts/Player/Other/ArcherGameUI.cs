@@ -7,26 +7,28 @@ using TMPro;
 public class ArcherGameUI : MonoBehaviour
 {
     [SerializeField] private ArcherCharacter playerObject;
-    [SerializeField] private TMP_Text playerHealth;
-    [SerializeField] private Image extraDamageSkill;
-    [SerializeField] private Image tripleShotSkill;
-    [SerializeField] private Image dodgeSkill;
-    [SerializeField] private TMP_Text currentBowDraw;
-    [SerializeField] private TMP_Text maxBowDraw;
+
+    [SerializeField] private TMP_Text healthText;
+    [SerializeField] private Image    healthSlider;
+    [SerializeField] private Image    extraDamageSkill;
+    [SerializeField] private Image    tripleShotSkill;
+    [SerializeField] private Image    dodgeSkill;
 
     private void Start()
     {
-        //maxBowDraw.text = playerObject.GetBowDraw.ToString("0.0");
+        playerObject.onGUIChangeCallback += UpdateUI;
     }
 
     private void Update()
-    {
-        //currentBowDraw.text         = playerObject.GetCurrentBowDraw.ToString("0.0");
-
+    { 
         dodgeSkill.fillAmount       = playerObject.GetCurrentDodge  / playerObject.GetDodge;
         tripleShotSkill.fillAmount  = playerObject.GetTripleCurrent / playerObject.GetTripleCooldown;
         extraDamageSkill.fillAmount = playerObject.GetExtraCurrent  / playerObject.GetExtraCooldown;
+    }
 
-        //playerHealth.text           = playerObject.GetCurrentHealth.ToString("000");
+    private void UpdateUI()
+    {
+        healthSlider.fillAmount = playerObject.GetCurrentHealth / playerObject.GetMaxHealth;
+        healthText.text         = playerObject.GetCurrentHealth.ToString("00");
     }
 }

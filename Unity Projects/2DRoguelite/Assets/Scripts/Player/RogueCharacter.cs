@@ -50,8 +50,8 @@ public class RogueCharacter : MeleeController
 
     IEnumerator Dodge()
     {
-        moveSpeed += 20f;
+        playerMoveSpeed += 20f;
         yield return new WaitForSeconds(.3f);
-        moveSpeed -= 20f;
+        playerMoveSpeed -= 20f;
     }
 }

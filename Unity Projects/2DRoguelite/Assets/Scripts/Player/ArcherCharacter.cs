@@ -4,74 +4,46 @@ using UnityEngine;
 
 public class ArcherCharacter : RangedController
 {
-    [SerializeField] private float bowDrawLength;
+    [SerializeField] private float drawLength;
     [SerializeField] private float dodgeLength;
     [SerializeField] private float dodgeCooldown;
-    [SerializeField] private Transform[] specialFirePoints;
+    [SerializeField] private Transform[] tripleShotPoint;
     [SerializeField] private float tripleShotCooldown;
-    [SerializeField] private float extraShotCooldown;
-    [SerializeField] private int   specialsNumber = 2;
-    [SerializeField] private float specialCooldown;
+    [SerializeField] private float arrowNockCooldown;
 
     // ------------------
-    [SerializeField] private int   currentSpecial = 1;
-    private float currentBowDraw;
+    private float currentDrawLength;
     private float currentTripleCooldown;
-    private float currentExtraCooldown;
-    private bool  extraShot;
-
-    private float currentSpecialCooldown;
+    private float currentNockCooldown;
     private float currentDodgeCooldown;
-    private float selectedSpecial;
 
-    private bool showDebug = true;
+    // ---
 
     override protected void Update()
     {
         base.Update();
 
-        if (Input.GetKey(KeyCode.Q))
-            currentSpecial = 1;
-
-        if (Input.GetKey(KeyCode.E))
-            currentSpecial = 2;
-
-        if (Input.GetKeyDown(KeyCode.F3))
-            showDebug = !showDebug;
-
-        if (Input.GetButtonDown("CTRL"))
-            ChangeSpecial();
-
         #region Primary Attack
-
-        if (currentBowDraw < bowDrawLength)
+        if (Input.GetButton("LMB"))
         {
-            if (Input.GetButton("LMB"))
-            {
-                currentBowDraw += Time.deltaTime;
-            }
+            currentDrawLength += Time.deltaTime;
 
-            if (Input.GetButtonUp("LMB"))
-            {
-                currentBowDraw = 0;
-            }
+            if (currentDrawLength >= drawLength)
+                currentDrawLength = drawLength;
         }
 
-        if (currentBowDraw >= bowDrawLength)
-        {
-            if (Input.GetButtonUp("LMB"))
-            {
-                PrimAttack();
-                currentBowDraw = 0;
-            }
-        }
+        if (Input.GetButtonUp("LMB"))
+            PrimAttack();
+
         #endregion
 
-        #region Secondary Attack
-        if (Input.GetButtonDown("SPACE"))
-        {
-            SecAttack();
-        }
+        #region Specials
+        if (Input.GetKeyDown(KeyCode.Q) && currentNockCooldown >= arrowNockCooldown)
+            ExtraDamageShot();
+
+        if (Input.GetKeyDown(KeyCode.E) && currentTripleCooldown >= tripleShotCooldown)
+            TripleShot();
+
         #endregion
 
         #region Dodge
@@ -95,21 +67,15 @@ public class ArcherCharacter : RangedController
         if (currentTripleCooldown <= tripleShotCooldown)
             currentTripleCooldown += Time.deltaTime;
 
-        if (currentExtraCooldown <= extraShotCooldown || extraShot)
-            currentExtraCooldown += Time.deltaTime;
+        if (currentNockCooldown <= arrowNockCooldown)
+            currentNockCooldown += Time.deltaTime;
         #endregion
-    }
-
-    protected void ChangeSpecial()
-    {
-        currentSpecial += 1;
-
-        if (currentSpecial > specialsNumber)
-            currentSpecial = 1;
     }
 
     override protected void PrimAttack()
     {
+        float dmg = CalculateDamage();
+
         shootDirection = mousePosition - playerRB.position;
 
         GameObject tempProjectile     = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
@@ -117,42 +83,23 @@ public class ArcherCharacter : RangedController
         PlayerProjectile bulletScript = tempProjectile.GetComponent<PlayerProjectile>();
 
         projectileRB.AddForce(firePoint.up * 20, ForceMode2D.Impulse);
-        bulletScript.SetDamage(damageAmount);
+        bulletScript.SetDamage(dmg);
 
-        if (extraShot)
-        {
-            damageAmount /= 2;
-            moveSpeed    *= 2;
-            extraShot = false;
-        }
-    }
-
-    protected override void SecAttack()
-    {
-        switch (currentSpecial)
-        {
-            case 1:
-                if (currentExtraCooldown >= extraShotCooldown)
-                    ExtraDamageShot();
-                break;
-
-            case 2:
-                if (currentTripleCooldown >= tripleShotCooldown)
-                    TripleShot();
-                break;
-        }
+        currentDrawLength = 0;
     }
 
     private void ExtraDamageShot()
     {
-        if (extraShot)
-            return;
+        shootDirection = mousePosition - playerRB.position;
 
-        damageAmount *= 2;
-        moveSpeed    /= 2;
+        GameObject tempProjectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+        Rigidbody2D projectileRB = tempProjectile.GetComponent<Rigidbody2D>();
+        PlayerProjectile bulletScript = tempProjectile.GetComponent<PlayerProjectile>();
 
-        extraShot            = true;
-        currentExtraCooldown = 0;
+        projectileRB.AddForce(firePoint.up * 20, ForceMode2D.Impulse);
+        bulletScript.SetDamage(currentDamage * 2);
+
+        currentNockCooldown = 0;
     }
 
     private void TripleShot()
@@ -163,7 +110,7 @@ public class ArcherCharacter : RangedController
         Rigidbody2D      projectileRB;
         PlayerProjectile bulletScript;
 
-        foreach (Transform _firePoint in specialFirePoints)
+        foreach (Transform _firePoint in tripleShotPoint)
         {
             playerProjectile  = Instantiate(projectilePrefab, _firePoint.position, firePoint.rotation);
 
@@ -171,46 +118,45 @@ public class ArcherCharacter : RangedController
             bulletScript    = playerProjectile.GetComponent<PlayerProjectile>();
 
             projectileRB.AddForce(firePoint.up * 20, ForceMode2D.Impulse);
-            bulletScript.SetDamage(damageAmount);
+            bulletScript.SetDamage(1);
 
             playerProjectile.GetComponent<TrailRenderer>().startColor = Color.blue;
             playerProjectile.GetComponent<TrailRenderer>().endColor = Color.blue;
         }
 
-        if (extraShot)
-        {
-            extraShot     = false;
-            damageAmount /= 2;
-            moveSpeed    *= 2;
-        }
-
         currentTripleCooldown = 0;
+    }
+
+    private float CalculateDamage()
+    {
+        // Calculate the bow draw percentage (based on currentDraw & maxDraw),
+        //  using that percentage calculate player's damage (using damageAmount),
+        //  and return the damage player's will deal.
+
+        float drawPerc = (currentDrawLength / drawLength) * 100;
+        float damage   = (currentDamage / 100) * drawPerc;
+
+        damage = Mathf.Round(damage);
+        damage = Mathf.Clamp(damage, 0.5f, 999f);
+
+        return damage;
     }
 
     override protected IEnumerator Dodge()
     {
         allowMovement = false;
-        moveSpeed += 15f;
+        playerMoveSpeed += 15f;
+
         yield return new WaitForSeconds(dodgeLength);
-        moveSpeed -= 15f;
+
+        playerMoveSpeed -= 15f;
         allowMovement = true;
-    }
-
-    // --- TEMP STUFF --- //
-    private void OnGUI()
-    {
-        if (!showDebug)
-            return;
-
-        GUI.Label(new Rect(10, 40, 200, 20), "HP: " + currentHealth.ToString("000"));
-        GUI.Label(new Rect(10, 55, 200, 20), "Bow: " + currentBowDraw.ToString("0.0") + " / " + bowDrawLength.ToString("0.0"));
-        GUI.Label(new Rect(10, 70, 500, 20), "Pos: " + transform.position.ToString("0.000"));
     }
 
     public float GetDodge { get { return dodgeCooldown; } }
     public float GetCurrentDodge { get { return currentDodgeCooldown; } }
     public float GetTripleCurrent { get { return currentTripleCooldown; } }
     public float GetTripleCooldown { get { return tripleShotCooldown; } }
-    public float GetExtraCurrent { get { return currentExtraCooldown; } }
-    public float GetExtraCooldown { get { return extraShotCooldown; } }
+    public float GetExtraCurrent { get { return currentNockCooldown; } }
+    public float GetExtraCooldown { get { return arrowNockCooldown; } }
 }

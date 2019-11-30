@@ -59,8 +59,6 @@ public class EnemyController : MonoBehaviour
     private void Start()
     {
         InitiateEnemy();
-
-        levelManager.onDayStateChangeCallback += NightBuff;
     }
 
     private void InitiateEnemy()
@@ -87,6 +85,7 @@ public class EnemyController : MonoBehaviour
         aiPath.maxSpeed            = moveSpeed;
 
         levelManager = LevelManager.instance;
+        levelManager.onDayStateChangeCallback += NightBuff;
     }
 
     virtual protected void Update()

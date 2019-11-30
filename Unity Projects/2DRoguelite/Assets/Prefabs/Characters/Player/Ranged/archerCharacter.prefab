@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: 7368213390279314162}
   - component: {fileID: 7368213390279314163}
   - component: {fileID: 6928827130408796320}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: archerCharacter
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -279,23 +279,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc62daea4c95419408573b3eadf47cd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 12
+  moveSpeed: 10
   playerHealth: 80
-  damageAmount: 4
+  playerDamage: 4
   playerArm: {fileID: 7368213389689043494}
   weaponSprite: {fileID: 7368213391151072767}
   firePoint: {fileID: 7368213389864781441}
   projectilePrefab: {fileID: 4729260153567274746, guid: f5b27cdd946361045817bd4351c6aa6a,
     type: 3}
-  bowDrawLength: 0.4
-  dodgeCooldown: 1.2
-  specialFirePoints:
+  drawLength: 0.9
+  dodgeLength: 0.25
+  dodgeCooldown: 0.4
+  tripleShotPoint:
   - {fileID: 2045450087}
   - {fileID: 672336184}
   - {fileID: 761383608}
-  tripleShotCooldown: 3
-  extraShotCooldown: 4
-  specialCooldown: 0
+  tripleShotCooldown: 5.5
+  arrowNockCooldown: 5.5
 --- !u!1 &7368213391151072765
 GameObject:
   m_ObjectHideFlags: 0
@@ -466,11 +466,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7368213390279314161}
     m_Modifications:
-    - target: {fileID: 1844283188940379383, guid: 70e17d47722b7184194f5ddaedc41985,
-        type: 3}
-      propertyPath: m_Name
-      value: playerUI
-      objectReference: {fileID: 0}
     - target: {fileID: 5191194217874097435, guid: 70e17d47722b7184194f5ddaedc41985,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -576,10 +571,15 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1844283188940379383, guid: 70e17d47722b7184194f5ddaedc41985,
+        type: 3}
+      propertyPath: m_Name
+      value: playerUI
+      objectReference: {fileID: 0}
     - target: {fileID: 1488456709748414585, guid: 70e17d47722b7184194f5ddaedc41985,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 144.79999
+      value: 144.7998
       objectReference: {fileID: 0}
     - target: {fileID: 1488456709748414585, guid: 70e17d47722b7184194f5ddaedc41985,
         type: 3}

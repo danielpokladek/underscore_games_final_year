@@ -6,13 +6,13 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Base Settings")]
     [Tooltip("Speed at which the player will move")]
-    [SerializeField] protected float moveSpeed = 8.0f;
+    [SerializeField] protected float playerMoveSpeed = 8.0f;
 
     [Tooltip("Player's maximum health points.")]
     [SerializeField] protected float playerHealth = 20;
     
     [Tooltip("Damage that the player will deal to the enemies, later this will be determined by the weapon.")]
-    [SerializeField] protected float damageAmount;
+    [SerializeField] protected float playerDamage;
 
     [Tooltip("This is player's 'arm' which will be used to aiming, shooting, etc. It rotates towards the mouse.")]
     [SerializeField] protected GameObject playerArm;
@@ -34,21 +34,28 @@ public class PlayerController : MonoBehaviour
     
     // -------------------------
     protected float currentHealth;
+    protected float currentDamage;
     protected bool  playerAlive = true;
 
     // --- MANAGERS --- //
     protected GameUIManager gameUIManager;
 
+    public delegate void OnGUIChange();
+    public OnGUIChange onGUIChangeCallback;
+
     virtual public void Start()
     {
         InitiatePlayer();
+
+        onGUIChangeCallback.Invoke();
     }
 
     private void InitiatePlayer()
     {
         playerRB      = GetComponent<Rigidbody2D>();
         playerCamera  = Camera.main;
-        
+
+        currentDamage = playerDamage;
         currentHealth = playerHealth;
         playerAlive   = true;
         CanMove       = true;
@@ -149,7 +156,7 @@ public class PlayerController : MonoBehaviour
     private void MoveCharacter(Vector2 input)
     {
         if (canMove)
-            playerRB.MovePosition((Vector2) transform.position + (input * moveSpeed * Time.deltaTime));
+            playerRB.MovePosition((Vector2) transform.position + (input * playerMoveSpeed * Time.deltaTime));
     }
 
     virtual protected void PlayerAim()
@@ -170,6 +177,7 @@ public class PlayerController : MonoBehaviour
         get { return currentHealth; }
     }
 
+    public float GetMaxHealth { get { return playerHealth; } }
     #endregion
 
     #region Attack/Dodge/Skill Declarations
@@ -192,9 +200,6 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.N))
                 HealPlayer(10);
-
-            if (Input.GetKeyDown(KeyCode.Backspace))
-                LevelManager.instance.Restart();
         }
     }
 }

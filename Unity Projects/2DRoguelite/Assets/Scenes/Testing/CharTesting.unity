@@ -707,10 +707,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab42d7d80f9b5404e8f1ad4cfc328697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: 0
   dayLength: 120
   nightLength: 120
   midnightLength: 120
+  currentState: 0
   playerPrefab: {fileID: 0}
 --- !u!1001 &727236340
 PrefabInstance:
@@ -723,16 +723,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: archerCharacter
-      objectReference: {fileID: 0}
-    - target: {fileID: 7368213390279314166, guid: ec5d65a572afc014b972d4823372553d,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7368213390279314166, guid: ec5d65a572afc014b972d4823372553d,
-        type: 3}
-      propertyPath: m_Layer
-      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7368213390279314161, guid: ec5d65a572afc014b972d4823372553d,
         type: 3}
@@ -789,30 +779,45 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6928827130408796320, guid: ec5d65a572afc014b972d4823372553d,
+    - target: {fileID: 7523829694158890532, guid: ec5d65a572afc014b972d4823372553d,
         type: 3}
-      propertyPath: playerArm
-      value: 
-      objectReference: {fileID: 2074274895}
-    - target: {fileID: 6928827130408796320, guid: ec5d65a572afc014b972d4823372553d,
-        type: 3}
-      propertyPath: damageAmount
-      value: 4
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6928827130408796320, guid: ec5d65a572afc014b972d4823372553d,
+    - target: {fileID: 2226415336202871497, guid: ec5d65a572afc014b972d4823372553d,
         type: 3}
-      propertyPath: dodgeLength
-      value: 0.2
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6928827130408796320, guid: ec5d65a572afc014b972d4823372553d,
+    - target: {fileID: 7093018509841527129, guid: ec5d65a572afc014b972d4823372553d,
         type: 3}
-      propertyPath: dodgeCooldown
-      value: 0.4
+      propertyPath: m_AnchoredPosition.y
+      value: 33.200073
       objectReference: {fileID: 0}
-    - target: {fileID: 7056648950674954746, guid: ec5d65a572afc014b972d4823372553d,
+    - target: {fileID: 5147617220198008428, guid: ec5d65a572afc014b972d4823372553d,
         type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 144.7998
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5147617220198008428, guid: ec5d65a572afc014b972d4823372553d,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5147617220198008428, guid: ec5d65a572afc014b972d4823372553d,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5147617220198008428, guid: ec5d65a572afc014b972d4823372553d,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5147617220198008428, guid: ec5d65a572afc014b972d4823372553d,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec5d65a572afc014b972d4823372553d, type: 3}
@@ -1714,12 +1719,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 820044748670082817, guid: 0661664873cc40242b0c91987f7bbeff,
     type: 3}
   m_PrefabInstance: {fileID: 1238382615}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2074274895 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7368213389689043494, guid: ec5d65a572afc014b972d4823372553d,
-    type: 3}
-  m_PrefabInstance: {fileID: 727236340}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2103067970
 GameObject:
