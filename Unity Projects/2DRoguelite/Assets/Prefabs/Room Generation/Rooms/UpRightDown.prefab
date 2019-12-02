@@ -10372,7 +10372,7 @@ GameObject:
   - component: {fileID: -8600369409300138596}
   m_Layer: 0
   m_Name: UpRightDown
-  m_TagString: Untagged
+  m_TagString: Rooms
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10407,7 +10407,6 @@ MonoBehaviour:
   enemySpawners:
   - {fileID: 8018612187030736192}
   - {fileID: 7532683681880241671}
-  boss: {fileID: 0}
 --- !u!61 &-8600369409300138596
 BoxCollider2D:
   m_ObjectHideFlags: 0

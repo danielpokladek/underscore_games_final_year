@@ -54,6 +54,8 @@ public class PlayerController : MonoBehaviour
     virtual public void Start()
     {
         InitiatePlayer();
+
+        StartCoroutine(Init());
     }
 
     private void InitiatePlayer()
@@ -223,6 +225,12 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.N))
                 HealPlayer(10);
         }
+    }
+
+    private IEnumerator Init()
+    {
+        yield return new WaitForFixedUpdate();
+        onGUIChangeCallback.Invoke();
     }
 }
     

@@ -10374,7 +10374,7 @@ GameObject:
   - component: {fileID: 8721044060953091801}
   m_Layer: 0
   m_Name: UpDownLeft
-  m_TagString: Untagged
+  m_TagString: Rooms
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10411,7 +10411,6 @@ MonoBehaviour:
   - {fileID: 2980061020139062438}
   - {fileID: 846653890045219004}
   - {fileID: 2184731719227279416}
-  boss: {fileID: 0}
 --- !u!61 &8721044060953091801
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -16963,6 +16962,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1525540129595454516}
     m_Modifications:
+    - target: {fileID: 7960282616360328762, guid: 84ce4182d4782c14091b554100b1e5ec,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemySpawnPoint (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 7960282616360328761, guid: 84ce4182d4782c14091b554100b1e5ec,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17018,11 +17022,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7960282616360328762, guid: 84ce4182d4782c14091b554100b1e5ec,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemySpawnPoint (2)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84ce4182d4782c14091b554100b1e5ec, type: 3}
 --- !u!1 &2980061020139062438 stripped
@@ -17044,6 +17043,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1525540129595454516}
     m_Modifications:
+    - target: {fileID: 7960282616360328762, guid: 84ce4182d4782c14091b554100b1e5ec,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemySpawnPoint (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 7960282616360328761, guid: 84ce4182d4782c14091b554100b1e5ec,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17099,11 +17103,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7960282616360328762, guid: 84ce4182d4782c14091b554100b1e5ec,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemySpawnPoint (1)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84ce4182d4782c14091b554100b1e5ec, type: 3}
 --- !u!1 &846653890045219004 stripped
@@ -17125,6 +17124,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1525540129595454516}
     m_Modifications:
+    - target: {fileID: 7960282616360328762, guid: 84ce4182d4782c14091b554100b1e5ec,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemySpawnPoint
+      objectReference: {fileID: 0}
     - target: {fileID: 7960282616360328761, guid: 84ce4182d4782c14091b554100b1e5ec,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17180,11 +17184,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7960282616360328762, guid: 84ce4182d4782c14091b554100b1e5ec,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemySpawnPoint
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84ce4182d4782c14091b554100b1e5ec, type: 3}
 --- !u!1 &571943289963310580 stripped
@@ -17206,6 +17205,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1525540129595454516}
     m_Modifications:
+    - target: {fileID: 7960282616360328762, guid: 84ce4182d4782c14091b554100b1e5ec,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemySpawnPoint (3)
+      objectReference: {fileID: 0}
     - target: {fileID: 7960282616360328761, guid: 84ce4182d4782c14091b554100b1e5ec,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17260,11 +17264,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7960282616360328762, guid: 84ce4182d4782c14091b554100b1e5ec,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemySpawnPoint (3)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84ce4182d4782c14091b554100b1e5ec, type: 3}

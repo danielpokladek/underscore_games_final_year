@@ -196,7 +196,6 @@
         </e>
         <e p="ImprovedCameraController.cs" t="Include" />
         <e p="IndicatorText.cs" t="Include" />
-        <e p="ItemPickup.cs" t="Include" />
         <e p="Scripts" t="Include">
           <e p="Boss" t="Include">
             <e p="BossBullet.cs" t="Include" />
@@ -231,24 +230,34 @@
           <e p="GameManager.cs" t="Include" />
           <e p="LevelManager.cs" t="Include" />
           <e p="Player" t="Include">
-            <e p="ArcherCharacter.cs" t="Include" />
-            <e p="Base Scripts" t="Include">
+            <e p="ArcherGameUI.cs" t="Include" />
+            <e p="Characters" t="Include">
+              <e p="ArcherCharacter.cs" t="Include" />
+              <e p="RogueCharacter.cs" t="Include" />
+            </e>
+            <e p="Controllers" t="Include">
+              <e p="CameraController.cs" t="Include" />
+              <e p="ItemController.cs" t="Include" />
+              <e p="ItemPickup.cs" t="Include" />
               <e p="MeleeController.cs" t="Include" />
               <e p="PlayerController.cs" t="Include" />
               <e p="RangedController.cs" t="Include" />
             </e>
-            <e p="Other" t="Include">
-              <e p="ArcherGameUI.cs" t="Include" />
-              <e p="CameraController.cs" t="Include" />
+            <e p="Items" t="Include">
+              <e p="AbilityItem.cs" t="Include" />
+              <e p="AdjustAttack.cs" t="Include" />
+              <e p="AdjustHealth.cs" t="Include" />
+              <e p="AdjustMovement.cs" t="Include" />
+              <e p="BiggerProjectile.cs" t="Include" />
             </e>
             <e p="PlayerProjectile.cs" t="Include" />
-            <e p="RogueCharacter.cs" t="Include" />
             <e p="RogueProjectile.cs" t="Include" />
           </e>
           <e p="Projectile.cs" t="Include" />
           <e p="Room Generation" t="Include">
             <e p="LevelGeneration.cs" t="Include" />
             <e p="Room.cs" t="Include" />
+            <e p="RoomContainer.cs" t="Include" />
             <e p="RoomSelector.cs" t="Include" />
           </e>
           <e p="Room Logic" t="Include">

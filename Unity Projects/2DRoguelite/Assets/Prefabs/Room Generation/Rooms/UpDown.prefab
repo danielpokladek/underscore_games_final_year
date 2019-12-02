@@ -15038,7 +15038,7 @@ GameObject:
   - component: {fileID: 729505891947241657}
   m_Layer: 0
   m_Name: UpDown
-  m_TagString: Untagged
+  m_TagString: Rooms
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15075,7 +15075,6 @@ MonoBehaviour:
   - {fileID: 8494823904669069321}
   - {fileID: 1478253270721449790}
   - {fileID: 1633483334476645384}
-  boss: {fileID: 0}
 --- !u!61 &729505891947241657
 BoxCollider2D:
   m_ObjectHideFlags: 0
