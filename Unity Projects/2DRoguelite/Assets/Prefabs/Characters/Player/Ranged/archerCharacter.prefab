@@ -279,15 +279,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc62daea4c95419408573b3eadf47cd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  playerMoveSpeed: 8
   playerHealth: 80
   playerDamage: 4
   playerArm: {fileID: 7368213389689043494}
+  attackDelay: 0.9
+  projectileSizeMultiplier: 1
   weaponSprite: {fileID: 7368213391151072767}
   firePoint: {fileID: 7368213389864781441}
   projectilePrefab: {fileID: 4729260153567274746, guid: f5b27cdd946361045817bd4351c6aa6a,
     type: 3}
-  drawLength: 0.9
   dodgeLength: 0.25
   dodgeCooldown: 0.4
   tripleShotPoint:
@@ -466,6 +467,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7368213390279314161}
     m_Modifications:
+    - target: {fileID: 1844283188940379383, guid: 70e17d47722b7184194f5ddaedc41985,
+        type: 3}
+      propertyPath: m_Name
+      value: playerUI
+      objectReference: {fileID: 0}
     - target: {fileID: 5191194217874097435, guid: 70e17d47722b7184194f5ddaedc41985,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -571,26 +577,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1844283188940379383, guid: 70e17d47722b7184194f5ddaedc41985,
-        type: 3}
-      propertyPath: m_Name
-      value: playerUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 1488456709748414585, guid: 70e17d47722b7184194f5ddaedc41985,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 144.7998
-      objectReference: {fileID: 0}
-    - target: {fileID: 1488456709748414585, guid: 70e17d47722b7184194f5ddaedc41985,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 31.900146
-      objectReference: {fileID: 0}
-    - target: {fileID: 8816721838508701268, guid: 70e17d47722b7184194f5ddaedc41985,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 25.130127
-      objectReference: {fileID: 0}
     - target: {fileID: 7231988028628796785, guid: 70e17d47722b7184194f5ddaedc41985,
         type: 3}
       propertyPath: m_Layer
@@ -601,10 +587,10 @@ PrefabInstance:
       propertyPath: playerObject
       value: 
       objectReference: {fileID: 6928827130408796320}
-    - target: {fileID: 3458327139102672930, guid: 70e17d47722b7184194f5ddaedc41985,
+    - target: {fileID: 1668928263975284954, guid: 70e17d47722b7184194f5ddaedc41985,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      propertyPath: m_AnchoredPosition.y
+      value: 33.200073
       objectReference: {fileID: 0}
     - target: {fileID: 453240066340902344, guid: 70e17d47722b7184194f5ddaedc41985,
         type: 3}
@@ -630,21 +616,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4165771848307967447, guid: 70e17d47722b7184194f5ddaedc41985,
-        type: 3}
-      propertyPath: m_fontSize
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 4165771848307967447, guid: 70e17d47722b7184194f5ddaedc41985,
-        type: 3}
-      propertyPath: m_fontSizeBase
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 4165771848307967447, guid: 70e17d47722b7184194f5ddaedc41985,
-        type: 3}
-      propertyPath: m_textAlignment
-      value: 514
       objectReference: {fileID: 0}
     - target: {fileID: 1998286606297453319, guid: 70e17d47722b7184194f5ddaedc41985,
         type: 3}

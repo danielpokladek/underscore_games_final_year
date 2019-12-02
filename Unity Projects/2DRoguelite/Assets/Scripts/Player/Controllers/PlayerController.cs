@@ -16,6 +16,11 @@ public class PlayerController : MonoBehaviour
 
     [Tooltip("This is player's 'arm' which will be used to aiming, shooting, etc. It rotates towards the mouse.")]
     [SerializeField] protected GameObject playerArm;
+
+    [SerializeField] protected float attackDelay;
+
+    // --- STUFF FOR ABILITIES ---
+    [HideInInspector] public float projectileSizeMultiplier = 1;
     
     // ---------------------------
     protected Rigidbody2D playerRB;
@@ -43,11 +48,12 @@ public class PlayerController : MonoBehaviour
     public delegate void OnGUIChange();
     public OnGUIChange onGUIChangeCallback;
 
+    public delegate void OnPrimAttack();
+    public OnPrimAttack onPrimAttackCallback;
+
     virtual public void Start()
     {
         InitiatePlayer();
-
-        onGUIChangeCallback.Invoke();
     }
 
     private void InitiatePlayer()
@@ -116,6 +122,7 @@ public class PlayerController : MonoBehaviour
         }
 
         currentHealth += healAmount;
+        onGUIChangeCallback.Invoke();
     }
 
     /// <summary>
@@ -124,7 +131,7 @@ public class PlayerController : MonoBehaviour
     /// <param name="damageAmount">Amount of health points that will be deducted from the player.</param>
     public void TakeDamage(float damageAmount)
     {
-        currentHealth = currentHealth - damageAmount;
+        currentHealth -= damageAmount;
 
         // Check player health
         if (currentHealth <= 0)
@@ -133,6 +140,8 @@ public class PlayerController : MonoBehaviour
             playerAlive = false;
             this.gameObject.SetActive(false);
         }
+
+        onGUIChangeCallback.Invoke();
     }
     #endregion
 
@@ -178,11 +187,24 @@ public class PlayerController : MonoBehaviour
     }
 
     public float GetMaxHealth { get { return playerHealth; } }
+    public void SetMaxHealth(float value)
+    { 
+        playerHealth += value;
+        
+        onGUIChangeCallback.Invoke();
+        
+        if (currentHealth > playerHealth)
+            currentHealth = playerHealth;
+    }
+
+    public float DamageAmount { get { return currentDamage; }   set { currentDamage = value; } }
+    public float AttackDelay  { get { return attackDelay; }     set { attackDelay = value; } }
+    public float MovementSpd  { get { return playerMoveSpeed; } set { playerMoveSpeed = value; } }
     #endregion
 
     #region Attack/Dodge/Skill Declarations
     virtual protected void PrimAttack()   { /* Only declaration for the function, needs to be defined per character. */
-                                            throw new System.NotImplementedException(); }
+                                            onPrimAttackCallback.Invoke(); }
 
     virtual protected void SecAttack()    { /* Only declaration for the function, needs to be defined per character. */
                                             throw new System.NotImplementedException(); }

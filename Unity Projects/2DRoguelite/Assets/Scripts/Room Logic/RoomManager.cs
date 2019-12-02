@@ -5,7 +5,6 @@ using UnityEngine;
 public class RoomManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] enemySpawners;
-    [SerializeField] private GameObject   boss;
 
     // -------------------------------
     private LevelManager levelManager;

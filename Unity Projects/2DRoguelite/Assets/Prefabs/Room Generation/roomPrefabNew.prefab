@@ -74,6 +74,8 @@ MonoBehaviour:
     - {fileID: 3729084705764697659, guid: 65b764e70d9fff84aa53738244c0c4ae, type: 3}
     roomUpDownRightLeft:
     - {fileID: 4807685427921151012, guid: e3a880460b32c924186917417a864481, type: 3}
+  entranceRooms: {fileID: 11400000, guid: 0064778df7c94da4d98f841b5dd76db9, type: 2}
+  roomContainer: {fileID: 11400000, guid: a402513e7711e364a9689117370d586e, type: 2}
   bossIcon: {fileID: 2605526240753731375, guid: ec1084493e3b25446b9dded2acdec101,
     type: 3}
   sceneToLoad: 1

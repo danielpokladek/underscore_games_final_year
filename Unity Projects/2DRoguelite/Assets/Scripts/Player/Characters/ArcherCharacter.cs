@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ArcherCharacter : RangedController
 {
-    [SerializeField] private float drawLength;
     [SerializeField] private float dodgeLength;
     [SerializeField] private float dodgeCooldown;
     [SerializeField] private Transform[] tripleShotPoint;
@@ -12,7 +11,7 @@ public class ArcherCharacter : RangedController
     [SerializeField] private float arrowNockCooldown;
 
     // ------------------
-    private float currentDrawLength;
+    private float currentAttackDelay;
     private float currentTripleCooldown;
     private float currentNockCooldown;
     private float currentDodgeCooldown;
@@ -26,10 +25,10 @@ public class ArcherCharacter : RangedController
         #region Primary Attack
         if (Input.GetButton("LMB"))
         {
-            currentDrawLength += Time.deltaTime;
+            currentAttackDelay += Time.deltaTime;
 
-            if (currentDrawLength >= drawLength)
-                currentDrawLength = drawLength;
+            if (currentAttackDelay >= attackDelay)
+                currentAttackDelay = attackDelay;
         }
 
         if (Input.GetButtonUp("LMB"))
@@ -39,10 +38,10 @@ public class ArcherCharacter : RangedController
 
         #region Specials
         if (Input.GetKeyDown(KeyCode.Q) && currentNockCooldown >= arrowNockCooldown)
-            ExtraDamageShot();
+            ArrowNockAbility();
 
         if (Input.GetKeyDown(KeyCode.E) && currentTripleCooldown >= tripleShotCooldown)
-            TripleShot();
+            TripleShotAbility();
 
         #endregion
 
@@ -82,13 +81,18 @@ public class ArcherCharacter : RangedController
         Rigidbody2D projectileRB      = tempProjectile.GetComponent<Rigidbody2D>();
         PlayerProjectile bulletScript = tempProjectile.GetComponent<PlayerProjectile>();
 
+        tempProjectile.transform.localScale = new Vector3(
+            tempProjectile.transform.localScale.x * projectileSizeMultiplier,
+            tempProjectile.transform.localScale.y * projectileSizeMultiplier,
+            tempProjectile.transform.localScale.z * projectileSizeMultiplier);
+
         projectileRB.AddForce(firePoint.up * 20, ForceMode2D.Impulse);
         bulletScript.SetDamage(dmg);
 
-        currentDrawLength = 0;
+        currentAttackDelay = 0;
     }
 
-    private void ExtraDamageShot()
+    private void ArrowNockAbility()
     {
         shootDirection = mousePosition - playerRB.position;
 
@@ -96,13 +100,18 @@ public class ArcherCharacter : RangedController
         Rigidbody2D projectileRB = tempProjectile.GetComponent<Rigidbody2D>();
         PlayerProjectile bulletScript = tempProjectile.GetComponent<PlayerProjectile>();
 
+        tempProjectile.transform.localScale = new Vector3(
+            tempProjectile.transform.localScale.x * projectileSizeMultiplier,
+            tempProjectile.transform.localScale.y * projectileSizeMultiplier,
+            tempProjectile.transform.localScale.z * projectileSizeMultiplier);
+
         projectileRB.AddForce(firePoint.up * 20, ForceMode2D.Impulse);
         bulletScript.SetDamage(currentDamage * 2);
 
         currentNockCooldown = 0;
     }
 
-    private void TripleShot()
+    private void TripleShotAbility()
     {
         shootDirection = mousePosition - playerRB.position;
 
@@ -116,6 +125,11 @@ public class ArcherCharacter : RangedController
 
             projectileRB    = playerProjectile.GetComponent<Rigidbody2D>();
             bulletScript    = playerProjectile.GetComponent<PlayerProjectile>();
+
+            playerProjectile.transform.localScale = new Vector3(
+                playerProjectile.transform.localScale.x * projectileSizeMultiplier,
+                playerProjectile.transform.localScale.y * projectileSizeMultiplier,
+                playerProjectile.transform.localScale.z * projectileSizeMultiplier);
 
             projectileRB.AddForce(firePoint.up * 20, ForceMode2D.Impulse);
             bulletScript.SetDamage(1);
@@ -133,7 +147,7 @@ public class ArcherCharacter : RangedController
         //  using that percentage calculate player's damage (using damageAmount),
         //  and return the damage player's will deal.
 
-        float drawPerc = (currentDrawLength / drawLength) * 100;
+        float drawPerc = (currentAttackDelay / attackDelay) * 100;
         float damage   = (currentDamage / 100) * drawPerc;
 
         damage = Mathf.Round(damage);

@@ -5,7 +5,6 @@ using UnityEngine;
 public class MeleeController : PlayerController
 {
     [Header("Melee Settings")]
-    [SerializeField] protected float attackDelay;
     [SerializeField] protected float attackRange;
     [SerializeField] protected Transform attackPoint;
     [SerializeField] protected LayerMask enemiesLayer;

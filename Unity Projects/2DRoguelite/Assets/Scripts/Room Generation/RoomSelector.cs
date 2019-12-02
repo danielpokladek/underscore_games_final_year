@@ -27,6 +27,9 @@ public class RoomSelector : MonoBehaviour
         "as this will ensure the changes are saved for all rooms which use this prefab.")]
     public RoomsList roomList;
 
+    public RoomContainer entranceRooms;
+    public RoomContainer roomContainer;
+
     [Header("Temporary")]
     public GameObject bossIcon;
     public int sceneToLoad;
@@ -68,112 +71,226 @@ public class RoomSelector : MonoBehaviour
 
     private void PickRoom()
     {
-        switch (doorDest)
+        if (roomType == 1)
         {
-            case 1:
-                // UP ONLY
-                tempRoom = Instantiate(
-                    roomList.roomUp[Random.Range(0, roomList.roomUp.Length)],
-                    transform.position, Quaternion.identity);
-                break;
-            
-            case 2:
-                // DOWN ONLY
-                tempRoom = Instantiate(
-                    roomList.roomDown[Random.Range(0, roomList.roomDown.Length)],
-                    transform.position, Quaternion.identity);
-                break;
-            
-            case 4:
-                // LEFT ONLY
-                tempRoom = Instantiate(
-                    roomList.roomLeft[Random.Range(0, roomList.roomLeft.Length)],
-                    transform.position, Quaternion.identity);
-                break;
-            
-            case 8:
-                // RIGHT ONLY
-                tempRoom = Instantiate(
-                    roomList.roomRight[Random.Range(0, roomList.roomRight.Length)],
-                    transform.position, Quaternion.identity);
-                break;
-            
-            case 3:
-                // UP - DOWN
-                tempRoom = Instantiate(
-                    roomList.roomUpDown[Random.Range(0, roomList.roomUpDown.Length)],
-                    transform.position, Quaternion.identity);
-                break;
-            
-            case 12:
-                // RIGHT - LEFT
-                tempRoom = Instantiate(
-                    roomList.roomRightLeft[Random.Range(0, roomList.roomRightLeft.Length)],
-                    transform.position, Quaternion.identity);
-                break;
-            
-            case 9:
-                // UP - RIGHT
-                tempRoom = Instantiate(
-                    roomList.roomUpRight[Random.Range(0, roomList.roomUpRight.Length)],
-                    transform.position, Quaternion.identity);
-                break;
-            
-            case 5:
-                // UP - LEFT
-                tempRoom = Instantiate(
-                    roomList.roomUpLeft[Random.Range(0, roomList.roomUpLeft.Length)],
-                    transform.position, Quaternion.identity);
-                break;
-            
-            case 10:
-                // RIGHT - DOWN
-                tempRoom = Instantiate(
-                    roomList.roomRightDown[Random.Range(0, roomList.roomRightDown.Length)],
-                    transform.position, Quaternion.identity);
-                break;
-            
-            case 6:
-                // DOWN - LEFT
-                tempRoom = Instantiate(
-                    roomList.roomDownLeft[Random.Range(0, roomList.roomDownLeft.Length)],
-                    transform.position, Quaternion.identity);
-                break;
-            
-            case 7:
-                // UP - DOWN - LEFT
-                tempRoom = Instantiate(
-                    roomList.roomUpDownLeft[Random.Range(0, roomList.roomUpDownLeft.Length)],
-                    transform.position, Quaternion.identity);
-                break;
-            
-            case 13:
-                // UP - RIGHT - LEFT
-                tempRoom = Instantiate(
-                    roomList.roomUpRightLeft[Random.Range(0, roomList.roomUpRightLeft.Length)],
-                    transform.position, Quaternion.identity);
-                break;
-            
-            case 11:
-                // UP - RIGHT - DOWN
-                tempRoom = Instantiate(
-                    roomList.roomUpRightDown[Random.Range(0, roomList.roomUpRightDown.Length)],
-                    transform.position, Quaternion.identity);
-                break;
-            
-            case 14:
-                // RIGHT - DOWN - LEFT
-                tempRoom = Instantiate(
-                    roomList.roomRightDownLeft[Random.Range(0, roomList.roomRightDownLeft.Length)],
-                    transform.position, Quaternion.identity);
-                break;
-            
-            case 15:
-                // ALL FOUR
-                tempRoom = Instantiate(
-                    roomList.roomUpDownRightLeft[Random.Range(0, roomList.roomUpDownRightLeft.Length)],
-                    transform.position, Quaternion.identity);
-                break;
+            switch (doorDest)
+            {
+                case 1:
+                    // UP ONLY
+                    tempRoom = Instantiate(
+                        entranceRooms.roomUp[Random.Range(0, entranceRooms.roomUp.Length)],
+                        transform.position, Quaternion.identity);
+                    break;
+
+                case 2:
+                    // DOWN ONLY
+                    tempRoom = Instantiate(
+                        entranceRooms.roomDown[Random.Range(0, entranceRooms.roomDown.Length)],
+                        transform.position, Quaternion.identity);
+                    break;
+
+                case 4:
+                    // LEFT ONLY
+                    tempRoom = Instantiate(
+                        entranceRooms.roomLeft[Random.Range(0, entranceRooms.roomLeft.Length)],
+                        transform.position, Quaternion.identity);
+                    break;
+
+                case 8:
+                    // RIGHT ONLY
+                    tempRoom = Instantiate(
+                        entranceRooms.roomRight[Random.Range(0, entranceRooms.roomRight.Length)],
+                        transform.position, Quaternion.identity);
+                    break;
+
+                case 3:
+                    // UP - DOWN
+                    tempRoom = Instantiate(
+                        entranceRooms.roomUpDown[Random.Range(0, entranceRooms.roomUpDown.Length)],
+                        transform.position, Quaternion.identity);
+                    break;
+
+                case 12:
+                    // RIGHT - LEFT
+                    tempRoom = Instantiate(
+                        entranceRooms.roomRightLeft[Random.Range(0, entranceRooms.roomRightLeft.Length)],
+                        transform.position, Quaternion.identity);
+                    break;
+
+                case 9:
+                    // UP - RIGHT
+                    tempRoom = Instantiate(
+                        entranceRooms.roomUpRight[Random.Range(0, entranceRooms.roomUpRight.Length)],
+                        transform.position, Quaternion.identity);
+                    break;
+
+                case 5:
+                    // UP - LEFT
+                    tempRoom = Instantiate(
+                        entranceRooms.roomUpLeft[Random.Range(0, entranceRooms.roomUpLeft.Length)],
+                        transform.position, Quaternion.identity);
+                    break;
+
+                case 10:
+                    // RIGHT - DOWN
+                    tempRoom = Instantiate(
+                        entranceRooms.roomRightDown[Random.Range(0, entranceRooms.roomRightDown.Length)],
+                        transform.position, Quaternion.identity);
+                    break;
+
+                case 6:
+                    // DOWN - LEFT
+                    tempRoom = Instantiate(
+                        entranceRooms.roomDownLeft[Random.Range(0, entranceRooms.roomDownLeft.Length)],
+                        transform.position, Quaternion.identity);
+                    break;
+
+                case 7:
+                    // UP - DOWN - LEFT
+                    tempRoom = Instantiate(
+                        entranceRooms.roomUpDownLeft[Random.Range(0, entranceRooms.roomUpDownLeft.Length)],
+                        transform.position, Quaternion.identity);
+                    break;
+
+                case 13:
+                    // UP - RIGHT - LEFT
+                    tempRoom = Instantiate(
+                        entranceRooms.roomUpRightLeft[Random.Range(0, entranceRooms.roomUpRightLeft.Length)],
+                        transform.position, Quaternion.identity);
+                    break;
+
+                case 11:
+                    // UP - RIGHT - DOWN
+                    tempRoom = Instantiate(
+                        entranceRooms.roomUpRightDown[Random.Range(0, entranceRooms.roomUpRightDown.Length)],
+                        transform.position, Quaternion.identity);
+                    break;
+
+                case 14:
+                    // RIGHT - DOWN - LEFT
+                    tempRoom = Instantiate(
+                        entranceRooms.roomRightDownLeft[Random.Range(0, entranceRooms.roomRightDownLeft.Length)],
+                        transform.position, Quaternion.identity);
+                    break;
+
+                case 15:
+                    // ALL FOUR
+                    tempRoom = Instantiate(
+                        entranceRooms.roomUpDownRightLeft[Random.Range(0, entranceRooms.roomUpDownRightLeft.Length)],
+                        transform.position, Quaternion.identity);
+                    break;
+            }
+        }
+
+        if (roomType != 1)
+        {
+            switch (doorDest)
+            {
+                case 1:
+                    // UP ONLY
+                    tempRoom = Instantiate(
+                        roomContainer.roomUp[Random.Range(0, roomContainer.roomUp.Length)],
+                        transform.position, Quaternion.identity);
+                    break;
+
+                case 2:
+                    // DOWN ONLY
+                    tempRoom = Instantiate(
+                        roomContainer.roomDown[Random.Range(0, roomContainer.roomDown.Length)],
+                        transform.position, Quaternion.identity);
+                    break;
+
+                case 4:
+                    // LEFT ONLY
+                    tempRoom = Instantiate(
+                        roomContainer.roomLeft[Random.Range(0, roomContainer.roomLeft.Length)],
+                        transform.position, Quaternion.identity);
+                    break;
+
+                case 8:
+                    // RIGHT ONLY
+                    tempRoom = Instantiate(
+                        roomContainer.roomRight[Random.Range(0, roomContainer.roomRight.Length)],
+                        transform.position, Quaternion.identity);
+                    break;
+
+                case 3:
+                    // UP - DOWN
+                    tempRoom = Instantiate(
+                        roomContainer.roomUpDown[Random.Range(0, roomContainer.roomUpDown.Length)],
+                        transform.position, Quaternion.identity);
+                    break;
+
+                case 12:
+                    // RIGHT - LEFT
+                    tempRoom = Instantiate(
+                        roomContainer.roomRightLeft[Random.Range(0, roomContainer.roomRightLeft.Length)],
+                        transform.position, Quaternion.identity);
+                    break;
+
+                case 9:
+                    // UP - RIGHT
+                    tempRoom = Instantiate(
+                        roomContainer.roomUpRight[Random.Range(0, roomContainer.roomUpRight.Length)],
+                        transform.position, Quaternion.identity);
+                    break;
+
+                case 5:
+                    // UP - LEFT
+                    tempRoom = Instantiate(
+                        roomContainer.roomUpLeft[Random.Range(0, roomContainer.roomUpLeft.Length)],
+                        transform.position, Quaternion.identity);
+                    break;
+
+                case 10:
+                    // RIGHT - DOWN
+                    tempRoom = Instantiate(
+                        roomContainer.roomRightDown[Random.Range(0, roomContainer.roomRightDown.Length)],
+                        transform.position, Quaternion.identity);
+                    break;
+
+                case 6:
+                    // DOWN - LEFT
+                    tempRoom = Instantiate(
+                        roomContainer.roomDownLeft[Random.Range(0, roomContainer.roomDownLeft.Length)],
+                        transform.position, Quaternion.identity);
+                    break;
+
+                case 7:
+                    // UP - DOWN - LEFT
+                    tempRoom = Instantiate(
+                        roomContainer.roomUpDownLeft[Random.Range(0, roomContainer.roomUpDownLeft.Length)],
+                        transform.position, Quaternion.identity);
+                    break;
+
+                case 13:
+                    // UP - RIGHT - LEFT
+                    tempRoom = Instantiate(
+                        roomContainer.roomUpRightLeft[Random.Range(0, roomContainer.roomUpRightLeft.Length)],
+                        transform.position, Quaternion.identity);
+                    break;
+
+                case 11:
+                    // UP - RIGHT - DOWN
+                    tempRoom = Instantiate(
+                        roomContainer.roomUpRightDown[Random.Range(0, roomContainer.roomUpRightDown.Length)],
+                        transform.position, Quaternion.identity);
+                    break;
+
+                case 14:
+                    // RIGHT - DOWN - LEFT
+                    tempRoom = Instantiate(
+                        roomContainer.roomRightDownLeft[Random.Range(0, roomContainer.roomRightDownLeft.Length)],
+                        transform.position, Quaternion.identity);
+                    break;
+
+                case 15:
+                    // ALL FOUR
+                    tempRoom = Instantiate(
+                        roomContainer.roomUpDownRightLeft[Random.Range(0, roomContainer.roomUpDownRightLeft.Length)],
+                        transform.position, Quaternion.identity);
+                    break;
+            }
         }
         
         if (tempRoom != null)
