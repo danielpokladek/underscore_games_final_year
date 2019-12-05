@@ -10,7 +10,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private float nightLength;
     [SerializeField] private float midnightLength;
 
-    [SerializeField] private Light2D sunLight;
+    [SerializeField] private Light2D  sunLight;
+    [SerializeField] private Gradient sunColor;
     [SerializeField] private float minSunIntensity = 0.3f;
     [SerializeField] private float maxSunIntensity = 1.0f;
 
@@ -82,6 +83,8 @@ public class LevelManager : MonoBehaviour
                 dayTimer += Time.deltaTime;
 
                 sunLight.intensity = Mathf.Lerp(maxSunIntensity, minSunIntensity, (stateTimer / dayLength));
+                sunLight.color = sunColor.Evaluate(stateTimer / dayLength);
+
                 break;
 
             // Handle Night.
@@ -91,6 +94,8 @@ public class LevelManager : MonoBehaviour
 
                 stateTimer += Time.deltaTime;
                 sunLight.intensity = minSunIntensity;
+                sunLight.color = sunColor.Evaluate(1);
+
                 break;
 
             // Handle Midnight.
@@ -100,6 +105,8 @@ public class LevelManager : MonoBehaviour
 
                 stateTimer += Time.deltaTime;
                 sunLight.intensity = minSunIntensity;
+                sunLight.color = sunColor.Evaluate(1);
+
                 break;
         }
     }
