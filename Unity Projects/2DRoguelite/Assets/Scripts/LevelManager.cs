@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Experimental.Rendering.LWRP;
 
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] private float dayLength;
     [SerializeField] private float nightLength;
     [SerializeField] private float midnightLength;
+
+    [SerializeField] private Light2D sunLight;
+    [SerializeField] private float minSunIntensity = 0.3f;
+    [SerializeField] private float maxSunIntensity = 1.0f;
 
     // -------------------------------------------------
     public enum DayState { Day, Night, Midnight, Boss };
@@ -21,6 +26,7 @@ public class LevelManager : MonoBehaviour
 
     private string currentStateString;
     private float stateTimer;
+    private float dayTimer;
 
     #region Singleton
     public static LevelManager instance = null;
@@ -71,27 +77,29 @@ public class LevelManager : MonoBehaviour
             case DayState.Day:
                 if (stateTimer >= dayLength)
                     SetState(DayState.Night, "Night");
-                else
-                    stateTimer += Time.deltaTime;
 
+                stateTimer += Time.deltaTime;
+                dayTimer += Time.deltaTime;
+
+                sunLight.intensity = Mathf.Lerp(maxSunIntensity, minSunIntensity, (stateTimer / dayLength));
                 break;
 
             // Handle Night.
             case DayState.Night:
                 if (stateTimer >= nightLength)
                     SetState(DayState.Midnight, "Midnight");
-                else
-                    stateTimer += Time.deltaTime;
 
+                stateTimer += Time.deltaTime;
+                sunLight.intensity = minSunIntensity;
                 break;
 
             // Handle Midnight.
             case DayState.Midnight:
                 if (stateTimer >= midnightLength)
                     SetState(DayState.Day, "Day");
-                else
-                    stateTimer += Time.deltaTime;
 
+                stateTimer += Time.deltaTime;
+                sunLight.intensity = minSunIntensity;
                 break;
         }
     }
