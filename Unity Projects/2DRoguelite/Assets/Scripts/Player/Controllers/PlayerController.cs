@@ -27,6 +27,9 @@ public class PlayerController : MonoBehaviour
     protected Vector2     playerInput;
     protected Camera      playerCamera;
 
+    private Animator playerAnim;
+    private bool facingRight;
+
     // -----------------------------
     protected Vector2 mousePosition = new Vector2(0, 0);
     protected Vector2 mouseVector   = new Vector2(0, 0);
@@ -61,6 +64,7 @@ public class PlayerController : MonoBehaviour
     private void InitiatePlayer()
     {
         playerRB      = GetComponent<Rigidbody2D>();
+        playerAnim    = GetComponent<Animator>();
         playerCamera  = Camera.main;
 
         currentDamage = playerDamage;
@@ -90,7 +94,40 @@ public class PlayerController : MonoBehaviour
             PlayerMovement();
             MoveCharacter(playerInput);
             PlayerAim();
+
+            playerAnim.SetFloat("HMovement", mouseVector.x);
+            playerAnim.SetFloat("VMovement", mouseVector.y);
+            playerAnim.SetFloat("moveMagnitude", playerInput.magnitude);
         }
+    }
+
+    private void PlayerMovement()
+    {
+        if (allowMovement)
+        {
+            playerInput.x = Input.GetAxisRaw("Horizontal");
+            playerInput.y = Input.GetAxisRaw("Vertical");
+        }
+    }
+
+    private void GetMouseInput()
+    {
+        if (playerCamera)
+            mousePosition = playerCamera.ScreenToWorldPoint(Input.mousePosition);
+
+        mouseVector = (mousePosition - (Vector2) transform.position).normalized;
+    }
+
+    private void MoveCharacter(Vector2 input)
+    {
+        if (canMove)
+            playerRB.MovePosition((Vector2) transform.position + (input * playerMoveSpeed * Time.deltaTime));
+    }
+
+    virtual protected void PlayerAim()
+    {
+        armAngle                     = -1 * Mathf.Atan2(mouseVector.y, mouseVector.x) * Mathf.Rad2Deg;
+        playerArm.transform.rotation = Quaternion.AngleAxis(armAngle, Vector3.back);
     }
 
     #region External Calls
@@ -146,35 +183,6 @@ public class PlayerController : MonoBehaviour
         onGUIChangeCallback.Invoke();
     }
     #endregion
-
-    private void PlayerMovement()
-    {
-        if (allowMovement)
-        {
-            playerInput.x = Input.GetAxisRaw("Horizontal");
-            playerInput.y = Input.GetAxisRaw("Vertical");
-        }
-    }
-
-    private void GetMouseInput()
-    {
-        if (playerCamera)
-            mousePosition = playerCamera.ScreenToWorldPoint(Input.mousePosition);
-
-        mouseVector = (mousePosition - (Vector2) transform.position).normalized;
-    }
-
-    private void MoveCharacter(Vector2 input)
-    {
-        if (canMove)
-            playerRB.MovePosition((Vector2) transform.position + (input * playerMoveSpeed * Time.deltaTime));
-    }
-
-    virtual protected void PlayerAim()
-    {
-        armAngle                     = -1 * Mathf.Atan2(mouseVector.y, mouseVector.x) * Mathf.Rad2Deg;
-        playerArm.transform.rotation = Quaternion.AngleAxis(armAngle, Vector3.back);
-    }
 
     #region Getters/Setters
     public bool CanMove

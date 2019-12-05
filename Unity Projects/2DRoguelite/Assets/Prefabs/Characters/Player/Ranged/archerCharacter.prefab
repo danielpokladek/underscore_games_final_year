@@ -277,6 +277,7 @@ GameObject:
   - component: {fileID: 7368213390279314162}
   - component: {fileID: 7368213390279314163}
   - component: {fileID: 6928827130408796320}
+  - component: {fileID: 727236342}
   m_Layer: 12
   m_Name: archerCharacter
   m_TagString: Player
@@ -379,6 +380,25 @@ MonoBehaviour:
   - {fileID: 761383608}
   tripleShotCooldown: 5.5
   arrowNockCooldown: 5.5
+--- !u!95 &727236342
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7368213390279314166}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 16695865347650b48a07ddb9dae7b147, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7368213391151072765
 GameObject:
   m_ObjectHideFlags: 0
@@ -531,7 +551,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 152b4ef7b492c67459b97743beb97645, type: 3}
+  m_Sprite: {fileID: 297365192272268415, guid: dd0023236f7f09d4eb269b12908981c5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -549,6 +569,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7368213390279314161}
     m_Modifications:
+    - target: {fileID: 1844283188940379383, guid: 70e17d47722b7184194f5ddaedc41985,
+        type: 3}
+      propertyPath: m_Name
+      value: playerUI
+      objectReference: {fileID: 0}
     - target: {fileID: 5191194217874097435, guid: 70e17d47722b7184194f5ddaedc41985,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -653,11 +678,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1844283188940379383, guid: 70e17d47722b7184194f5ddaedc41985,
-        type: 3}
-      propertyPath: m_Name
-      value: playerUI
       objectReference: {fileID: 0}
     - target: {fileID: 7231988028628796785, guid: 70e17d47722b7184194f5ddaedc41985,
         type: 3}
