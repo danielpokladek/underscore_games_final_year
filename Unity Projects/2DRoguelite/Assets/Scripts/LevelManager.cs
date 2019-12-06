@@ -10,7 +10,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private float midnightLength;
 
     // -------------------------------------------------
-    public enum DayState { Day, Night, Midnight, Boss };
+    public enum DayState { PlayerSel, Day, Night, Midnight, Boss };
     public DayState currentState;
 
     // -------------------------------------
@@ -19,7 +19,7 @@ public class LevelManager : MonoBehaviour
 
     public GameObject playerPrefab;
 
-    private string currentStateString;
+    private string currentStateString = "N/A";
     private float stateTimer;
 
     #region Singleton
@@ -36,11 +36,16 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        currentState       = DayState.Day;
-        currentStateString = "Day";
+        //currentState       = DayState.Day;
+        //currentStateString = "Day";
     }
 
     public void LoadBossBattle()
+    {
+        SceneManager.LoadScene(2);
+    }
+
+    public void StartGame()
     {
         SceneManager.LoadScene(1);
     }
@@ -63,6 +68,9 @@ public class LevelManager : MonoBehaviour
     {
         switch (currentState)
         {
+            case DayState.PlayerSel:
+                break;
+            
             case DayState.Boss:
                 // No day/night transition in the boss battle stage.
                 break;
