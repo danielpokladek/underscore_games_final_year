@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
     protected bool    allowMovement;
 
     // ---
-    private bool      canMove;
+    protected bool      canMove;
     private int       playerDirection;
     
     // -------------------------
@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
     public delegate void OnPrimAttack();
     public OnPrimAttack onPrimAttackCallback;
 
-    virtual public void Start()
+    virtual protected void Start()
     {
         InitiatePlayer();
 
@@ -91,9 +91,12 @@ public class PlayerController : MonoBehaviour
     {
         if (playerAlive)
         {
-            PlayerMovement();
-            MoveCharacter(playerInput);
-            PlayerAim();
+            if (canMove)
+            {
+                PlayerMovement();
+                MoveCharacter(playerInput);
+                PlayerAim();
+            }
 
             playerAnim.SetFloat("HMovement", mouseVector.x);
             playerAnim.SetFloat("VMovement", mouseVector.y);
@@ -238,7 +241,9 @@ public class PlayerController : MonoBehaviour
     private IEnumerator Init()
     {
         yield return new WaitForFixedUpdate();
-        onGUIChangeCallback.Invoke();
+        
+        if (onGUIChangeCallback != null)
+            onGUIChangeCallback.Invoke();
     }
 }
     

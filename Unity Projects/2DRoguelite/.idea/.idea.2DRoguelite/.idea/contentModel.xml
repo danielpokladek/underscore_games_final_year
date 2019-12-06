@@ -233,8 +233,10 @@
             <e p="ArcherGameUI.cs" t="Include" />
             <e p="Characters" t="Include">
               <e p="ArcherCharacter.cs" t="Include" />
+              <e p="CharBio.cs" t="Include" />
               <e p="RogueCharacter.cs" t="Include" />
             </e>
+            <e p="CharSelController.cs" t="Include" />
             <e p="Controllers" t="Include">
               <e p="CameraController.cs" t="Include" />
               <e p="ItemController.cs" t="Include" />
