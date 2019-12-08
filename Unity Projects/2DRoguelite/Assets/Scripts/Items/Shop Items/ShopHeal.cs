@@ -14,6 +14,7 @@ public class ShopHeal : ShopItem
         if (playerController.isHealed())
             return;
 
+        PurchaseItem(itemPrice);
         playerController.HealPlayer(healAmount);
         Destroy(gameObject);
     }

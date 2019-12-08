@@ -30,4 +30,10 @@ public class ShopItem : MonoBehaviour
         Debug.Log("Come back when you have some more gems");
         return false;
     }
+
+    protected void PurchaseItem(int _itemPrice)
+    {
+        GameManager.current.PlayerCurrency -= _itemPrice;
+        showItemName = false;
+    }
 }

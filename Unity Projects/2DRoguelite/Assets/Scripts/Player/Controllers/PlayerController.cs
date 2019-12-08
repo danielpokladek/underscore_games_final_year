@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour
     protected Vector2     playerInput;
     protected Camera      playerCamera;
 
+    protected PlayerStats playerStats;
+
     private Animator playerAnim;
     private bool facingRight;
 
@@ -57,6 +59,9 @@ public class PlayerController : MonoBehaviour
     public delegate void OnInteract();
     public OnInteract onInteractCallback;
 
+    public delegate void OnItemInteract();
+    public OnItemInteract onItemInteractCallback;
+
     virtual protected void Start()
     {
         InitiatePlayer();
@@ -68,6 +73,7 @@ public class PlayerController : MonoBehaviour
     {
         playerRB      = GetComponent<Rigidbody2D>();
         playerAnim    = GetComponent<Animator>();
+        playerStats   = GetComponent<PlayerStats>();
         playerCamera  = Camera.main;
 
         currentDamage = playerDamage;
@@ -107,7 +113,7 @@ public class PlayerController : MonoBehaviour
                 PlayerAim();
             }
 
-            playerAnim.SetFloat("HMovement", mouseVector.x);
+
             playerAnim.SetFloat("VMovement", mouseVector.y);
             playerAnim.SetFloat("moveMagnitude", playerInput.magnitude);
         }
@@ -197,7 +203,7 @@ public class PlayerController : MonoBehaviour
 
     public void AddCurrency(int currencyAmount)
     {
-        GameManager.current.PlayerCurrency = currencyAmount;
+        GameManager.current.PlayerCurrency += currencyAmount;
         Debug.Log(GameManager.current.PlayerCurrency);
     }
     #endregion

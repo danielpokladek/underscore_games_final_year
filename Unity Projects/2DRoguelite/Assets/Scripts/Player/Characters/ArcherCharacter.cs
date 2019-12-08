@@ -151,7 +151,7 @@ public class ArcherCharacter : RangedController
         //  and return the damage player's will deal.
 
         float drawPerc = (currentAttackDelay / attackDelay) * 100;
-        float damage   = (currentDamage / 100) * drawPerc;
+        float damage   = (playerStats.characterAttackDamage.GetValue() / 100) * drawPerc;
 
         damage = Mathf.Round(damage);
         damage = Mathf.Clamp(damage, 0.5f, 999f);

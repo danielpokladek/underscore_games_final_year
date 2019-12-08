@@ -279,6 +279,7 @@ GameObject:
   - component: {fileID: 6928827130408796320}
   - component: {fileID: 3129229698477711625}
   - component: {fileID: 727236342}
+  - component: {fileID: 856903686689879538}
   m_Layer: 12
   m_Name: archerCharacter
   m_TagString: Player
@@ -412,6 +413,26 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &856903686689879538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7368213390279314166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78a783f573b0fab49af97056b992b444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterHealth:
+    baseValue: 80
+  characterSpeed:
+    baseValue: 8
+  characterAttackDamage:
+    baseValue: 4
+  characterAttackDelay:
+    baseValue: 0.9
 --- !u!1 &7368213391151072765
 GameObject:
   m_ObjectHideFlags: 0
@@ -697,6 +718,11 @@ PrefabInstance:
       propertyPath: playerObject
       value: 
       objectReference: {fileID: 6928827130408796320}
+    - target: {fileID: 6038787061479712635, guid: 70e17d47722b7184194f5ddaedc41985,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 47.56006
+      objectReference: {fileID: 0}
     - target: {fileID: 1668928263975284954, guid: 70e17d47722b7184194f5ddaedc41985,
         type: 3}
       propertyPath: m_AnchoredPosition.y
