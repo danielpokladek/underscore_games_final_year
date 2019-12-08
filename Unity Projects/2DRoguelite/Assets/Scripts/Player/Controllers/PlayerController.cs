@@ -54,6 +54,9 @@ public class PlayerController : MonoBehaviour
     public delegate void OnPrimAttack();
     public OnPrimAttack onPrimAttackCallback;
 
+    public delegate void OnInteract();
+    public OnInteract onInteractCallback;
+
     virtual protected void Start()
     {
         InitiatePlayer();
@@ -82,6 +85,12 @@ public class PlayerController : MonoBehaviour
     {
         if (playerAlive)
         {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (onInteractCallback != null)
+                    onInteractCallback.Invoke();
+            }
+
             GetMouseInput();
             DebugInputs();
         }
@@ -185,6 +194,12 @@ public class PlayerController : MonoBehaviour
 
         onGUIChangeCallback.Invoke();
     }
+
+    public void AddCurrency(int currencyAmount)
+    {
+        GameManager.current.PlayerCurrency = currencyAmount;
+        Debug.Log(GameManager.current.PlayerCurrency);
+    }
     #endregion
 
     #region Getters/Setters
@@ -192,6 +207,17 @@ public class PlayerController : MonoBehaviour
     {
         set { canMove = value; }
         get { return canMove; }
+    }
+
+    public bool isHealed()
+    {
+        if (currentHealth == playerHealth)
+        {
+            Debug.Log("You are fully healed!");
+            return true;
+        }
+
+        return false;
     }
 
     public float GetCurrentHealth

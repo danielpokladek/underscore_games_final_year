@@ -78,8 +78,13 @@ public class ImprovedCameraController : MonoBehaviour
     private IEnumerator InitCamera()
     {
         yield return new WaitForFixedUpdate();
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        
+
+        if (GameObject.FindGameObjectWithTag("Player"))
+            playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        else
+            playerTransform = gameObject.transform;
+
+
         target = playerTransform.position;
         zStart = transform.position.z;
 

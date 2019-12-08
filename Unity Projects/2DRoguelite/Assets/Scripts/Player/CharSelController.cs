@@ -16,7 +16,7 @@ public class CharSelController : PlayerController
     private void OnMouseDown()
     {
         canMove = true;
-        GameManager.instance.playerPrefab = playerPrefab;
+        GameManager.current.playerPrefab = playerPrefab;
     }
 
     override protected void Update()

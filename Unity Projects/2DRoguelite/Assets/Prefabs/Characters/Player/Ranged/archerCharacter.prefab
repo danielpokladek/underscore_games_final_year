@@ -277,6 +277,7 @@ GameObject:
   - component: {fileID: 7368213390279314162}
   - component: {fileID: 7368213390279314163}
   - component: {fileID: 6928827130408796320}
+  - component: {fileID: 3129229698477711625}
   - component: {fileID: 727236342}
   m_Layer: 12
   m_Name: archerCharacter
@@ -380,6 +381,18 @@ MonoBehaviour:
   - {fileID: 761383608}
   tripleShotCooldown: 5.5
   arrowNockCooldown: 5.5
+--- !u!114 &3129229698477711625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7368213390279314166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca18aec26822e634fa61c8c647b7499a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &727236342
 Animator:
   serializedVersion: 3
@@ -679,11 +692,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7231988028628796785, guid: 70e17d47722b7184194f5ddaedc41985,
-        type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 4178499887627839139, guid: 70e17d47722b7184194f5ddaedc41985,
         type: 3}
       propertyPath: playerObject
@@ -693,21 +701,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 33.200073
-      objectReference: {fileID: 0}
-    - target: {fileID: 453240066340902344, guid: 70e17d47722b7184194f5ddaedc41985,
-        type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 730092891553352776, guid: 70e17d47722b7184194f5ddaedc41985,
-        type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 787437256220789576, guid: 70e17d47722b7184194f5ddaedc41985,
-        type: 3}
-      propertyPath: m_Layer
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5326039054526612332, guid: 70e17d47722b7184194f5ddaedc41985,
         type: 3}
@@ -720,6 +713,21 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1998286606297453319, guid: 70e17d47722b7184194f5ddaedc41985,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 453240066340902344, guid: 70e17d47722b7184194f5ddaedc41985,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 730092891553352776, guid: 70e17d47722b7184194f5ddaedc41985,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 787437256220789576, guid: 70e17d47722b7184194f5ddaedc41985,
         type: 3}
       propertyPath: m_Layer
       value: 5

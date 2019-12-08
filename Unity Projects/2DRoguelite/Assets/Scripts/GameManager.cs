@@ -4,17 +4,26 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance = null;
+    public static GameManager current = null;
 
     public GameObject playerPrefab;
 
+    [SerializeField] private int playerGems;
+
     private void Awake()
     {
-        if (instance == null)
-            instance = this;
+        if (current == null)
+            current = this;
         else
             Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
+    }
+
+    public int PlayerCurrency { get { return playerGems; } set { playerGems = value; } }
+
+    private void OnGUI()
+    {
+        GUI.Label(new Rect(10, 10, 80, 20), "Gems: " + playerGems);
     }
 }

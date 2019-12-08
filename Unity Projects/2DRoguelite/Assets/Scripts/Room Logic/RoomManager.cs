@@ -27,7 +27,7 @@ public class RoomManager : MonoBehaviour
     public void SpawnPlayer()
     {
         spawnRoom = true;
-        Instantiate(GameManager.instance.playerPrefab, transform.position, Quaternion.identity);
+        Instantiate(GameManager.current.playerPrefab, transform.position, Quaternion.identity);
     }
 
     public void SpawnBoss(GameObject bossIcon)
