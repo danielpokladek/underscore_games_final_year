@@ -135,7 +135,7 @@ public class ArcherCharacter : RangedController
                 playerProjectile.transform.localScale.z * projectileSizeMultiplier);
 
             projectileRB.AddForce(firePoint.up * 20, ForceMode2D.Impulse);
-            bulletScript.SetDamage(1);
+            bulletScript.SetDamage(playerDamage / 2);
 
             playerProjectile.GetComponent<TrailRenderer>().startColor = Color.blue;
             playerProjectile.GetComponent<TrailRenderer>().endColor = Color.blue;

@@ -7,7 +7,9 @@ public class GameManager : MonoBehaviour
     public static GameManager current = null;
 
     public GameObject playerPrefab;
-
+    
+    public GameObject bossPortal;
+    
     [SerializeField] private int playerGems;
 
     private void Awake()

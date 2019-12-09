@@ -317,6 +317,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 7368213390279314166, guid: ec5d65a572afc014b972d4823372553d,
     type: 3}
+  bossPortal: {fileID: 0}
   playerGems: 0
 --- !u!4 &335987315
 Transform:
@@ -1037,7 +1038,7 @@ MonoBehaviour:
   roomPref: {fileID: 2447372284656423943, guid: cbfa820a7f018584fb22878721570e5a,
     type: 3}
   worldSize: {x: 4, y: 4}
-  numberOfRooms: 25
+  numberOfRooms: 10
   roomSizeX: 39
   roomSizeY: 29
 --- !u!4 &1953332612
@@ -1153,9 +1154,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab42d7d80f9b5404e8f1ad4cfc328697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dayLength: 90
-  nightLength: 60
-  midnightLength: 30
+  dayLength: 5
+  nightLength: 50
+  midnightLength: 20
   bossPortal: {fileID: 5899671452077304352, guid: 820fce2142e78ad4ca329e6276b278b4,
     type: 3}
   currentState: 1

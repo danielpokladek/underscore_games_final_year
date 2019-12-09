@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
 
     // --- MANAGERS --- //
     protected GameUIManager gameUIManager;
+    private LineRenderer lineRenderer;
 
     public delegate void OnGUIChange();
     public OnGUIChange onGUIChangeCallback;
@@ -67,6 +68,9 @@ public class PlayerController : MonoBehaviour
         InitiatePlayer();
 
         StartCoroutine(Init());
+
+        //lineRenderer = GetComponent<LineRenderer>();
+        //lineRenderer.enabled = false;
     }
 
     private void InitiatePlayer()

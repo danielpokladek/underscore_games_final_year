@@ -27,6 +27,7 @@ public class RoomManager : MonoBehaviour
         if (bossRoom)
         {
             m_bossPortal = Instantiate(LevelManager.instance.bossPortal, transform.position, Quaternion.identity);
+            GameManager.current.bossPortal = m_bossPortal;
             m_bossPortal.SetActive(false);
         }
     }
