@@ -37,7 +37,7 @@ public class BossController : MonoBehaviour
 
     virtual protected void DamagePlayer(float damageAmount)
     {
-        playerController.TakeDamage(damageAmount);
+        playerController.playerStats.TakeDamage(damageAmount);
     }
 
     virtual public void DamageBoss(float damageAmount)

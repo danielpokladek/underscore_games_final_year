@@ -23,7 +23,7 @@ public class ArcherCharacter : RangedController
         base.Update();
 
         if (Input.GetKeyDown(KeyCode.O))
-            onGUIChangeCallback.Invoke();
+            onGUIUpdateCallback.Invoke();
 
         #region Primary Attack
         if (Input.GetButton("LMB"))

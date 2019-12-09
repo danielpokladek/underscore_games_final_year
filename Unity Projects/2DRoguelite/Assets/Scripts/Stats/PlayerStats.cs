@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class PlayerStats : CharacterStats
 {
-    void Start()
+    override protected void Start()
     {
+        base.Start();
+
         playerController.onItemInteractCallback += OnItemInteract;
     }
 
     private void OnItemInteract()
     {
         
+    }
+
+    override protected void CharacterDeath()
+    {
+        gameObject.SetActive(false);
     }
 }

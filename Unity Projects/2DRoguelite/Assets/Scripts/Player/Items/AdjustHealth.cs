@@ -13,15 +13,15 @@ public class AdjustHealth : ItemPickup
         switch (ItemType)
         {
             case Type.Heal:
-                playerController.HealPlayer(amount);
+                playerController.playerStats.HealCharacter(amount);
                 break;
 
             case Type.Damage:
-                playerController.TakeDamage(amount);
+                playerController.playerStats.TakeDamage(amount);
                 break;
 
             case Type.MaxHealth:
-                playerController.SetMaxHealth(amount);
+                playerController.playerStats.characterHealth.AddModifier(amount);
                 break;
         }
 

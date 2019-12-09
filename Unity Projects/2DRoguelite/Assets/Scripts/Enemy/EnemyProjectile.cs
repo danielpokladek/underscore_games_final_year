@@ -12,7 +12,7 @@ public class EnemyProjectile : Projectile
         if (other.CompareTag("Player"))
         {
             PlayerController playerController = other.GetComponent<PlayerController>();
-            playerController.TakeDamage(projectileDamage);
+            playerController.playerStats.TakeDamage(projectileDamage);
 
             GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
             Destroy(effect, 0.4f);

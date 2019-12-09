@@ -16,7 +16,7 @@ public class ArcherGameUI : MonoBehaviour
 
     private void Start()
     {
-        playerObject.onGUIChangeCallback += UpdateUI;
+        playerObject.onGUIUpdateCallback += UpdateUI;
     }
 
     private void Update()
@@ -28,7 +28,7 @@ public class ArcherGameUI : MonoBehaviour
 
     private void UpdateUI()
     {
-        healthSlider.fillAmount = playerObject.GetCurrentHealth / playerObject.GetMaxHealth;
-        healthText.text         = playerObject.GetCurrentHealth.ToString("00");
+        healthSlider.fillAmount = playerObject.playerStats.currentHealth / playerObject.playerStats.characterHealth.GetValue();
+        healthText.text         = playerObject.playerStats.currentHealth.ToString("00");
     }
 }

@@ -13,22 +13,40 @@ public class CharacterStats : MonoBehaviour
 
     // ---
     protected PlayerController playerController;
-    protected GameUIManager uiManager;
+    protected GameUIManager gameuiManager;
 
     private void Awake()
     {
         currentHealth = characterHealth.GetValue();
+    }
 
-        playerController = GetComponent<PlayerController>();
+    virtual protected void Start()
+    {
+        playerController     = GetComponent<PlayerController>();
+        gameuiManager        = GameUIManager.currentInstance;
     }
 
     #region External Calls
+    
+    public void HealCharacter(float healAmount)
+    {
+        if ((currentHealth + healAmount) > characterHealth.GetValue())
+        {
+            currentHealth = characterHealth.GetValue();
+            return;
+        }
+
+        currentHealth += healAmount;
+        playerController.onGUIUpdateCallback.Invoke();
+        gameuiManager.HealIndicator(transform.position, healAmount);
+    }
+
     public void TakeDamage(float damageAmount)
     {
         currentHealth -= damageAmount;
 
-        uiManager.DamageIndicator(transform.position, damageAmount);
-        playerController.onGUIChangeCallback.Invoke();
+        gameuiManager.DamageIndicator(transform.position, damageAmount);
+        playerController.onGUIUpdateCallback.Invoke();
 
         if (currentHealth <= 0)
         {
