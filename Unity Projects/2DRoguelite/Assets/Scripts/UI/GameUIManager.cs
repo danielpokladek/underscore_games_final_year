@@ -11,7 +11,8 @@ public class GameUIManager : MonoBehaviour
         public GameObject healIndicator;
     }
 
-    [SerializeField] private Canvas gameCanvas;
+    public Canvas gameCanvas;
+    [SerializeField] private GameObject loadingScreen;
 
     public Effects effectsContainer;
     public static GameUIManager currentInstance;

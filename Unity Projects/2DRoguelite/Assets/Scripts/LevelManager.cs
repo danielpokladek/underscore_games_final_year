@@ -9,6 +9,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private float nightLength;
     [SerializeField] private float midnightLength;
 
+    public GameObject bossPortal;
+
     // -------------------------------------------------
     public enum DayState { PlayerSel, Day, Night, Midnight, Boss };
     public DayState currentState;
@@ -36,8 +38,11 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        //currentState       = DayState.Day;
-        //currentStateString = "Day";
+        if (currentState == DayState.PlayerSel || currentState == DayState.Boss)
+            return;
+
+        currentState       = DayState.Day;
+        currentStateString = "Day";
     }
 
     public void LoadBossBattle()
@@ -81,7 +86,6 @@ public class LevelManager : MonoBehaviour
                     SetState(DayState.Night, "Night");
                 else
                     stateTimer += Time.deltaTime;
-
                 break;
 
             // Handle Night.

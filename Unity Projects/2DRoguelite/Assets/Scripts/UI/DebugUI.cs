@@ -12,7 +12,7 @@ public class DebugUI : MonoBehaviour
 
     private void Start()
     {
-        gameManager = GameManager.instance;
+        gameManager = GameManager.current;
         levelManager = LevelManager.instance;
     }
 

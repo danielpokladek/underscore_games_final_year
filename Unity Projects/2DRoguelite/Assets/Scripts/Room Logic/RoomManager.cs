@@ -17,17 +17,25 @@ public class RoomManager : MonoBehaviour
 
     // ------------------------------
     private string m_currentDayState;
+    private GameObject m_bossPortal;
 
     private void Start()
     {
         levelManager = LevelManager.instance;
         levelManager.onDayStateChangeCallback += UpdateRoomState;
+
+        if (bossRoom)
+        {
+            m_bossPortal = Instantiate(LevelManager.instance.bossPortal, transform.position, Quaternion.identity);
+            GameManager.current.bossPortal = m_bossPortal;
+            m_bossPortal.SetActive(false);
+        }
     }
 
     public void SpawnPlayer()
     {
         spawnRoom = true;
-        Instantiate(GameManager.instance.playerPrefab, transform.position, Quaternion.identity);
+        Instantiate(GameManager.current.playerPrefab, transform.position, Quaternion.identity);
     }
 
     public void SpawnBoss(GameObject bossIcon)
@@ -72,21 +80,21 @@ public class RoomManager : MonoBehaviour
         //  At the moment, only boss icon will appear,
         //  more functionality will be added later.
         if (bossRoom)
+        {
             bossIconGO.SetActive(condition);
+            m_bossPortal.SetActive(condition);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            if (bossRoom && m_currentDayState == "Night" || m_currentDayState == "Midnight")
-                LevelManager.instance.LoadBossBattle();
+            if (spawnRoom)
+                return;
 
             // It is daytime, and enemies have been spawned.
             if (levelManager.GetCurrentState == "Day" && enemiesSpawned)
-                return;
-
-            if (spawnRoom)
                 return;
             
             foreach (GameObject spawner in enemySpawners)

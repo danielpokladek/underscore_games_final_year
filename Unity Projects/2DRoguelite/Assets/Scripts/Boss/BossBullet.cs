@@ -54,7 +54,7 @@ public class BossBullet : Projectile
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            other.gameObject.GetComponent<PlayerController>().TakeDamage(projectileDamage);
+            other.gameObject.GetComponent<PlayerStats>().TakeDamage(projectileDamage);
             DestroyBullet(0);
         }
     }
