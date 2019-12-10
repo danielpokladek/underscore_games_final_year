@@ -19,15 +19,18 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] protected float attackDelay;
 
+    [SerializeField] protected GameObject minimapThing;
+    
     // --- STUFF FOR ABILITIES ---
     [HideInInspector] public float projectileSizeMultiplier = 1;
+    
+    // --- ACCESSED BY OTHERS ---
+    [HideInInspector] public PlayerStats playerStats;
     
     // ---------------------------
     protected Rigidbody2D playerRB;
     protected Vector2     playerInput;
     protected Camera      playerCamera;
-
-    protected PlayerStats playerStats;
 
     private Animator playerAnim;
     private bool facingRight;
@@ -51,8 +54,8 @@ public class PlayerController : MonoBehaviour
     protected GameUIManager gameUIManager;
     private LineRenderer lineRenderer;
 
-    public delegate void OnGUIChange();
-    public OnGUIChange onGUIChangeCallback;
+    public delegate void OnGUIUpdate();
+    public OnGUIUpdate onGUIUpdateCallback;
 
     public delegate void OnPrimAttack();
     public OnPrimAttack onPrimAttackCallback;
@@ -68,9 +71,6 @@ public class PlayerController : MonoBehaviour
         InitiatePlayer();
 
         StartCoroutine(Init());
-
-        //lineRenderer = GetComponent<LineRenderer>();
-        //lineRenderer.enabled = false;
     }
 
     private void InitiatePlayer()
@@ -86,6 +86,8 @@ public class PlayerController : MonoBehaviour
         CanMove       = true;
 
         gameUIManager = GameUIManager.currentInstance;
+        
+        minimapThing.SetActive(false);
 
         // ---
         allowMovement = true;
@@ -103,6 +105,25 @@ public class PlayerController : MonoBehaviour
 
             GetMouseInput();
             DebugInputs();
+            
+            if (Input.GetKeyDown(KeyCode.K))
+                playerStats.TakeDamage(10);
+            
+            // Temp minimap thing
+            if (LevelManager.instance.currentState == LevelManager.DayState.Night)
+            {               
+                minimapThing.SetActive(true);
+
+                Vector3 diff = GameManager.current.bossPortal.transform.position - transform.position;
+                diff.Normalize();
+
+                float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
+                minimapThing.transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
+            }
+            else
+            {
+                minimapThing.SetActive(false);
+            }
         }
     }
 
@@ -169,42 +190,6 @@ public class PlayerController : MonoBehaviour
         canMove = true;
     }
 
-    /// <summary>
-    /// Heals player (adds health), by the amount specified in the parameter.
-    /// </summary>
-    /// <param name="healAmount">Amount of health points that will be added to the player's health.</param>
-    public void HealPlayer(float healAmount)
-    {
-        // If player's health will be higher than max amount, set health to max.
-        if ((currentHealth + healAmount) > playerHealth)
-        {
-            currentHealth = playerHealth;
-            return;
-        }
-
-        currentHealth += healAmount;
-        onGUIChangeCallback.Invoke();
-    }
-
-    /// <summary>
-    /// Damages player (removes health), by the amount specified in the parameter.
-    /// </summary>
-    /// <param name="damageAmount">Amount of health points that will be deducted from the player.</param>
-    public void TakeDamage(float damageAmount)
-    {
-        currentHealth -= damageAmount;
-
-        // Check player health
-        if (currentHealth <= 0)
-        {
-            Debug.Log("Player is det. Try again?");
-            playerAlive = false;
-            this.gameObject.SetActive(false);
-        }
-
-        onGUIChangeCallback.Invoke();
-    }
-
     public void AddCurrency(int currencyAmount)
     {
         GameManager.current.PlayerCurrency += currencyAmount;
@@ -240,7 +225,7 @@ public class PlayerController : MonoBehaviour
     { 
         playerHealth += value;
         
-        onGUIChangeCallback.Invoke();
+        onGUIUpdateCallback.Invoke();
         
         if (currentHealth > playerHealth)
             currentHealth = playerHealth;
@@ -266,11 +251,11 @@ public class PlayerController : MonoBehaviour
     {
         if (Debug.isDebugBuild)
         {
-            if (Input.GetKeyDown(KeyCode.M))
-                TakeDamage(10);
+            if (Input.GetKeyDown(KeyCode.P))
+                playerStats.HealCharacter(10);
 
-            if (Input.GetKeyDown(KeyCode.N))
-                HealPlayer(10);
+            if (Input.GetKeyDown(KeyCode.O))
+                playerStats.TakeDamage(10);
         }
     }
 
@@ -278,8 +263,8 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForFixedUpdate();
         
-        if (onGUIChangeCallback != null)
-            onGUIChangeCallback.Invoke();
+        if (onGUIUpdateCallback != null)
+            onGUIUpdateCallback.Invoke();
     }
 }
     

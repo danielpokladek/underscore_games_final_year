@@ -10,6 +10,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private float midnightLength;
 
     public GameObject bossPortal;
+    public GameObject shopPrefab;
 
     // -------------------------------------------------
     public enum DayState { PlayerSel, Day, Night, Midnight, Boss };
