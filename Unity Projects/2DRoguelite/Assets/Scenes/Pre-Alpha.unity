@@ -219,7 +219,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraDist: 3.5
   smoothTime: 0.2
-  minimapCamera: {fileID: 988063701}
 --- !u!1 &106427083
 GameObject:
   m_ObjectHideFlags: 0
@@ -1159,6 +1158,7 @@ MonoBehaviour:
   midnightLength: 20
   bossPortal: {fileID: 5899671452077304352, guid: 820fce2142e78ad4ca329e6276b278b4,
     type: 3}
+  shopPrefab: {fileID: 0}
   currentState: 1
   playerPrefab: {fileID: 0}
 --- !u!114 &1953332615

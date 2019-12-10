@@ -12,7 +12,7 @@ public class ImprovedCameraController : MonoBehaviour
              "Increase this value to make the camera to move faster.")]
     [SerializeField] private float smoothTime = 0.2f;
 
-    [SerializeField] private GameObject minimapCamera;
+    //[SerializeField] private GameObject minimapCamera;
     
     // -------------------------------
     private Transform playerTransform;
@@ -28,7 +28,7 @@ public class ImprovedCameraController : MonoBehaviour
         StartCoroutine(InitCamera());
 
         thisCamera = GetComponent<Camera>();
-        minimapCamera.transform.parent = null;
+        //minimapCamera.transform.parent = null;
     }
 
     private void FixedUpdate()
@@ -40,7 +40,7 @@ public class ImprovedCameraController : MonoBehaviour
         target = UpdateTargetPos();
         UpdateCameraPosition();
 
-        minimapCamera.transform.position = playerTransform.position;
+        //minimapCamera.transform.position = playerTransform.position;
     }
 
     private Vector3 CaptureMousePos()

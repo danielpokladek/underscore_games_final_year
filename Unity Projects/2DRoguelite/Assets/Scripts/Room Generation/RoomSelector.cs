@@ -2,36 +2,17 @@
 
 public class RoomSelector : MonoBehaviour
 {
-    [System.Serializable]
-    public class RoomsList
-    {
-        public GameObject[] roomUp;
-        public GameObject[] roomDown;
-        public GameObject[] roomRight;
-        public GameObject[] roomLeft;
-        public GameObject[] roomUpDown;
-        public GameObject[] roomRightLeft;
-        public GameObject[] roomUpRight;
-        public GameObject[] roomUpLeft;
-        public GameObject[] roomRightDown;
-        public GameObject[] roomDownLeft;
-        public GameObject[] roomUpDownLeft;
-        public GameObject[] roomUpRightLeft;
-        public GameObject[] roomUpRightDown;
-        public GameObject[] roomRightDownLeft;
-        public GameObject[] roomUpDownRightLeft;
-    }
-
+    public RoomContainer entranceRooms;
+    
     [Tooltip("This is where the room prefabs are assigned for the level generator to use." +
         "This should only be adjusted on the empty prefab for the rooms," +
         "as this will ensure the changes are saved for all rooms which use this prefab.")]
-    public RoomsList roomList;
-
-    public RoomContainer entranceRooms;
     public RoomContainer roomContainer;
 
     [Header("Temporary")]
     public GameObject bossIcon;
+    public GameObject shopIcon;
+    
     public int sceneToLoad;
 
     // -------------------------------------------------
@@ -297,9 +278,12 @@ public class RoomSelector : MonoBehaviour
             tempRoom.transform.SetParent(gameObject.transform);
         
         if (roomType == 1)
-            tempRoom.GetComponent<RoomManager>().SpawnPlayer();
+            tempRoom.GetComponent<RoomManager>().SetSpawnRoom();
 
         if (roomType == 2)
-            tempRoom.GetComponent<RoomManager>().SpawnBoss(bossIcon);
+            tempRoom.GetComponent<RoomManager>().SetBossRoom(bossIcon);
+        
+        if (roomType == 3)
+            tempRoom.GetComponent<RoomManager>().SetShopRoom(shopIcon);
     }
 }

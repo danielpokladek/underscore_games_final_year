@@ -9,7 +9,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
+    <splitter split-orientation="horizontal" split-proportion="0.4371002">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
@@ -37,6 +37,57 @@
                     <marker date="1575286181475" expanded="true" signature="4989:5173" ph="{...}" />
                     <marker date="1575286181475" expanded="true" signature="5039:5137" ph="{...}" />
                     <marker date="1575286181475" expanded="true" signature="5208:5243" ph="{...}" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Assets/Scripts/LevelManager.cs">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-48">
+                  <caret line="12" column="33" selection-start-line="12" selection-start-column="33" selection-end-line="12" selection-end-column="33" />
+                  <folding>
+                    <marker date="1575986501769" expanded="false" signature="6:113" ph="..." />
+                    <marker date="1575986501769" expanded="true" signature="156:3296" ph="{...}" />
+                    <marker date="1575986501769" expanded="false" signature="798:1021" ph="Singleton" />
+                    <marker date="1575986501769" expanded="true" signature="889:1006" ph="{...}" />
+                    <marker date="1575986501769" expanded="true" signature="1047:1240" ph="{...}" />
+                    <marker date="1575986501769" expanded="true" signature="1274:1321" ph="{...}" />
+                    <marker date="1575986501769" expanded="true" signature="1350:1397" ph="{...}" />
+                    <marker date="1575986501769" expanded="true" signature="1424:1676" ph="{...}" />
+                    <marker date="1575986501769" expanded="true" signature="1489:1670" ph="{...}" />
+                    <marker date="1575986501769" expanded="true" signature="1711:2766" ph="{...}" />
+                    <marker date="1575986501769" expanded="true" signature="1747:2760" ph="{...}" />
+                    <marker date="1575986501769" expanded="true" signature="2829:3045" ph="{...}" />
+                    <marker date="1575986501769" expanded="true" signature="3208:3294" ph="{...}" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/Assets/Scripts/Room Logic/RoomManager.cs">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="384">
+                  <caret line="53" column="83" selection-start-line="53" selection-start-column="83" selection-end-line="53" selection-end-column="83" />
+                  <folding>
+                    <marker date="1575992992129" expanded="false" signature="6:78" ph="..." />
+                    <marker date="1575992992129" expanded="true" signature="120:3432" ph="{...}" />
+                    <marker date="1575992992129" expanded="true" signature="662:1046" ph="{...}" />
+                    <marker date="1575992992129" expanded="true" signature="803:1040" ph="{...}" />
+                    <marker date="1575992992129" expanded="true" signature="1078:1212" ph="{...}" />
+                    <marker date="1575992992129" expanded="true" signature="1262:1421" ph="{...}" />
+                    <marker date="1575992992129" expanded="true" signature="1472:1593" ph="{...}" />
+                    <marker date="1575992992129" expanded="true" signature="1628:2468" ph="{...}" />
+                    <marker date="1575992992129" expanded="true" signature="1643:1767" ph="/* At the moment nothing happens in daytime; monsters only respawn at night. ... */" />
+                    <marker date="1575992992129" expanded="true" signature="1811:2462" ph="{...}" />
+                    <marker date="1575992992129" expanded="true" signature="2514:2829" ph="{...}" />
+                    <marker date="1575992992129" expanded="true" signature="2529:2689" ph="/* Check if room is a boss room, and update the room. ... */" />
+                    <marker date="1575992992129" expanded="true" signature="2711:2823" ph="{...}" />
+                    <marker date="1575992992129" expanded="true" signature="2882:3430" ph="{...}" />
+                    <marker date="1575992992129" expanded="true" signature="2928:3420" ph="{...}" />
+                    <marker date="1575992992129" expanded="true" signature="3219:3374" ph="{...}" />
                   </folding>
                 </state>
               </provider>
@@ -87,7 +138,7 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Assets/Scripts/Player/ArcherGameUI.cs">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="432">
@@ -103,22 +154,6 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Assets/Scripts/Stats/Stat.cs">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="48">
-                  <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-                  <folding>
-                    <marker date="1575900212631" expanded="false" signature="6:78" ph="..." />
-                    <marker date="1575900212631" expanded="true" signature="119:628" ph="{...}" />
-                    <marker date="1575900212631" expanded="true" signature="252:378" ph="{...}" />
-                    <marker date="1575900212631" expanded="true" signature="423:499" ph="{...}" />
-                    <marker date="1575900212631" expanded="true" signature="547:626" ph="{...}" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
         </leaf>
       </split-first>
       <split-second>
@@ -126,7 +161,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Assets/Scripts/Player/Characters/ArcherCharacter.cs">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="222">
+                <state relative-caret-position="1520">
                   <caret line="137" column="47" selection-start-line="137" selection-start-column="47" selection-end-line="137" selection-end-column="47" />
                   <folding>
                     <marker date="1575904428085" expanded="false" signature="6:78" ph="..." />
@@ -156,7 +191,7 @@
             <entry file="file://$PROJECT_DIR$/Assets/Scripts/Player/Items/AdjustHealth.cs">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="336">
-                  <caret line="23" column="81" lean-forward="true" selection-start-line="23" selection-start-column="81" selection-end-line="23" selection-end-column="81" />
+                  <caret line="23" column="81" selection-start-line="23" selection-start-column="81" selection-end-line="23" selection-end-column="81" />
                   <folding>
                     <marker date="1575907339081" expanded="false" signature="6:78" ph="..." />
                     <marker date="1575907339081" expanded="true" signature="118:778" ph="{...}" />
@@ -167,10 +202,10 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Assets/Scripts/Stats/CharacterStats.cs">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-116">
+                <state relative-caret-position="112">
                   <caret line="9" column="14" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
                   <folding>
                     <marker date="1575907377240" expanded="false" signature="6:78" ph="..." />
@@ -182,6 +217,83 @@
                     <marker date="1575907377240" expanded="true" signature="848:944" ph="{...}" />
                     <marker date="1575907377240" expanded="true" signature="1160:1468" ph="{...}" />
                     <marker date="1575907377240" expanded="true" signature="1367:1462" ph="{...}" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/Assets/Scripts/Room Generation/LevelGeneration.cs">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-4690">
+                  <folding>
+                    <marker date="1575286181534" expanded="false" signature="6:78" ph="..." />
+                    <marker date="1575286181534" expanded="true" signature="80:251" ph="/* Room Types: ... */" />
+                    <marker date="1575286181534" expanded="true" signature="297:12479" ph="{...}" />
+                    <marker date="1575286181534" expanded="true" signature="346:574" ph="[...]" />
+                    <marker date="1575286181534" expanded="true" signature="614:773" ph="[...]" />
+                    <marker date="1575286181534" expanded="true" signature="811:1052" ph="[...]" />
+                    <marker date="1575286181534" expanded="true" signature="1108:1610" ph="[...]" />
+                    <marker date="1575286181534" expanded="true" signature="2313:2676" ph="{...}" />
+                    <marker date="1575286181534" expanded="true" signature="2387:2492" ph="{...}" />
+                    <marker date="1575286181534" expanded="true" signature="2708:4744" ph="{...}" />
+                    <marker date="1575286181534" expanded="true" signature="3149:4738" ph="{...}" />
+                    <marker date="1575286181534" expanded="true" signature="3172:3482" ph="/* This generator will determine whether the rooms should be clumped together, or branched out. ... */" />
+                    <marker date="1575286181534" expanded="true" signature="3781:4376" ph="{...}" />
+                    <marker date="1575286181534" expanded="true" signature="4390:4579" ph="/* Finalize Position, add to list and calculate the offset. ... */" />
+                    <marker date="1575286181534" expanded="true" signature="4779:6088" ph="{...}" />
+                    <marker date="1575286181534" expanded="true" signature="4902:5147" ph="/* Grab a random taken position from the list, ... */" />
+                    <marker date="1575286181534" expanded="true" signature="5449:5656" ph="{...}" />
+                    <marker date="1575286181534" expanded="true" signature="5493:5557" ph="{...}" />
+                    <marker date="1575286181534" expanded="true" signature="5578:5642" ph="{...}" />
+                    <marker date="1575286181534" expanded="true" signature="5673:5880" ph="{...}" />
+                    <marker date="1575286181534" expanded="true" signature="5717:5781" ph="{...}" />
+                    <marker date="1575286181534" expanded="true" signature="5802:5866" ph="{...}" />
+                    <marker date="1575286181534" expanded="true" signature="6132:7672" ph="{...}" />
+                    <marker date="1575286181534" expanded="true" signature="6299:6423" ph="/* Find a room which only has one neighbour. ... */" />
+                    <marker date="1575286181534" expanded="true" signature="6896:7103" ph="{...}" />
+                    <marker date="1575286181534" expanded="true" signature="6940:7004" ph="{...}" />
+                    <marker date="1575286181534" expanded="true" signature="7025:7089" ph="{...}" />
+                    <marker date="1575286181534" expanded="true" signature="7120:7327" ph="{...}" />
+                    <marker date="1575286181534" expanded="true" signature="7164:7228" ph="{...}" />
+                    <marker date="1575286181534" expanded="true" signature="7249:7313" ph="{...}" />
+                    <marker date="1575286181534" expanded="true" signature="7526:7637" ph="{...}" />
+                    <marker date="1575286181534" expanded="true" signature="7758:8281" ph="{...}" />
+                    <marker date="1575286181534" expanded="true" signature="8427:9770" ph="{...}" />
+                    <marker date="1575286181534" expanded="true" signature="8442:8643" ph="/* Use a nested for loop to check each slot in the grid, to check for neighbours of the room. ... */" />
+                    <marker date="1575286181534" expanded="true" signature="8696:9764" ph="{...}" />
+                    <marker date="1575286181534" expanded="true" signature="8762:9754" ph="{...}" />
+                    <marker date="1575286181534" expanded="true" signature="9798:12078" ph="{...}" />
+                    <marker date="1575286181534" expanded="true" signature="9813:9932" ph="/* Grab a random room number, from the list of taken rooms, ... */" />
+                    <marker date="1575286181534" expanded="true" signature="10106:10286" ph="/* Loop through each of the rooms in the grid, ... */" />
+                    <marker date="1575286181534" expanded="true" signature="10323:11797" ph="{...}" />
+                    <marker date="1575286181534" expanded="true" signature="10448:10569" ph="/* Multipley the current room position (on the grid), ... */" />
+                    <marker date="1575286181534" expanded="true" signature="10859:11027" ph="/* If the bossRoom is the same as shopRoom, find a new room for the boss. ... */" />
+                    <marker date="1575286181534" expanded="true" signature="11586:11696" ph="/* Move the room to the root folder (to keep hierarchy cleaner), ... */" />
+                    <marker date="1575286181534" expanded="true" signature="11807:12031" ph="/* Update the navmesh at the start of FixedUpdate(), ... */" />
+                    <marker date="1575286181534" expanded="true" signature="12111:12477" ph="{...}" />
+                    <marker date="1575286181534" expanded="true" signature="12126:12369" ph="/* Navmesh update needs to be carried out at the end of room generation, ... */" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Assets/Scripts/Room Generation/RoomSelector.cs">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="716">
+                  <caret line="286" column="69" selection-start-line="286" selection-start-column="69" selection-end-line="286" selection-end-column="69" />
+                  <folding>
+                    <marker date="1575992837889" expanded="true" signature="61:11490" ph="{...}" />
+                    <marker date="1575992837889" expanded="true" signature="113:368" ph="[...]" />
+                    <marker date="1575992837889" expanded="true" signature="901:1381" ph="/* based on 1-2-4-8. 1 up, 2 down, 4 left, 8 right. ... */" />
+                    <marker date="1575992837889" expanded="true" signature="1411:1468" ph="{...}" />
+                    <marker date="1575992837889" expanded="true" signature="1502:1764" ph="{...}" />
+                    <marker date="1575992837889" expanded="true" signature="1793:11488" ph="{...}" />
+                    <marker date="1575992837889" expanded="true" signature="1826:6434" ph="{...}" />
+                    <marker date="1575992837889" expanded="true" signature="1866:6424" ph="{...}" />
+                    <marker date="1575992837889" expanded="true" signature="6462:11070" ph="{...}" />
+                    <marker date="1575992837889" expanded="true" signature="6502:11060" ph="{...}" />
                   </folding>
                 </state>
               </provider>
@@ -230,12 +342,9 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/Base Scripts/RangedController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/ArcherCharacter.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/Other/CameraController.cs" />
-        <option value="$PROJECT_DIR$/Assets/ImprovedCameraController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/CharSelController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/LevelManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" />
         <option value="$PROJECT_DIR$/Assets/BossPortal.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Room Logic/RoomManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/Characters/ArcherCharacter.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Stats/PlayerStats.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/Controllers/PlayerController.cs" />
@@ -246,6 +355,10 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Stats/CharacterStats.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/Items/AdjustHealth.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/ArcherGameUI.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/LevelManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/ImprovedCameraController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Room Generation/RoomSelector.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Room Logic/RoomManager.cs" />
       </list>
     </option>
   </component>
@@ -302,7 +415,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="22" width="1936" height="1066" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.24966443" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -353,76 +465,8 @@
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Bullet.cs" />
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/PlayerBullet.cs" />
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Player/Base Scripts/RangedController.cs" />
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Room Generation/LevelGeneration.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <marker date="1572865964355" expanded="false" signature="6:97" ph="..." />
-            <marker date="1572865964355" expanded="true" signature="99:302" ph="/* Level Generation Script ... */" />
-            <marker date="1572865964355" expanded="true" signature="348:11903" ph="{...}" />
-            <marker date="1572865964355" expanded="true" signature="397:625" ph="[...]" />
-            <marker date="1572865964355" expanded="true" signature="850:1091" ph="[...]" />
-            <marker date="1572865964355" expanded="true" signature="1147:1649" ph="[...]" />
-            <marker date="1572865964355" expanded="true" signature="2195:2583" ph="{...}" />
-            <marker date="1572865964355" expanded="true" signature="2269:2374" ph="{...}" />
-            <marker date="1572865964355" expanded="true" signature="2615:4778" ph="{...}" />
-            <marker date="1572865964355" expanded="true" signature="3077:4772" ph="{...}" />
-            <marker date="1572865964355" expanded="true" signature="3100:3410" ph="/* This generator will determine whether the rooms should be clumped together, or branched out. ... */" />
-            <marker date="1572865964355" expanded="true" signature="3781:4375" ph="{...}" />
-            <marker date="1572865964355" expanded="true" signature="4389:4578" ph="/* Finalize Position, add to list and calculate the offset. ... */" />
-            <marker date="1572865964355" expanded="true" signature="4813:6121" ph="{...}" />
-            <marker date="1572865964355" expanded="true" signature="4936:5180" ph="/* Grab a random taken position from the list, ... */" />
-            <marker date="1572865964355" expanded="true" signature="5482:5689" ph="{...}" />
-            <marker date="1572865964355" expanded="true" signature="5526:5590" ph="{...}" />
-            <marker date="1572865964355" expanded="true" signature="5611:5675" ph="{...}" />
-            <marker date="1572865964355" expanded="true" signature="5706:5913" ph="{...}" />
-            <marker date="1572865964355" expanded="true" signature="5750:5814" ph="{...}" />
-            <marker date="1572865964355" expanded="true" signature="5835:5899" ph="{...}" />
-            <marker date="1572865964355" expanded="true" signature="6165:7705" ph="{...}" />
-            <marker date="1572865964355" expanded="true" signature="6332:6456" ph="/* Find a room which only has one neighbour. ... */" />
-            <marker date="1572865964355" expanded="true" signature="6929:7136" ph="{...}" />
-            <marker date="1572865964355" expanded="true" signature="6973:7037" ph="{...}" />
-            <marker date="1572865964355" expanded="true" signature="7058:7122" ph="{...}" />
-            <marker date="1572865964355" expanded="true" signature="7153:7360" ph="{...}" />
-            <marker date="1572865964355" expanded="true" signature="7197:7261" ph="{...}" />
-            <marker date="1572865964355" expanded="true" signature="7282:7346" ph="{...}" />
-            <marker date="1572865964355" expanded="true" signature="7559:7670" ph="{...}" />
-            <marker date="1572865964355" expanded="true" signature="7791:8314" ph="{...}" />
-            <marker date="1572865964355" expanded="true" signature="8320:8465" ph="/// Loop through all rooms in the level, checking if they have neighbours, and select which doors they need. ... " />
-            <marker date="1572865964355" expanded="true" signature="8497:9907" ph="{...}" />
-            <marker date="1572865964355" expanded="true" signature="8512:8713" ph="/* Use a nested for loop to check each slot in the grid, to check for neighbours of the room. ... */" />
-            <marker date="1572865964355" expanded="true" signature="8766:9901" ph="{...}" />
-            <marker date="1572865964355" expanded="true" signature="8832:9891" ph="{...}" />
-            <marker date="1572865964355" expanded="true" signature="9941:10305" ph="{...}" />
-            <marker date="1572865964355" expanded="true" signature="10181:10299" ph="/* Debug.Log(&quot;Boss Room: &quot; + bossRoomPos); ... */" />
-            <marker date="1572865964355" expanded="true" signature="10333:11745" ph="{...}" />
-            <marker date="1572865964355" expanded="true" signature="10468:10590" ph="/* Loop through each room on the gird, ... */" />
-            <marker date="1572865964355" expanded="true" signature="10627:11651" ph="{...}" />
-            <marker date="1572865964355" expanded="true" signature="10752:10921" ph="/* Ideally allow users to select the size of the room in generation script, ... */" />
-            <marker date="1572865964355" expanded="true" signature="11157:11279" ph="{...}" />
-            <marker date="1572865964355" expanded="true" signature="11778:11901" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Player/Base Scripts/PlayerController.cs" />
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Player/ArcherCharacter.cs" />
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Room Generation/RoomSelector.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="716">
-          <caret line="181" column="26" selection-start-line="181" selection-start-column="26" selection-end-line="181" selection-end-column="26" />
-          <folding>
-            <marker date="1572865964359" expanded="true" signature="116:758" ph="{...}" />
-            <marker date="1572865964359" expanded="true" signature="764:1019" ph="[...]" />
-            <marker date="1572865964359" expanded="true" signature="1506:1986" ph="/* based on 1-2-4-8. 1 up, 2 down, 4 left, 8 right. ... */" />
-            <marker date="1572865964359" expanded="true" signature="2016:2073" ph="{...}" />
-            <marker date="1572865964359" expanded="true" signature="2107:2369" ph="{...}" />
-            <marker date="1572865964359" expanded="true" signature="2398:6945" ph="{...}" />
-            <marker date="1572865964359" expanded="true" signature="2430:6638" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Boss/TempBoss/TempBossController.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="32">
@@ -480,52 +524,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/ImprovedCameraController.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="448">
-          <caret line="42" column="66" selection-start-line="42" selection-start-column="66" selection-end-line="42" selection-end-column="66" />
-          <folding>
-            <marker date="1575643036021" expanded="false" signature="6:78" ph="..." />
-            <marker date="1575643036021" expanded="true" signature="133:2386" ph="{...}" />
-            <marker date="1575643036021" expanded="true" signature="140:373" ph="[...]" />
-            <marker date="1575643036021" expanded="true" signature="433:566" ph="[...]" />
-            <marker date="1575643036021" expanded="true" signature="941:1084" ph="{...}" />
-            <marker date="1575643036021" expanded="true" signature="1116:1354" ph="{...}" />
-            <marker date="1575643036021" expanded="true" signature="1393:1674" ph="{...}" />
-            <marker date="1575643036021" expanded="true" signature="1713:1885" ph="{...}" />
-            <marker date="1575643036021" expanded="true" signature="1926:2092" ph="{...}" />
-            <marker date="1575643036021" expanded="true" signature="2130:2384" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/BossPortal.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
           <caret line="8" column="8" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Room Logic/RoomManager.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="29" column="58" selection-start-line="29" selection-start-column="58" selection-end-line="29" selection-end-column="58" />
-          <folding>
-            <marker date="1575900212619" expanded="true" signature="120:3144" ph="{...}" />
-            <marker date="1575900212619" expanded="true" signature="549:933" ph="{...}" />
-            <marker date="1575900212619" expanded="true" signature="690:927" ph="{...}" />
-            <marker date="1575900212619" expanded="true" signature="964:1098" ph="{...}" />
-            <marker date="1575900212619" expanded="true" signature="1146:1305" ph="{...}" />
-            <marker date="1575900212619" expanded="true" signature="1340:2180" ph="{...}" />
-            <marker date="1575900212619" expanded="true" signature="1355:1479" ph="/* At the moment nothing happens in daytime; monsters only respawn at night. ... */" />
-            <marker date="1575900212619" expanded="true" signature="1523:2174" ph="{...}" />
-            <marker date="1575900212619" expanded="true" signature="2226:2541" ph="{...}" />
-            <marker date="1575900212619" expanded="true" signature="2241:2401" ph="/* Check if room is a boss room, and update the room. ... */" />
-            <marker date="1575900212619" expanded="true" signature="2423:2535" ph="{...}" />
-            <marker date="1575900212619" expanded="true" signature="2594:3142" ph="{...}" />
-            <marker date="1575900212619" expanded="true" signature="2640:3132" ph="{...}" />
-            <marker date="1575900212619" expanded="true" signature="2931:3086" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -570,27 +572,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/LevelManager.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="19" column="31" selection-start-line="19" selection-start-column="31" selection-end-line="19" selection-end-column="31" />
-          <folding>
-            <marker date="1575900212580" expanded="true" signature="156:3262" ph="{...}" />
-            <marker date="1575900212580" expanded="false" signature="764:987" ph="Singleton" />
-            <marker date="1575900212580" expanded="true" signature="855:972" ph="{...}" />
-            <marker date="1575900212580" expanded="true" signature="1013:1206" ph="{...}" />
-            <marker date="1575900212580" expanded="true" signature="1240:1287" ph="{...}" />
-            <marker date="1575900212580" expanded="true" signature="1316:1363" ph="{...}" />
-            <marker date="1575900212580" expanded="true" signature="1390:1642" ph="{...}" />
-            <marker date="1575900212580" expanded="true" signature="1455:1636" ph="{...}" />
-            <marker date="1575900212580" expanded="true" signature="1677:2732" ph="{...}" />
-            <marker date="1575900212580" expanded="true" signature="1713:2726" ph="{...}" />
-            <marker date="1575900212580" expanded="true" signature="2795:3011" ph="{...}" />
-            <marker date="1575900212580" expanded="true" signature="3174:3260" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/GameManager.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="128">
@@ -627,33 +608,6 @@
             <marker date="1575904223210" expanded="true" signature="159:261" ph="{...}" />
             <marker date="1575904223210" expanded="true" signature="296:317" ph="{...}" />
             <marker date="1575904223210" expanded="true" signature="363:412" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Player/Characters/ArcherCharacter.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="137" column="47" selection-start-line="137" selection-start-column="47" selection-end-line="137" selection-end-column="47" />
-          <folding>
-            <marker date="1575904428085" expanded="false" signature="6:78" ph="..." />
-            <marker date="1575904428085" expanded="true" signature="127:6160" ph="{...}" />
-            <marker date="1575904428085" expanded="true" signature="629:2018" ph="{...}" />
-            <marker date="1575904428085" expanded="false" signature="752:1067" ph="Primary Attack" />
-            <marker date="1575904428085" expanded="true" signature="810:982" ph="{...}" />
-            <marker date="1575904428085" expanded="false" signature="1077:1352" ph="Specials" />
-            <marker date="1575904428085" expanded="false" signature="1362:1750" ph="Dodge" />
-            <marker date="1575904428085" expanded="true" signature="1427:1602" ph="{...}" />
-            <marker date="1575904428085" expanded="true" signature="1481:1592" ph="{...}" />
-            <marker date="1575904428085" expanded="true" signature="1658:1730" ph="{...}" />
-            <marker date="1575904428085" expanded="false" signature="1760:2012" ph="Cooldowns" />
-            <marker date="1575904428085" expanded="true" signature="2060:2894" ph="{...}" />
-            <marker date="1575904428085" expanded="true" signature="2931:3731" ph="{...}" />
-            <marker date="1575904428085" expanded="true" signature="3769:4956" ph="{...}" />
-            <marker date="1575904428085" expanded="true" signature="4016:4914" ph="{...}" />
-            <marker date="1575904428085" expanded="true" signature="4993:5491" ph="{...}" />
-            <marker date="1575904428085" expanded="true" signature="5008:5214" ph="/* Calculate the bow draw percentage (based on currentDraw &amp; maxDraw), ... */" />
-            <marker date="1575904428085" expanded="true" signature="5535:5728" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -765,12 +719,77 @@
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Player/Items/AdjustHealth.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="336">
-          <caret line="23" column="81" lean-forward="true" selection-start-line="23" selection-start-column="81" selection-end-line="23" selection-end-column="81" />
+          <caret line="23" column="81" selection-start-line="23" selection-start-column="81" selection-end-line="23" selection-end-column="81" />
           <folding>
             <marker date="1575907339081" expanded="false" signature="6:78" ph="..." />
             <marker date="1575907339081" expanded="true" signature="118:778" ph="{...}" />
             <marker date="1575907339081" expanded="true" signature="311:776" ph="{...}" />
             <marker date="1575907339081" expanded="true" signature="343:740" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Stats/CharacterStats.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="9" column="14" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
+          <folding>
+            <marker date="1575907377240" expanded="false" signature="6:78" ph="..." />
+            <marker date="1575907377240" expanded="true" signature="123:1534" ph="{...}" />
+            <marker date="1575907377240" expanded="true" signature="451:515" ph="{...}" />
+            <marker date="1575907377240" expanded="true" signature="551:690" ph="{...}" />
+            <marker date="1575907377240" expanded="true" signature="696:1483" ph="External Calls" />
+            <marker date="1575907377240" expanded="true" signature="771:1112" ph="{...}" />
+            <marker date="1575907377240" expanded="true" signature="848:944" ph="{...}" />
+            <marker date="1575907377240" expanded="true" signature="1160:1468" ph="{...}" />
+            <marker date="1575907377240" expanded="true" signature="1367:1462" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/ImprovedCameraController.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-128">
+          <caret line="42" column="10" selection-start-line="42" selection-start-column="10" selection-end-line="42" selection-end-column="10" />
+          <folding>
+            <marker date="1575989657944" expanded="false" signature="6:78" ph="..." />
+            <marker date="1575989657944" expanded="true" signature="133:2511" ph="{...}" />
+            <marker date="1575989657944" expanded="true" signature="140:373" ph="[...]" />
+            <marker date="1575989657944" expanded="true" signature="433:566" ph="[...]" />
+            <marker date="1575989657944" expanded="true" signature="626:722" ph="/* [SerializeField] private GameObject minimapCamera; ... */" />
+            <marker date="1575989657944" expanded="true" signature="943:1088" ph="{...}" />
+            <marker date="1575989657944" expanded="true" signature="1120:1360" ph="{...}" />
+            <marker date="1575989657944" expanded="true" signature="1399:1680" ph="{...}" />
+            <marker date="1575989657944" expanded="true" signature="1719:1891" ph="{...}" />
+            <marker date="1575989657944" expanded="true" signature="1932:2098" ph="{...}" />
+            <marker date="1575989657944" expanded="true" signature="2136:2509" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Player/Characters/ArcherCharacter.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1520">
+          <caret line="137" column="47" selection-start-line="137" selection-start-column="47" selection-end-line="137" selection-end-column="47" />
+          <folding>
+            <marker date="1575904428085" expanded="false" signature="6:78" ph="..." />
+            <marker date="1575904428085" expanded="true" signature="127:6160" ph="{...}" />
+            <marker date="1575904428085" expanded="true" signature="629:2018" ph="{...}" />
+            <marker date="1575904428085" expanded="false" signature="752:1067" ph="Primary Attack" />
+            <marker date="1575904428085" expanded="true" signature="810:982" ph="{...}" />
+            <marker date="1575904428085" expanded="false" signature="1077:1352" ph="Specials" />
+            <marker date="1575904428085" expanded="false" signature="1362:1750" ph="Dodge" />
+            <marker date="1575904428085" expanded="true" signature="1427:1602" ph="{...}" />
+            <marker date="1575904428085" expanded="true" signature="1481:1592" ph="{...}" />
+            <marker date="1575904428085" expanded="true" signature="1658:1730" ph="{...}" />
+            <marker date="1575904428085" expanded="false" signature="1760:2012" ph="Cooldowns" />
+            <marker date="1575904428085" expanded="true" signature="2060:2894" ph="{...}" />
+            <marker date="1575904428085" expanded="true" signature="2931:3731" ph="{...}" />
+            <marker date="1575904428085" expanded="true" signature="3769:4956" ph="{...}" />
+            <marker date="1575904428085" expanded="true" signature="4016:4914" ph="{...}" />
+            <marker date="1575904428085" expanded="true" signature="4993:5491" ph="{...}" />
+            <marker date="1575904428085" expanded="true" signature="5008:5214" ph="/* Calculate the bow draw percentage (based on currentDraw &amp; maxDraw), ... */" />
+            <marker date="1575904428085" expanded="true" signature="5535:5728" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -789,24 +808,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Stats/CharacterStats.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-116">
-          <caret line="9" column="14" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
-          <folding>
-            <marker date="1575907377240" expanded="false" signature="6:78" ph="..." />
-            <marker date="1575907377240" expanded="true" signature="123:1534" ph="{...}" />
-            <marker date="1575907377240" expanded="true" signature="451:515" ph="{...}" />
-            <marker date="1575907377240" expanded="true" signature="551:690" ph="{...}" />
-            <marker date="1575907377240" expanded="true" signature="696:1483" ph="External Calls" />
-            <marker date="1575907377240" expanded="true" signature="771:1112" ph="{...}" />
-            <marker date="1575907377240" expanded="true" signature="848:944" ph="{...}" />
-            <marker date="1575907377240" expanded="true" signature="1160:1468" ph="{...}" />
-            <marker date="1575907377240" expanded="true" signature="1367:1462" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Player/ArcherGameUI.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
@@ -817,6 +818,126 @@
             <marker date="1575907456000" expanded="true" signature="507:573" ph="{...}" />
             <marker date="1575907456000" expanded="true" signature="600:909" ph="{...}" />
             <marker date="1575907456000" expanded="true" signature="938:1167" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/LevelManager.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-48">
+          <caret line="12" column="33" selection-start-line="12" selection-start-column="33" selection-end-line="12" selection-end-column="33" />
+          <folding>
+            <marker date="1575986501769" expanded="false" signature="6:113" ph="..." />
+            <marker date="1575986501769" expanded="true" signature="156:3296" ph="{...}" />
+            <marker date="1575986501769" expanded="false" signature="798:1021" ph="Singleton" />
+            <marker date="1575986501769" expanded="true" signature="889:1006" ph="{...}" />
+            <marker date="1575986501769" expanded="true" signature="1047:1240" ph="{...}" />
+            <marker date="1575986501769" expanded="true" signature="1274:1321" ph="{...}" />
+            <marker date="1575986501769" expanded="true" signature="1350:1397" ph="{...}" />
+            <marker date="1575986501769" expanded="true" signature="1424:1676" ph="{...}" />
+            <marker date="1575986501769" expanded="true" signature="1489:1670" ph="{...}" />
+            <marker date="1575986501769" expanded="true" signature="1711:2766" ph="{...}" />
+            <marker date="1575986501769" expanded="true" signature="1747:2760" ph="{...}" />
+            <marker date="1575986501769" expanded="true" signature="2829:3045" ph="{...}" />
+            <marker date="1575986501769" expanded="true" signature="3208:3294" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Room Generation/RoomSelector.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="716">
+          <caret line="286" column="69" selection-start-line="286" selection-start-column="69" selection-end-line="286" selection-end-column="69" />
+          <folding>
+            <marker date="1575992837889" expanded="true" signature="61:11490" ph="{...}" />
+            <marker date="1575992837889" expanded="true" signature="113:368" ph="[...]" />
+            <marker date="1575992837889" expanded="true" signature="901:1381" ph="/* based on 1-2-4-8. 1 up, 2 down, 4 left, 8 right. ... */" />
+            <marker date="1575992837889" expanded="true" signature="1411:1468" ph="{...}" />
+            <marker date="1575992837889" expanded="true" signature="1502:1764" ph="{...}" />
+            <marker date="1575992837889" expanded="true" signature="1793:11488" ph="{...}" />
+            <marker date="1575992837889" expanded="true" signature="1826:6434" ph="{...}" />
+            <marker date="1575992837889" expanded="true" signature="1866:6424" ph="{...}" />
+            <marker date="1575992837889" expanded="true" signature="6462:11070" ph="{...}" />
+            <marker date="1575992837889" expanded="true" signature="6502:11060" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Room Logic/RoomManager.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="53" column="83" selection-start-line="53" selection-start-column="83" selection-end-line="53" selection-end-column="83" />
+          <folding>
+            <marker date="1575992992129" expanded="false" signature="6:78" ph="..." />
+            <marker date="1575992992129" expanded="true" signature="120:3432" ph="{...}" />
+            <marker date="1575992992129" expanded="true" signature="662:1046" ph="{...}" />
+            <marker date="1575992992129" expanded="true" signature="803:1040" ph="{...}" />
+            <marker date="1575992992129" expanded="true" signature="1078:1212" ph="{...}" />
+            <marker date="1575992992129" expanded="true" signature="1262:1421" ph="{...}" />
+            <marker date="1575992992129" expanded="true" signature="1472:1593" ph="{...}" />
+            <marker date="1575992992129" expanded="true" signature="1628:2468" ph="{...}" />
+            <marker date="1575992992129" expanded="true" signature="1643:1767" ph="/* At the moment nothing happens in daytime; monsters only respawn at night. ... */" />
+            <marker date="1575992992129" expanded="true" signature="1811:2462" ph="{...}" />
+            <marker date="1575992992129" expanded="true" signature="2514:2829" ph="{...}" />
+            <marker date="1575992992129" expanded="true" signature="2529:2689" ph="/* Check if room is a boss room, and update the room. ... */" />
+            <marker date="1575992992129" expanded="true" signature="2711:2823" ph="{...}" />
+            <marker date="1575992992129" expanded="true" signature="2882:3430" ph="{...}" />
+            <marker date="1575992992129" expanded="true" signature="2928:3420" ph="{...}" />
+            <marker date="1575992992129" expanded="true" signature="3219:3374" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Room Generation/LevelGeneration.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4690">
+          <folding>
+            <marker date="1575286181534" expanded="false" signature="6:78" ph="..." />
+            <marker date="1575286181534" expanded="true" signature="80:251" ph="/* Room Types: ... */" />
+            <marker date="1575286181534" expanded="true" signature="297:12479" ph="{...}" />
+            <marker date="1575286181534" expanded="true" signature="346:574" ph="[...]" />
+            <marker date="1575286181534" expanded="true" signature="614:773" ph="[...]" />
+            <marker date="1575286181534" expanded="true" signature="811:1052" ph="[...]" />
+            <marker date="1575286181534" expanded="true" signature="1108:1610" ph="[...]" />
+            <marker date="1575286181534" expanded="true" signature="2313:2676" ph="{...}" />
+            <marker date="1575286181534" expanded="true" signature="2387:2492" ph="{...}" />
+            <marker date="1575286181534" expanded="true" signature="2708:4744" ph="{...}" />
+            <marker date="1575286181534" expanded="true" signature="3149:4738" ph="{...}" />
+            <marker date="1575286181534" expanded="true" signature="3172:3482" ph="/* This generator will determine whether the rooms should be clumped together, or branched out. ... */" />
+            <marker date="1575286181534" expanded="true" signature="3781:4376" ph="{...}" />
+            <marker date="1575286181534" expanded="true" signature="4390:4579" ph="/* Finalize Position, add to list and calculate the offset. ... */" />
+            <marker date="1575286181534" expanded="true" signature="4779:6088" ph="{...}" />
+            <marker date="1575286181534" expanded="true" signature="4902:5147" ph="/* Grab a random taken position from the list, ... */" />
+            <marker date="1575286181534" expanded="true" signature="5449:5656" ph="{...}" />
+            <marker date="1575286181534" expanded="true" signature="5493:5557" ph="{...}" />
+            <marker date="1575286181534" expanded="true" signature="5578:5642" ph="{...}" />
+            <marker date="1575286181534" expanded="true" signature="5673:5880" ph="{...}" />
+            <marker date="1575286181534" expanded="true" signature="5717:5781" ph="{...}" />
+            <marker date="1575286181534" expanded="true" signature="5802:5866" ph="{...}" />
+            <marker date="1575286181534" expanded="true" signature="6132:7672" ph="{...}" />
+            <marker date="1575286181534" expanded="true" signature="6299:6423" ph="/* Find a room which only has one neighbour. ... */" />
+            <marker date="1575286181534" expanded="true" signature="6896:7103" ph="{...}" />
+            <marker date="1575286181534" expanded="true" signature="6940:7004" ph="{...}" />
+            <marker date="1575286181534" expanded="true" signature="7025:7089" ph="{...}" />
+            <marker date="1575286181534" expanded="true" signature="7120:7327" ph="{...}" />
+            <marker date="1575286181534" expanded="true" signature="7164:7228" ph="{...}" />
+            <marker date="1575286181534" expanded="true" signature="7249:7313" ph="{...}" />
+            <marker date="1575286181534" expanded="true" signature="7526:7637" ph="{...}" />
+            <marker date="1575286181534" expanded="true" signature="7758:8281" ph="{...}" />
+            <marker date="1575286181534" expanded="true" signature="8427:9770" ph="{...}" />
+            <marker date="1575286181534" expanded="true" signature="8442:8643" ph="/* Use a nested for loop to check each slot in the grid, to check for neighbours of the room. ... */" />
+            <marker date="1575286181534" expanded="true" signature="8696:9764" ph="{...}" />
+            <marker date="1575286181534" expanded="true" signature="8762:9754" ph="{...}" />
+            <marker date="1575286181534" expanded="true" signature="9798:12078" ph="{...}" />
+            <marker date="1575286181534" expanded="true" signature="9813:9932" ph="/* Grab a random room number, from the list of taken rooms, ... */" />
+            <marker date="1575286181534" expanded="true" signature="10106:10286" ph="/* Loop through each of the rooms in the grid, ... */" />
+            <marker date="1575286181534" expanded="true" signature="10323:11797" ph="{...}" />
+            <marker date="1575286181534" expanded="true" signature="10448:10569" ph="/* Multipley the current room position (on the grid), ... */" />
+            <marker date="1575286181534" expanded="true" signature="10859:11027" ph="/* If the bossRoom is the same as shopRoom, find a new room for the boss. ... */" />
+            <marker date="1575286181534" expanded="true" signature="11586:11696" ph="/* Move the room to the root folder (to keep hierarchy cleaner), ... */" />
+            <marker date="1575286181534" expanded="true" signature="11807:12031" ph="/* Update the navmesh at the start of FixedUpdate(), ... */" />
+            <marker date="1575286181534" expanded="true" signature="12111:12477" ph="{...}" />
+            <marker date="1575286181534" expanded="true" signature="12126:12369" ph="/* Navmesh update needs to be carried out at the end of room generation, ... */" />
           </folding>
         </state>
       </provider>

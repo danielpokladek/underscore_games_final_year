@@ -5,15 +5,18 @@ using UnityEngine;
 public class RoomManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] enemySpawners;
+    [SerializeField] private GameObject shopSpawner;
 
     // -------------------------------
     private LevelManager levelManager;
     private GameObject bossIconGO;
+    private GameObject shopIcon;
     private bool enemiesSpawned;
 
     // -------------------
     private bool bossRoom;
     private bool spawnRoom;
+    private bool shopRoom;
 
     // ------------------------------
     private string m_currentDayState;
@@ -32,17 +35,23 @@ public class RoomManager : MonoBehaviour
         }
     }
 
-    public void SpawnPlayer()
+    public void SetSpawnRoom()
     {
         spawnRoom = true;
         Instantiate(GameManager.current.playerPrefab, transform.position, Quaternion.identity);
     }
 
-    public void SpawnBoss(GameObject bossIcon)
+    public void SetBossRoom(GameObject bossIcon)
     {
         bossIconGO = Instantiate(bossIcon, transform.position, Quaternion.identity);
         bossIconGO.SetActive(false);
         bossRoom = true;
+    }
+
+    public void SetShopRoom(GameObject _shopIcon)
+    {
+        shopRoom = true;
+        shopIcon = Instantiate(_shopIcon, transform.position, Quaternion.identity);
     }
 
     public void UpdateRoomState()
