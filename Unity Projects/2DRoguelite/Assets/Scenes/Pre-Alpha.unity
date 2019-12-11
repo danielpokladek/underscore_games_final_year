@@ -1034,12 +1034,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapRoot: {fileID: 2007092662}
-  roomPref: {fileID: 2447372284656423943, guid: cbfa820a7f018584fb22878721570e5a,
+  roomPref: {fileID: 2447372284656423943, guid: b47346f9540082642ae922a8ce8cd2cb,
     type: 3}
   worldSize: {x: 4, y: 4}
   numberOfRooms: 10
-  roomSizeX: 39
-  roomSizeY: 29
+  roomSizeX: 69
+  roomSizeY: 59
 --- !u!4 &1953332612
 Transform:
   m_ObjectHideFlags: 0
