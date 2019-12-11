@@ -5,7 +5,7 @@ using UnityEngine;
 public class RoomManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] enemySpawners;
-    [SerializeField] private GameObject shopSpawner;
+    [SerializeField] private GameObject[] shopSpawner;
 
     // -------------------------------
     private LevelManager levelManager;
@@ -51,6 +51,11 @@ public class RoomManager : MonoBehaviour
     public void SetShopRoom(GameObject _shopIcon)
     {
         shopRoom = true;
+
+        int rand = Random.Range(0, shopSpawner.Length);
+
+        GameObject shop = Instantiate(LevelManager.instance.shopPrefab,
+            shopSpawner[rand].transform.position, Quaternion.identity);
         shopIcon = Instantiate(_shopIcon, transform.position, Quaternion.identity);
     }
 
