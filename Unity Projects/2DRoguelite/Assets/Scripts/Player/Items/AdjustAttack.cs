@@ -5,12 +5,12 @@ using UnityEngine;
 public class AdjustAttack : ItemPickup
 {
     [Header("Attack Properties:")]
-    public float damageAmount;
-    public float attackDelay;
+    public float damageModifier;
+    public float delayModifier;
 
     override protected void PlayerInteract(PlayerController playerController)
     {
-        playerController.DamageAmount = damageAmount;
-        playerController.AttackDelay = attackDelay;
+        playerController.playerStats.characterAttackDamage.AddModifier(damageModifier);
+        playerController.playerStats.characterAttackDelay.AddModifier(delayModifier);
     }
 }

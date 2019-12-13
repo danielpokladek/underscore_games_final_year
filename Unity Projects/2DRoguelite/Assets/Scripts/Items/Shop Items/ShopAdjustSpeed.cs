@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShopAdjustSpeed : ShopItem
 {
-    [SerializeField] private float moveSpeed;
+    [SerializeField] private float movementModifier;
 
     override public void Interact(PlayerController playerController)
     {
@@ -12,7 +12,10 @@ public class ShopAdjustSpeed : ShopItem
             return;
 
         PurchaseItem(itemPrice);
-        playerController.MovementSpd += moveSpeed;
+        
+        playerController.playerStats.characterSpeed.AddModifier(movementModifier);
+        playerController.onGUIUpdateCallback.Invoke();
+        
         Destroy(gameObject);
     }
 }

@@ -6,6 +6,7 @@ public class RoomManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] enemySpawners;
     [SerializeField] private GameObject[] shopSpawner;
+    //[SerializeField] private GameObject _shopIcon;
 
     // -------------------------------
     private LevelManager levelManager;
@@ -30,7 +31,7 @@ public class RoomManager : MonoBehaviour
         if (bossRoom)
         {
             m_bossPortal = Instantiate(LevelManager.instance.bossPortal, transform.position, Quaternion.identity);
-            GameManager.current.bossPortal = m_bossPortal;
+            GameManager.current.bossPortalReference = m_bossPortal;
             m_bossPortal.SetActive(false);
         }
     }
@@ -52,10 +53,11 @@ public class RoomManager : MonoBehaviour
     {
         shopRoom = true;
 
-        int rand = Random.Range(0, shopSpawner.Length);
+        int rand = Random.Range(0, shopSpawner.Length-1);
 
         GameObject shop = Instantiate(LevelManager.instance.shopPrefab,
-            shopSpawner[rand].transform.position, Quaternion.identity);
+            shopSpawner[0].transform.position, Quaternion.identity);
+        
         shopIcon = Instantiate(_shopIcon, transform.position, Quaternion.identity);
     }
 
@@ -118,6 +120,12 @@ public class RoomManager : MonoBehaviour
             }
 
             enemiesSpawned = true;
-        }    
+        }
+
+        if (bossRoom)
+        {
+            if (other.CompareTag("Player"))
+                other.GetComponent<PlayerController>().foundPortal = true;
+        }
     }
 }

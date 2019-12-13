@@ -284,6 +284,6 @@ public class RoomSelector : MonoBehaviour
             tempRoom.GetComponent<RoomManager>().SetBossRoom(bossIcon);
         
         if (roomType == 3)
-            tempRoom.GetComponent<RoomManager>().SetShopRoom(shopIcon);
+            tempRoom.GetComponent<RoomManager>().SetShopRoom(LevelManager.instance.shopIcon);
     }
 }

@@ -12,6 +12,8 @@ public class LevelManager : MonoBehaviour
     public GameObject bossPortal;
     public GameObject shopPrefab;
 
+    public GameObject shopIcon;
+
     // -------------------------------------------------
     public enum DayState { PlayerSel, Day, Night, Midnight, Boss };
     public DayState currentState;

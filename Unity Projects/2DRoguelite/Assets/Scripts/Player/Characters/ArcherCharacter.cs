@@ -9,6 +9,7 @@ public class ArcherCharacter : RangedController
     [SerializeField] private Transform[] tripleShotPoint;
     [SerializeField] private float tripleShotCooldown;
     [SerializeField] private float arrowNockCooldown;
+    [SerializeField] private GameObject fullyChargedParticles;
 
     // ------------------
     private float currentAttackDelay;
@@ -36,6 +37,11 @@ public class ArcherCharacter : RangedController
 
         if (Input.GetButtonUp("LMB"))
             PrimAttack();
+        
+        if (currentAttackDelay >= attackDelay)
+            fullyChargedParticles.SetActive(true);
+        else
+            fullyChargedParticles.SetActive(false);
 
         #endregion
 
@@ -109,7 +115,7 @@ public class ArcherCharacter : RangedController
             tempProjectile.transform.localScale.z * projectileSizeMultiplier);
 
         projectileRB.AddForce(firePoint.up * 20, ForceMode2D.Impulse);
-        bulletScript.SetDamage(currentDamage * 2);
+        bulletScript.SetDamage(playerStats.characterAttackDamage.GetValue() * 2);
 
         currentNockCooldown = 0;
     }
@@ -135,7 +141,7 @@ public class ArcherCharacter : RangedController
                 playerProjectile.transform.localScale.z * projectileSizeMultiplier);
 
             projectileRB.AddForce(firePoint.up * 20, ForceMode2D.Impulse);
-            bulletScript.SetDamage(playerDamage / 2);
+            bulletScript.SetDamage(playerStats.characterAttackDamage.GetValue() / 2);
 
             playerProjectile.GetComponent<TrailRenderer>().startColor = Color.blue;
             playerProjectile.GetComponent<TrailRenderer>().endColor = Color.blue;
@@ -162,11 +168,11 @@ public class ArcherCharacter : RangedController
     override protected IEnumerator Dodge()
     {
         allowMovement = false;
-        playerMoveSpeed += 15f;
+        playerStats.characterSpeed.AddModifier(15);
 
         yield return new WaitForSeconds(dodgeLength);
 
-        playerMoveSpeed -= 15f;
+        playerStats.characterSpeed.RemoveModifier(15);
         allowMovement = true;
     }
 

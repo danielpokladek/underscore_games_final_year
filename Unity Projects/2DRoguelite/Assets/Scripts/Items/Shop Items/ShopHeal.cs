@@ -11,11 +11,14 @@ public class ShopHeal : ShopItem
         if (!CheckGems(itemPrice))
             return;
 
-        if (playerController.isHealed())
+        if (playerController.playerStats.IsHealed())
             return;
 
         PurchaseItem(itemPrice);
+        
         playerController.playerStats.HealCharacter(healAmount);
+        playerController.onGUIUpdateCallback.Invoke();
+        
         Destroy(gameObject);
     }
 }

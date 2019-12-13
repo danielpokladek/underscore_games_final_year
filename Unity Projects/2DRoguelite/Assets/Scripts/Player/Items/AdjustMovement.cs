@@ -5,10 +5,10 @@ using UnityEngine;
 public class AdjustMovement : ItemPickup
 {
     [Header("Movement Properties:")]
-    public float movementSpeed;
+    public float movementModifier;
 
     override protected void PlayerInteract(PlayerController playerController)
     {
-        playerController.MovementSpd = movementSpeed;
+        playerController.playerStats.characterSpeed.AddModifier(movementModifier);
     }
 }

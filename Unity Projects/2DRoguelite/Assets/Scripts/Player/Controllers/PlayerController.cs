@@ -4,16 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Base Settings")]
-    [Tooltip("Speed at which the player will move")]
-    [SerializeField] protected float playerMoveSpeed = 8.0f;
-
-    [Tooltip("Player's maximum health points.")]
-    [SerializeField] protected float playerHealth = 20;
-    
-    [Tooltip("Damage that the player will deal to the enemies, later this will be determined by the weapon.")]
-    [SerializeField] protected float playerDamage;
-
+    [Header("Base Settings")]   
     [Tooltip("This is player's 'arm' which will be used to aiming, shooting, etc. It rotates towards the mouse.")]
     [SerializeField] protected GameObject playerArm;
 
@@ -46,9 +37,8 @@ public class PlayerController : MonoBehaviour
     private int       playerDirection;
     
     // -------------------------
-    protected float currentHealth;
-    protected float currentDamage;
-    protected bool  playerAlive = true;
+    protected bool playerAlive = true;
+    [HideInInspector] public bool foundPortal = false;
 
     // --- MANAGERS --- //
     protected GameUIManager gameUIManager;
@@ -80,8 +70,6 @@ public class PlayerController : MonoBehaviour
         playerStats   = GetComponent<PlayerStats>();
         playerCamera  = Camera.main;
 
-        currentDamage = playerDamage;
-        currentHealth = playerHealth;
         playerAlive   = true;
         CanMove       = true;
 
@@ -110,15 +98,23 @@ public class PlayerController : MonoBehaviour
                 playerStats.TakeDamage(10);
             
             // Temp minimap thing
-            if (LevelManager.instance.currentState == LevelManager.DayState.Night)
-            {               
+            if (LevelManager.instance.currentState == LevelManager.DayState.Night ||
+                LevelManager.instance.currentState == LevelManager.DayState.Midnight)
+            {
                 minimapThing.SetActive(true);
+                
+                if (foundPortal)
+                {
+                    Vector3 diff = GameManager.current.bossPortalReference.transform.position - transform.position;
+                    diff.Normalize();
 
-                Vector3 diff = GameManager.current.bossPortal.transform.position - transform.position;
-                diff.Normalize();
-
-                float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
-                minimapThing.transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
+                    float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
+                    minimapThing.transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
+                }
+                else
+                {
+                    minimapThing.transform.RotateAround(minimapThing.transform.position, new Vector3(0, 0, 1), 30);
+                }
             }
             else
             {
@@ -138,7 +134,8 @@ public class PlayerController : MonoBehaviour
                 PlayerAim();
             }
 
-
+            
+            playerAnim.SetFloat("HMovement", mouseVector.x);
             playerAnim.SetFloat("VMovement", mouseVector.y);
             playerAnim.SetFloat("moveMagnitude", playerInput.magnitude);
         }
@@ -161,10 +158,17 @@ public class PlayerController : MonoBehaviour
         mouseVector = (mousePosition - (Vector2) transform.position).normalized;
     }
 
-    private void MoveCharacter(Vector2 input)
+    private void MoveCharacter(Vector2 _playerInput)
     {
         if (canMove)
-            playerRB.MovePosition((Vector2) transform.position + (input * playerMoveSpeed * Time.deltaTime));
+        {
+            Vector2 moveVector = new Vector2(_playerInput.x, _playerInput.y);
+            moveVector.Normalize();
+            moveVector *= playerStats.characterSpeed.GetValue();
+            
+            playerRB.MovePosition((Vector2) transform.position +
+                                  (moveVector * Time.deltaTime));
+        }
     }
 
     virtual protected void PlayerAim()
@@ -174,12 +178,6 @@ public class PlayerController : MonoBehaviour
     }
 
     #region External Calls
-    /// <summary>
-    /// Temporarily disables player's movement and adds force to the Rigidbody2D in specified direcion and with specified force.
-    /// </summary>
-    /// <param name="forceDirection">Vector2 direction in which the force should be applied on player.</param>
-    /// <param name="forceStrength">Amount of force that should be applied to the player.</param>
-    /// <param name="moveDelay">Determines how long player's movement will be disabled for.</param>
     public IEnumerator AddForce(Vector2 forceDirection, float forceStrength, float moveDelay)
     {
         canMove = false;
@@ -203,37 +201,8 @@ public class PlayerController : MonoBehaviour
         set { canMove = value; }
         get { return canMove; }
     }
-
-    public bool isHealed()
-    {
-        if (currentHealth == playerHealth)
-        {
-            Debug.Log("You are fully healed!");
-            return true;
-        }
-
-        return false;
-    }
-
-    public float GetCurrentHealth
-    {
-        get { return currentHealth; }
-    }
-
-    public float GetMaxHealth { get { return playerHealth; } }
-    public void SetMaxHealth(float value)
-    { 
-        playerHealth += value;
-        
-        onGUIUpdateCallback.Invoke();
-        
-        if (currentHealth > playerHealth)
-            currentHealth = playerHealth;
-    }
-
-    public float DamageAmount { get { return currentDamage; }   set { currentDamage = value; } }
+    
     public float AttackDelay  { get { return attackDelay; }     set { attackDelay = value; } }
-    public float MovementSpd  { get { return playerMoveSpeed; } set { playerMoveSpeed = value; } }
     #endregion
 
     #region Attack/Dodge/Skill Declarations
@@ -267,4 +236,3 @@ public class PlayerController : MonoBehaviour
             onGUIUpdateCallback.Invoke();
     }
 }
-    

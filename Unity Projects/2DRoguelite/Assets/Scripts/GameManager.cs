@@ -8,10 +8,10 @@ public class GameManager : MonoBehaviour
 
     public GameObject playerPrefab;
     
-    public GameObject bossPortal;
+    [HideInInspector] public GameObject bossPortalReference;
     
     [SerializeField] private int playerGems;
-
+    
     private void Awake()
     {
         if (current == null)

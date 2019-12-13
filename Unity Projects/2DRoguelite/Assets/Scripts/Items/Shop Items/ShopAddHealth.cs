@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class ShopAddHealth : ShopItem
 {
-    [SerializeField] private float healthAmount;
+    [SerializeField] private float healthModifier;
 
-    public override void Interact(PlayerController playerController)
+    override public void Interact(PlayerController playerController)
     {
         if (!CheckGems(itemPrice))
             return;
 
         PurchaseItem(itemPrice);
-        playerController.SetMaxHealth(healthAmount);
+        
+        playerController.playerStats.characterHealth.AddModifier(healthModifier);
+        playerController.onGUIUpdateCallback.Invoke();
+        
         Destroy(gameObject);
     }
 }

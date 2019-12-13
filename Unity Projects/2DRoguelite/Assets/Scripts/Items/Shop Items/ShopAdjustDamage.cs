@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShopAdjustDamage : ShopItem
 {
-    [SerializeField] private float damageAmount;
+    [SerializeField] private float damageModifier;
 
     public override void Interact(PlayerController playerController)
     {
@@ -12,7 +12,10 @@ public class ShopAdjustDamage : ShopItem
             return;
 
         PurchaseItem(itemPrice);
-        playerController.DamageAmount += damageAmount;
+        
+        playerController.playerStats.characterAttackDamage.AddModifier(damageModifier);
+        playerController.onGUIUpdateCallback.Invoke();
+        
         Destroy(gameObject);
     }
 }

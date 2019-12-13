@@ -11,24 +11,19 @@ public class CharacterStats : MonoBehaviour
     public Stat characterAttackDamage;
     public Stat characterAttackDelay;
 
-    // ---
-    protected PlayerController playerController;
-    protected GameUIManager gameuiManager;
-
+    private GameUIManager gameUI;
+    
     private void Awake()
     {
+        gameUI = GameUIManager.currentInstance;
         currentHealth = characterHealth.GetValue();
     }
 
-    virtual protected void Start()
-    {
-        playerController     = GetComponent<PlayerController>();
-        gameuiManager        = GameUIManager.currentInstance;
-    }
+    virtual protected void Start() { gameUI = GameUIManager.currentInstance; }
 
     #region External Calls
     
-    public void HealCharacter(float healAmount)
+    virtual public void HealCharacter(float healAmount)
     {
         if ((currentHealth + healAmount) > characterHealth.GetValue())
         {
@@ -37,16 +32,13 @@ public class CharacterStats : MonoBehaviour
         }
 
         currentHealth += healAmount;
-        playerController.onGUIUpdateCallback.Invoke();
-        gameuiManager.HealIndicator(transform.position, healAmount);
+        gameUI.HealIndicator(transform.position, healAmount);
     }
 
-    public void TakeDamage(float damageAmount)
+    virtual public void TakeDamage(float damageAmount)
     {
         currentHealth -= damageAmount;
-
-        gameuiManager.DamageIndicator(transform.position, damageAmount);
-        playerController.onGUIUpdateCallback.Invoke();
+        gameUI.DamageIndicator(transform.position, damageAmount);
 
         if (currentHealth <= 0)
         {
@@ -54,6 +46,12 @@ public class CharacterStats : MonoBehaviour
             CharacterDeath();
         }
     }
+
+    public bool IsHealed()
+    {
+        return currentHealth >= characterHealth.GetValue();
+    }
+
     #endregion
 
     virtual protected void CharacterDeath() { }

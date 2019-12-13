@@ -28,7 +28,7 @@ public class RogueCharacter : MeleeController
         currentAttackDelay = 0;
     }
 
-    protected override void SecAttack()
+    override protected void SecAttack()
     {
         Vector2 shootDirection = mousePosition - playerRB.position;
 
@@ -38,20 +38,14 @@ public class RogueCharacter : MeleeController
         projectileRB.AddForce(attackPoint.up * 20, ForceMode2D.Impulse);
     }
 
-    private void OnGUI()
-    {
-        if (!showDebug)
-            return;
-
-        GUI.Label(new Rect(10, 40, 200, 20), "HP: "  + currentHealth.ToString("000") + " | Delay Charge: " + (currentAttackDelay / attackDelay).ToString("0"));
-        GUI.Label(new Rect(10, 55, 200, 20), "Enemies in range: " + enemiesInRange.Length);
-        GUI.Label(new Rect(10, 70, 500, 20), "Pos: " + transform.position.ToString("0.000"));
-    }
-
     IEnumerator Dodge()
     {
-        playerMoveSpeed += 20f;
-        yield return new WaitForSeconds(.3f);
-        playerMoveSpeed -= 20f;
+        allowMovement = false;
+        playerStats.characterSpeed.AddModifier(15);
+
+        yield return new WaitForSeconds(.2f);
+
+        playerStats.characterSpeed.RemoveModifier(15);
+        allowMovement = true;
     }
 }
