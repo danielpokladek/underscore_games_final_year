@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class RangedController : PlayerController
 {
-    [Header("Ranger Settings")]
     [SerializeField] protected SpriteRenderer weaponSprite;
     [SerializeField] protected Transform      firePoint;
     [SerializeField] protected GameObject     projectilePrefab;

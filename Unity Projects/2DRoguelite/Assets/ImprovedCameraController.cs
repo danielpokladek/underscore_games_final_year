@@ -12,11 +12,12 @@ public class ImprovedCameraController : MonoBehaviour
              "Increase this value to make the camera to move faster.")]
     [SerializeField] private float smoothTime = 0.2f;
 
+    [SerializeField] private Camera gameCamera;
+
     //[SerializeField] private GameObject minimapCamera;
-    
+
     // -------------------------------
     private Transform playerTransform;
-    private Camera    thisCamera;
 
     private Vector3 target, mousePos, refVel, shakeOffset;
     private float   zStart;
@@ -27,7 +28,6 @@ public class ImprovedCameraController : MonoBehaviour
     {
         StartCoroutine(InitCamera());
 
-        thisCamera = GetComponent<Camera>();
         //minimapCamera.transform.parent = null;
     }
 
@@ -45,7 +45,7 @@ public class ImprovedCameraController : MonoBehaviour
 
     private Vector3 CaptureMousePos()
     {
-        Vector2 ret = thisCamera.ScreenToViewportPoint(Input.mousePosition);
+        Vector2 ret = gameCamera.ScreenToViewportPoint(Input.mousePosition);
 
         ret *= 2;
         ret -= Vector2.one;

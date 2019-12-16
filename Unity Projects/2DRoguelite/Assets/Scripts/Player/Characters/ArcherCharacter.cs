@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EZCameraShake;
 
 public class ArcherCharacter : RangedController
 {
@@ -9,7 +10,8 @@ public class ArcherCharacter : RangedController
     [SerializeField] private Transform[] tripleShotPoint;
     [SerializeField] private float tripleShotCooldown;
     [SerializeField] private float arrowNockCooldown;
-    [SerializeField] private GameObject fullyChargedParticles;
+    [SerializeField] private ParticleSystem bowParticles;
+    [SerializeField] private ParticleSystem shootParticles;
 
     // ------------------
     private float currentAttackDelay;
@@ -29,20 +31,36 @@ public class ArcherCharacter : RangedController
         #region Primary Attack
         if (Input.GetButton("LMB"))
         {
+            shootParticles.Stop();
+
             currentAttackDelay += Time.deltaTime;
+
+            attackAnim.SetBool("drawingWeapon", true);
+            attackAnim.SetFloat("perc", currentAttackDelay / attackDelay);
 
             if (currentAttackDelay >= attackDelay)
                 currentAttackDelay = attackDelay;
         }
 
         if (Input.GetButtonUp("LMB"))
-            PrimAttack();
-        
-        if (currentAttackDelay >= attackDelay)
-            fullyChargedParticles.SetActive(true);
-        else
-            fullyChargedParticles.SetActive(false);
+        {
+            if (currentAttackDelay >= attackDelay)
+            {
+                //GameObject _go = Instantiate(shootParticles, firePoint.transform.position, firePoint.rotation);
+                //Destroy(_go, 2.5f);
 
+                shootParticles.Play();
+                bowParticles.Clear();
+            }
+
+            PrimAttack();
+            attackAnim.SetBool("drawingWeapon", false);
+        }
+
+        if (currentAttackDelay >= attackDelay)
+            bowParticles.Play();
+        else
+            bowParticles.Stop();
         #endregion
 
         #region Specials

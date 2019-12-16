@@ -1,7 +1,14 @@
 ﻿using UnityEngine;
+using EZCameraShake;
 
 public class PlayerProjectile : Projectile
 {
+    [Tooltip("Strength of the shake which will be applied to the camera upon hitting the enemy.")]
+    [SerializeField] private float cameraShakeMagnitude = 4.0f;
+
+    [Tooltip("Rougness of the camera shake upon hitting the enemy.")]
+    [SerializeField] private float cameraShakeRoughness = 2.0f;
+
     private void Start()
     {
         Destroy(gameObject, 3.5f);
@@ -15,7 +22,8 @@ public class PlayerProjectile : Projectile
             enemyController.TakeDamage(projectileDamage);
 
             GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
-            //gameUIManager.DamageIndicator(other.transform.position, projectileDamage);
+
+            CameraShaker.Instance.ShakeOnce(cameraShakeMagnitude, cameraShakeRoughness, .1f, .5f);
 
             Destroy(effect, 0.4f);
             Destroy(gameObject);

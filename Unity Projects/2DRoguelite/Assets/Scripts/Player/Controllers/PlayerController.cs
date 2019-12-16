@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Base Settings")]   
+    [Header("Character Settings")]   
     [Tooltip("This is player's 'arm' which will be used to aiming, shooting, etc. It rotates towards the mouse.")]
     [SerializeField] protected GameObject playerArm;
 
@@ -23,8 +23,9 @@ public class PlayerController : MonoBehaviour
     protected Vector2     playerInput;
     protected Camera      playerCamera;
 
-    private Animator playerAnim;
-    private bool facingRight;
+    // --- Animators ---
+                     protected Animator playerAnim;
+    [SerializeField] protected Animator attackAnim;
 
     // -----------------------------
     protected Vector2 mousePosition = new Vector2(0, 0);
@@ -33,7 +34,7 @@ public class PlayerController : MonoBehaviour
     protected bool    allowMovement;
 
     // ---
-    protected bool      canMove;
+    protected bool    canMove;
     private int       playerDirection;
     
     // -------------------------
@@ -97,7 +98,10 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.K))
                 playerStats.TakeDamage(10);
             
-            // Temp minimap thing
+            /*
+             * TEMPORARY BOSS PORTAL SOLUTIONS
+             * IDEALLY SHOULD BE CHANGED IN FUTURE AT SOME POINT
+             */
             if (LevelManager.instance.currentState == LevelManager.DayState.Night ||
                 LevelManager.instance.currentState == LevelManager.DayState.Midnight)
             {
@@ -113,7 +117,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
-                    minimapThing.transform.RotateAround(minimapThing.transform.position, new Vector3(0, 0, 1), 30);
+                    minimapThing.transform.RotateAround(minimapThing.transform.position, new Vector3(0, 0, 1), 10);
                 }
             }
             else
