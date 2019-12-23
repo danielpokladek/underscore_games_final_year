@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using EZCameraShake;
 using UnityEngine;
 
 public class PlayerStats : CharacterStats
@@ -19,6 +20,7 @@ public class PlayerStats : CharacterStats
         base.TakeDamage(damageAmount);
         
         playerController.onGUIUpdateCallback.Invoke();
+        CameraShaker.Instance.ShakeOnce(2f, 2f, .01f, .1f);
     }
 
     private void OnItemInteract()

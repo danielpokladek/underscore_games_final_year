@@ -14,7 +14,7 @@ public class ShopAddHealth : ShopItem
         PurchaseItem(itemPrice);
         
         playerController.playerStats.characterHealth.AddModifier(healthModifier);
-        playerController.onGUIUpdateCallback.Invoke();
+        playerController.onItemInteractCallback.Invoke();
         
         Destroy(gameObject);
     }

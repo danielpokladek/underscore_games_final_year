@@ -17,7 +17,7 @@ public class ShopHeal : ShopItem
         PurchaseItem(itemPrice);
         
         playerController.playerStats.HealCharacter(healAmount);
-        playerController.onGUIUpdateCallback.Invoke();
+        playerController.onItemInteractCallback.Invoke();
         
         Destroy(gameObject);
     }

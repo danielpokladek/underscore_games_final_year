@@ -32,6 +32,7 @@ public class ArcherCharacter : RangedController
         if (Input.GetButton("LMB"))
         {
             shootParticles.Stop();
+            bowParticles.Play();
 
             currentAttackDelay += Time.deltaTime;
 
@@ -50,17 +51,11 @@ public class ArcherCharacter : RangedController
                 //Destroy(_go, 2.5f);
 
                 shootParticles.Play();
-                bowParticles.Clear();
             }
 
             PrimAttack();
             attackAnim.SetBool("drawingWeapon", false);
         }
-
-        if (currentAttackDelay >= attackDelay)
-            bowParticles.Play();
-        else
-            bowParticles.Stop();
         #endregion
 
         #region Specials
