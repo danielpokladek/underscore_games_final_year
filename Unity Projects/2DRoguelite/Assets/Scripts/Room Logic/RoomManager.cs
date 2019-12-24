@@ -1,131 +1,100 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class RoomManager : MonoBehaviour
 {
-    [SerializeField] private GameObject[] enemySpawners;
-    [SerializeField] private GameObject[] shopSpawner;
-    //[SerializeField] private GameObject _shopIcon;
+    [Tooltip("Leave this option check if you want the enemies to be spawned.")]
+    [SerializeField] protected bool spawnEnemies = true;
+    [Tooltip("These are the points where the enemies will spawn in the room, " +
+        "make sure that the object has a EnemySpawner script attached to it.")]
+    [SerializeField] protected GameObject[] enemySpawnPoints;
+    [Tooltip("These are the points where the shops will spawn in the room, " +
+        "the script will select one of those points when creating the room.")]
+    [SerializeField] protected GameObject[] shopSpawnPoints;
+    [Tooltip("These are the points where the portal will spawn in the room, " +
+        "the script will select one of those points when creating the room.")]
+    [SerializeField] protected GameObject[] portalSpawnPoints;
 
-    // -------------------------------
-    private LevelManager levelManager;
-    private GameObject bossIconGO;
-    private GameObject shopIcon;
-    private bool enemiesSpawned;
-
-    // -------------------
-    private bool bossRoom;
-    private bool spawnRoom;
-    private bool shopRoom;
+    // ---------------------------------
+    protected LevelManager levelManager;
 
     // ------------------------------
-    private string m_currentDayState;
-    private GameObject m_bossPortal;
+    protected GameObject bossPortalRef;
+    protected GameObject bossIconRef;
+    protected GameObject shopIconRef;
+
+    // ---------------------------
+    protected bool roomDiscovered;
+    protected bool isPortalRoom;
+    protected bool isSpawnRoom;
+    protected bool isShopRoom;
 
     private void Start()
     {
         levelManager = LevelManager.instance;
         levelManager.onDayStateChangeCallback += UpdateRoomState;
+    }
 
-        if (bossRoom)
+    public void InitRoom(bool _isPortalRoom, bool _isSpawnRoom, bool _isShopRoom)
+    {
+        isPortalRoom = _isPortalRoom;
+        isSpawnRoom = _isSpawnRoom;
+        isShopRoom = _isShopRoom;
+
+        if (isPortalRoom)
+            bossIconRef = Instantiate(LevelManager.instance.minimapBoss, transform.position, Quaternion.identity);
+
+        if (isShopRoom)
+            shopIconRef = Instantiate(LevelManager.instance.minimapShop, transform.position, Quaternion.identity);
+
+        SpawnRoomObjects();
+    }
+
+    protected void SpawnRoomObjects()
+    {
+        if (isPortalRoom)
+            SpawnBossPortal();
+
+        if (isShopRoom)
+            SpawnItemShop();
+
+        if (isSpawnRoom)
+            SpawnPlayer();
+    }
+
+    virtual protected void SpawnBossPortal() { }
+
+    virtual protected void SpawnItemShop() { }
+
+    virtual protected void SpawnPlayer()
+    {
+        GameManager.current.playerRef = 
+            Instantiate(GameManager.current.playerPrefab, transform.position, Quaternion.identity);
+    }
+
+    virtual protected void UpdateRoomState() { }
+
+    protected void DisplayBoss(bool condition)
+    {
+        if (bossIconRef != null)
         {
-            m_bossPortal = Instantiate(LevelManager.instance.bossPortal, transform.position, Quaternion.identity);
-            GameManager.current.bossPortalReference = m_bossPortal;
-            m_bossPortal.SetActive(false);
+            bossIconRef.SetActive(condition);
         }
     }
 
-    public void SetSpawnRoom()
+    protected void SpawnEnemies()
     {
-        spawnRoom = true;
-        Instantiate(GameManager.current.playerPrefab, transform.position, Quaternion.identity);
-    }
+        if (!spawnEnemies)
+            return;
 
-    public void SetBossRoom(GameObject bossIcon)
-    {
-        bossIconGO = Instantiate(bossIcon, transform.position, Quaternion.identity);
-        bossIconGO.SetActive(false);
-        bossRoom = true;
-    }
-
-    public void SetShopRoom(GameObject _shopIcon)
-    {
-        shopRoom = true;
-
-        int rand = Random.Range(0, shopSpawner.Length-1);
-
-        GameObject shop = Instantiate(LevelManager.instance.shopPrefab,
-            shopSpawner[0].transform.position, Quaternion.identity);
-        
-        shopIcon = Instantiate(_shopIcon, transform.position, Quaternion.identity);
-    }
-
-    public void UpdateRoomState()
-    {
-        // At the moment nothing happens in daytime; monsters only respawn at night.
-        //  At night, the boss will also spawn.
-
-        switch (levelManager.currentState)
+        foreach (GameObject spawnPoint in enemySpawnPoints)
         {
-            case LevelManager.DayState.Day:
-                if (bossRoom)
-                    DisplayBoss(false);
-
-                m_currentDayState = LevelManager.instance.GetCurrentState;
-                break;
-
-            case LevelManager.DayState.Night:
-                if (bossRoom)
-                    DisplayBoss(true);
-
-                m_currentDayState = LevelManager.instance.GetCurrentState;
-                break;
-
-            case LevelManager.DayState.Midnight:
-                // Boss is still visible at midnight.
-
-                m_currentDayState = LevelManager.instance.GetCurrentState;
-                break;
+            spawnPoint.GetComponent<EnemySpawnPoint>().SpawnEnemy();
         }
     }
 
-    private void DisplayBoss(bool condition)
+    virtual protected void OnTriggerEnter2D(Collider2D other)
     {
-        // Check if room is a boss room, and update the room.
-        //  At the moment, only boss icon will appear,
-        //  more functionality will be added later.
-        if (bossRoom)
-        {
-            bossIconGO.SetActive(condition);
-            m_bossPortal.SetActive(condition);
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            if (spawnRoom)
-                return;
-
-            // It is daytime, and enemies have been spawned.
-            if (levelManager.GetCurrentState == "Day" && enemiesSpawned)
-                return;
-            
-            foreach (GameObject spawner in enemySpawners)
-            {
-                EnemySpawnPoint spawnPoint = spawner.GetComponent<EnemySpawnPoint>();
-                spawnPoint.SpawnEnemy();
-            }
-
-            enemiesSpawned = true;
-        }
-
-        if (bossRoom)
-        {
-            if (other.CompareTag("Player"))
-                other.GetComponent<PlayerController>().foundPortal = true;
-        }
+        if (isSpawnRoom)
+            return;
     }
 }

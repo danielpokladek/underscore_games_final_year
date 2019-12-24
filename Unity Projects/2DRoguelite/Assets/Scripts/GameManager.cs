@@ -7,8 +7,9 @@ public class GameManager : MonoBehaviour
     public static GameManager current = null;
 
     public GameObject playerPrefab;
+    public GameObject playerRef;
     
-    [HideInInspector] public GameObject bossPortalReference;
+    [HideInInspector] public GameObject bossPortalRef;
     
     [SerializeField] private int playerGems;
     

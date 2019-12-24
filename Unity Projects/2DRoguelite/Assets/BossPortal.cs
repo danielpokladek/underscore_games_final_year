@@ -6,7 +6,7 @@ public class BossPortal : MonoBehaviour
 {
     private void Start()
     {
-        GameManager.current.bossPortalReference = this.gameObject;
+        GameManager.current.bossPortalRef = this.gameObject;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

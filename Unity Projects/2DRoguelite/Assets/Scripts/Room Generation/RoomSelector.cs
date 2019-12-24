@@ -278,12 +278,12 @@ public class RoomSelector : MonoBehaviour
             tempRoom.transform.SetParent(gameObject.transform);
         
         if (roomType == 1)
-            tempRoom.GetComponent<RoomManager>().SetSpawnRoom();
+            tempRoom.GetComponent<RoomManager>().InitRoom(false, true, false);
 
         if (roomType == 2)
-            tempRoom.GetComponent<RoomManager>().SetBossRoom(bossIcon);
+            tempRoom.GetComponent<RoomManager>().InitRoom(true, false, false);
         
         if (roomType == 3)
-            tempRoom.GetComponent<RoomManager>().SetShopRoom(LevelManager.instance.shopIcon);
+            tempRoom.GetComponent<RoomManager>().InitRoom(false, false, true);
     }
 }

@@ -1,14 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemySpawnPoint : MonoBehaviour
 {
     [Header("Spawner Settings")]
-    [SerializeField] private GameObject testAiObject;
+    [SerializeField] private GameObject[] enemiesList;
 
     public void SpawnEnemy()
     {
-        Instantiate(testAiObject, transform.position, Quaternion.identity);
+        int rand = Random.Range(0, enemiesList.Length);
+
+        Instantiate(enemiesList[rand], transform.position, Quaternion.identity);
     }
 }
