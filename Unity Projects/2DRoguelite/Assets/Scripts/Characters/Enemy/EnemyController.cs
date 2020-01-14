@@ -53,6 +53,9 @@ public class EnemyController : MonoBehaviour
     protected Vector2 playerVector;
     protected float   aimAngle;
 
+    public delegate void OnEnemyDeath();
+    public OnEnemyDeath onEnemyDeathCallback;
+
     // ---
     private LevelManager levelManager;
 
@@ -175,6 +178,9 @@ public class EnemyController : MonoBehaviour
         {
             Instantiate(healthDrop, transform.position, Quaternion.identity);
         }
+
+        if (onEnemyDeathCallback != null)
+            onEnemyDeathCallback.Invoke();
 
         Destroy(gameObject);
     }

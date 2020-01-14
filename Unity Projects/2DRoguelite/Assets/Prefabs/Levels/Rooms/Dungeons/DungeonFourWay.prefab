@@ -948,9 +948,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 630fa3465ba953d4ca83fd3bc303d7e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawners: []
-  shopSpawner:
-  - {fileID: 0}
+  spawnEnemies: 1
+  enemySpawnPoints: []
+  shopSpawnPoints: []
+  portalSpawnPoints: []
 --- !u!61 &6236172727426242928
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1147,54 +1148,32 @@ CompositeCollider2D:
         Y: -20000029
       - X: -119999971
         Y: -120000000
-  - m_Collider: {fileID: 3622549605350144264}
-    m_ColliderPaths:
-    - - X: 19999606
-        Y: 109999900
-      - X: 19999606
-        Y: 120000100
-      - X: -20000100
-        Y: 119999577
-      - X: -19999665
-        Y: 109999988
-    - - X: -110000278
-        Y: -20000100
-      - X: -110000307
-        Y: 20000100
-      - X: -120000100
-        Y: 19999693
-      - X: -119999722
-        Y: -20000100
-    - - X: 119999896
-        Y: -20000100
-      - X: 119999867
-        Y: 20000100
-      - X: 109999900
-        Y: 19999867
-      - X: 110000104
-        Y: -20000100
-    - - X: 19999983
-        Y: -120000100
-      - X: 19999983
-        Y: -109999900
-      - X: -20000100
-        Y: -109999988
-      - X: -20000071
-        Y: -120000041
   m_CompositePaths:
     m_Paths:
-    - - {x: -11.999997, y: -11.999997}
-      - {x: 11.999997, y: -11.999997}
+    - - {x: -11.000006, y: 2}
+      - {x: -10.999994, y: 11}
+      - {x: -2, y: 11.000006}
+      - {x: -2.0000057, y: 12}
+      - {x: -12, y: 11.999994}
+      - {x: -11.999994, y: 2}
+    - - {x: 11.999994, y: 2}
       - {x: 11.999994, y: 12}
       - {x: 2, y: 11.999994}
       - {x: 2.0000057, y: 11}
       - {x: 11, y: 10.999994}
-      - {x: 10.999994, y: -11}
+      - {x: 11.000006, y: 2}
+    - - {x: -2.0000057, y: -12}
+      - {x: -2.0000057, y: -11}
       - {x: -11, y: -10.999994}
-      - {x: -10.999994, y: 11}
-      - {x: 1.9999607, y: 10.999993}
-      - {x: 1.9999577, y: 12.00001}
-      - {x: -12, y: 11.999994}
+      - {x: -11.000006, y: -2}
+      - {x: -12, y: -2.0000057}
+      - {x: -11.999994, y: -12}
+    - - {x: 11.999994, y: -12}
+      - {x: 11.999994, y: -2}
+      - {x: 11, y: -2.0000057}
+      - {x: 10.999994, y: -11}
+      - {x: 2, y: -11.000006}
+      - {x: 2.0000057, y: -12}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.000005
 --- !u!1 &4807685427921151012
@@ -1229,6 +1208,7 @@ Transform:
   - {fileID: 4152284474241518970}
   - {fileID: 4807685427257466539}
   - {fileID: 1424430874183544090}
+  - {fileID: 9033526271967845891}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1244,13 +1224,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 630fa3465ba953d4ca83fd3bc303d7e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawners:
-  - {fileID: 5489797042573093578}
-  - {fileID: 1718080881777886604}
-  - {fileID: 4696008523266774654}
-  shopSpawner:
-  - {fileID: 0}
-  - {fileID: 0}
+  spawnEnemies: 1
+  enemySpawnPoints: []
+  shopSpawnPoints: []
+  portalSpawnPoints: []
 --- !u!61 &8850550133089939579
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5931,7 +5908,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5512850903825546443
 Transform:
   m_ObjectHideFlags: 0
@@ -6308,12 +6285,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc417f562a4f17b4fb966a9cbc9f16b6, type: 3}
---- !u!1 &5489797042573093578 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7960282616360328762, guid: bc417f562a4f17b4fb966a9cbc9f16b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 2474507610943976688}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5489797042573093577 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7960282616360328761, guid: bc417f562a4f17b4fb966a9cbc9f16b6,
@@ -6389,17 +6360,86 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc417f562a4f17b4fb966a9cbc9f16b6, type: 3}
---- !u!1 &4696008523266774654 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7960282616360328762, guid: bc417f562a4f17b4fb966a9cbc9f16b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 3410078148209543236}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4696008523266774653 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7960282616360328761, guid: bc417f562a4f17b4fb966a9cbc9f16b6,
     type: 3}
   m_PrefabInstance: {fileID: 3410078148209543236}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6596796141100579466
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4807685427921151013}
+    m_Modifications:
+    - target: {fileID: 6981442854889627326, guid: d00b9c7853dc3f84c9e1bb8fc331bc7a,
+        type: 3}
+      propertyPath: m_Name
+      value: dungeonChest
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797033799169008777, guid: d00b9c7853dc3f84c9e1bb8fc331bc7a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797033799169008777, guid: d00b9c7853dc3f84c9e1bb8fc331bc7a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797033799169008777, guid: d00b9c7853dc3f84c9e1bb8fc331bc7a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797033799169008777, guid: d00b9c7853dc3f84c9e1bb8fc331bc7a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797033799169008777, guid: d00b9c7853dc3f84c9e1bb8fc331bc7a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797033799169008777, guid: d00b9c7853dc3f84c9e1bb8fc331bc7a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797033799169008777, guid: d00b9c7853dc3f84c9e1bb8fc331bc7a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797033799169008777, guid: d00b9c7853dc3f84c9e1bb8fc331bc7a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797033799169008777, guid: d00b9c7853dc3f84c9e1bb8fc331bc7a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797033799169008777, guid: d00b9c7853dc3f84c9e1bb8fc331bc7a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797033799169008777, guid: d00b9c7853dc3f84c9e1bb8fc331bc7a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d00b9c7853dc3f84c9e1bb8fc331bc7a, type: 3}
+--- !u!4 &9033526271967845891 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2797033799169008777, guid: d00b9c7853dc3f84c9e1bb8fc331bc7a,
+    type: 3}
+  m_PrefabInstance: {fileID: 6596796141100579466}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8768301391402572726
 PrefabInstance:
@@ -6470,12 +6510,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc417f562a4f17b4fb966a9cbc9f16b6, type: 3}
---- !u!1 &1718080881777886604 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7960282616360328762, guid: bc417f562a4f17b4fb966a9cbc9f16b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 8768301391402572726}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1718080881777886607 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7960282616360328761, guid: bc417f562a4f17b4fb966a9cbc9f16b6,

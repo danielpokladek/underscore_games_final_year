@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Room Container", menuName = "Room Generation", order = 0)]
+[CreateAssetMenu(fileName = "Room Container", menuName = "New Room Container", order = 0)]
 public class RoomContainer : ScriptableObject
 {
     public GameObject[] roomUp;

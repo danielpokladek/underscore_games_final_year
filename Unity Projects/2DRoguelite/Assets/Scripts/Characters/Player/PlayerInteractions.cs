@@ -8,6 +8,8 @@ public class PlayerInteractions : MonoBehaviour
     private PlayerController playerController;
     private ShopItem currentItem;
 
+    private InteractableItem interactItem;
+
     private bool onItem;
 
     private void Awake()
@@ -18,6 +20,12 @@ public class PlayerInteractions : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.CompareTag("Interactable"))
+        {
+            interactItem = other.gameObject.GetComponent<InteractableItem>();
+            interactItem.PlayerInRange = true;
+        }
+
         if (other.CompareTag("ShopItem"))
         {
             currentItem = other.gameObject.GetComponent<ShopItem>();
@@ -38,10 +46,14 @@ public class PlayerInteractions : MonoBehaviour
 
     private void PlayerInteract()
     {
+        interactItem.Interact();
+
+
         // Not on item, no need to run it.
         if (currentItem == null || !onItem)
             return;
 
         currentItem.Interact(playerController);
+
     }
 }

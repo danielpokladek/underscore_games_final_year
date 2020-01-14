@@ -28,6 +28,8 @@ public class RoomManager : MonoBehaviour
     protected bool isSpawnRoom;
     protected bool isShopRoom;
 
+    protected int enemiesSpawned;
+
     private void Start()
     {
         levelManager = LevelManager.instance;
@@ -88,8 +90,15 @@ public class RoomManager : MonoBehaviour
 
         foreach (GameObject spawnPoint in enemySpawnPoints)
         {
-            spawnPoint.GetComponent<EnemySpawnPoint>().SpawnEnemy();
+            GameObject enemy = spawnPoint.GetComponent<EnemySpawnPoint>().SpawnEnemy();
+            enemy.GetComponent<EnemyController>().onEnemyDeathCallback += OnEnemyDeath;
+            enemiesSpawned += 1;
         }
+    }
+
+    protected virtual void OnEnemyDeath()
+    {
+
     }
 
     virtual protected void OnTriggerEnter2D(Collider2D other)
