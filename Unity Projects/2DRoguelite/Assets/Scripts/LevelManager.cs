@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class LevelManager : MonoBehaviour
 {
@@ -17,9 +18,12 @@ public class LevelManager : MonoBehaviour
     }
     #endregion
 
+    [Header("Day State Settings")]
     [SerializeField] private float dayLength;
     [SerializeField] private float nightLength;
     [SerializeField] private float midnightLength;
+    public enum DayState { PlayerSel, Day, Night, Midnight, Boss };
+    public DayState currentState;
 
     public GameObject portalPrefab;
     public GameObject shopPrefab;
@@ -27,18 +31,24 @@ public class LevelManager : MonoBehaviour
     public GameObject minimapBoss;
     public GameObject minimapShop;
 
-    // -------------------------------------------------
-    public enum DayState { PlayerSel, Day, Night, Midnight, Boss };
-    public DayState currentState;
+    [Header("Ambient Light Settings")]
+    [SerializeField] private bool enableSunProgress;
+    [SerializeField] private Light2D  ambientLight;
+    [SerializeField] private Gradient dayToNightGradient;
+    [SerializeField] private Color nightColor;
+    [SerializeField] private Gradient nightToDayGradient;
+    [SerializeField] private float minLightIntensity = .7f;
+    [SerializeField] private float maxLightIntensity = .3f;
 
     // -------------------------------------
     public delegate void OnDayStateChange();
     public OnDayStateChange onDayStateChangeCallback;
 
-    public GameObject playerPrefab;
+    //[HideInInspector] public GameObject playerPrefab;
 
     private string currentStateString = "N/A";
     private float stateTimer;
+    private float dayTimer;
 
     private void Start()
     {
@@ -106,16 +116,24 @@ public class LevelManager : MonoBehaviour
             case DayState.Day:
                 if (stateTimer >= dayLength)
                     SetState(DayState.Night, "Night");
-                else
-                    stateTimer += Time.deltaTime;
+
+                stateTimer += Time.deltaTime;
+                dayTimer += Time.deltaTime;
+
+                ambientLight.intensity = Mathf.Lerp(maxLightIntensity, minLightIntensity, (stateTimer / dayLength));
+                ambientLight.color = dayToNightGradient.Evaluate(stateTimer / dayLength);
+
                 break;
 
             // Handle Night.
             case DayState.Night:
                 if (stateTimer >= nightLength)
                     SetState(DayState.Midnight, "Midnight");
-                else
-                    stateTimer += Time.deltaTime;
+
+                stateTimer += Time.deltaTime;
+
+                ambientLight.intensity = minLightIntensity;
+                ambientLight.color = nightColor;
 
                 break;
 
@@ -123,8 +141,11 @@ public class LevelManager : MonoBehaviour
             case DayState.Midnight:
                 if (stateTimer >= midnightLength)
                     SetState(DayState.Day, "Day");
-                else
-                    stateTimer += Time.deltaTime;
+
+                stateTimer += Time.deltaTime;
+
+                ambientLight.intensity = Mathf.Lerp(minLightIntensity, maxLightIntensity, (stateTimer / dayLength));
+                ambientLight.color = nightToDayGradient.Evaluate(stateTimer / dayLength);
 
                 break;
         }
