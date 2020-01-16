@@ -5,6 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
+    #region Singleton
+    public static LevelManager instance = null;
+
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
+    }
+    #endregion
+
     [SerializeField] private float dayLength;
     [SerializeField] private float nightLength;
     [SerializeField] private float midnightLength;
@@ -28,18 +40,6 @@ public class LevelManager : MonoBehaviour
     private string currentStateString = "N/A";
     private float stateTimer;
 
-    #region Singleton
-    public static LevelManager instance = null;
-
-    private void Awake()
-    {
-        if (instance == null)
-            instance = this;
-        else
-            Destroy(gameObject);
-    }
-    #endregion
-
     private void Start()
     {
         if (currentState == DayState.PlayerSel || currentState == DayState.Boss)
@@ -51,7 +51,7 @@ public class LevelManager : MonoBehaviour
 
     public void LoadBossBattle()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
     }
 
     public void StartGame()
@@ -71,6 +71,24 @@ public class LevelManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Backspace))
                 Restart();
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            SavePlayerStats();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+    }
+
+    public void SavePlayerStats()
+    {
+        if (GameManager.current.levelCounter > 0)
+            SaveManager.current.Save();
+    }
+
+    public void LoadPlayerStats()
+    {
+        if (GameManager.current.levelCounter > 0)
+            SaveManager.current.Load();
     }
 
     private void UpdateDayState()
@@ -124,6 +142,11 @@ public class LevelManager : MonoBehaviour
 
     public string GetCurrentState { get { return currentStateString; } }
     public float GetStateTimer { get { return stateTimer; } }
+
+    public void LevelComplete()
+    {
+        GameManager.current.levelCounter += 1;
+    }
 
     public void Restart()
     {

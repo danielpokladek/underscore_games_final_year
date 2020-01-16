@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    #region Singleton
     public static GameManager current = null;
-
-    public GameObject playerPrefab;
-    public GameObject playerRef;
-    
-    [HideInInspector] public GameObject bossPortalRef;
-    
-    [SerializeField] private int playerGems;
-    
     private void Awake()
     {
         if (current == null)
@@ -22,6 +15,17 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
     }
+    #endregion
+
+    public int levelCounter = 0;
+
+    public GameObject playerPrefab;
+    public GameObject playerRef;
+    
+    [HideInInspector] public GameObject bossPortalRef;
+    
+    [SerializeField] private int playerGems;
+
 
     public int PlayerCurrency { get { return playerGems; } set { playerGems = value; } }
 

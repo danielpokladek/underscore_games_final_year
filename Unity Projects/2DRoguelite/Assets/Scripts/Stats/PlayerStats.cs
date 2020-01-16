@@ -13,6 +13,8 @@ public class PlayerStats : CharacterStats
 
         playerController = GetComponent<PlayerController>();
         playerController.onItemInteractCallback += OnItemInteract;
+         
+        LevelManager.instance.LoadPlayerStats();
     }
 
     override public void TakeDamage(float damageAmount)
@@ -31,5 +33,11 @@ public class PlayerStats : CharacterStats
     override protected void CharacterDeath()
     {
         gameObject.SetActive(false);
+    }
+
+    public void SetHealth(float value)
+    {
+        currentHealth = value;
+        playerController.onGUIUpdateCallback.Invoke();
     }
 }

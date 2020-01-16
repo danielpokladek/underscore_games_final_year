@@ -63,6 +63,8 @@ public class BossController : MonoBehaviour
 
         ParticleSystem deathParticle = Instantiate(deathParticles, transform.position, Quaternion.identity);
 
+        SaveManager.current.Save();
+
         Destroy(deathParticle, 4.0f);
         Destroy(gameObject);
     }

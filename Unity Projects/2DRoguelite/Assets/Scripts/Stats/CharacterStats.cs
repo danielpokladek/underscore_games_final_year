@@ -5,7 +5,7 @@ using UnityEngine;
 public class CharacterStats : MonoBehaviour
 {
     public Stat characterHealth;
-    public float currentHealth { get; private set; }
+    public float currentHealth { get; set; }
 
     public Stat characterSpeed;
     public Stat characterAttackDamage;
@@ -51,7 +51,6 @@ public class CharacterStats : MonoBehaviour
     {
         return currentHealth >= characterHealth.GetValue();
     }
-
     #endregion
 
     virtual protected void CharacterDeath() { }
