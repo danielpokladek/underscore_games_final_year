@@ -13,6 +13,10 @@ public class ArcherCharacter : RangedController
     [SerializeField] private ParticleSystem bowParticles;
     [SerializeField] private ParticleSystem shootParticles;
 
+    [Header("Temp FX")]
+    public Color particlesDraw;
+    public Color particlesFullyDrawn;
+
     // ------------------
     private float currentAttackDelay;
     private float currentTripleCooldown;
@@ -29,29 +33,30 @@ public class ArcherCharacter : RangedController
             onGUIUpdateCallback.Invoke();
 
         #region Primary Attack
-        if (Input.GetButton("LMB"))
-        {
-            shootParticles.Stop();
+        if (Input.GetButtonDown("LMB"))
             bowParticles.Play();
 
+        if (Input.GetButton("LMB"))
+        {
             currentAttackDelay += Time.deltaTime;
 
             attackAnim.SetBool("drawingWeapon", true);
             attackAnim.SetFloat("perc", currentAttackDelay / attackDelay);
 
             if (currentAttackDelay >= attackDelay)
+            {
+                bowParticles.startColor = particlesFullyDrawn;
                 currentAttackDelay = attackDelay;
+            }
         }
 
         if (Input.GetButtonUp("LMB"))
         {
-            if (currentAttackDelay >= attackDelay)
-            {
-                //GameObject _go = Instantiate(shootParticles, firePoint.transform.position, firePoint.rotation);
-                //Destroy(_go, 2.5f);
+            bowParticles.Stop();
+            bowParticles.startColor = particlesDraw;
 
+            if (currentAttackDelay >= attackDelay)
                 shootParticles.Play();
-            }
 
             PrimAttack();
             attackAnim.SetBool("drawingWeapon", false);

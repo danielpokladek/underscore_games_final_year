@@ -18,7 +18,7 @@ public class LevelManager : MonoBehaviour
     }
     #endregion
 
-    [Header("Day State Settings")]
+    [Header("State Settings")]
     [SerializeField] private float dayLength;
     [SerializeField] private float nightLength;
     [SerializeField] private float midnightLength;
@@ -31,20 +31,31 @@ public class LevelManager : MonoBehaviour
     public GameObject minimapBoss;
     public GameObject minimapShop;
 
-    [Header("Ambient Light Settings")]
+    [Header("Day & Night Visual Settings")]
+    [Tooltip("Tick this box to enable the visual progress of the day and night cycle, " +
+        "leaving this option disabled will still progress the time in game. " +
+        "Brighter colours will result in higher sun intesity, and darker colours will result in lower intesity. " +
+        "Use the gradient colour to adjust the brightness of the sun, as well as the colour.")]
     [SerializeField] private bool enableSunProgress;
+    [Tooltip("Sun of the scene, this light will be used for the day and night cycle.")]
     [SerializeField] private Light2D  ambientLight;
+    [Tooltip("Gradient which will be used on the progression from day to night." +
+        "Start of the gradient will represent the daytime, and end of the gradient will represent night.")]
     [SerializeField] private Gradient dayToNightGradient;
-    [SerializeField] private Color nightColor;
+    [Tooltip("The same as 'dayToNightGradient' but in this case the colours are reversed.")]
     [SerializeField] private Gradient nightToDayGradient;
-    [SerializeField] private float minLightIntensity = .7f;
-    [SerializeField] private float maxLightIntensity = .3f;
+    [Tooltip("Colour which will be used at night.")]
+    [SerializeField] private Color nightColor;
+    [Tooltip("Minimum sun intensity, this will be used at night; lower this value to create darker night. " +
+        "Avoid making this value too low, as it can cause the light to become too dark and result in a black scene.")]
+    [SerializeField] private float minLightIntensity = 0.7f;
+    [Tooltip("Maximum sun intensity, this will be used at day; increase this value to create brighter day. " +
+        "Avoid making this value too high, as it can cause the light to become too bright and result in white scene.")]
+    [SerializeField] private float maxLightIntensity = 1.0f;
 
     // -------------------------------------
     public delegate void OnDayStateChange();
     public OnDayStateChange onDayStateChangeCallback;
-
-    //[HideInInspector] public GameObject playerPrefab;
 
     private string currentStateString = "N/A";
     private float stateTimer;
@@ -120,6 +131,9 @@ public class LevelManager : MonoBehaviour
                 stateTimer += Time.deltaTime;
                 dayTimer += Time.deltaTime;
 
+                if (!enableSunProgress)
+                    break;
+
                 ambientLight.intensity = Mathf.Lerp(maxLightIntensity, minLightIntensity, (stateTimer / dayLength));
                 ambientLight.color = dayToNightGradient.Evaluate(stateTimer / dayLength);
 
@@ -132,6 +146,9 @@ public class LevelManager : MonoBehaviour
 
                 stateTimer += Time.deltaTime;
 
+                if (!enableSunProgress)
+                    break;
+
                 ambientLight.intensity = minLightIntensity;
                 ambientLight.color = nightColor;
 
@@ -143,6 +160,9 @@ public class LevelManager : MonoBehaviour
                     SetState(DayState.Day, "Day");
 
                 stateTimer += Time.deltaTime;
+
+                if (!enableSunProgress)
+                    break;
 
                 ambientLight.intensity = Mathf.Lerp(minLightIntensity, maxLightIntensity, (stateTimer / dayLength));
                 ambientLight.color = nightToDayGradient.Evaluate(stateTimer / dayLength);
