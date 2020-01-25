@@ -46,7 +46,7 @@ public class PlayerInteractions : MonoBehaviour
 
     private void PlayerInteract()
     {
-        interactItem.Interact();
+        interactItem.Interact(playerController);
 
 
         // Not on item, no need to run it.

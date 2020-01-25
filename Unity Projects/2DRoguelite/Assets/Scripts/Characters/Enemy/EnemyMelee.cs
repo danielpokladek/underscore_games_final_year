@@ -35,6 +35,8 @@ public class EnemyMelee : EnemyController
 
     override protected void AttackPlayer()
     {
+        base.AttackPlayer();
+
         if (Vector2.Distance(playerTrans.position, transform.position) < attackRange)
         {
             base.AttackPlayer();

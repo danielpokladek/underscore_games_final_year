@@ -43,6 +43,8 @@ public class EnemyRanged : EnemyController
 
     override protected void AttackPlayer()
     {
+        base.AttackPlayer();
+
         GameObject projectile       = Instantiate(projectilePrefab, attackPoint.position, attackPoint.rotation);
         Projectile projectileBullet = projectile.GetComponent<Projectile>();
         Rigidbody2D projectileRB    = projectile.GetComponent<Rigidbody2D>();

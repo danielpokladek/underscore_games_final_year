@@ -20,7 +20,7 @@ public class ShopEnergyBall : ShopItem
             Quaternion.identity);
 
         _go.GetComponent<ItemEnergyBall>().playerTrans = playerController.transform;
-        _go.transform.SetParent(playerController.transform);
+        _go.transform.SetParent(playerController.powerUpContainer);
 
         Destroy(gameObject);
     }

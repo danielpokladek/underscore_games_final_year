@@ -17,7 +17,7 @@ public class DungeonChest : InteractableItem
         anim = GetComponent<Animator>();
     }
 
-    override public void Interact()
+    override public void Interact(PlayerController playerController)
     {
         //Debug.Log("It just works!");
 

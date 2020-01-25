@@ -31,10 +31,11 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private GameObject healthDrop;
     [SerializeField] protected float dropPercentage;
 
-    // --- PLAYER & MOVEMENT -----------
+    // --- MOVEMENT -----------
     protected Transform  playerTrans;
     protected GameObject playerGO;
     protected Vector2    stopPoint = new Vector2(0, 0);
+    protected bool       movementEnabled = true;
 
     // --- ATTACK & HEALTH -------
     protected float currentHealth;
@@ -42,8 +43,9 @@ public class EnemyController : MonoBehaviour
     protected float currentAttackDelay;
     private float   bleedingLength;
 
-    protected bool canAttack    = false;
-    protected bool isBleeding   = false;
+    protected bool canAttack     = false;
+    protected bool attackEnabled = true;
+    protected bool isBleeding    = false;
     private float  bleedingTimer = 0;
 
     // --- PATHFINDING SETTINGS --------------------
@@ -107,6 +109,11 @@ public class EnemyController : MonoBehaviour
             if (isBleeding == true)
                 bleedingTimer += Time.deltaTime;
         }
+
+        if (!movementEnabled)
+            aiPath.maxSpeed = 0;
+        else
+            aiPath.maxSpeed = moveSpeed;
     }
 
     private void NightBuff()
@@ -125,7 +132,11 @@ public class EnemyController : MonoBehaviour
         AIAim();
     }
 
-    virtual protected void AttackPlayer() { /* Define in the enemy script */ }
+    virtual protected void AttackPlayer()
+    {
+        if (!attackEnabled)
+            return;
+    }
 
     virtual protected void AIAim()
     {
@@ -133,6 +144,21 @@ public class EnemyController : MonoBehaviour
         aimAngle     = -1 * Mathf.Atan2(playerVector.y, playerVector.x) * Mathf.Rad2Deg;
 
         armPivot.rotation = Quaternion.AngleAxis(aimAngle, Vector3.back);
+    }
+
+    /// <summary>
+    /// While enemy is stunned, he can't move or attack, but can still take damage.
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator Stun(float timeDelay)
+    {
+        attackEnabled   = false;
+        movementEnabled = false;
+
+        yield return new WaitForSeconds(timeDelay);
+
+        attackEnabled   = true;
+        movementEnabled = true;
     }
 
     public void TakeDamage(float damageAmount)

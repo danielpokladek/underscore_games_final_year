@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] protected float attackDelay;
 
     [SerializeField] protected GameObject minimapThing;
+
+    public Transform powerUpContainer;
     
     // --- STUFF FOR ABILITIES ---
     [HideInInspector] public float projectileSizeMultiplier = 1;
