@@ -16,7 +16,7 @@ public class ArcherGameUI : MonoBehaviour
 
     private void Start()
     {
-        playerObject.onGUIUpdateCallback += UpdateUI;
+        playerObject.onUIUpdateCallback += UpdateUI;
     }
 
     private void Update()

@@ -14,7 +14,7 @@ public class ShopAdjustDamage : ShopItem
         PurchaseItem(itemPrice);
         
         playerController.playerStats.characterAttackDamage.AddModifier(damageModifier);
-        playerController.onGUIUpdateCallback.Invoke();
+        playerController.onUIUpdateCallback.Invoke();
         
         Destroy(gameObject);
     }

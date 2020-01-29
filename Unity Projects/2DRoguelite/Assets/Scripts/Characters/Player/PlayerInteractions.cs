@@ -46,6 +46,9 @@ public class PlayerInteractions : MonoBehaviour
 
     private void PlayerInteract()
     {
+        if (interactItem == null)
+            return;
+
         interactItem.Interact(playerController);
 
 

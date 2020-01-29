@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("UI Settings")]
+    public Sprite characterPortrait;
+    public Sprite skillOne, skillTwo, skillThree;
+
     [Header("Character Settings")]   
     [Tooltip("This is player's 'arm' which will be used to aiming, shooting, etc. It rotates towards the mouse.")]
     [SerializeField] protected GameObject playerArm;
@@ -48,7 +52,7 @@ public class PlayerController : MonoBehaviour
     private LineRenderer lineRenderer;
 
     public delegate void OnGUIUpdate();
-    public OnGUIUpdate onGUIUpdateCallback;
+    public OnGUIUpdate onUIUpdateCallback;
 
     public delegate void OnPrimAttack();
     public OnPrimAttack onPrimAttackCallback;
@@ -238,7 +242,7 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForFixedUpdate();
         
-        if (onGUIUpdateCallback != null)
-            onGUIUpdateCallback.Invoke();
+        if (onUIUpdateCallback != null)
+            onUIUpdateCallback.Invoke();
     }
 }

@@ -17,17 +17,33 @@ public class PlayerStats : CharacterStats
         LevelManager.instance.LoadPlayerStats();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Equals))
+            HealCharacter(10);
+
+        if (Input.GetKeyDown(KeyCode.Minus))
+            TakeDamage(10);
+    }
+
+    public override void HealCharacter(float healAmount)
+    {
+        base.HealCharacter(healAmount);
+
+        playerController.onUIUpdateCallback.Invoke();
+    }
+
     override public void TakeDamage(float damageAmount)
     {
         base.TakeDamage(damageAmount);
         
-        playerController.onGUIUpdateCallback.Invoke();
+        playerController.onUIUpdateCallback.Invoke();
         CameraShaker.Instance.ShakeOnce(2f, 2f, .01f, .1f);
     }
 
     private void OnItemInteract()
     {
-        playerController.onGUIUpdateCallback.Invoke();
+        playerController.onUIUpdateCallback.Invoke();
     }
 
     override protected void CharacterDeath()
@@ -38,6 +54,6 @@ public class PlayerStats : CharacterStats
     public void SetHealth(float value)
     {
         currentHealth = value;
-        playerController.onGUIUpdateCallback.Invoke();
+        playerController.onUIUpdateCallback.Invoke();
     }
 }

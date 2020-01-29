@@ -14,7 +14,7 @@ public class ShopAdjustSpeed : ShopItem
         PurchaseItem(itemPrice);
         
         playerController.playerStats.characterSpeed.AddModifier(movementModifier);
-        playerController.onGUIUpdateCallback.Invoke();
+        playerController.onUIUpdateCallback.Invoke();
         
         Destroy(gameObject);
     }

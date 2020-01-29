@@ -27,6 +27,20 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int playerGems;
 
 
+    public delegate void LoadingFinished();
+    public LoadingFinished loadingFinishedCallback;
+
+    private void Start()
+    {
+        playerRef = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+            loadingFinishedCallback.Invoke();
+    }
+
     public int PlayerCurrency { get { return playerGems; } set { playerGems = value; } }
 
     private void OnGUI()
