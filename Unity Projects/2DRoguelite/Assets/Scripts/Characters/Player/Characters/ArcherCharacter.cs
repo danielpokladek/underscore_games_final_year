@@ -10,12 +10,20 @@ public class ArcherCharacter : RangedController
     [SerializeField] private Transform[] tripleShotPoint;
     [SerializeField] private float tripleShotCooldown;
     [SerializeField] private float arrowNockCooldown;
+
+    [Header("Particle System")]
+    [SerializeField] private ParticleSystem[] chargeParticles;
+    [SerializeField] private ParticleSystem[] aimParticles;
+    [SerializeField] private ParticleSystem[] shootParticles;
+
     [SerializeField] private ParticleSystem bowParticles;
-    [SerializeField] private ParticleSystem shootParticles;
+    [SerializeField] private ParticleSystem shootParticles_old;
 
     [Header("Temp FX")]
     public Color particlesDraw;
     public Color particlesFullyDrawn;
+
+    bool test = false;
 
     // ------------------
     private float currentAttackDelay;
@@ -34,7 +42,11 @@ public class ArcherCharacter : RangedController
 
         #region Primary Attack
         if (Input.GetButtonDown("LMB"))
-            bowParticles.Play();
+        {
+            //bowParticles.Play();
+            foreach (ParticleSystem _ps in chargeParticles)
+                _ps.Play();
+        }
 
         if (Input.GetButton("LMB"))
         {
@@ -45,21 +57,52 @@ public class ArcherCharacter : RangedController
 
             if (currentAttackDelay >= attackDelay)
             {
-                bowParticles.startColor = particlesFullyDrawn;
+                //bowParticles.startColor = particlesFullyDrawn;
+                if (!test)
+                {
+                    test = true;
+
+                    foreach (ParticleSystem _ps in aimParticles)
+                        _ps.Play();
+                }
+
                 currentAttackDelay = attackDelay;
             }
         }
 
         if (Input.GetButtonUp("LMB"))
         {
-            bowParticles.Stop();
-            bowParticles.startColor = particlesDraw;
+            foreach (ParticleSystem _ps in chargeParticles)
+            {
+                _ps.Stop();
+                _ps.Clear();
+            }
+
+            foreach (ParticleSystem _ps in aimParticles)
+            {
+                _ps.Stop();
+                _ps.Clear();
+            }
+
+            //bowParticles.Stop();
+            //bowParticles.startColor = particlesDraw;
 
             if (currentAttackDelay >= attackDelay)
-                shootParticles.Play();
+            {
+                ParticleSystem temp;
+
+                foreach (ParticleSystem _ps in shootParticles)
+                {
+                    temp = Instantiate(_ps, firePoint.transform.position, firePoint.rotation);
+                    Destroy(temp, .6f);
+                }
+
+                CameraShaker.Instance.ShakeOnce(4.0f, 2.0f, .1f, .5f);
+            }
 
             PrimAttack();
             attackAnim.SetBool("drawingWeapon", false);
+            test = false;
         }
         #endregion
 
@@ -107,6 +150,12 @@ public class ArcherCharacter : RangedController
         GameObject tempProjectile     = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D projectileRB      = tempProjectile.GetComponent<Rigidbody2D>();
         PlayerProjectile bulletScript = tempProjectile.GetComponent<PlayerProjectile>();
+
+        if (!test)
+        {
+            tempProjectile.GetComponent<TrailRenderer>().startColor = Color.white;
+            tempProjectile.GetComponent<TrailRenderer>().endColor = Color.white;
+        }
 
         tempProjectile.transform.localScale = new Vector3(
             tempProjectile.transform.localScale.x * projectileSizeMultiplier,
