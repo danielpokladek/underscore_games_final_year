@@ -37,7 +37,9 @@ public class PlayerStats : CharacterStats
     {
         base.TakeDamage(damageAmount);
         
-        playerController.onUIUpdateCallback.Invoke();
+        if (playerController.onUIUpdateCallback != null)
+            playerController.onUIUpdateCallback.Invoke();
+        
         CameraShaker.Instance.ShakeOnce(2f, 2f, .01f, .1f);
     }
 

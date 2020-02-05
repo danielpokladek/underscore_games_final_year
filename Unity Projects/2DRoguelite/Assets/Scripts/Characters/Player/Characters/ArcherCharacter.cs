@@ -57,7 +57,6 @@ public class ArcherCharacter : RangedController
 
             if (currentAttackDelay >= attackDelay)
             {
-                //bowParticles.startColor = particlesFullyDrawn;
                 if (!test)
                 {
                     test = true;
@@ -83,9 +82,6 @@ public class ArcherCharacter : RangedController
                 _ps.Stop();
                 _ps.Clear();
             }
-
-            //bowParticles.Stop();
-            //bowParticles.startColor = particlesDraw;
 
             if (currentAttackDelay >= attackDelay)
             {

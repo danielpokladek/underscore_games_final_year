@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
+using Pathfinding;
+
 using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
 
@@ -11,7 +13,10 @@ public class BossController : MonoBehaviour
     [SerializeField] protected float             maxHealth = 100f;
     [SerializeField] protected ParticleSystem    deathParticles;
     [SerializeField] protected float             bossDamage;
-    
+
+    [HideInInspector] public AIPath aiPath;
+    [HideInInspector] public bool moveEnabled { get; set; }
+
     // ----------------
     protected Animator  animator;
     protected float     currentHealth;
@@ -32,7 +37,17 @@ public class BossController : MonoBehaviour
         playerController   = player.GetComponent<PlayerController>();
         playerRigidbody    = player.GetComponent<Rigidbody2D>();
 
+        aiPath = GetComponent<AIPath>();
+
         LevelManager.instance.currentState = LevelManager.DayState.Boss;
+    }
+
+    private void Update()
+    {
+        if (moveEnabled)
+            aiPath.destination = GameManager.current.playerRef.transform.position;
+        else
+            aiPath.destination = transform.position;
     }
 
     virtual protected void DamagePlayer(float damageAmount)

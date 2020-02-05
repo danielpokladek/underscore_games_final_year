@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
-public class TempBossController : BossController
+public class SlimeBoss : BossController
 {
     [Header("Temp Boss Settings")]
     [SerializeField] private ParticleSystem firstStageDeathParticles;
