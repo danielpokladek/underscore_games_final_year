@@ -68,6 +68,12 @@ public class LevelManager : MonoBehaviour
 
         currentState       = DayState.Day;
         currentStateString = "Day";
+
+        //if (currentState == DayState.Boss)
+        //{
+        //    GameObject tempPlayer = Instantiate(GameManager.current.playerPrefab, new Vector3(-11, -6, 0), Quaternion.identity);
+        //    GameManager.current.playerRef = tempPlayer;
+        //}
     }
 
     public void LoadBossBattle()

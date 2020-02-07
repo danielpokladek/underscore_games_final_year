@@ -24,6 +24,9 @@ public class RoomManager : MonoBehaviour
 
     // ---------------------------
     protected bool roomDiscovered;
+    [HideInInspector] public int roomType { get; set; }
+
+    
     protected bool isPortalRoom;
     protected bool isSpawnRoom;
     protected bool isShopRoom;
@@ -36,36 +39,33 @@ public class RoomManager : MonoBehaviour
         levelManager.onDayStateChangeCallback += UpdateRoomState;
     }
 
-    public void InitRoom(bool _isPortalRoom, bool _isSpawnRoom, bool _isShopRoom)
+    public void SetRoomType(int _roomType)
     {
-        isPortalRoom = _isPortalRoom;
-        isSpawnRoom = _isSpawnRoom;
-        isShopRoom = _isShopRoom;
-
-        if (isPortalRoom)
-            bossIconRef = Instantiate(LevelManager.instance.minimapBoss, transform.position, Quaternion.identity);
-
-        if (isShopRoom)
-            shopIconRef = Instantiate(LevelManager.instance.minimapShop, transform.position, Quaternion.identity);
-
+        roomType = _roomType;
         SpawnRoomObjects();
     }
 
     protected void SpawnRoomObjects()
     {
-        if (isPortalRoom)
+        if (roomType == 2)
             SpawnBossPortal();
 
-        if (isShopRoom)
+        if (roomType == 3)
             SpawnItemShop();
 
-        if (isSpawnRoom)
+        if (roomType == 1)
             SpawnPlayer();
     }
 
-    virtual protected void SpawnBossPortal() { }
+    virtual protected void SpawnBossPortal()
+    {
+        bossIconRef = Instantiate(LevelManager.instance.minimapBoss, transform.position, Quaternion.identity);
+    }
 
-    virtual protected void SpawnItemShop() { }
+    virtual protected void SpawnItemShop()
+    {
+        shopIconRef = Instantiate(LevelManager.instance.minimapShop, transform.position, Quaternion.identity);
+    }
 
     virtual protected void SpawnPlayer()
     {

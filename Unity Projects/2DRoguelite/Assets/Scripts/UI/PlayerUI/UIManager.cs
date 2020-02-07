@@ -41,6 +41,8 @@ public class UIManager : MonoBehaviour
         skillOne.sprite       = playerRef.skillOne;
         skillTwo.sprite       = playerRef.skillTwo;
         skillThree.sprite     = playerRef.skillThree;
+
+        UpdateUI();
     }
 
     private void UpdateUI()

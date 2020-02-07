@@ -4,6 +4,8 @@ public class NormalRoom : RoomManager
 {
     override protected void SpawnBossPortal()
     {
+        base.SpawnBossPortal();
+
         int randPoint = Random.Range(0, portalSpawnPoints.Length);
 
         bossPortalRef = Instantiate(LevelManager.instance.portalPrefab,
@@ -14,6 +16,8 @@ public class NormalRoom : RoomManager
 
     override protected void SpawnItemShop()
     {
+        base.SpawnItemShop();
+
         int randPoint = Random.Range(0, shopSpawnPoints.Length);
 
         bossPortalRef = Instantiate(LevelManager.instance.shopPrefab,

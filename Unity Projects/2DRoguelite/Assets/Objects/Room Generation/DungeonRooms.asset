@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a534f5cd9ef921439f9a80d6d1842fc, type: 3}
+  m_Name: DungeonRooms
+  m_EditorClassIdentifier: 
+  roomUp:
+  - {fileID: 8329491186030350639, guid: 85d47baa082750140901425213984094, type: 3}
+  roomDown:
+  - {fileID: 6187503858339696499, guid: 7f98cf16f8663ec46add0aa405be3dc9, type: 3}
+  roomRight:
+  - {fileID: 7833837376851484607, guid: 7e241d8d98136334db5f4f7a95682569, type: 3}
+  roomLeft:
+  - {fileID: 865599158575851673, guid: 992e85912aceb8340bf807dd2cf770bf, type: 3}
+  roomUpDown:
+  - {fileID: 2928977939396335635, guid: 556216d5eb24a2844aea681dc5bde3b6, type: 3}
+  roomRightLeft:
+  - {fileID: 5562476675614154014, guid: 66572be62907cde418dc486451188627, type: 3}
+  roomUpRight:
+  - {fileID: 1378079345394901764, guid: b30db6a0791b57244a0c641fc5074eda, type: 3}
+  roomUpLeft:
+  - {fileID: 7460021486721980485, guid: a8eb02d3eef1120469872b4963379884, type: 3}
+  roomRightDown:
+  - {fileID: 4976495780087041623, guid: 72864accd786101449d8a7c6befa71b9, type: 3}
+  roomDownLeft:
+  - {fileID: 3152840956620427538, guid: 775c5af4cd65db544aef7d226b12b138, type: 3}
+  roomUpDownLeft:
+  - {fileID: 3379008424310686003, guid: 5245d5d20da6d5b48970e37fd73cbd4c, type: 3}
+  roomUpRightLeft:
+  - {fileID: 4563146687284605218, guid: 1973037150d76d5418bf2c7061f549a4, type: 3}
+  roomUpRightDown:
+  - {fileID: 4560570782951576508, guid: cf3fe105b55e57b4983d651b4ec904a1, type: 3}
+  roomRightDownLeft:
+  - {fileID: 3729084705764697659, guid: d659f62c00bbab14589b4362e9c9822f, type: 3}
+  roomUpDownRightLeft:
+  - {fileID: 4807685427921151012, guid: 3096de67866eb6741a6fbdf64310aee6, type: 3}

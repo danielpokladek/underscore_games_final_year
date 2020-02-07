@@ -277,8 +277,9 @@ public class LevelGeneration : MonoBehaviour
     {
         // Grab a random room number, from the list of taken rooms,
         //  and assign them to the shop room and boss room.
-        int bossRoomNo = Random.Range(2, takenPositions.Count - 1);
-        int shopRoomNo = Random.Range(2, takenPositions.Count - 1);
+        int bossRoomNo = Random.Range(3, takenPositions.Count - 1);
+        int shopRoomNo = Random.Range(3, takenPositions.Count - 1);
+        int dungRoomNo = Random.Range(3, takenPositions.Count - 1);
 
         int iteration = 0;
 
@@ -302,14 +303,20 @@ public class LevelGeneration : MonoBehaviour
 
             // If the bossRoom is the same as shopRoom, find a new room for the boss.
             //  After assign the variables to the room, and pass them through to RoomSelector.
-            if (bossRoomNo == shopRoomNo)
-                bossRoomNo = Random.Range(2, takenPositions.Count - 1);
+            if (bossRoomNo == shopRoomNo || bossRoomNo == dungRoomNo)
+                bossRoomNo = Random.Range(3, takenPositions.Count - 1);
+
+            if (shopRoomNo == dungRoomNo)
+                shopRoomNo = Random.Range(3, takenPositions.Count - 1);
 
             if (iteration == bossRoomNo)
                 room.roomType = 2;
 
             if (iteration == shopRoomNo)
                 room.roomType = 3;
+
+            if (iteration == shopRoomNo)
+                room.roomType = 4;
 
             roomSelector.roomType   = room.roomType;
             roomSelector.up         = room.doorTop;
