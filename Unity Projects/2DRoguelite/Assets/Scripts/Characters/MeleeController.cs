@@ -17,7 +17,7 @@ public class MeleeController : PlayerController
     {
         base.Update();
 
-        if (currentAttackDelay >= attackDelay)
+        if (currentAttackDelay >= playerStats.characterAttackDelay.GetValue())
         {
             if (Input.GetButtonDown("LMB"))
                 PrimAttack();
@@ -39,12 +39,12 @@ public class MeleeController : PlayerController
         }
     }
 
-    override protected void PlayerAim()
-    {
-        base.PlayerAim();
+    //override protected void PlayerAim()
+    //{
+    //    base.PlayerAim();
 
-        enemiesInRange = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemiesLayer);
-    }
+    //    enemiesInRange = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemiesLayer);
+    //}
 
     private void OnDrawGizmosSelected()
     {

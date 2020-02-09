@@ -5,8 +5,15 @@ using UnityEngine;
 
 public class PlayerStats : CharacterStats
 {
+    [Tooltip("Cooldown for the first ability of player, in all cases this is the dash.")]
+    public Stat abilityOneCooldown;
+    [Tooltip("Cooldown for the second ability of player.")]
+    public Stat abilityTwoCooldown;
+    [Tooltip("Cooldown for the third ability of player.")]
+    public Stat abilityThreeCooldown;
+
     private PlayerController playerController;
-    
+
     override protected void Start()
     {
         base.Start();

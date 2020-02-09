@@ -3,35 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using EZCameraShake;
 
-public class ArcherCharacter : RangedController
+/*
+ * Archer Special Abilities:
+ *      Ability 1 : Dash
+ *      Ability 2 : Piercing Shot
+ *      Ability 3 : Throwable Item
+ */
+
+public class ArcherController : PlayerController
 {
-    [SerializeField] private float dodgeLength;
-    [SerializeField] private float dodgeCooldown;
-    [SerializeField] private Transform[] tripleShotPoint;
-    [SerializeField] private float tripleShotCooldown;
-    [SerializeField] private float arrowNockCooldown;
+    [SerializeField] private Transform  firePoint;
+    [SerializeField] private GameObject normalProjectile;
+    [SerializeField] private GameObject specialProjectile;
+
 
     [Header("Particle System")]
     [SerializeField] private ParticleSystem[] chargeParticles;
     [SerializeField] private ParticleSystem[] aimParticles;
     [SerializeField] private ParticleSystem[] shootParticles;
 
-    [SerializeField] private ParticleSystem bowParticles;
-    [SerializeField] private ParticleSystem shootParticles_old;
-
     [Header("Temp FX")]
     public Color particlesDraw;
     public Color particlesFullyDrawn;
 
-    bool test = false;
-
-    // ------------------
-    private float currentAttackDelay;
-    private float currentTripleCooldown;
-    private float currentNockCooldown;
-    private float currentDodgeCooldown;
-
     // ---
+    private bool aimParticlesEnabled = false;
 
     override protected void Update()
     {
@@ -50,22 +46,22 @@ public class ArcherCharacter : RangedController
 
         if (Input.GetButton("LMB"))
         {
-            currentAttackDelay += Time.deltaTime;
+            _attackDelay += Time.deltaTime;
 
             attackAnim.SetBool("drawingWeapon", true);
-            attackAnim.SetFloat("perc", currentAttackDelay / attackDelay);
+            attackAnim.SetFloat("perc", _attackDelay / playerStats.characterAttackDelay.GetValue());
 
-            if (currentAttackDelay >= attackDelay)
+            if (_attackDelay >= playerStats.characterAttackDelay.GetValue())
             {
-                if (!test)
+                if (!aimParticlesEnabled)
                 {
-                    test = true;
+                    aimParticlesEnabled = true;
 
                     foreach (ParticleSystem _ps in aimParticles)
                         _ps.Play();
                 }
 
-                currentAttackDelay = attackDelay;
+                _attackDelay = playerStats.characterAttackDelay.GetValue();
             }
         }
 
@@ -83,7 +79,7 @@ public class ArcherCharacter : RangedController
                 _ps.Clear();
             }
 
-            if (currentAttackDelay >= attackDelay)
+            if (_attackDelay >= playerStats.characterAttackDelay.GetValue())
             {
                 ParticleSystem temp;
 
@@ -98,42 +94,42 @@ public class ArcherCharacter : RangedController
 
             PrimAttack();
             attackAnim.SetBool("drawingWeapon", false);
-            test = false;
+            aimParticlesEnabled = false;
         }
         #endregion
 
         #region Specials
-        if (Input.GetKeyDown(KeyCode.Q) && currentNockCooldown >= arrowNockCooldown)
+        if (Input.GetKeyDown(KeyCode.Q) && _abilityTwoCooldown >= playerStats.abilityTwoCooldown.GetValue())
             ArrowNockAbility();
 
-        if (Input.GetKeyDown(KeyCode.E) && currentTripleCooldown >= tripleShotCooldown)
-            TripleShotAbility();
+        if (Input.GetKeyDown(KeyCode.E) && _abilityThreeCooldown >= playerStats.abilityThreeCooldown.GetValue())
+            //TripleShotAbility();
 
         #endregion
 
         #region Dodge
 
-        if (currentDodgeCooldown >= dodgeCooldown)
+        if (_abilityOneCooldown >= playerStats.abilityOneCooldown.GetValue())
         {
             if (Input.GetButtonDown("RMB"))
             {
-                StartCoroutine(Dodge());
-                currentDodgeCooldown = 0;
+                StartCoroutine(playerMovement.PlayerDash());
+                _abilityOneCooldown = 0;
             }
         }
-        else if (currentDodgeCooldown <= dodgeCooldown)
+        else if (_abilityOneCooldown <= playerStats.abilityOneCooldown.GetValue())
         {
-            currentDodgeCooldown += Time.deltaTime;
+            _abilityOneCooldown += Time.deltaTime;
         }
 
         #endregion
 
         #region Cooldowns
-        if (currentTripleCooldown <= tripleShotCooldown)
-            currentTripleCooldown += Time.deltaTime;
+        if (_abilityTwoCooldown <= playerStats.abilityTwoCooldown.GetValue())
+            _abilityTwoCooldown += Time.deltaTime;
 
-        if (currentNockCooldown <= arrowNockCooldown)
-            currentNockCooldown += Time.deltaTime;
+        if (_abilityThreeCooldown <= playerStats.abilityThreeCooldown.GetValue())
+            _abilityThreeCooldown += Time.deltaTime;
         #endregion
     }
 
@@ -141,13 +137,11 @@ public class ArcherCharacter : RangedController
     {
         float dmg = CalculateDamage();
 
-        shootDirection = mousePosition - playerRB.position;
-
-        GameObject tempProjectile     = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+        GameObject tempProjectile     = Instantiate(normalProjectile, firePoint.position, firePoint.rotation);
         Rigidbody2D projectileRB      = tempProjectile.GetComponent<Rigidbody2D>();
         PlayerProjectile bulletScript = tempProjectile.GetComponent<PlayerProjectile>();
 
-        if (!test)
+        if (!aimParticlesEnabled)
         {
             tempProjectile.GetComponent<TrailRenderer>().startColor = Color.white;
             tempProjectile.GetComponent<TrailRenderer>().endColor = Color.white;
@@ -161,14 +155,12 @@ public class ArcherCharacter : RangedController
         projectileRB.AddForce(firePoint.up * 20, ForceMode2D.Impulse);
         bulletScript.SetDamage(dmg);
 
-        currentAttackDelay = 0;
+        _attackDelay = 0;
     }
 
     private void ArrowNockAbility()
     {
-        shootDirection = mousePosition - playerRB.position;
-
-        GameObject tempProjectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+        GameObject tempProjectile = Instantiate(normalProjectile, firePoint.position, firePoint.rotation);
         Rigidbody2D projectileRB = tempProjectile.GetComponent<Rigidbody2D>();
         PlayerProjectile bulletScript = tempProjectile.GetComponent<PlayerProjectile>();
 
@@ -180,38 +172,36 @@ public class ArcherCharacter : RangedController
         projectileRB.AddForce(firePoint.up * 20, ForceMode2D.Impulse);
         bulletScript.SetDamage(playerStats.characterAttackDamage.GetValue() * 2);
 
-        currentNockCooldown = 0;
+        _abilityTwoCooldown = 0;
     }
 
-    private void TripleShotAbility()
-    {
-        shootDirection = mousePosition - playerRB.position;
+    //private void TripleShotAbility()
+    //{
+    //    GameObject       playerProjectile;
+    //    Rigidbody2D      projectileRB;
+    //    PlayerProjectile bulletScript;
 
-        GameObject       playerProjectile;
-        Rigidbody2D      projectileRB;
-        PlayerProjectile bulletScript;
+    //    foreach (Transform _firePoint in tripleShotPoint)
+    //    {
+    //        playerProjectile  = Instantiate(normalProjectile, _firePoint.position, firePoint.rotation);
 
-        foreach (Transform _firePoint in tripleShotPoint)
-        {
-            playerProjectile  = Instantiate(projectilePrefab, _firePoint.position, firePoint.rotation);
+    //        projectileRB    = playerProjectile.GetComponent<Rigidbody2D>();
+    //        bulletScript    = playerProjectile.GetComponent<PlayerProjectile>();
 
-            projectileRB    = playerProjectile.GetComponent<Rigidbody2D>();
-            bulletScript    = playerProjectile.GetComponent<PlayerProjectile>();
+    //        playerProjectile.transform.localScale = new Vector3(
+    //            playerProjectile.transform.localScale.x * projectileSizeMultiplier,
+    //            playerProjectile.transform.localScale.y * projectileSizeMultiplier,
+    //            playerProjectile.transform.localScale.z * projectileSizeMultiplier);
 
-            playerProjectile.transform.localScale = new Vector3(
-                playerProjectile.transform.localScale.x * projectileSizeMultiplier,
-                playerProjectile.transform.localScale.y * projectileSizeMultiplier,
-                playerProjectile.transform.localScale.z * projectileSizeMultiplier);
+    //        projectileRB.AddForce(firePoint.up * 20, ForceMode2D.Impulse);
+    //        bulletScript.SetDamage(playerStats.characterAttackDamage.GetValue() / 2);
 
-            projectileRB.AddForce(firePoint.up * 20, ForceMode2D.Impulse);
-            bulletScript.SetDamage(playerStats.characterAttackDamage.GetValue() / 2);
+    //        playerProjectile.GetComponent<TrailRenderer>().startColor = Color.blue;
+    //        playerProjectile.GetComponent<TrailRenderer>().endColor = Color.blue;
+    //    }
 
-            playerProjectile.GetComponent<TrailRenderer>().startColor = Color.blue;
-            playerProjectile.GetComponent<TrailRenderer>().endColor = Color.blue;
-        }
-
-        currentTripleCooldown = 0;
-    }
+    //    _abilityThreeCooldown = 0;
+    //}
 
     private float CalculateDamage()
     {
@@ -219,7 +209,7 @@ public class ArcherCharacter : RangedController
         //  using that percentage calculate player's damage (using damageAmount),
         //  and return the damage player's will deal.
 
-        float drawPerc = (currentAttackDelay / attackDelay) * 100;
+        float drawPerc = (_attackDelay / playerStats.characterAttackDelay.GetValue()) * 100;
         float damage   = (playerStats.characterAttackDamage.GetValue() / 100) * drawPerc;
 
         damage = Mathf.Round(damage);
@@ -227,22 +217,4 @@ public class ArcherCharacter : RangedController
 
         return damage;
     }
-
-    override protected IEnumerator Dodge()
-    {
-        allowMovement = false;
-        playerStats.characterSpeed.AddModifier(15);
-
-        yield return new WaitForSeconds(dodgeLength);
-
-        playerStats.characterSpeed.RemoveModifier(15);
-        allowMovement = true;
-    }
-
-    public float GetDodge { get { return dodgeCooldown; } }
-    public float GetCurrentDodge { get { return currentDodgeCooldown; } }
-    public float GetTripleCurrent { get { return currentTripleCooldown; } }
-    public float GetTripleCooldown { get { return tripleShotCooldown; } }
-    public float GetExtraCurrent { get { return currentNockCooldown; } }
-    public float GetExtraCooldown { get { return arrowNockCooldown; } }
 }
