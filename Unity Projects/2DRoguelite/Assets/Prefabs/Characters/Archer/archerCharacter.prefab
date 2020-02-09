@@ -421,9 +421,9 @@ GameObject:
   - component: {fileID: 7368213390279314162}
   - component: {fileID: 7368213390279314163}
   - component: {fileID: 727236342}
-  - component: {fileID: 856903686689879538}
   - component: {fileID: 3129229698477711625}
   - component: {fileID: 7322336239146054419}
+  - component: {fileID: 856903686689879538}
   - component: {fileID: 6928827130408796320}
   m_Layer: 12
   m_Name: archerCharacter
@@ -517,26 +517,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &856903686689879538
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7368213390279314166}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78a783f573b0fab49af97056b992b444, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterHealth:
-    baseValue: 80
-  characterSpeed:
-    baseValue: 8
-  characterAttackDamage:
-    baseValue: 4
-  characterAttackDelay:
-    baseValue: 0.9
 --- !u!114 &3129229698477711625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -565,6 +545,32 @@ MonoBehaviour:
   dashDuration: 0.2
   playerArmPivot: {fileID: 7368213389689043489}
   armSprite: {fileID: 7368213391151072767}
+--- !u!114 &856903686689879538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7368213390279314166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78a783f573b0fab49af97056b992b444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterHealth:
+    baseValue: 80
+  characterSpeed:
+    baseValue: 8
+  characterAttackDamage:
+    baseValue: 4
+  characterAttackDelay:
+    baseValue: 0.9
+  abilityOneCooldown:
+    baseValue: 0.5
+  abilityTwoCooldown:
+    baseValue: 1.5
+  abilityThreeCooldown:
+    baseValue: 1.5
 --- !u!114 &6928827130408796320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -577,33 +583,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc62daea4c95419408573b3eadf47cd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMovement: {fileID: 0}
-  playerInteractions: {fileID: 0}
-  playerStats: {fileID: 0}
-  playerAnim: {fileID: 0}
   characterPortrait: {fileID: 21300000, guid: 059465cf959995741b9f9bbb60cdf183, type: 3}
   skillOne: {fileID: 21300000, guid: 4fb4290613c97c4469cddd7d2a78e1d9, type: 3}
   skillTwo: {fileID: 21300000, guid: 0e4c61af82e495846b4a715371c8ebed, type: 3}
   skillThree: {fileID: 21300000, guid: fdfa705e577966e40a319a052de30f2e, type: 3}
   playerArm: {fileID: 7368213389689043494}
-  attackDelay: 0.9
-  minimapThing: {fileID: 720336290}
   powerUpContainer: {fileID: 8420646393169131963}
   projectileSizeMultiplier: 1
-  attackAnim: {fileID: 1362232857}
   foundPortal: 0
-  weaponSprite: {fileID: 7368213391151072767}
+  playerMovement: {fileID: 0}
+  playerInteractions: {fileID: 0}
+  playerStats: {fileID: 0}
+  playerAnim: {fileID: 0}
   firePoint: {fileID: 7368213389864781441}
-  projectilePrefab: {fileID: 4729260153567274746, guid: f5b27cdd946361045817bd4351c6aa6a,
+  normalProjectile: {fileID: 4729260153567274746, guid: f5b27cdd946361045817bd4351c6aa6a,
     type: 3}
-  dodgeLength: 0.25
-  dodgeCooldown: 0.4
-  tripleShotPoint:
-  - {fileID: 2045450087}
-  - {fileID: 672336184}
-  - {fileID: 761383608}
-  tripleShotCooldown: 5.5
-  arrowNockCooldown: 5.5
+  specialProjectile: {fileID: 4729260153567274746, guid: 9eb515d2758af384d8976daf9fc1eca5,
+    type: 3}
   chargeParticles:
   - {fileID: 8138573751950429340}
   - {fileID: 8138573752490742664}
@@ -616,8 +612,6 @@ MonoBehaviour:
   shootParticles:
   - {fileID: 157593513879272056, guid: cb9f2c7ec1936964ab0c551cf8ad3a84, type: 3}
   - {fileID: 7252598913341321885, guid: 3518469042dc1c34c85fec6e5c4788c7, type: 3}
-  bowParticles: {fileID: 0}
-  shootParticles_old: {fileID: 0}
   particlesDraw: {r: 0, g: 0.80784315, b: 1, a: 1}
   particlesFullyDrawn: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &7368213391151072765

@@ -12,6 +12,13 @@ using EZCameraShake;
 
 public class ArcherController : PlayerController
 {
+    [Header("Attacks")]
+    #if UNITY_EDITOR
+    [Help(  "Attack    : LMB - Normal Attack\n" +
+            "Ability 1 : RMB - Dash\n" +
+            "Ability 2 : Q   - Piercing Shot\n" +
+            "Ability 3 : E   - Throwable\n", UnityEditor.MessageType.None)]
+    #endif
     [SerializeField] private Transform  firePoint;
     [SerializeField] private GameObject normalProjectile;
     [SerializeField] private GameObject specialProjectile;
@@ -21,13 +28,11 @@ public class ArcherController : PlayerController
     [SerializeField] private ParticleSystem[] chargeParticles;
     [SerializeField] private ParticleSystem[] aimParticles;
     [SerializeField] private ParticleSystem[] shootParticles;
-
-    [Header("Temp FX")]
-    public Color particlesDraw;
-    public Color particlesFullyDrawn;
+    [SerializeField] private Color particlesDraw;
+    [SerializeField] private Color particlesFullyDrawn;
 
     // ---
-    private bool aimParticlesEnabled = false;
+    private bool bowFullyCharged = false;
 
     override protected void Update()
     {
@@ -53,9 +58,9 @@ public class ArcherController : PlayerController
 
             if (_attackDelay >= playerStats.characterAttackDelay.GetValue())
             {
-                if (!aimParticlesEnabled)
+                if (!bowFullyCharged)
                 {
-                    aimParticlesEnabled = true;
+                    bowFullyCharged = true;
 
                     foreach (ParticleSystem _ps in aimParticles)
                         _ps.Play();
@@ -94,16 +99,16 @@ public class ArcherController : PlayerController
 
             PrimAttack();
             attackAnim.SetBool("drawingWeapon", false);
-            aimParticlesEnabled = false;
+            bowFullyCharged = false;
         }
         #endregion
 
         #region Specials
         if (Input.GetKeyDown(KeyCode.Q) && _abilityTwoCooldown >= playerStats.abilityTwoCooldown.GetValue())
-            ArrowNockAbility();
+            SecondAbility();
 
         if (Input.GetKeyDown(KeyCode.E) && _abilityThreeCooldown >= playerStats.abilityThreeCooldown.GetValue())
-            //TripleShotAbility();
+            ThirdAbility();
 
         #endregion
 
@@ -137,71 +142,54 @@ public class ArcherController : PlayerController
     {
         float dmg = CalculateDamage();
 
-        GameObject tempProjectile     = Instantiate(normalProjectile, firePoint.position, firePoint.rotation);
-        Rigidbody2D projectileRB      = tempProjectile.GetComponent<Rigidbody2D>();
-        PlayerProjectile bulletScript = tempProjectile.GetComponent<PlayerProjectile>();
+        GameObject       proj   = Instantiate(normalProjectile, firePoint.position, firePoint.rotation);
+        Rigidbody2D      projRB = proj.GetComponent<Rigidbody2D>();
+        PlayerProjectile pProj  = proj.GetComponent<PlayerProjectile>();
 
-        if (!aimParticlesEnabled)
+        if (!bowFullyCharged)
         {
-            tempProjectile.GetComponent<TrailRenderer>().startColor = Color.white;
-            tempProjectile.GetComponent<TrailRenderer>().endColor = Color.white;
+            proj.GetComponent<TrailRenderer>().startColor = Color.white;
+            proj.GetComponent<TrailRenderer>().endColor = Color.white;
         }
 
-        tempProjectile.transform.localScale = new Vector3(
-            tempProjectile.transform.localScale.x * projectileSizeMultiplier,
-            tempProjectile.transform.localScale.y * projectileSizeMultiplier,
-            tempProjectile.transform.localScale.z * projectileSizeMultiplier);
+        //tempProjectile.transform.localScale = new Vector3(
+        //    tempProjectile.transform.localScale.x * projectileSizeMultiplier,
+        //    tempProjectile.transform.localScale.y * projectileSizeMultiplier,
+        //    tempProjectile.transform.localScale.z * projectileSizeMultiplier);
 
-        projectileRB.AddForce(firePoint.up * 20, ForceMode2D.Impulse);
-        bulletScript.SetDamage(dmg);
+        projRB.AddForce(firePoint.up * 20, ForceMode2D.Impulse);
+        pProj.SetDamage(dmg);
 
         _attackDelay = 0;
     }
 
-    private void ArrowNockAbility()
+    private void SecondAbility()
     {
-        GameObject tempProjectile = Instantiate(normalProjectile, firePoint.position, firePoint.rotation);
-        Rigidbody2D projectileRB = tempProjectile.GetComponent<Rigidbody2D>();
-        PlayerProjectile bulletScript = tempProjectile.GetComponent<PlayerProjectile>();
+        GameObject       proj   = Instantiate(normalProjectile, firePoint.position, firePoint.rotation);
+        Rigidbody2D      projRB = proj.GetComponent<Rigidbody2D>();
+        PlayerProjectile pProj  = proj.GetComponent<PlayerProjectile>();
 
-        tempProjectile.transform.localScale = new Vector3(
-            tempProjectile.transform.localScale.x * projectileSizeMultiplier,
-            tempProjectile.transform.localScale.y * projectileSizeMultiplier,
-            tempProjectile.transform.localScale.z * projectileSizeMultiplier);
+        //tempProjectile.transform.localScale = new Vector3(
+        //    tempProjectile.transform.localScale.x * projectileSizeMultiplier,
+        //    tempProjectile.transform.localScale.y * projectileSizeMultiplier,
+        //    tempProjectile.transform.localScale.z * projectileSizeMultiplier);
 
-        projectileRB.AddForce(firePoint.up * 20, ForceMode2D.Impulse);
-        bulletScript.SetDamage(playerStats.characterAttackDamage.GetValue() * 2);
+        projRB.AddForce(firePoint.up * 20, ForceMode2D.Impulse);
+        pProj.SetDamage(playerStats.characterAttackDamage.GetValue() * 2);
 
         _abilityTwoCooldown = 0;
     }
 
-    //private void TripleShotAbility()
-    //{
-    //    GameObject       playerProjectile;
-    //    Rigidbody2D      projectileRB;
-    //    PlayerProjectile bulletScript;
+    private void ThirdAbility()
+    {
+        throw new System.NotImplementedException();
 
-    //    foreach (Transform _firePoint in tripleShotPoint)
-    //    {
-    //        playerProjectile  = Instantiate(normalProjectile, _firePoint.position, firePoint.rotation);
+        //GameObject       proj   = Instantiate(normalProjectile, firePoint.position, firePoint.rotation);
+        //Rigidbody2D      projRB = proj.GetComponent<Rigidbody2D>();
+        //PlayerProjectile pProj  = proj.GetComponent<PlayerProjectile>();
 
-    //        projectileRB    = playerProjectile.GetComponent<Rigidbody2D>();
-    //        bulletScript    = playerProjectile.GetComponent<PlayerProjectile>();
-
-    //        playerProjectile.transform.localScale = new Vector3(
-    //            playerProjectile.transform.localScale.x * projectileSizeMultiplier,
-    //            playerProjectile.transform.localScale.y * projectileSizeMultiplier,
-    //            playerProjectile.transform.localScale.z * projectileSizeMultiplier);
-
-    //        projectileRB.AddForce(firePoint.up * 20, ForceMode2D.Impulse);
-    //        bulletScript.SetDamage(playerStats.characterAttackDamage.GetValue() / 2);
-
-    //        playerProjectile.GetComponent<TrailRenderer>().startColor = Color.blue;
-    //        playerProjectile.GetComponent<TrailRenderer>().endColor = Color.blue;
-    //    }
-
-    //    _abilityThreeCooldown = 0;
-    //}
+        //projRB.AddForce(firePoint.up * 10, ForceMode2D.Impulse);
+    }
 
     private float CalculateDamage()
     {
