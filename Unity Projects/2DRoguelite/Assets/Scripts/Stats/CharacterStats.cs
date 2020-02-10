@@ -1,14 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
+    public float currentHealth { get; protected set; }
+    [Tooltip("Character's max health points.")]
     public Stat characterHealth;
-    public float currentHealth { get; set; }
-
+    [Tooltip("The speed at which the character will move.")]
     public Stat characterSpeed;
+    [Tooltip("The damage which character will deal when attacking")]
     public Stat characterAttackDamage;
+    [Tooltip("The delay between the attacks (in seconds).")]
     public Stat characterAttackDelay;
 
     private GameUIManager gameUI;

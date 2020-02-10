@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BiggerProjectile : ItemPickup
+public class BiggerProjectile : InteractableItem
 {
     public float projectileSizeMultiplier;
 
-    override protected void PlayerInteract(PlayerController playerController)
+    override public void Interact(PlayerController playerController)
     {
         playerController.projectileSizeMultiplier = projectileSizeMultiplier;
         Destroy(gameObject);

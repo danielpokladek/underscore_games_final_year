@@ -51,7 +51,7 @@ public class SlimeBoss : BossController
             Vector2 direction = player.position - transform.position;
             direction = direction.normalized;
 
-            playerController.AddForce(direction, thumpForce, .5f);
+            playerController.playerMovement.AddForce(direction, thumpForce, .5f);
         }
     }
     

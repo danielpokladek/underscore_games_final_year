@@ -30,22 +30,9 @@ public class RogueCharacter : MeleeController
 
     override protected void SecAttack()
     {
-        Vector2 shootDirection = mousePosition - playerRB.position;
-
         GameObject projectile           = Instantiate(rangerArrow, attackPoint.position, attackPoint.rotation);
         Rigidbody2D projectileRB        = projectile.GetComponent<Rigidbody2D>();
 
         projectileRB.AddForce(attackPoint.up * 20, ForceMode2D.Impulse);
-    }
-
-    IEnumerator Dodge()
-    {
-        allowMovement = false;
-        playerStats.characterSpeed.AddModifier(15);
-
-        yield return new WaitForSeconds(.2f);
-
-        playerStats.characterSpeed.RemoveModifier(15);
-        allowMovement = true;
     }
 }

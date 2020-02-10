@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AdjustHealth : ItemPickup
+public class AdjustHealth : InteractableItem
 {
     public enum Type { Heal, Damage, MaxHealth }
     public Type ItemType = Type.Heal;
     public float amount;
 
-    override protected void PlayerInteract(PlayerController playerController)
+    override public void Interact(PlayerController playerController)
     {
         switch (ItemType)
         {

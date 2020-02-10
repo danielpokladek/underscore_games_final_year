@@ -10,12 +10,12 @@ public class CharSelController : PlayerController
     {
         base.Start();
 
-        canMove = false;
+        playerMovement.EnableMovement = false;
     }
 
     private void OnMouseDown()
     {
-        canMove = true;
+        playerMovement.EnableMovement = true;
         GameManager.current.playerPrefab = playerPrefab;
     }
 
