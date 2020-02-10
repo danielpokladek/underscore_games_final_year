@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(PlayerInteractions))]
 [RequireComponent(typeof(PlayerStats))]
@@ -18,6 +17,9 @@ public class PlayerController : MonoBehaviour
         "This ensures a clearner hierarchy, and makes it so the objects follow player." +
         "This is only requried for powerups that spawn in world, for example energy balls.")]
     public Transform powerUpContainer;
+    [Tooltip("This is the animator that controls the attack animations." +
+        "This animator is most likely placed on the object used as a weapon/fists.")]
+    public Animator attackAnim;
 
     // --- --- ---
     [HideInInspector] public float  projectileSizeMultiplier = 1; 
@@ -25,7 +27,6 @@ public class PlayerController : MonoBehaviour
 
     // --- --- ---
     protected Camera    playerCamera;
-    protected Animator  attackAnim;
 
     // --- --- ---
     protected float _attackDelay;

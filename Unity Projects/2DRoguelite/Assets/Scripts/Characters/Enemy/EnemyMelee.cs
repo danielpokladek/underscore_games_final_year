@@ -37,7 +37,7 @@ public class EnemyMelee : EnemyController
     {
         base.AttackPlayer();
 
-        if (Vector2.Distance(playerTrans.position, transform.position) < attackRange)
+        if (Vector2.Distance(enemyMovement.PlayerTrans, (Vector2)transform.position) < attackRange)
         {
             base.AttackPlayer();
 

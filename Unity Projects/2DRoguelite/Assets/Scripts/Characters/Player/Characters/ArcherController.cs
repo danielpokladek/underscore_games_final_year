@@ -146,10 +146,11 @@ public class ArcherController : PlayerController
         Rigidbody2D      projRB = proj.GetComponent<Rigidbody2D>();
         PlayerProjectile pProj  = proj.GetComponent<PlayerProjectile>();
 
-        if (!bowFullyCharged)
+        if (bowFullyCharged)
         {
-            proj.GetComponent<TrailRenderer>().startColor = Color.white;
-            proj.GetComponent<TrailRenderer>().endColor = Color.white;
+            proj.GetComponent<TrailRenderer>().enabled = true;
+            //proj.GetComponent<TrailRenderer>().startColor = Color.white;
+            //proj.GetComponent<TrailRenderer>().endColor = Color.white;
         }
 
         //tempProjectile.transform.localScale = new Vector3(
@@ -165,7 +166,7 @@ public class ArcherController : PlayerController
 
     private void SecondAbility()
     {
-        GameObject       proj   = Instantiate(normalProjectile, firePoint.position, firePoint.rotation);
+        GameObject       proj   = Instantiate(specialProjectile, firePoint.position, firePoint.rotation);
         Rigidbody2D      projRB = proj.GetComponent<Rigidbody2D>();
         PlayerProjectile pProj  = proj.GetComponent<PlayerProjectile>();
 

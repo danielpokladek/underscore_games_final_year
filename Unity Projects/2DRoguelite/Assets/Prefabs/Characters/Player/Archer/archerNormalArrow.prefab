@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3091335250733579987}
   - component: {fileID: -8920838921880691332}
   m_Layer: 0
-  m_Name: playerArrow
+  m_Name: archerNormalArrow
   m_TagString: Finish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -90,7 +90,7 @@ TrailRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4729260153567274746}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

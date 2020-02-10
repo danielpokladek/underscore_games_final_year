@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(AIPath))]
+[RequireComponent(typeof(EnemyMovement))]
 public class EnemyController : MonoBehaviour
 {
     [Header("Enemy Settings")]
@@ -31,11 +34,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private GameObject healthDrop;
     [SerializeField] protected float dropPercentage;
 
-    // --- MOVEMENT -----------
-    protected Transform  playerTrans;
-    protected GameObject playerGO;
-    protected Vector2    stopPoint = new Vector2(0, 0);
-    protected bool       movementEnabled = true;
+    [SerializeField] private GameObject[] gemDrops;
 
     // --- ATTACK & HEALTH -------
     protected float currentHealth;
@@ -48,21 +47,22 @@ public class EnemyController : MonoBehaviour
     protected bool isBleeding    = false;
     private float  bleedingTimer = 0;
 
-    // --- PATHFINDING SETTINGS --------------------
-    protected AIDestinationSetter aiDestinationSetter;
-    protected AIPath aiPath;
-
-    protected Vector2 playerVector;
     protected float   aimAngle;
 
     public delegate void OnEnemyDeath();
     public OnEnemyDeath onEnemyDeathCallback;
 
     // ---
+    [HideInInspector] public EnemyMovement   enemyMovement;
+    [HideInInspector] public EnemyStats      enemyStats;
+
     private LevelManager levelManager;
 
     private void Start()
     {
+        enemyMovement = GetComponent<EnemyMovement>();
+        enemyStats = GetComponent<EnemyStats>();
+
         InitiateEnemy();
     }
 
@@ -78,16 +78,7 @@ public class EnemyController : MonoBehaviour
         if (!GameObject.FindGameObjectWithTag("Player"))
             Debug.LogError("Could not find a player, make sure they are tagged and present in the current scene.", gameObject);
 
-        playerGO    = GameObject.FindGameObjectWithTag("Player");
-        playerTrans = playerGO.transform;
-
         currentDamage = damageAmount;
-
-        aiDestinationSetter = GetComponent<AIDestinationSetter>();
-        aiPath              = GetComponent<AIPath>();
-
-        aiDestinationSetter.target = playerTrans;
-        aiPath.maxSpeed            = moveSpeed;
 
         levelManager = LevelManager.instance;
         levelManager.onDayStateChangeCallback += NightBuff;
@@ -109,11 +100,6 @@ public class EnemyController : MonoBehaviour
             if (isBleeding == true)
                 bleedingTimer += Time.deltaTime;
         }
-
-        if (!movementEnabled)
-            aiPath.maxSpeed = 0;
-        else
-            aiPath.maxSpeed = moveSpeed;
     }
 
     private void NightBuff()
@@ -140,9 +126,7 @@ public class EnemyController : MonoBehaviour
 
     virtual protected void AIAim()
     {
-        playerVector = ((Vector2)playerTrans.position - (Vector2)transform.position).normalized;
-        aimAngle     = -1 * Mathf.Atan2(playerVector.y, playerVector.x) * Mathf.Rad2Deg;
-
+        aimAngle     = -1 * Mathf.Atan2(enemyMovement.PlayerVector.y, enemyMovement.PlayerVector.x) * Mathf.Rad2Deg;
         armPivot.rotation = Quaternion.AngleAxis(aimAngle, Vector3.back);
     }
 
@@ -153,12 +137,12 @@ public class EnemyController : MonoBehaviour
     public IEnumerator Stun(float timeDelay)
     {
         attackEnabled   = false;
-        movementEnabled = false;
+        enemyMovement.enableMovement = false;
 
         yield return new WaitForSeconds(timeDelay);
 
         attackEnabled   = true;
-        movementEnabled = true;
+        enemyMovement.enableMovement = true;
     }
 
     public void TakeDamage(float damageAmount)
@@ -176,7 +160,7 @@ public class EnemyController : MonoBehaviour
         if (isBleeding)
             return;
 
-        InvokeRepeating("BleedingDamage", 0.0f, 1.0f);
+        InvokeRepeating("BleedingDamage", effectLength, 1.0f);
 
         bleedingTimer = 0;
         bleedingLength = effectLength;
@@ -185,7 +169,7 @@ public class EnemyController : MonoBehaviour
 
     virtual protected bool CanSeePlayer()
     {
-        Vector2 rayDirection = (playerTrans.position - transform.position).normalized;
+        Vector2 rayDirection = (enemyMovement.PlayerTrans - (Vector2)transform.position).normalized;
 
         RaycastHit2D rayHit2D = Physics2D.Raycast(transform.position, rayDirection, 10, playerLayer);
 
