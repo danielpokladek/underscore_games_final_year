@@ -35,7 +35,7 @@ public class MeleeController : PlayerController
     {
         if (enemyObject.CompareTag("Enemy"))
         {
-            enemyObject.GetComponent<EnemyController>().TakeDamage(playerStats.characterAttackDamage.GetValue());
+            enemyObject.GetComponent<EnemyController>().enemyStats.TakeDamage(playerStats.characterAttackDamage.GetValue());
         }
     }
 

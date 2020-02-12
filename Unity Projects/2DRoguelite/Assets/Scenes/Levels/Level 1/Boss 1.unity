@@ -918,7 +918,7 @@ MonoBehaviour:
   showUnwalkableNodes: 1
   debugMode: 0
   debugFloor: 0
-  debugRoof: 20000
+  debugRoof: 1
   manualDebugFloorRoof: 0
   showSearchTree: 0
   unwalkableNodeDebugSize: 0.3
@@ -1335,6 +1335,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5524302524855385844, guid: ee67f91c1506b5340ad5f7f182f590f2,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 931772500935661607, guid: 2190580d6cd5f4149bb914c7aba768d8,
+        type: 3}
     - target: {fileID: 5524302525095851172, guid: ee67f91c1506b5340ad5f7f182f590f2,
         type: 3}
       propertyPath: m_LocalPosition.x

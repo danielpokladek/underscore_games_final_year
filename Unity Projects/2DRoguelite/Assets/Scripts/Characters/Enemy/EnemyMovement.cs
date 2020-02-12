@@ -7,44 +7,41 @@ public class EnemyMovement : MonoBehaviour
 {
     [HideInInspector] public bool isDummy { get; set; }
 
-    // --- MOVEMENT ---
-    private Transform   playerTrans;
-    private GameObject  playerGO;
+    // --- Public ---
+    public float _aimAngle { get; private set; }
+    public Vector2 playerVector { get; private set; }
 
-    private Vector2     stopPoint   = new Vector2(0, 0);
-    private Vector2     playerVector;
+    // --- Private ---
+    private Transform playerTrans;
+    public bool enableMovement;
 
-    public bool        enableMovement { get; set; }
-
-    private float       _attackDelay;
-    private float       _aimAngle;
-
-    private EnemyController     enemyController;
-    private AIPath              aiPath;
+    // --- --- ---
     private AIDestinationSetter aiDest;
+    private AIPath              aiPath;
+    private EnemyStats          enemyStats;
 
     private void Start()
     {
-        enemyController = GetComponent<EnemyController>();
-        aiDest          = GetComponent<AIDestinationSetter>();
-        aiPath          = GetComponent<AIPath>();
+        enemyStats = GetComponent<EnemyStats>();
+        aiDest = GetComponent<AIDestinationSetter>();
+        aiPath = GetComponent<AIPath>();
 
-        playerTrans     = GameObject.FindGameObjectWithTag("Player").transform;
+        playerTrans = GameObject.FindGameObjectWithTag("Player").transform;
 
         aiDest.target = playerTrans;
-        aiPath.maxSpeed = enemyController.enemyStats.characterSpeed.GetValue();
+        aiPath.maxSpeed = enemyStats.characterSpeed.GetValue();
 
         enableMovement = true;
     }
 
     private void Update()
     {
+        GetPlayerVector();
+
         if (!enableMovement)
             aiPath.maxSpeed = 0;
         else
-            aiPath.maxSpeed = enemyController.enemyStats.characterSpeed.GetValue();
-
-        GetPlayerVector();
+            aiPath.maxSpeed = enemyStats.characterSpeed.GetValue();
     }
 
     private void GetPlayerVector()
@@ -54,4 +51,6 @@ public class EnemyMovement : MonoBehaviour
 
     public Vector2 PlayerVector { get; set; }
     public Vector2 PlayerTrans { get; set; }
+
+    public bool EnableMovement { get; set; }
 }

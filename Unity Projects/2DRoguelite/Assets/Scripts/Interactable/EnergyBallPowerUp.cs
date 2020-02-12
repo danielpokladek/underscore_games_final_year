@@ -16,7 +16,7 @@ public class EnergyBallPowerUp : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            other.GetComponent<EnemyController>().TakeDamage(damageAmount);
+            other.GetComponent<EnemyController>().enemyStats.TakeDamage(damageAmount);
         }
     }
 }

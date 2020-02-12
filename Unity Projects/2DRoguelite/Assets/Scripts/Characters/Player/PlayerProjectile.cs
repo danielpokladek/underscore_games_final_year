@@ -52,7 +52,7 @@ public class PlayerProjectile : Projectile
 
     virtual protected void EnemyHit(EnemyController enemyController)
     {
-        enemyController.TakeDamage(projectileDamage);
+        enemyController.enemyStats.TakeDamage(projectileDamage);
         _hitEffect = Instantiate(hitEffect, transform.position, Quaternion.identity);
         CameraShaker.Instance.ShakeOnce(cameraShakeMagnitude, cameraShakeRoughness, .1f, .5f);
 

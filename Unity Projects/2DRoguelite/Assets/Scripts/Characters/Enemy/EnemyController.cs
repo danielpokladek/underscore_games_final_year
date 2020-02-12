@@ -36,6 +36,8 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] private GameObject[] gemDrops;
 
+    [SerializeField] private SpriteRenderer weaponSprite;
+
     // --- ATTACK & HEALTH -------
     protected float currentHealth;
     protected float currentDamage;
@@ -60,16 +62,15 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
-        enemyMovement = GetComponent<EnemyMovement>();
-        enemyStats = GetComponent<EnemyStats>();
+        enemyMovement   = GetComponent<EnemyMovement>();
+        enemyStats      = GetComponent<EnemyStats>();
 
         InitiateEnemy();
+        //enemyMovement.InitMovement();
     }
 
     private void InitiateEnemy()
     {
-        currentHealth = enemyHealth;
-
         // No need to initiate anything if the object is a dummy,
         //  so simply skip this part and move to the update loop.
         if (isDummy)
@@ -88,6 +89,8 @@ public class EnemyController : MonoBehaviour
     {
         if (isDummy)
             return;
+
+        AIAim();
 
         if (isBleeding)
         {
@@ -114,8 +117,6 @@ public class EnemyController : MonoBehaviour
     {
         if (isDummy)
             return;
-
-        AIAim();
     }
 
     virtual protected void AttackPlayer()
@@ -126,34 +127,32 @@ public class EnemyController : MonoBehaviour
 
     virtual protected void AIAim()
     {
-        aimAngle     = -1 * Mathf.Atan2(enemyMovement.PlayerVector.y, enemyMovement.PlayerVector.x) * Mathf.Rad2Deg;
+        aimAngle          = -1 * Mathf.Atan2(enemyMovement.PlayerVector.y, enemyMovement.PlayerVector.x) * Mathf.Rad2Deg;
         armPivot.rotation = Quaternion.AngleAxis(aimAngle, Vector3.back);
+
+        if (weaponSprite != null)
+        {
+            weaponSprite.sortingOrder = 5 - 1;
+
+            if (aimAngle > 0)
+                weaponSprite.sortingOrder = 5 + 1;
+        }
     }
 
-    /// <summary>
-    /// While enemy is stunned, he can't move or attack, but can still take damage.
-    /// </summary>
-    /// <returns></returns>
-    public IEnumerator Stun(float timeDelay)
-    {
-        attackEnabled   = false;
-        enemyMovement.enableMovement = false;
+    ///// <summary>
+    ///// While enemy is stunned, he can't move or attack, but can still take damage.
+    ///// </summary>
+    ///// <returns></returns>
+    //public IEnumerator Stun(float timeDelay)
+    //{
+    //    attackEnabled   = false;
+    //    enemyMovement.enableMovement = false;
 
-        yield return new WaitForSeconds(timeDelay);
+    //    yield return new WaitForSeconds(timeDelay);
 
-        attackEnabled   = true;
-        enemyMovement.enableMovement = true;
-    }
-
-    public void TakeDamage(float damageAmount)
-    {
-        currentHealth -= damageAmount;
-
-        GameUIManager.currentInstance.DamageIndicator(transform.position, damageAmount);
-
-        if (currentHealth <= 0)
-            KillCharacter();
-    }
+    //    attackEnabled   = true;
+    //    enemyMovement.enableMovement = true;
+    //}
 
     public void BleedingEffect(float effectLength)
     {
@@ -171,7 +170,7 @@ public class EnemyController : MonoBehaviour
     {
         Vector2 rayDirection = (enemyMovement.PlayerTrans - (Vector2)transform.position).normalized;
 
-        RaycastHit2D rayHit2D = Physics2D.Raycast(transform.position, rayDirection, 10, playerLayer);
+        RaycastHit2D rayHit2D = Physics2D.Raycast(transform.position, rayDirection, 20, playerLayer);
 
         if (rayHit2D.collider)
         {
@@ -197,6 +196,6 @@ public class EnemyController : MonoBehaviour
 
     private void BleedingDamage()
     {
-        TakeDamage(1);
+        //TakeDamage(1);
     }
 }

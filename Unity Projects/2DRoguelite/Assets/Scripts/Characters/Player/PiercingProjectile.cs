@@ -10,9 +10,9 @@ public class PiercingProjectile : PlayerProjectile
 
     override protected void EnemyHit(EnemyController enemyController)
     {
-        //base.EnemyHit(enemyController);s
-
-        enemyController.TakeDamage(projectileDamage);
+        enemyController.enemyStats.TakeDamage(projectileDamage);
+        //enemyController.Stun(0.7f);
+        //enemyController.enemyStats.DamageOverTime(3.0f, 1.0f);
 
         _hitEffect = Instantiate(hitEffect, transform.position, Quaternion.identity);
         CameraShaker.Instance.ShakeOnce(cameraShakeMagnitude, cameraShakeRoughness, .1f, .5f);
