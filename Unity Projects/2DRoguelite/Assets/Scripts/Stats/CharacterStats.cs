@@ -43,7 +43,7 @@ public class CharacterStats : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            Debug.Log("Character is dead.");
+            //Debug.Log("Character is dead.");
             CharacterDeath();
         }
     }

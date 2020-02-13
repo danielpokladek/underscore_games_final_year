@@ -46,6 +46,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -127,10 +128,11 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 99e31664d614ed84181c4619d03fab30, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -208,6 +210,8 @@ GameObject:
   - component: {fileID: 2279957945320878748}
   - component: {fileID: 4763069743746865410}
   - component: {fileID: -3203307281210593216}
+  - component: {fileID: 6696932729696317638}
+  - component: {fileID: 7903142550016793368}
   m_Layer: 9
   m_Name: slimeRangedEnemy
   m_TagString: Enemy
@@ -401,9 +405,45 @@ MonoBehaviour:
   healthDrop: {fileID: 2511877264795001674, guid: 4f71a14180282054fbb4189adf44bc24,
     type: 3}
   dropPercentage: 0.75
+  gemDrops: []
+  weaponSprite: {fileID: 2279957944466416966}
+  enemyMovement: {fileID: 0}
+  enemyStats: {fileID: 0}
   projectilePrefab: {fileID: 442335749978805841, guid: 8023802798a43a94ebb43e675740deef,
     type: 3}
-  weaponSprite: {fileID: 2279957944466416966}
+--- !u!114 &6696932729696317638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2279957945320878747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c2a22d7e4ae58d4bb670110fc8d022f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterHealth:
+    baseValue: 4
+  characterSpeed:
+    baseValue: 2.5
+  characterAttackDamage:
+    baseValue: 5
+  characterAttackDelay:
+    baseValue: 1.8
+--- !u!114 &7903142550016793368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2279957945320878747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d740eb58291c5514e902ff2b9725f024, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableMovement: 0
 --- !u!1 &2279957945586153059
 GameObject:
   m_ObjectHideFlags: 0

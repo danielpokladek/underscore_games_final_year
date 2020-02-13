@@ -32,4 +32,9 @@ public class EnemyStats : CharacterStats
         CancelInvoke("BleedingDamage");
         isBleeding = false;
     }
+
+    override protected void CharacterDeath()
+    {
+        Destroy(gameObject);
+    }
 }
