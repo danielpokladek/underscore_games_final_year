@@ -1397,6 +1397,7 @@ GameObject:
   - component: {fileID: 1953332612}
   - component: {fileID: 1953332615}
   - component: {fileID: 1953332616}
+  - component: {fileID: 1953332611}
   m_Layer: 0
   m_Name: '- Scripts Container -'
   m_TagString: Untagged
@@ -1404,6 +1405,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1953332611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1953332610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2df981a8ee274424d84e5cde818ebc25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tempChestItems: {fileID: 11400000, guid: a73bc917acfb6d040bdf5f9ea71bfc0e, type: 2}
 --- !u!4 &1953332612
 Transform:
   m_ObjectHideFlags: 0

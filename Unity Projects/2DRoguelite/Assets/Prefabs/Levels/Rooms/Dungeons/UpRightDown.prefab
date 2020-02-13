@@ -56574,7 +56574,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4560570782951576509}
   - component: {fileID: -8600369409300138596}
-  - component: {fileID: 8630054758217956286}
   - component: {fileID: -9160498855336529275}
   m_Layer: 0
   m_Name: UpRightDown
@@ -56612,7 +56611,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_UsedByComposite: 1
+  m_UsedByComposite: 0
   m_Offset: {x: 1.5, y: -2.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -56626,26 +56625,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 69, y: 59}
   m_EdgeRadius: 0
---- !u!114 &8630054758217956286
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4560570782951576508}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2b233b4841feb241a3ce447104ea330, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnEnemies: 1
-  enemySpawnPoints:
-  - {fileID: 8597039149012695889}
-  - {fileID: 1091897308319703960}
-  shopSpawnPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  portalSpawnPoints: []
 --- !u!114 &-9160498855336529275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60820,8 +60799,9 @@ GameObject:
   - component: {fileID: 5407018276719331656}
   - component: {fileID: 6470097507894259670}
   - component: {fileID: 4868535735362645639}
+  - component: {fileID: 3738999045426379490}
   m_Layer: 0
-  m_Name: Tilemap
+  m_Name: door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61509,6 +61489,22 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!19719996 &3738999045426379490
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4701939457076847073}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 1
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0.00001
 --- !u!1001 &1816722322478392683
 PrefabInstance:
   m_ObjectHideFlags: 0

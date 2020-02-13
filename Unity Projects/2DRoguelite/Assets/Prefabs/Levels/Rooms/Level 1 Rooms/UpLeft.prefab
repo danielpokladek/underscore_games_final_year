@@ -75962,7 +75962,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7460021486721980484}
-  - component: {fileID: -1344967619077889425}
   - component: {fileID: -2372447758055628599}
   - component: {fileID: 5104455364985058255}
   m_Layer: 0
@@ -75990,22 +75989,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-1344967619077889425
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7460021486721980485}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 630fa3465ba953d4ca83fd3bc303d7e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnEnemies: 1
-  enemySpawnPoints: []
-  shopSpawnPoints: []
-  portalSpawnPoints: []
 --- !u!61 &-2372447758055628599
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -76514,15 +76497,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc417f562a4f17b4fb966a9cbc9f16b6, type: 3}
---- !u!4 &1835622473922067407 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7960282616360328761, guid: bc417f562a4f17b4fb966a9cbc9f16b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 8575392687971558902}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1835622473922067404 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7960282616360328762, guid: bc417f562a4f17b4fb966a9cbc9f16b6,
+    type: 3}
+  m_PrefabInstance: {fileID: 8575392687971558902}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1835622473922067407 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7960282616360328761, guid: bc417f562a4f17b4fb966a9cbc9f16b6,
     type: 3}
   m_PrefabInstance: {fileID: 8575392687971558902}
   m_PrefabAsset: {fileID: 0}

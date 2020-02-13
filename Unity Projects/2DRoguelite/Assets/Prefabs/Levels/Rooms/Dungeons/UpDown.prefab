@@ -24021,7 +24021,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2928977939396335634}
   - component: {fileID: 729505891947241657}
-  - component: {fileID: 2377279286643518485}
   - component: {fileID: -2460384200633573706}
   m_Layer: 0
   m_Name: UpDown
@@ -24074,27 +24073,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 69, y: 59}
   m_EdgeRadius: 0
---- !u!114 &2377279286643518485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2928977939396335635}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2b233b4841feb241a3ce447104ea330, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnEnemies: 1
-  enemySpawnPoints:
-  - {fileID: 3198332069186038522}
-  - {fileID: 2572581554021543926}
-  - {fileID: 6862772566809248825}
-  shopSpawnPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  portalSpawnPoints: []
 --- !u!114 &-2460384200633573706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57029,8 +57007,9 @@ GameObject:
   - component: {fileID: 2380995720424745004}
   - component: {fileID: 4346702887000353571}
   - component: {fileID: 385557675380849446}
+  - component: {fileID: 5775178352499697418}
   m_Layer: 0
-  m_Name: Tilemap
+  m_Name: door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57502,6 +57481,22 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!19719996 &5775178352499697418
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8744673053791546467}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 1
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0.00001
 --- !u!1001 &181564674763545937
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -38593,9 +38593,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7833837376851484606}
-  - component: {fileID: 8307868729772617164}
   - component: {fileID: 6069914907064938878}
-  - component: {fileID: 2912036983642845955}
   - component: {fileID: 219481448426567830}
   m_Layer: 0
   m_Name: Right
@@ -38622,22 +38620,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8307868729772617164
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7833837376851484607}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 630fa3465ba953d4ca83fd3bc303d7e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnEnemies: 1
-  enemySpawnPoints: []
-  shopSpawnPoints: []
-  portalSpawnPoints: []
 --- !u!61 &6069914907064938878
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -38664,28 +38646,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 69, y: 59}
   m_EdgeRadius: 0
---- !u!114 &2912036983642845955
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7833837376851484607}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2b233b4841feb241a3ce447104ea330, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnEnemies: 1
-  enemySpawnPoints:
-  - {fileID: 6625888068797412817}
-  - {fileID: 7991178652172578308}
-  - {fileID: 6684336886348210910}
-  - {fileID: 5690210794603070504}
-  shopSpawnPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  portalSpawnPoints: []
 --- !u!114 &219481448426567830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67500,7 +67460,7 @@ GameObject:
   - component: {fileID: 1555027193579653952}
   - component: {fileID: 8274509556550095818}
   m_Layer: 0
-  m_Name: Tilemap
+  m_Name: door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67786,7 +67746,7 @@ TilemapCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_UsedByComposite: 1
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001

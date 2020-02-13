@@ -23252,9 +23252,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3152840956620427539}
-  - component: {fileID: 9175936850485096034}
   - component: {fileID: -2534418299786464184}
-  - component: {fileID: 4081729735003210201}
   - component: {fileID: 642445660863130075}
   m_Layer: 0
   m_Name: DownLeft
@@ -23281,22 +23279,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9175936850485096034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3152840956620427538}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 630fa3465ba953d4ca83fd3bc303d7e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnEnemies: 1
-  enemySpawnPoints: []
-  shopSpawnPoints: []
-  portalSpawnPoints: []
 --- !u!61 &-2534418299786464184
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -23323,27 +23305,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 69, y: 59}
   m_EdgeRadius: 0
---- !u!114 &4081729735003210201
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3152840956620427538}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2b233b4841feb241a3ce447104ea330, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnEnemies: 1
-  enemySpawnPoints:
-  - {fileID: 4239440174808995026}
-  - {fileID: 8030574681848065671}
-  - {fileID: 1266457345293171741}
-  - {fileID: 3101788056919813622}
-  shopSpawnPoints:
-  - {fileID: 0}
-  portalSpawnPoints: []
 --- !u!114 &642445660863130075
 MonoBehaviour:
   m_ObjectHideFlags: 0

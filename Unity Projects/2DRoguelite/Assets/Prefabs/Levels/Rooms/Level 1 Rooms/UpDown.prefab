@@ -43020,7 +43020,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2928977939396335634}
-  - component: {fileID: -4011113740133505387}
   - component: {fileID: 729505891947241657}
   - component: {fileID: 2377279286643518485}
   m_Layer: 0
@@ -43048,22 +43047,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-4011113740133505387
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2928977939396335635}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 630fa3465ba953d4ca83fd3bc303d7e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnEnemies: 1
-  enemySpawnPoints: []
-  shopSpawnPoints: []
-  portalSpawnPoints: []
 --- !u!61 &729505891947241657
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -43075,7 +43058,7 @@ BoxCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_UsedByEffector: 1
+  m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 1.5, y: -2.5}
   m_SpriteTilingProperty:

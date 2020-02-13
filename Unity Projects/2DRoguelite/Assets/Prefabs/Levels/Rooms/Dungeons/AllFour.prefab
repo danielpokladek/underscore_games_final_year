@@ -31864,7 +31864,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4923909138351855971
 Transform:
   m_ObjectHideFlags: 0
@@ -32930,6 +32930,40 @@ CompositeCollider2D:
         Y: -330000000
       - X: 160000000
         Y: -330000000
+  - m_Collider: {fileID: 489059125952695793}
+    m_ColliderPaths:
+    - - X: 250000000
+        Y: 260000000
+      - X: 160000000
+        Y: 260000000
+      - X: 160000000
+        Y: 240000000
+      - X: 250000000
+        Y: 240000000
+    - - X: 540000000
+        Y: 30000000
+      - X: 520000000
+        Y: 30000000
+      - X: 520000000
+        Y: -70000000
+      - X: 540000000
+        Y: -70000000
+    - - X: -140000000
+        Y: 30000000
+      - X: -160000000
+        Y: 30000000
+      - X: -160000000
+        Y: -70000000
+      - X: -140000000
+        Y: -70000000
+    - - X: 250000000
+        Y: -310000000
+      - X: 160000000
+        Y: -310000000
+      - X: 160000000
+        Y: -330000000
+      - X: 250000000
+        Y: -330000000
   m_CompositePaths:
     m_Paths:
     - - {x: 25.999996, y: -33}
@@ -32942,36 +32976,36 @@ CompositeCollider2D:
       - {x: 43.999996, y: 17}
       - {x: 26, y: 17.000004}
       - {x: 25.999996, y: 26}
-      - {x: 25, y: 25.999996}
-      - {x: 25.000004, y: 16}
-      - {x: 43, y: 15.999997}
-      - {x: 43.000004, y: 3}
-      - {x: 53, y: 2.9999971}
-      - {x: 52.999996, y: -7}
-      - {x: 43, y: -7.0000033}
-      - {x: 42.999996, y: -23}
-      - {x: 25, y: -23.000004}
-      - {x: 25.000004, y: -33}
-    - - {x: -5.000003, y: 3}
-      - {x: -4.999997, y: 16}
-      - {x: 16, y: 16.000004}
-      - {x: 15.999997, y: 26}
       - {x: 15, y: 25.999996}
       - {x: 14.999997, y: 17}
       - {x: -6, y: 16.999996}
       - {x: -6.000003, y: 4}
       - {x: -16, y: 3.9999971}
-      - {x: -15.999997, y: 3}
-    - - {x: 15.999997, y: -33}
-      - {x: 15.999997, y: -23}
-      - {x: -5, y: -22.999996}
-      - {x: -5.000003, y: -7}
-      - {x: -16, y: -7.0000033}
       - {x: -15.999997, y: -8}
       - {x: -6, y: -8.000003}
       - {x: -5.999997, y: -24}
       - {x: 15, y: -24.000004}
       - {x: 15.000004, y: -33}
+    - - {x: 25, y: -30.999998}
+      - {x: 16, y: -30.999998}
+      - {x: 15.999997, y: -23}
+      - {x: -5, y: -22.999996}
+      - {x: -5.000003, y: -7}
+      - {x: -14, y: -6.9999967}
+      - {x: -13.999997, y: 3}
+      - {x: -5, y: 3.0000029}
+      - {x: -4.999997, y: 16}
+      - {x: 16, y: 16.000004}
+      - {x: 16.000004, y: 24}
+      - {x: 25, y: 23.999996}
+      - {x: 25.000004, y: 16}
+      - {x: 43, y: 15.999997}
+      - {x: 43.000004, y: 3}
+      - {x: 52, y: 2.9999971}
+      - {x: 51.999996, y: -7}
+      - {x: 43, y: -7.0000033}
+      - {x: 42.999996, y: -23}
+      - {x: 25, y: -23.000004}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.000005
 --- !u!1 &4807685427452833504
@@ -35358,7 +35392,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4807685427921151013}
   - component: {fileID: 8850550133089939579}
-  - component: {fileID: 8905322130088032535}
   - component: {fileID: 1313327060382164156}
   m_Layer: 0
   m_Name: AllFour
@@ -35411,27 +35444,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 69, y: 59}
   m_EdgeRadius: 0
---- !u!114 &8905322130088032535
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4807685427921151012}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2b233b4841feb241a3ce447104ea330, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnEnemies: 1
-  enemySpawnPoints:
-  - {fileID: 5489797042573093578}
-  - {fileID: 1718080881777886604}
-  - {fileID: 4696008523266774654}
-  shopSpawnPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  portalSpawnPoints: []
 --- !u!114 &1313327060382164156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58481,15 +58493,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc417f562a4f17b4fb966a9cbc9f16b6, type: 3}
---- !u!4 &501443436291076473 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7960282616360328761, guid: bc417f562a4f17b4fb966a9cbc9f16b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 7533931718391852864}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &501443436291076474 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7960282616360328762, guid: bc417f562a4f17b4fb966a9cbc9f16b6,
+    type: 3}
+  m_PrefabInstance: {fileID: 7533931718391852864}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &501443436291076473 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7960282616360328761, guid: bc417f562a4f17b4fb966a9cbc9f16b6,
     type: 3}
   m_PrefabInstance: {fileID: 7533931718391852864}
   m_PrefabAsset: {fileID: 0}
