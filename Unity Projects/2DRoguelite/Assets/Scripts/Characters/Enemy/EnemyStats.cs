@@ -35,6 +35,9 @@ public class EnemyStats : CharacterStats
 
     override protected void CharacterDeath()
     {
+        if (enemyController.onEnemyDeathCallback != null)
+            enemyController.onEnemyDeathCallback.Invoke();
+
         Destroy(gameObject);
     }
 }

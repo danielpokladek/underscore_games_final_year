@@ -44,7 +44,7 @@ public class ShadowController : EnemyRanged
         GameObject projectile = Instantiate(projectilePrefab, attackPoint.position, attackPoint.rotation);
 
         Projectile projectileBullet = projectile.GetComponent<Projectile>();
-        Rigidbody2D projectileRB = projectile.GetComponent<Rigidbody2D>();
+        Rigidbody2D projectileRB    = projectile.GetComponent<Rigidbody2D>();
 
         projectileRB.AddForce(attackPoint.up * 10, ForceMode2D.Impulse);
         projectileBullet.SetDamage(currentDamage);
@@ -52,5 +52,10 @@ public class ShadowController : EnemyRanged
         currentAttackDelay = 0;
         canAttack = false;
         //wandAim = false;
+    }
+
+    private void OnGUI()
+    {
+        Debug.DrawLine(transform.position, enemyMovement.playerVector, Color.red, 2, false);
     }
 }
