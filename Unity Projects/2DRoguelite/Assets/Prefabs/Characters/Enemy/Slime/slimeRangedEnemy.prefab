@@ -431,6 +431,8 @@ MonoBehaviour:
     baseValue: 5
   characterAttackDelay:
     baseValue: 1.8
+  soulParticle: {fileID: 8558200818212196397, guid: 155753f8135d24948b94998611d692c3,
+    type: 3}
 --- !u!114 &7903142550016793368
 MonoBehaviour:
   m_ObjectHideFlags: 0

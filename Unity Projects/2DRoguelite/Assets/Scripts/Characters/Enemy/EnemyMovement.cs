@@ -32,6 +32,8 @@ public class EnemyMovement : MonoBehaviour
         aiPath.maxSpeed = enemyStats.characterSpeed.GetValue();
 
         enableMovement = true;
+
+        Debug.Log(playerTrans, playerTrans.gameObject);
     }
 
     private void Update()
@@ -46,7 +48,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void GetPlayerVector()
     {
-        playerVector = ((Vector2)playerTrans.position - (Vector2)transform.position).normalized;
+        playerVector = (playerTrans.position - transform.position).normalized;
     }
 
     public Vector2 PlayerVector { get; set; }

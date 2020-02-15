@@ -59,7 +59,7 @@ public class RoomManager : MonoBehaviour
 
     virtual protected void SpawnBossPortal()
     {
-        if (roomType != 0)
+        if (roomType == 0)
             return;
 
         bossIconRef = Instantiate(LevelManager.instance.minimapBoss, transform.position, Quaternion.identity);
@@ -67,7 +67,7 @@ public class RoomManager : MonoBehaviour
 
     virtual protected void SpawnItemShop()
     {
-        if (roomType != 0)
+        if (roomType == 0)
             return;
         
         shopIconRef = Instantiate(LevelManager.instance.minimapShop, transform.position, Quaternion.identity);

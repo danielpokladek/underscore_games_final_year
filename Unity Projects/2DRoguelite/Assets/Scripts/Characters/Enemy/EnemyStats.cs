@@ -1,13 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
 public class EnemyStats : CharacterStats
 {
+    [SerializeField] private GameObject soulParticle;
+
     private bool  isBleeding = false;
     private float bleedingDamage;
 
     private EnemyController enemyController;
+
+    override protected void Start()
+    {
+        base.Start();
+
+        enemyController = GetComponent<EnemyController>();
+    }
 
     public void DamageOverTime(float effectLength, float damageAmount)
     {
@@ -37,6 +47,9 @@ public class EnemyStats : CharacterStats
     {
         if (enemyController.onEnemyDeathCallback != null)
             enemyController.onEnemyDeathCallback.Invoke();
+
+        //LevelManager.instance.EnemyKilled();
+        Instantiate(soulParticle, transform.position, Quaternion.identity);
 
         Destroy(gameObject);
     }

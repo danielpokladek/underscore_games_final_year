@@ -21,8 +21,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject playerPrefab;
     public GameObject playerRef;
-    
-    [HideInInspector] public GameObject bossPortalRef;
+    public GameObject bossPortalRef;
     
     [SerializeField] private int playerGems;
 

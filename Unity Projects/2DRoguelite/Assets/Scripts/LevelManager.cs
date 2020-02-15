@@ -31,6 +31,9 @@ public class LevelManager : MonoBehaviour
     public GameObject minimapBoss;
     public GameObject minimapShop;
 
+    [Tooltip("Kills required for portal to work.")]
+    public int killsRequired;
+
     [Header("Day & Night Visual Settings")]
     [Tooltip("Tick this box to enable the visual progress of the day and night cycle, " +
         "leaving this option disabled will still progress the time in game. " +
@@ -57,9 +60,14 @@ public class LevelManager : MonoBehaviour
     public delegate void OnDayStateChange();
     public OnDayStateChange onDayStateChangeCallback;
 
+    public delegate void PortalCharged();
+    public PortalCharged portalChargedCallback;
+
     private string currentStateString = "N/A";
     private float stateTimer;
     private float dayTimer;
+
+    [HideInInspector] public float enemyKills { get; private set; }
 
     private void Start()
     {
@@ -103,6 +111,17 @@ public class LevelManager : MonoBehaviour
         {
             SavePlayerStats();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+    }
+
+    public void AddSoul()
+    {
+        enemyKills++;
+
+        if (enemyKills >= killsRequired)
+        {
+            if (portalChargedCallback != null)
+                portalChargedCallback.Invoke();
         }
     }
 

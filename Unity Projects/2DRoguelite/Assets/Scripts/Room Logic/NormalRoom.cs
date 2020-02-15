@@ -8,10 +8,8 @@ public class NormalRoom : RoomManager
 
         int randPoint = Random.Range(0, portalSpawnPoints.Length);
 
-        bossPortalRef = Instantiate(LevelManager.instance.portalPrefab,
-            portalSpawnPoints[randPoint].transform.position, Quaternion.identity);
-
-        GameManager.current.bossPortalRef = bossPortalRef;
+        GameManager.current.bossPortalRef = Instantiate(LevelManager.instance.portalPrefab,
+            enemySpawnPoints[randPoint].transform.position, Quaternion.identity);
     }
 
     override protected void SpawnItemShop()
