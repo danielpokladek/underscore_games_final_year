@@ -20,17 +20,6 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] protected LayerMask playerLayer;
 
-    [Tooltip("This is enemy's maximum movement speed.")]
-    [SerializeField] protected float moveSpeed = 2.5f;
-
-    [Tooltip("This is enemy's maximum health points")]
-    [SerializeField] protected float enemyHealth = 10f;
-
-    [Tooltip("This is enemy's damage points; set to 0 (zero) for dummy AI")]
-    [SerializeField] protected float damageAmount;
-
-    [SerializeField] protected float attackDelay;
-
     [SerializeField] private GameObject healthDrop;
     [SerializeField] protected float dropPercentage;
 
@@ -38,11 +27,7 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] private SpriteRenderer weaponSprite;
 
-    // --- ATTACK & HEALTH -------
-    protected float currentHealth;
-    protected float currentDamage;
-    protected float currentAttackDelay;
-    private float   bleedingLength;
+    private float bleedingLength;
 
     protected bool canAttack     = false;
     protected bool attackEnabled = true;
@@ -53,6 +38,8 @@ public class EnemyController : MonoBehaviour
 
     public delegate void OnEnemyDeath();
     public OnEnemyDeath onEnemyDeathCallback;
+
+    protected float _attackDelay;
 
     // ---
     [HideInInspector] public EnemyMovement   enemyMovement;
@@ -66,7 +53,6 @@ public class EnemyController : MonoBehaviour
         enemyStats      = GetComponent<EnemyStats>();
 
         InitiateEnemy();
-        //enemyMovement.InitMovement();
     }
 
     private void InitiateEnemy()
@@ -78,8 +64,6 @@ public class EnemyController : MonoBehaviour
 
         if (!GameObject.FindGameObjectWithTag("Player"))
             Debug.LogError("Could not find a player, make sure they are tagged and present in the current scene.", gameObject);
-
-        currentDamage = damageAmount;
 
         levelManager = LevelManager.instance;
         levelManager.onDayStateChangeCallback += NightBuff;
@@ -108,9 +92,9 @@ public class EnemyController : MonoBehaviour
     private void NightBuff()
     {
         if (levelManager.currentState == LevelManager.DayState.Midnight)
-            currentDamage = damageAmount * 2;
+            enemyStats.characterAttackDamage.AddModifier(enemyStats.characterAttackDamage.GetValue() * 2);
         else
-            currentDamage = damageAmount;
+            enemyStats.characterAttackDamage.RemoveModifier(enemyStats.characterAttackDamage.GetValue() * 2);
     }
 
     virtual protected void FixedUpdate()
@@ -127,7 +111,7 @@ public class EnemyController : MonoBehaviour
 
     virtual protected void AIAim()
     {
-        aimAngle          = -1 * Mathf.Atan2(enemyMovement.PlayerVector.y, enemyMovement.PlayerVector.x) * Mathf.Rad2Deg;
+        aimAngle          = -1 * Mathf.Atan2(enemyMovement.playerVector.y, enemyMovement.playerVector.x) * Mathf.Rad2Deg;
         armPivot.rotation = Quaternion.AngleAxis(aimAngle, Vector3.back);
 
         if (weaponSprite != null)
@@ -168,7 +152,7 @@ public class EnemyController : MonoBehaviour
 
     virtual protected bool CanSeePlayer()
     {
-        Vector2 rayDirection = (enemyMovement.PlayerTrans - (Vector2)transform.position).normalized;
+        Vector2 rayDirection = enemyMovement.playerVector;
 
         RaycastHit2D rayHit2D = Physics2D.Raycast(transform.position, rayDirection, 20, playerLayer);
 

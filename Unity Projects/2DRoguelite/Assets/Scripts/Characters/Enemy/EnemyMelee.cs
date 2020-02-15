@@ -19,9 +19,9 @@ public class EnemyMelee : EnemyController
 
         if (!canAttack)
         {
-            currentAttackDelay += Time.deltaTime;
+            _attackDelay += Time.deltaTime;
 
-            if (currentAttackDelay >= attackDelay)
+            if (_attackDelay >= enemyStats.characterAttackDelay.GetValue())
                 canAttack = true;
         }
     }
@@ -37,16 +37,16 @@ public class EnemyMelee : EnemyController
     {
         base.AttackPlayer();
 
-        if (Vector2.Distance(enemyMovement.PlayerTrans, (Vector2)transform.position) < attackRange)
+        if (Vector2.Distance((Vector2)enemyMovement.playerTrans.position, (Vector2)transform.position) < attackRange)
         {
             base.AttackPlayer();
 
             for (int i = 0; i < playerInRange.Length; i++)
             {
-                playerInRange[i].GetComponent<PlayerController>().playerStats.TakeDamage(damageAmount);
+                playerInRange[i].GetComponent<PlayerController>().playerStats.TakeDamage(enemyStats.characterAttackDamage.GetValue());
             }
 
-            currentAttackDelay = 0;
+            _attackDelay = 0;
             canAttack = false;
         }
     }

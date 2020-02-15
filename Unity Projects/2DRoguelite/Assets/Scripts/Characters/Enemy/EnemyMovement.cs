@@ -10,9 +10,9 @@ public class EnemyMovement : MonoBehaviour
     // --- Public ---
     public float _aimAngle { get; private set; }
     public Vector2 playerVector { get; private set; }
+    public Transform playerTrans;
 
     // --- Private ---
-    private Transform playerTrans;
     public bool enableMovement;
 
     // --- --- ---
@@ -30,10 +30,6 @@ public class EnemyMovement : MonoBehaviour
 
         aiDest.target = playerTrans;
         aiPath.maxSpeed = enemyStats.characterSpeed.GetValue();
-
-        enableMovement = true;
-
-        Debug.Log(playerTrans, playerTrans.gameObject);
     }
 
     private void Update()
@@ -49,10 +45,6 @@ public class EnemyMovement : MonoBehaviour
     private void GetPlayerVector()
     {
         playerVector = (playerTrans.position - transform.position).normalized;
+        //Debug.DrawRay(transform.position, playerVector, Color.green, 2, true);
     }
-
-    public Vector2 PlayerVector { get; set; }
-    public Vector2 PlayerTrans { get; set; }
-
-    public bool EnableMovement { get; set; }
 }
