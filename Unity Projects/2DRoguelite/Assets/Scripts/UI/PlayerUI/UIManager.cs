@@ -26,6 +26,13 @@ public class UIManager : MonoBehaviour
     }
     #endregion
 
+    public void PlayerSpawned()
+    {
+        //loadingScreen.SetActive(false);
+
+        GameManager.current.loadingFinishedCallback.Invoke();
+    }
+
     private void Start()
     {
         GameManager.current.loadingFinishedCallback += AssignImages;

@@ -68,6 +68,7 @@ public class PlayerController : MonoBehaviour
         playerCamera        = Camera.main;
 
         InitiatePlayer();
+        UIManager.current.PlayerSpawned();
     }
 
     private void InitiatePlayer()

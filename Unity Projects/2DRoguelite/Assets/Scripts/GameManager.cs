@@ -36,8 +36,8 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-            loadingFinishedCallback.Invoke();
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //    loadingFinishedCallback.Invoke();
     }
 
     public int PlayerCurrency { get { return playerGems; } set { playerGems = value; } }

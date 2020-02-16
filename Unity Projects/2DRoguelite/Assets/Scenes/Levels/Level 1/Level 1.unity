@@ -375,7 +375,7 @@ MonoBehaviour:
     type: 3}
   minimapShop: {fileID: 1231099883081015952, guid: 2b784f7445a02fb4ea6abf78badfc02e,
     type: 3}
-  killsRequired: 0
+  killsRequired: 15
   enableSunProgress: 1
   ambientLight: {fileID: 598736748}
   dayToNightGradient:
@@ -716,6 +716,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8911461689338754195, guid: 2c21f76cefd30d74a864de5e42068316,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8911461689382245255, guid: 2c21f76cefd30d74a864de5e42068316,
         type: 3}
       propertyPath: m_AnchorMin.y
