@@ -13,6 +13,7 @@ public class RoomManager : MonoBehaviour
     [Tooltip("These are the points where the portal will spawn in the room, " +
         "the script will select one of those points when creating the room.")]
     [SerializeField] protected GameObject[] portalSpawnPoints;
+    [SerializeField] private GameObject minimapTilemap;
 
     // ---------------------------------
     protected LevelManager levelManager;
