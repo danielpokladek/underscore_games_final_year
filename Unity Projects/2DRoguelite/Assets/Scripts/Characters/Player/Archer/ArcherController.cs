@@ -176,7 +176,7 @@ public class ArcherController : PlayerController
         //    tempProjectile.transform.localScale.z * projectileSizeMultiplier);
 
         projRB.AddForce(firePoint.up * 20, ForceMode2D.Impulse);
-        pProj.SetDamage(playerStats.characterAttackDamage.GetValue() * 2);
+        pProj.SetDamage(playerStats.characterAttackDamage.GetValue() / 2);
 
         _abilityTwoCooldown = 0;
     }
