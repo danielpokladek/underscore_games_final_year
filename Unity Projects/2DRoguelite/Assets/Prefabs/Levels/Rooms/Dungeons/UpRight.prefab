@@ -23240,6 +23240,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   portalSpawnPoints: []
+  minimapTilemap: {fileID: 0}
 --- !u!114 &309692805990511767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23263,6 +23264,7 @@ MonoBehaviour:
   - {fileID: 6198164169800953549}
   shopSpawnPoints: []
   portalSpawnPoints: []
+  minimapTilemap: {fileID: 2153284336921375534}
   doorTilemap: {fileID: 5474568145892672479}
 --- !u!1 &2153284336921375534
 GameObject:
