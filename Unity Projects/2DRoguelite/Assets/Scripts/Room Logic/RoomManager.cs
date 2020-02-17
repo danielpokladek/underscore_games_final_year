@@ -36,6 +36,9 @@ public class RoomManager : MonoBehaviour
 
     private void Start()
     {
+        if (minimapTilemap != null)
+            minimapTilemap.SetActive(false);
+
         levelManager = LevelManager.instance;
         levelManager.onDayStateChangeCallback += UpdateRoomState;
     }
@@ -111,6 +114,18 @@ public class RoomManager : MonoBehaviour
     virtual protected void OnTriggerEnter2D(Collider2D other)
     {
         if (isSpawnRoom)
+            return;
+
+        if (other.CompareTag("Player"))
+            UpdateRoomMinimap();
+    }
+
+    private void UpdateRoomMinimap()
+    {
+        if (!roomDiscovered)
+            if (minimapTilemap != null)
+                minimapTilemap.SetActive(true);
+        else
             return;
     }
 }

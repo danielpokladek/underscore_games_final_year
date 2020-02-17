@@ -50,6 +50,8 @@ public class NormalRoom : RoomManager
 
     override protected void OnTriggerEnter2D(Collider2D other)
     {
+        base.OnTriggerEnter2D(other);
+
         if (other.CompareTag("Player"))
         {
             if (isPortalRoom)
