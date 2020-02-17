@@ -419,7 +419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enableMovement: 1
-  dashDuration: 0.2
+  dashDuration: 0.1
   playerArmPivot: {fileID: 7368213389689043489}
   armSprite: {fileID: 7368213391151072767}
 --- !u!114 &856903686689879538
@@ -435,9 +435,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterHealth:
-    baseValue: 80
+    baseValue: 30
   characterSpeed:
-    baseValue: 8
+    baseValue: 6
   characterAttackDamage:
     baseValue: 4
   characterAttackDelay:

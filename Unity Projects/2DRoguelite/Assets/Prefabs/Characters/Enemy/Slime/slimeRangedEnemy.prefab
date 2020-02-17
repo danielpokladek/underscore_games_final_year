@@ -434,11 +434,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterHealth:
-    baseValue: 4
+    baseValue: 10
   characterSpeed:
-    baseValue: 2.5
+    baseValue: 5
   characterAttackDamage:
-    baseValue: 4
+    baseValue: 10
   characterAttackDelay:
     baseValue: 1.2
   soulParticle: {fileID: 8558200818212196397, guid: 155753f8135d24948b94998611d692c3,

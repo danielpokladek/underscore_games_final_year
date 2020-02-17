@@ -270,9 +270,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterHealth:
-    baseValue: 5
+    baseValue: 10
   characterSpeed:
-    baseValue: 2.5
+    baseValue: 5
   characterAttackDamage:
     baseValue: 10
   characterAttackDelay:
