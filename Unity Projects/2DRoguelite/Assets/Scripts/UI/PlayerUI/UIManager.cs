@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     public GameObject loadingScreen;
     public Image playerPortrait;
     public Image healthImage;
+    public Gradient healthGradient;
     public Image skillOne, skillTwo, skillThree;
 
     private PlayerController playerRef;
@@ -55,5 +56,7 @@ public class UIManager : MonoBehaviour
     private void UpdateUI()
     {
         healthImage.fillAmount = playerStats.currentHealth / playerStats.characterHealth.GetValue();
+
+        healthImage.color = healthGradient.Evaluate(playerStats.currentHealth / playerStats.characterHealth.GetValue());
     }
 }

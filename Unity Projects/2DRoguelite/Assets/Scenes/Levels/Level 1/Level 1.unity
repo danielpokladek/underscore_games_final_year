@@ -741,6 +741,12 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8911461689415480187, guid: 2c21f76cefd30d74a864de5e42068316,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c761b5f9d35058f47bbb2ac078a2912e,
+        type: 3}
     - target: {fileID: 8911461689739902169, guid: 2c21f76cefd30d74a864de5e42068316,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -760,6 +766,116 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911461689809716835, guid: 2c21f76cefd30d74a864de5e42068316,
+        type: 3}
+      propertyPath: healthGradient.m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911461689809716835, guid: 2c21f76cefd30d74a864de5e42068316,
+        type: 3}
+      propertyPath: healthGradient.key2.r
+      value: 0.13919187
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911461689809716835, guid: 2c21f76cefd30d74a864de5e42068316,
+        type: 3}
+      propertyPath: healthGradient.key2.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911461689809716835, guid: 2c21f76cefd30d74a864de5e42068316,
+        type: 3}
+      propertyPath: healthGradient.key2.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911461689809716835, guid: 2c21f76cefd30d74a864de5e42068316,
+        type: 3}
+      propertyPath: healthGradient.ctime1
+      value: 45875
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911461689809716835, guid: 2c21f76cefd30d74a864de5e42068316,
+        type: 3}
+      propertyPath: healthGradient.ctime2
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911461689809716835, guid: 2c21f76cefd30d74a864de5e42068316,
+        type: 3}
+      propertyPath: healthGradient.m_NumColorKeys
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911461689809716835, guid: 2c21f76cefd30d74a864de5e42068316,
+        type: 3}
+      propertyPath: healthGradient.key3.r
+      value: 0.49517727
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911461689809716835, guid: 2c21f76cefd30d74a864de5e42068316,
+        type: 3}
+      propertyPath: healthGradient.key3.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911461689809716835, guid: 2c21f76cefd30d74a864de5e42068316,
+        type: 3}
+      propertyPath: healthGradient.key3.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911461689809716835, guid: 2c21f76cefd30d74a864de5e42068316,
+        type: 3}
+      propertyPath: healthGradient.ctime3
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911461689809716835, guid: 2c21f76cefd30d74a864de5e42068316,
+        type: 3}
+      propertyPath: healthGradient.key4.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911461689809716835, guid: 2c21f76cefd30d74a864de5e42068316,
+        type: 3}
+      propertyPath: healthGradient.key4.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911461689809716835, guid: 2c21f76cefd30d74a864de5e42068316,
+        type: 3}
+      propertyPath: healthGradient.key4.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911461689809716835, guid: 2c21f76cefd30d74a864de5e42068316,
+        type: 3}
+      propertyPath: healthGradient.ctime4
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911461689809716835, guid: 2c21f76cefd30d74a864de5e42068316,
+        type: 3}
+      propertyPath: healthGradient.key0.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911461689809716835, guid: 2c21f76cefd30d74a864de5e42068316,
+        type: 3}
+      propertyPath: healthGradient.key0.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911461689809716835, guid: 2c21f76cefd30d74a864de5e42068316,
+        type: 3}
+      propertyPath: healthGradient.key0.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911461689809716835, guid: 2c21f76cefd30d74a864de5e42068316,
+        type: 3}
+      propertyPath: healthGradient.ctime0
+      value: 19661
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911461689809716835, guid: 2c21f76cefd30d74a864de5e42068316,
+        type: 3}
+      propertyPath: healthGradient.key1.g
+      value: 0.9151792
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911461689809716835, guid: 2c21f76cefd30d74a864de5e42068316,
+        type: 3}
+      propertyPath: healthGradient.key1.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911461689809716835, guid: 2c21f76cefd30d74a864de5e42068316,
+        type: 3}
+      propertyPath: healthGradient.key1.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8911461689809716836, guid: 2c21f76cefd30d74a864de5e42068316,
         type: 3}
