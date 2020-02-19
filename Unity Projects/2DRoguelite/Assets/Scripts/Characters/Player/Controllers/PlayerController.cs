@@ -76,6 +76,8 @@ public class PlayerController : MonoBehaviour
         playerAlive   = true;
 
         gameUIManager = GameUIManager.currentInstance;
+
+        GameManager.current.playerRef = gameObject;
         
        // minimapThing.SetActive(false);
     }
@@ -134,6 +136,9 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.O))
                 playerStats.TakeDamage(10);
+
+            if (Input.GetKeyDown(KeyCode.I))
+                LevelManager.instance.AddSoul();
         }
     }
 }

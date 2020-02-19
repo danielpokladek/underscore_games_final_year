@@ -26,7 +26,7 @@ public class EnemyMovement : MonoBehaviour
         aiDest = GetComponent<AIDestinationSetter>();
         aiPath = GetComponent<AIPath>();
 
-        playerTrans = GameObject.FindGameObjectWithTag("Player").transform;
+        playerTrans = GameManager.current.playerRef.transform;
 
         aiDest.target = playerTrans;
         aiPath.maxSpeed = enemyStats.characterSpeed.GetValue();
@@ -45,6 +45,5 @@ public class EnemyMovement : MonoBehaviour
     private void GetPlayerVector()
     {
         playerVector = (playerTrans.position - transform.position).normalized;
-        //Debug.DrawRay(transform.position, playerVector, Color.green, 2, true);
     }
 }

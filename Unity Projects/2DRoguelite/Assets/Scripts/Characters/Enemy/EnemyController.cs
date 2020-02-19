@@ -14,28 +14,21 @@ public class EnemyController : MonoBehaviour
         "This is mainly used for debugging, and checking that the AI script is working." +
         "This can be used to test new effects, such as impact effects.")]
     [SerializeField] protected bool isDummy;
-
     [SerializeField] protected Transform armPivot;
     [SerializeField] protected Transform attackPoint;
-
     [SerializeField] protected LayerMask playerLayer;
-
-    [SerializeField] private GameObject healthDrop;
-    [SerializeField] protected float dropPercentage;
-
-    [SerializeField] private GameObject[] gemDrops;
-
+    public float dropPercentage;
+    public GameObject[] gemDrops;
     [SerializeField] private SpriteRenderer weaponSprite;
 
     private float bleedingLength;
-
     protected bool canAttack     = false;
     protected bool attackEnabled = true;
     protected bool isBleeding    = false;
     private float  bleedingTimer = 0;
-
     protected float   aimAngle;
 
+    // --- --- ---
     public delegate void OnEnemyDeath();
     public OnEnemyDeath onEnemyDeathCallback;
 
@@ -47,7 +40,7 @@ public class EnemyController : MonoBehaviour
 
     private LevelManager levelManager;
 
-    private void Start()
+    virtual protected void Start()
     {
         enemyMovement   = GetComponent<EnemyMovement>();
         enemyStats      = GetComponent<EnemyStats>();
@@ -163,19 +156,6 @@ public class EnemyController : MonoBehaviour
         }
 
         return false;
-    }
-
-    private void KillCharacter()
-    {
-        if (Random.value >= dropPercentage)
-        {
-            Instantiate(healthDrop, transform.position, Quaternion.identity);
-        }
-
-        if (onEnemyDeathCallback != null)
-            onEnemyDeathCallback.Invoke();
-
-        Destroy(gameObject);
     }
 
     private void BleedingDamage()
