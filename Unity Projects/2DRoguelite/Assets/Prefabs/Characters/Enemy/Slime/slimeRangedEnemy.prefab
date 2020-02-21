@@ -341,9 +341,9 @@ MonoBehaviour:
   targetCompatibility: {fileID: 0}
   maxAcceleration: -2.5
   rotationSpeed: 360
-  slowdownDistance: 0.6
-  pickNextWaypointDist: 3
-  endReachedDistance: 2
+  slowdownDistance: 6
+  pickNextWaypointDist: 2
+  endReachedDistance: 4
   alwaysDrawGizmos: 1
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
@@ -399,8 +399,6 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 4096
-  healthDrop: {fileID: 2511877264795001674, guid: 4f71a14180282054fbb4189adf44bc24,
-    type: 3}
   dropPercentage: 0.75
   gemDrops: []
   weaponSprite: {fileID: 2279957944466416966}

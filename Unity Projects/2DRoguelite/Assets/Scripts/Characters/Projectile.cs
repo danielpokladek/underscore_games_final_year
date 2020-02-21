@@ -6,12 +6,12 @@ public class Projectile : MonoBehaviour
     [SerializeField] protected GameObject hitEffect;
     
     // ----------------------------
-    protected Rigidbody2D projectileRb;
+    protected Rigidbody2D projectileRB;
     protected float       projectileDamage;
 
     virtual protected void InitProjectile()
     {
-        projectileRb = GetComponent<Rigidbody2D>();
+        projectileRB = GetComponent<Rigidbody2D>();
     }
 
     public void SetDamage(float damage)

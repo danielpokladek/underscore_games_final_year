@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
 using UnityEngine;
-using Vector2 = UnityEngine.Vector2;
 
 public class BossNormalBullet : BossBullet
 {
@@ -33,6 +31,6 @@ public class BossNormalBullet : BossBullet
         angle     = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90.0f;
         
         // Apply the rotation to the rigidbody.
-        projectileRb.rotation = angle;
+        projectileRB.rotation = angle;
     }
 }

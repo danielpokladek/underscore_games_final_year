@@ -9,6 +9,9 @@ public class UIManager : MonoBehaviour
     public GameObject loadingScreen;
     public Image playerPortrait;
     public Image healthImage;
+    [Tooltip("This is the gradient that will be used to colour player's health bar, changing the currently set colours will work in game straight away. "
+    + "If you'd like the colours to change quicker, move the sliders to the right, and if you'd like the colours to stay longer move them to right."
+    + "Imagine the gradient slider as value between 0 and 1, and the lower is player's health the lower will be the value on the 0 to 1 scale.")]
     public Gradient healthGradient;
     public Image skillOne, skillTwo, skillThree;
 
