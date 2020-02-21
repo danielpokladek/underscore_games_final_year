@@ -41,10 +41,12 @@ public class ShadowController : EnemyRanged
 
         base.AttackPlayer();
         
-        GameObject projectile = Instantiate(enemyProjectile, attackPoint.position, attackPoint.rotation);
+        //GameObject projectile = Instantiate(enemyProjectile, attackPoint.position, attackPoint.rotation);
 
-        Projectile projectileBullet = projectile.GetComponent<Projectile>();
-        Rigidbody2D projectileRB    = projectile.GetComponent<Rigidbody2D>();
+        GameObject proj = ObjectPooler.instance.PoolItem("shadowProj", transform.position, Quaternion.identity);
+
+        Projectile projectileBullet = proj.GetComponent<Projectile>();
+        Rigidbody2D projectileRB    = proj.GetComponent<Rigidbody2D>();
 
         projectileRB.AddForce(attackPoint.up * 10, ForceMode2D.Impulse);
         projectileBullet.SetDamage(enemyStats.characterAttackDamage.GetValue());
