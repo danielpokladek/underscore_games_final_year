@@ -60,6 +60,9 @@ public class EnemyController : MonoBehaviour
 
         levelManager = LevelManager.instance;
         levelManager.onDayStateChangeCallback += NightBuff;
+
+        _attackDelay = enemyStats.characterAttackDelay.GetValue();
+        canAttack = true;
     }
 
     virtual protected void Update()

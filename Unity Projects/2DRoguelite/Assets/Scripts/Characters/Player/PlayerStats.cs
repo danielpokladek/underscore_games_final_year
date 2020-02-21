@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerStats : CharacterStats
 {
+    public bool godMode;
+    public bool canTakeDamage = true;
     [Tooltip("Cooldown for the first ability of player, in all cases this is the dash.")]
     public Stat abilityOneCooldown;
     [Tooltip("Cooldown for the second ability of player.")]
@@ -42,6 +44,16 @@ public class PlayerStats : CharacterStats
 
     override public void TakeDamage(float damageAmount)
     {
+        if (!canTakeDamage)
+            return;
+
+        if (godMode)
+        {
+            gameUI.DamageIndicator(transform.position, damageAmount);
+            return;
+        }
+
+        // --- --- ---
         base.TakeDamage(damageAmount);
         
         if (playerController.onUIUpdateCallback != null)

@@ -11,6 +11,9 @@ public class EnemyProjectile : Projectile
     {
         if (other.CompareTag("Player"))
         {
+            if(!other.GetComponent<PlayerStats>().canTakeDamage)
+                return;
+
             PlayerController playerController = other.GetComponent<PlayerController>();
             playerController.playerStats.TakeDamage(projectileDamage);
 

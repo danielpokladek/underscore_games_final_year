@@ -49,12 +49,13 @@ public class EnemyStats : CharacterStats
             enemyController.onEnemyDeathCallback.Invoke();
 
         if (soulParticle != null)
-            Instantiate(soulParticle, transform.position, Quaternion.identity);
+            if (GameManager.current.bossPortalRef != null)
+                Instantiate(soulParticle, transform.position, Quaternion.identity);
 
-        if (Random.value <= enemyController.dropPercentage)
-        {
-            Instantiate(enemyController.gemDrops[Random.Range(0, enemyController.gemDrops.Length -1)], transform.position, Quaternion.identity);
-        }
+        //if (Random.value <= enemyController.dropPercentage)
+        //{
+        //    Instantiate(enemyController.gemDrops[Random.Range(0, enemyController.gemDrops.Length -1)], transform.position, Quaternion.identity);
+        //}
 
         Destroy(gameObject);
     }

@@ -12,7 +12,7 @@ public class CharacterStats : MonoBehaviour
     [Tooltip("The delay between the attacks (in seconds).")]
     public Stat characterAttackDelay;
 
-    private GameUIManager gameUI;
+    protected GameUIManager gameUI;
     
     private void Awake()
     {

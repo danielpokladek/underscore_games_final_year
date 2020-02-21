@@ -137,6 +137,9 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.O))
                 playerStats.TakeDamage(10);
 
+            if (Input.GetKeyDown(KeyCode.L))
+                playerStats.godMode = !playerStats.godMode;
+
             if (Input.GetKeyDown(KeyCode.I))
                 LevelManager.instance.AddSoul();
         }

@@ -93,9 +93,11 @@ public class PlayerMovement : MonoBehaviour
     {
         enableMovement = false;
         playerController.playerStats.characterSpeed.AddModifier(15);
+        playerController.playerStats.canTakeDamage = false;
 
         yield return new WaitForSeconds(dashDuration);
 
+        playerController.playerStats.canTakeDamage = true;
         playerController.playerStats.characterSpeed.RemoveModifier(15);
         enableMovement = true;
     }
