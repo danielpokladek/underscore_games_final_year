@@ -319,8 +319,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   dropPercentage: 0.75
-  gemDrops: []
-  weaponSprite: {fileID: 0}
+  gemDrops:
+  - {fileID: 4004655409075409955, guid: d69f6de288d498a478ed639fedca87c6, type: 3}
+  weaponSprite: {fileID: 7237441686851900797}
+  enemySprite: {fileID: 493610696457187368}
   enemyMovement: {fileID: 0}
   enemyStats: {fileID: 0}
   attackRange: 1.5

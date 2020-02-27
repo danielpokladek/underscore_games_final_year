@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class InteractableItem : MonoBehaviour
 {
-    [SerializeField] protected float itemPrice;
+    [SerializeField] protected int itemPrice;
 
     private bool playerInRange;
 
     virtual public void Interact(PlayerController playerController)
     {
         Debug.Log("It just works! - Todd Howard");
+    }
+
+    protected void PurchaseItem(int gemAmount)
+    {
+        GameManager.current.PlayerCurrency -= gemAmount;
     }
 
     public bool PlayerInRange { get; set; }
@@ -25,7 +30,7 @@ public class InteractableItem : MonoBehaviour
         if (itemPrice == 0)
             return true;
 
-        if ((GameManager.current.PlayerCurrency - itemPrice) > 0)
+        if ((GameManager.current.PlayerCurrency - itemPrice) >= 0)
             return true;
 
         Debug.Log("No money, no buy!", gameObject);

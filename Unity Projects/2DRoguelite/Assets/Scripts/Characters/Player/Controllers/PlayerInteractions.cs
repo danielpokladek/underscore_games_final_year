@@ -4,9 +4,8 @@
 public class PlayerInteractions : MonoBehaviour
 {
     private PlayerController playerController;
-    private ShopItem currentItem;
 
-    private InteractableItem interactItem;
+    private InteractableItem currentItem;
 
     private bool onItem;
 
@@ -20,15 +19,8 @@ public class PlayerInteractions : MonoBehaviour
     {
         if (other.CompareTag("Interactable"))
         {
-            interactItem = other.gameObject.GetComponent<InteractableItem>();
-            interactItem.PlayerInRange = true;
-        }
-
-        if (other.CompareTag("ShopItem"))
-        {
-            currentItem = other.gameObject.GetComponent<ShopItem>();
-            onItem      = true;
-            currentItem.ShowName(true);
+            currentItem = other.gameObject.GetComponent<InteractableItem>();
+            currentItem.PlayerInRange = true;
         }
     }
 
@@ -37,24 +29,15 @@ public class PlayerInteractions : MonoBehaviour
         if (currentItem == null)
             return;
 
-        currentItem.ShowName(false);
         onItem      = false;
         currentItem = null;
     }
 
     private void PlayerInteract()
     {
-        if (interactItem == null)
-            return;
-
-        interactItem.Interact(playerController);
-
-
-        // Not on item, no need to run it.
-        if (currentItem == null || !onItem)
+        if (currentItem == null)
             return;
 
         currentItem.Interact(playerController);
-
     }
 }

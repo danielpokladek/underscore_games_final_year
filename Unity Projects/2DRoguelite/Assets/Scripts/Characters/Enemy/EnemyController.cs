@@ -20,6 +20,7 @@ public class EnemyController : MonoBehaviour
     public float dropPercentage;
     public GameObject[] gemDrops;
     [SerializeField] private SpriteRenderer weaponSprite;
+    public SpriteRenderer enemySprite;
 
     private float bleedingLength;
     protected bool canAttack     = false;
@@ -60,6 +61,8 @@ public class EnemyController : MonoBehaviour
 
         levelManager = LevelManager.instance;
         levelManager.onDayStateChangeCallback += NightBuff;
+
+        onEnemyDeathCallback += DeathEffect;
 
         _attackDelay = enemyStats.characterAttackDelay.GetValue();
         canAttack = true;
@@ -119,33 +122,6 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    ///// <summary>
-    ///// While enemy is stunned, he can't move or attack, but can still take damage.
-    ///// </summary>
-    ///// <returns></returns>
-    //public IEnumerator Stun(float timeDelay)
-    //{
-    //    attackEnabled   = false;
-    //    enemyMovement.enableMovement = false;
-
-    //    yield return new WaitForSeconds(timeDelay);
-
-    //    attackEnabled   = true;
-    //    enemyMovement.enableMovement = true;
-    //}
-
-    public void BleedingEffect(float effectLength)
-    {
-        if (isBleeding)
-            return;
-
-        InvokeRepeating("BleedingDamage", effectLength, 1.0f);
-
-        bleedingTimer = 0;
-        bleedingLength = effectLength;
-        isBleeding = true;
-    }
-
     virtual protected bool CanSeePlayer()
     {
         Vector2 rayDirection = enemyMovement.playerVector;
@@ -164,5 +140,10 @@ public class EnemyController : MonoBehaviour
     private void BleedingDamage()
     {
         //TakeDamage(1);
+    }
+
+    virtual public void DeathEffect()
+    {
+        
     }
 }

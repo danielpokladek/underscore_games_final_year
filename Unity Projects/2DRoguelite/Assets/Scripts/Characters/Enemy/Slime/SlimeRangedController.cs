@@ -8,7 +8,7 @@ public class SlimeRangedController : EnemyRanged
     {
         base.AttackPlayer();
 
-        GameObject proj = Instantiate(enemyProjectile, attackPoint.position, attackPoint.rotation);
+        GameObject proj = ObjectPooler.instance.PoolItem("slimeProj", attackPoint.position, attackPoint.rotation);
         Projectile projScr = proj.GetComponent<Projectile>();
         Rigidbody2D projRB = proj.GetComponent<Rigidbody2D>();
 

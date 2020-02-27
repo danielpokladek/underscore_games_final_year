@@ -70,7 +70,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: adcc441c8be4b5f4eb5fd450c2f0a3e6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 5308460185606472707}
   - component: {fileID: 1144872985}
   m_Layer: 0
-  m_Name: slimeBossExplodeProj
+  m_Name: slimeBossExplosive
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -170,6 +170,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitEffect: {fileID: 7583490791312444778, guid: f8dd09c622411ca4fa4f5eb4eef765f1,
     type: 3}
+  projectileDecay: 5
+  projectileTag: bossExplosive
   bulletHealth: 999
   projectile: {fileID: 3361406223139990898, guid: 990f5272a10f2a849a56cc7910529b62,
     type: 3}

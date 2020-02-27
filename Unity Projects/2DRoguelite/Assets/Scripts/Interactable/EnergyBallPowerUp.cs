@@ -1,15 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnergyBallPowerUp : MonoBehaviour
 {
-    [SerializeField] private Transform rotateCenter;
+    public Transform rotateCenter;
     [SerializeField] private float damageAmount = 2;
 
     void Update()
     {
-        transform.RotateAround(rotateCenter.position, new Vector3(0, 0, 1), Time.deltaTime * 90);
+        if (rotateCenter)
+            transform.RotateAround(rotateCenter.position, new Vector3(0, 0, 1), Time.deltaTime * 90);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

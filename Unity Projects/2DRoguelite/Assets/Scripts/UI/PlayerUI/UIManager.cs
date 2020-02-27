@@ -34,7 +34,8 @@ public class UIManager : MonoBehaviour
     {
         //loadingScreen.SetActive(false);
 
-        GameManager.current.loadingFinishedCallback.Invoke();
+        if (GameManager.current.loadingFinishedCallback != null)
+            GameManager.current.loadingFinishedCallback.Invoke();
     }
 
     private void Start()

@@ -19,6 +19,24 @@ public class EnemyStats : CharacterStats
         enemyController = GetComponent<EnemyController>();
     }
 
+    override public void TakeDamage(float damageAmount)
+    {
+        base.TakeDamage(damageAmount);
+
+        StartCoroutine(EnemyDamaged());
+    }
+
+    private IEnumerator EnemyDamaged()
+    {
+        enemyController.enemySprite.color = Color.red;
+
+        yield return new WaitForSeconds(0.3f);
+
+        enemyController.enemySprite.color = Color.white;
+
+        yield break;
+    }
+
     public void DamageOverTime(float effectLength, float damageAmount)
     {
         if (isBleeding)
@@ -26,11 +44,11 @@ public class EnemyStats : CharacterStats
 
         bleedingDamage = damageAmount;
 
-        InvokeRepeating("BleedingDamage", 0.0f, 1.0f);
+        InvokeRepeating("_DamageOverTime", 0.0f, 1.0f);
         StartCoroutine(BleedingDamageTimer(effectLength));
     }
 
-    private void BleedingDamage()
+    private void _DamageOverTime()
     {
         TakeDamage(bleedingDamage);
     }
@@ -39,7 +57,7 @@ public class EnemyStats : CharacterStats
     {
         yield return new WaitForSeconds(effectLength);
 
-        CancelInvoke("BleedingDamage");
+        CancelInvoke("_DamageOverTime");
         isBleeding = false;
     }
 
@@ -52,11 +70,8 @@ public class EnemyStats : CharacterStats
             if (GameManager.current.bossPortalRef != null)
                 Instantiate(soulParticle, transform.position, Quaternion.identity);
 
-        //if (Random.value <= enemyController.dropPercentage)
-        //{
-        //    Instantiate(enemyController.gemDrops[Random.Range(0, enemyController.gemDrops.Length -1)], transform.position, Quaternion.identity);
-        //}
-
+        Instantiate(enemyController.gemDrops[Random.Range(0, enemyController.gemDrops.Length -1)], transform.position, Quaternion.identity);
+        
         Destroy(gameObject);
     }
 }

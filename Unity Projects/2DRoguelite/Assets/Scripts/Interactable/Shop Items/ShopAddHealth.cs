@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopAddHealth : ShopItem
+public class ShopAddHealth : InteractableItem
 {
     [SerializeField] private float healthModifier;
 
     override public void Interact(PlayerController playerController)
     {
-        if (!CheckGems(itemPrice))
+        if (!CheckGems())
             return;
 
         PurchaseItem(itemPrice);

@@ -130,7 +130,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: -7704898760755869196, guid: 2190580d6cd5f4149bb914c7aba768d8,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -471,6 +471,7 @@ MonoBehaviour:
   dropPercentage: 90
   gemDrops: []
   weaponSprite: {fileID: 0}
+  enemySprite: {fileID: 2624481791045960791}
   enemyMovement: {fileID: 0}
   enemyStats: {fileID: 0}
   projectileAmount: 12

@@ -42,10 +42,7 @@ public class CharacterStats : MonoBehaviour
         gameUI.DamageIndicator(transform.position, damageAmount);
 
         if (currentHealth <= 0)
-        {
-            //Debug.Log("Character is dead.");
             CharacterDeath();
-        }
     }
 
     public bool IsHealed()

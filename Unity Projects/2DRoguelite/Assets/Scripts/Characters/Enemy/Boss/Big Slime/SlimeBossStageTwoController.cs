@@ -43,9 +43,9 @@ public class SlimeBossStageTwoController : EnemyController
 
     public void Fire()
     {
-        float angleStep = (0 - 360) / 9;
+        float angleStep = (0 - 360) / 18;
 
-        for (int i = 0; i < 9; i++)
+        for (int i = 0; i < 18; i++)
         {
             float bulDriX = transform.position.x + Mathf.Sin((angle * Mathf.PI) / 180.0f);
             float bulDirY = transform.position.y + Mathf.Cos((angle * Mathf.PI) / 180.0f);
@@ -53,11 +53,14 @@ public class SlimeBossStageTwoController : EnemyController
             Vector3 bulMoveVector = new Vector3(bulDriX, bulDirY, 0.0f);
             Vector2 bulDir = (bulMoveVector - transform.position).normalized;
 
-            GameObject bul = Instantiate(normalProjectile,
+            //GameObject bul = Instantiate(normalProjectile,
+            //    attackPoint.position, Quaternion.identity);
+
+            GameObject proj = ObjectPooler.instance.PoolItem("bossNormal",
                 attackPoint.position, Quaternion.identity);
 
-                bul.GetComponent<Rigidbody2D>().AddForce(bulDir * 5, ForceMode2D.Impulse);
-                bul.GetComponent<Projectile>().SetDamage(enemyStats.characterAttackDamage.GetValue());
+                proj.GetComponent<Rigidbody2D>().AddForce(bulDir * 5, ForceMode2D.Impulse);
+                proj.GetComponent<Projectile>().SetDamage(enemyStats.characterAttackDamage.GetValue());
 
                 angle += angleStep;
         }
@@ -72,10 +75,10 @@ public class SlimeBossStageTwoController : EnemyController
 
     public void ExpandingBarrier()
     {
-        float angleStep = (0 - 360) / 30;
+        float angleStep = (0 - 360) / 90;
         float angle = 0;
 
-        for (int i = 0; i < 30; i++)
+        for (int i = 0; i < 90; i++)
         {
             float bulDriX = transform.position.x + Mathf.Sin((angle * Mathf.PI) / 180.0f);
             float bulDirY = transform.position.y + Mathf.Cos((angle * Mathf.PI) / 180.0f);
@@ -83,19 +86,23 @@ public class SlimeBossStageTwoController : EnemyController
             Vector3 bulMoveVector = new Vector3(bulDriX, bulDirY, 0.0f);
             Vector2 bulDir = (bulMoveVector - transform.position).normalized;
 
-            GameObject bul = Instantiate(normalProjectile,
-                attackPoint.position, Quaternion.identity);
+            //GameObject bul = Instantiate(normalProjectile,
+            //    attackPoint.position, Quaternion.identity);
 
-                bul.GetComponent<Rigidbody2D>().AddForce(bulDir * 5, ForceMode2D.Impulse);
-                bul.GetComponent<Projectile>().SetDamage(enemyStats.characterAttackDamage.GetValue());
+            GameObject proj = ObjectPooler.instance.PoolItem("bossNormal",
+                transform.position, Quaternion.identity);
+
+                proj.GetComponent<Rigidbody2D>().AddForce(bulDir * 5, ForceMode2D.Impulse);
+                proj.GetComponent<Projectile>().SetDamage(enemyStats.characterAttackDamage.GetValue());
 
                 angle += angleStep;
         }
 
-        GameObject proj = Instantiate(normalProjectile, attackPoint.position, Quaternion.identity);
-        proj.GetComponent<Rigidbody2D>().AddForce(enemyMovement.playerVector * 5, ForceMode2D.Impulse);
-        proj.GetComponent<Projectile>().SetDamage(enemyStats.characterAttackDamage.GetValue());
-        //proj.GetComponent<BossHoamingBullet>().Bullet(enemyMovement.playerTrans, 5, enemyStats.characterAttackDamage.GetValue());
+        GameObject homingProj = Instantiate(normalProjectile, attackPoint.position, Quaternion.identity);
+            homingProj.GetComponent<Rigidbody2D>().AddForce(enemyMovement.playerVector * 5, ForceMode2D.Impulse);
+            homingProj.GetComponent<Projectile>().SetDamage(enemyStats.characterAttackDamage.GetValue());
+        
+        Destroy(homingProj, 3.5f);
 
     }
 

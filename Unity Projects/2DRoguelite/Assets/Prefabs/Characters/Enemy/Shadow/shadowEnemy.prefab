@@ -431,9 +431,9 @@ MonoBehaviour:
   targetCompatibility: {fileID: 0}
   maxAcceleration: -2.5
   rotationSpeed: 360
-  slowdownDistance: 5
+  slowdownDistance: 8
   pickNextWaypointDist: 2
-  endReachedDistance: 4
+  endReachedDistance: 6.5
   alwaysDrawGizmos: 1
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
@@ -498,10 +498,13 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 4096
-  healthDrop: {fileID: 0}
   dropPercentage: 0
-  gemDrops: []
+  gemDrops:
+  - {fileID: 7583637798381323171, guid: 9610630251d8314478d351ab2781218f, type: 3}
+  - {fileID: 4004655409075409955, guid: d69f6de288d498a478ed639fedca87c6, type: 3}
+  - {fileID: 4138267978564711883, guid: e99803d428e8d7d4a87e6abaf73e59b6, type: 3}
   weaponSprite: {fileID: 1189285195}
+  enemySprite: {fileID: 1204499678317855343}
   enemyMovement: {fileID: 0}
   enemyStats: {fileID: 0}
   enemyProjectile: {fileID: 3361406223139990898, guid: 990f5272a10f2a849a56cc7910529b62,

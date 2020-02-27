@@ -7,7 +7,7 @@ public class RogueProjectile : Projectile
         if (other.gameObject.CompareTag("Enemy"))
         {
             EnemyController enemyController = other.GetComponent<EnemyController>();
-            enemyController.BleedingEffect(5.0f);
+            enemyController.enemyStats.DamageOverTime(5.0f, 1.0f);
 
             GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
 

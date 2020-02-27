@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopAdjustSpeed : ShopItem
+public class ShopAdjustSpeed : InteractableItem
 {
     [SerializeField] private float movementModifier;
 
     override public void Interact(PlayerController playerController)
     {
-        if (!CheckGems(itemPrice))
+        if (!CheckGems())
             return;
 
         PurchaseItem(itemPrice);

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 709679216}
   m_Layer: 0
   m_Name: shopBoots
-  m_TagString: ShopItem
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,6 +47,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -120,6 +121,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b194a6adf74b9648a01fbfeaf291eb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: Speed Boots
   itemPrice: 30
-  moveSpeed: 5
+  movementModifier: 5

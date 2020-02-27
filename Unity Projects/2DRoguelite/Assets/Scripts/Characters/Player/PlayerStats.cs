@@ -5,14 +5,15 @@ using UnityEngine;
 
 public class PlayerStats : CharacterStats
 {
-    public bool godMode;
-    public bool canTakeDamage = true;
-    [Tooltip("Cooldown for the first ability of player, in all cases this is the dash.")]
     public Stat abilityOneCooldown;
     [Tooltip("Cooldown for the second ability of player.")]
     public Stat abilityTwoCooldown;
     [Tooltip("Cooldown for the third ability of player.")]
     public Stat abilityThreeCooldown;
+    public Stat damageCooldown;
+    public bool godMode;
+    public bool canTakeDamage = true;
+    [Tooltip("Cooldown for the first ability of player, in all cases this is the dash.")]
 
     private PlayerController playerController;
 
@@ -56,10 +57,23 @@ public class PlayerStats : CharacterStats
         // --- --- ---
         base.TakeDamage(damageAmount);
         
+        StartCoroutine(Damaged());
+
         if (playerController.onUIUpdateCallback != null)
             playerController.onUIUpdateCallback.Invoke();
         
         CameraShaker.Instance.ShakeOnce(2f, 2f, .01f, .1f);
+    }
+
+    private IEnumerator Damaged()
+    {
+        playerController.playerSprite.color = Color.red;
+        canTakeDamage = false;
+
+        yield return new WaitForSeconds(damageCooldown.GetValue());
+
+        playerController.playerSprite.color = Color.white;
+        canTakeDamage = true;
     }
 
     private void OnItemInteract()

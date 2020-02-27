@@ -88,6 +88,7 @@ public class PlayerMovement : MonoBehaviour
     #region External
     public bool EnableMovement { get; set; }
     public Vector2 GetAttackDirection { get; }
+    public Vector2 GetMousePosition() { return mousePosition; }
 
     public IEnumerator PlayerDash()
     {

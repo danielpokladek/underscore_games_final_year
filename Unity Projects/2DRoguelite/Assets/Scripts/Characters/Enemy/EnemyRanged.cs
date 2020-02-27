@@ -8,7 +8,7 @@ public class EnemyRanged : EnemyController
     {
         base.Update();
         
-        if (canAttack)
+        if (canAttack && CanSeePlayer())
             AttackPlayer();
 
         if (!canAttack)

@@ -9,7 +9,6 @@ public class ObjectPooler : MonoBehaviour
     {
         public string tag;
         public GameObject prefab;
-        public int size;
     }
 
     #region Singleton
@@ -79,9 +78,7 @@ public class ObjectPooler : MonoBehaviour
         if (pooledObj != null)
             pooledObj.OnObjectSpawn();
 
-        poolDictionary[tag].Enqueue(poolItem);
-
-        Debug.Log(poolItem);
+        //poolDictionary[tag].Enqueue(poolItem);
         return poolItem;
     }
 

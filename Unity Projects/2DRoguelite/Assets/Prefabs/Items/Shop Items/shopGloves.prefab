@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7516699949196089295}
   m_Layer: 0
   m_Name: shopGloves
-  m_TagString: ShopItem
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,6 +47,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -120,6 +121,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08d3eba8b7c1ceb49897381a24b19dbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: Gloves o Damage
   itemPrice: 30
-  damageAmount: 5
+  damageModifier: 5

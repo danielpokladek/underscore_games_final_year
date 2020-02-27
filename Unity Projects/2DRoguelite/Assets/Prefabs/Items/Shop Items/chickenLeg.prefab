@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2052201104}
   m_Layer: 0
   m_Name: chickenLeg
-  m_TagString: ShopItem
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,6 +47,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -120,6 +121,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e61af1d88bfd964eab7b182d486e0c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: Chicken Leg
   itemPrice: 25
-  healthAmount: 10
+  healthModifier: 0

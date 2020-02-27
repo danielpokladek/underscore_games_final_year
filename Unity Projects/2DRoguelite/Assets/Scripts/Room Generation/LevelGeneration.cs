@@ -12,6 +12,9 @@ using UnityEngine;
 public class LevelGeneration : MonoBehaviour
 {
     [Header("Level Generation Settings")]
+    [Tooltip("Toggle this off to disable level generation.")]
+    public bool enableGeneration = true;
+
     [Tooltip("This is the root transform of the map, inside of this object the map will be created." +
              "If left empty, the map objects will flood the hierarchy, while using this will allow to keep the hierarchy tidy.")]
     public Transform mapRoot;
@@ -45,6 +48,9 @@ public class LevelGeneration : MonoBehaviour
 
     private void Start()
     {
+        if (!enableGeneration)
+            return;
+
         if (numberOfRooms >= (worldSize.x * 2) * (worldSize.y * 2))
         {
             numberOfRooms = Mathf.RoundToInt((worldSize.x * 2) * (worldSize.y * 2));

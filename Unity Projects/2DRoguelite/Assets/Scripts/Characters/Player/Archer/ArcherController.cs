@@ -72,29 +72,27 @@ public class ArcherController : PlayerController
 
         if (Input.GetButtonUp("LMB"))
         {
-            foreach (ParticleSystem _ps in chargeParticles)
+            foreach (ParticleSystem _chargeParticles in chargeParticles)
             {
-                _ps.Stop();
-                _ps.Clear();
+                _chargeParticles.Stop();
+                _chargeParticles.Clear();
             }
 
-            foreach (ParticleSystem _ps in aimParticles)
+            foreach (ParticleSystem _aimParticles in aimParticles)
             {
-                _ps.Stop();
-                _ps.Clear();
+                _aimParticles.Stop();
+                _aimParticles.Clear();
             }
 
             if (_attackDelay >= playerStats.characterAttackDelay.GetValue())
             {
-                ParticleSystem temp;
-
-                foreach (ParticleSystem _ps in shootParticles)
+                foreach (ParticleSystem _chargedParticles in shootParticles)
                 {
-                    temp = Instantiate(_ps, firePoint.transform.position, firePoint.rotation);
-                    Destroy(temp, .6f);
+                    ParticleSystem ps = Instantiate(_chargedParticles, firePoint.transform.position, firePoint.rotation);
+                    Destroy(ps.gameObject, .6f);
                 }
 
-                CameraShaker.Instance.ShakeOnce(4.0f, 2.0f, .1f, .5f);
+                CameraShaker.Instance.ShakeOnce(10.0f, 6.0f, .1f, .5f);
             }
 
             PrimAttack();
@@ -182,14 +180,14 @@ public class ArcherController : PlayerController
     }
 
     private void ThirdAbility()
-    {
-        throw new System.NotImplementedException();
+    {   
+        GameObject proj = ObjectPooler.instance.PoolItem("playerThrow",
+            firePoint.position, Quaternion.identity);
 
-        //GameObject       proj   = Instantiate(normalProjectile, firePoint.position, firePoint.rotation);
-        //Rigidbody2D      projRB = proj.GetComponent<Rigidbody2D>();
-        //PlayerProjectile pProj  = proj.GetComponent<PlayerProjectile>();
+            proj.GetComponent<Projectile>().SetDamage(playerStats.characterAttackDamage.GetValue());
+            proj.GetComponent<Rigidbody2D>().AddForce(firePoint.up * 10, ForceMode2D.Impulse);
 
-        //projRB.AddForce(firePoint.up * 10, ForceMode2D.Impulse);
+        _abilityThreeCooldown = 0;
     }
 
     private float CalculateDamage()

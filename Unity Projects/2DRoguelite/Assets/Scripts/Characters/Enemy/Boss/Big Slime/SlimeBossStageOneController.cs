@@ -52,7 +52,10 @@ public class SlimeBossStageOneController : EnemyController
             Vector3 bulMoveVector = new Vector3(bulDriX, bulDirY, 0.0f);
             Vector2 bulDir = (bulMoveVector - transform.position).normalized;
 
-            GameObject bul = Instantiate(normalProjectile,
+            //GameObject bul = Instantiate(normalProjectile,
+            //    attackPoint.position, Quaternion.identity);
+
+            GameObject bul = ObjectPooler.instance.PoolItem("bossNormal",
                 attackPoint.position, Quaternion.identity);
 
                 bul.GetComponent<Rigidbody2D>().AddForce(bulDir * 5, ForceMode2D.Impulse);
@@ -69,7 +72,10 @@ public class SlimeBossStageOneController : EnemyController
 
     public void ExplosiveProjectile()
     {
-        GameObject proj = Instantiate(explosiveProjectile, transform.position, Quaternion.identity);
+        //GameObject proj = Instantiate(explosiveProjectile, transform.position, Quaternion.identity);
+
+        GameObject proj = ObjectPooler.instance.PoolItem("bossExplosive",
+            attackPoint.position, Quaternion.identity);
 
         proj.GetComponent<BossBullet>().Bullet(enemyMovement.playerTrans, 5.0f, enemyStats.characterAttackDamage.GetValue());
     }

@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopEnergyBall : ShopItem
+public class ShopEnergyBall : InteractableItem
 {
     public GameObject energyBall;
 
     override public void Interact(PlayerController playerController)
     {
-        if (!CheckGems(itemPrice))
+        if (!CheckGems())
             return;
 
         PurchaseItem(itemPrice);
@@ -19,7 +19,7 @@ public class ShopEnergyBall : ShopItem
             playerController.transform.position.z),
             Quaternion.identity);
 
-        _go.GetComponent<ItemEnergyBall>().playerTrans = playerController.transform;
+        _go.GetComponent<EnergyBallPowerUp>().rotateCenter = playerController.transform;
         _go.transform.SetParent(playerController.powerUpContainer);
 
         Destroy(gameObject);

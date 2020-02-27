@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopAdjustDamage : ShopItem
+public class ShopAdjustDamage : InteractableItem
 {
     [SerializeField] private float damageModifier;
 
     public override void Interact(PlayerController playerController)
     {
-        if (!CheckGems(itemPrice))
+        if (!CheckGems())
             return;
 
         PurchaseItem(itemPrice);

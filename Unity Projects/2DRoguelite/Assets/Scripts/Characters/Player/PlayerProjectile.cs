@@ -54,7 +54,7 @@ public class PlayerProjectile : Projectile
     {
         enemyController.enemyStats.TakeDamage(projectileDamage);
         _hitEffect = Instantiate(hitEffect, transform.position, Quaternion.identity);
-        CameraShaker.Instance.ShakeOnce(cameraShakeMagnitude, cameraShakeRoughness, .1f, .5f);
+        //CameraShaker.Instance.ShakeOnce(cameraShakeMagnitude, cameraShakeRoughness, .1f, .5f);
 
         if (_hitEffect != null)
             Destroy(_hitEffect, 0.4f);

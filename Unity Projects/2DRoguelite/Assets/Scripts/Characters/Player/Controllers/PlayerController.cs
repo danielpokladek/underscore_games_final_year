@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     [Tooltip("This is the animator that controls the attack animations." +
         "This animator is most likely placed on the object used as a weapon/fists.")]
     public Animator attackAnim;
+    public SpriteRenderer playerSprite;
 
     // --- --- ---
     [HideInInspector] public float  projectileSizeMultiplier = 1; 

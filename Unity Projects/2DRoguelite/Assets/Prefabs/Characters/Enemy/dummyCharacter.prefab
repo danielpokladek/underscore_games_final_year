@@ -184,6 +184,7 @@ MonoBehaviour:
     baseValue: 0
   characterAttackDelay:
     baseValue: 0
+  soulParticle: {fileID: 0}
 --- !u!114 &820044748670082821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,13 +203,10 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 0
-  moveSpeed: 0
-  enemyHealth: 9999
-  damageAmount: 0
-  attackDelay: 0
-  healthDrop: {fileID: 0}
   dropPercentage: 0
   gemDrops: []
+  weaponSprite: {fileID: 0}
+  enemySprite: {fileID: 820044748419045587}
   enemyMovement: {fileID: 0}
   enemyStats: {fileID: 0}
 --- !u!114 &1388619078866181650
@@ -258,4 +256,4 @@ MonoBehaviour:
   - {x: -0.14685822, y: -1.1759517, z: 0}
   m_ShapePathHash: -1760658093
   m_Mesh: {fileID: 0}
-  m_InstanceId: -58756
+  m_InstanceId: -414194
