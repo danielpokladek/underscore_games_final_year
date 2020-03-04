@@ -30,9 +30,11 @@ public class ArcherController : PlayerController
     [SerializeField] private ParticleSystem[] shootParticles;
     [SerializeField] private Color particlesDraw;
     [SerializeField] private Color particlesFullyDrawn;
+    [SerializeField] private int rapidArrowAmnt = 20;
 
     // ---
     private bool bowFullyCharged = false;
+    private bool rapidFire = false;
 
     override protected void Update()
     {
@@ -105,8 +107,11 @@ public class ArcherController : PlayerController
         if (Input.GetKeyDown(KeyCode.Q) && _abilityTwoCooldown >= playerStats.abilityTwoCooldown.GetValue())
             SecondAbility();
 
-        if (Input.GetKeyDown(KeyCode.E) && _abilityThreeCooldown >= playerStats.abilityThreeCooldown.GetValue())
+        if (Input.GetKeyDown(KeyCode.E) && _abilityThreeCooldown >= playerStats.abilityThreeCooldown.GetValue() && !rapidFire)
+        {
             ThirdAbility();
+            rapidFire = true;
+        }
 
         #endregion
 
@@ -136,59 +141,67 @@ public class ArcherController : PlayerController
         #endregion
     }
 
+    // -- PRIMARY "LMB" SHOT -- //
     override protected void PrimAttack()
     {
         float dmg = CalculateDamage();
+        GameObject proj;
 
-        GameObject       proj   = Instantiate(normalProjectile, firePoint.position, firePoint.rotation);
-        Rigidbody2D      projRB = proj.GetComponent<Rigidbody2D>();
-        PlayerProjectile pProj  = proj.GetComponent<PlayerProjectile>();
 
         if (bowFullyCharged)
         {
+            proj = ObjectPooler.instance.PoolItem("playerPiercing", firePoint.position, firePoint.rotation);
             proj.GetComponent<TrailRenderer>().enabled = true;
-            //proj.GetComponent<TrailRenderer>().startColor = Color.white;
-            //proj.GetComponent<TrailRenderer>().endColor = Color.white;
+        }
+        else
+        {
+            proj = ObjectPooler.instance.PoolItem("playerNormal", firePoint.position, firePoint.rotation);
         }
 
-        //tempProjectile.transform.localScale = new Vector3(
-        //    tempProjectile.transform.localScale.x * projectileSizeMultiplier,
-        //    tempProjectile.transform.localScale.y * projectileSizeMultiplier,
-        //    tempProjectile.transform.localScale.z * projectileSizeMultiplier);
-
-        projRB.AddForce(firePoint.up * 20, ForceMode2D.Impulse);
-        pProj.SetDamage(dmg);
+        proj.GetComponent<Rigidbody2D>().AddForce(firePoint.up * 20, ForceMode2D.Impulse);
+        proj.GetComponent<Projectile>().SetDamage(dmg);
 
         _attackDelay = 0;
     }
 
+    // -- RAPID FIRE ABILITY -- //
     private void SecondAbility()
     {
-        GameObject       proj   = Instantiate(specialProjectile, firePoint.position, firePoint.rotation);
-        Rigidbody2D      projRB = proj.GetComponent<Rigidbody2D>();
-        PlayerProjectile pProj  = proj.GetComponent<PlayerProjectile>();
+        if (rapidFire)
+            return;
 
-        //tempProjectile.transform.localScale = new Vector3(
-        //    tempProjectile.transform.localScale.x * projectileSizeMultiplier,
-        //    tempProjectile.transform.localScale.y * projectileSizeMultiplier,
-        //    tempProjectile.transform.localScale.z * projectileSizeMultiplier);
-
-        projRB.AddForce(firePoint.up * 20, ForceMode2D.Impulse);
-        pProj.SetDamage(playerStats.characterAttackDamage.GetValue() / 2);
-
-        _abilityTwoCooldown = 0;
+        StartCoroutine(RapidFire());
     }
 
+    // -- FIRE BOTTLE -- //
     private void ThirdAbility()
     {   
-        GameObject proj = ObjectPooler.instance.PoolItem("playerThrow",
-            firePoint.position, Quaternion.identity);
-
+        GameObject proj = ObjectPooler.instance.PoolItem("playerThrow", firePoint.position, firePoint.rotation);
             proj.GetComponent<Projectile>().SetDamage(playerStats.characterAttackDamage.GetValue());
             proj.GetComponent<Rigidbody2D>().AddForce(firePoint.up * 10, ForceMode2D.Impulse);
 
         _abilityThreeCooldown = 0;
+        rapidFire = false;
     }
+
+    // -- RAPID FIRE COROUTINE -- //
+    private IEnumerator RapidFire()
+    {
+        for (int i = 0; i < rapidArrowAmnt; i++)
+        {
+            GameObject proj = ObjectPooler.instance.PoolItem("playerNormal", firePoint.position, firePoint.rotation);
+                proj.GetComponent<Projectile>().SetDamage(playerStats.characterAttackDamage.GetValue());
+                proj.GetComponent<Rigidbody2D>().AddForce(firePoint.up * 10, ForceMode2D.Impulse);
+
+            yield return new WaitForSeconds(0.15f);
+        }
+
+        _abilityTwoCooldown = 0;
+        rapidFire = false;
+
+        yield break;
+    }
+
 
     private float CalculateDamage()
     {

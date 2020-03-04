@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7583637798381323171}
   m_LocalRotation: {x: 0, y: 0, z: -0.38268343, w: 0.92387956}
-  m_LocalPosition: {x: -11.98, y: -0.48, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2644464478566791434}
@@ -143,6 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70aa11c24cb9e4a489a23566c3bfc5d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemPrice: 0
   gemWorth: 10
 --- !u!1 &7874313310282477638
 GameObject:
@@ -171,7 +172,7 @@ Transform:
   m_GameObject: {fileID: 7874313310282477638}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
+  m_LocalScale: {x: 1.1, y: 1.1, z: 1}
   m_Children: []
   m_Father: {fileID: 7583637798381323174}
   m_RootOrder: 0

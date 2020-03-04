@@ -4,7 +4,10 @@ using UnityEngine;
 using Pathfinding;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Seeker))]
 [RequireComponent(typeof(AIPath))]
+[RequireComponent(typeof(AIDestinationSetter))]
+[RequireComponent(typeof(EnemyStats))]
 [RequireComponent(typeof(EnemyMovement))]
 public class EnemyController : MonoBehaviour
 {

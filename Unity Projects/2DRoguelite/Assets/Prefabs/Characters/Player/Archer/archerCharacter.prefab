@@ -137,7 +137,7 @@ Transform:
   m_GameObject: {fileID: 1587711992144630986}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.972, y: 1.972, z: 1.972}
+  m_LocalScale: {x: 4, y: 4, z: 1}
   m_Children: []
   m_Father: {fileID: 7368213390279314161}
   m_RootOrder: 4
@@ -181,8 +181,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -10
-  m_Sprite: {fileID: -6939970552380966185, guid: e573e6cf1d9a3ac4494fa781ada02ae8,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 059465cf959995741b9f9bbb60cdf183, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -448,6 +447,10 @@ MonoBehaviour:
     baseValue: 1.5
   abilityThreeCooldown:
     baseValue: 1.5
+  damageCooldown:
+    baseValue: 0.4
+  godMode: 0
+  canTakeDamage: 1
 --- !u!114 &6928827130408796320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -467,6 +470,7 @@ MonoBehaviour:
   playerArm: {fileID: 7368213389689043494}
   powerUpContainer: {fileID: 8420646393169131963}
   attackAnim: {fileID: 1362232857}
+  playerSprite: {fileID: 7368213391160484319}
   projectileSizeMultiplier: 1
   foundPortal: 0
   playerMovement: {fileID: 0}
@@ -492,6 +496,7 @@ MonoBehaviour:
   - {fileID: 7252598913341321885, guid: 3518469042dc1c34c85fec6e5c4788c7, type: 3}
   particlesDraw: {r: 0, g: 0.80784315, b: 1, a: 1}
   particlesFullyDrawn: {r: 1, g: 0, b: 0, a: 1}
+  rapidArrowAmnt: 5
 --- !u!1 &7368213391151072765
 GameObject:
   m_ObjectHideFlags: 0

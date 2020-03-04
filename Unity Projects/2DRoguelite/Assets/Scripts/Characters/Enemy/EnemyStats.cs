@@ -70,7 +70,7 @@ public class EnemyStats : CharacterStats
             if (GameManager.current.bossPortalRef != null)
                 Instantiate(soulParticle, transform.position, Quaternion.identity);
 
-        Instantiate(enemyController.gemDrops[Random.Range(0, enemyController.gemDrops.Length -1)], transform.position, Quaternion.identity);
+        Instantiate(enemyController.gemDrops[Random.Range(0, enemyController.gemDrops.Length -1)], transform.position, Quaternion.Euler(0, 0, Random.Range(-45, 45)));
         
         Destroy(gameObject);
     }

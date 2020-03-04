@@ -202,6 +202,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitEffect: {fileID: 7583490791312444778, guid: f8dd09c622411ca4fa4f5eb4eef765f1,
     type: 3}
+  projectileDecay: 5
+  projectileTag: playerNormal
   cameraShakeMagnitude: 4
   cameraShakeRoughness: 2
 --- !u!1 &8129446538814266073
