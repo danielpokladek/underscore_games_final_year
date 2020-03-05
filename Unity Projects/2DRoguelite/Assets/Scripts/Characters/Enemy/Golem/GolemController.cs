@@ -7,6 +7,8 @@ public class GolemController : EnemyRanged
     [SerializeField] private GameObject[] golemRockAttackPoints;
     [SerializeField] private GameObject groundAttackEffect;
 
+    public GameObject spikething;
+
     GameObject[] projList;
 
     private float _spikeCooldown;
@@ -65,10 +67,11 @@ public class GolemController : EnemyRanged
 
     private IEnumerator SpikeAttack()
     {
-        Debug.Log("Spike Attack!");
-
         _spikeCooldown = 0;
-        
+
+        GameObject spike = Instantiate(spikething, enemyMovement.playerTrans.position, Quaternion.identity);
+        spike.GetComponent<GolemSpikeAttack>().SpikeAttack(enemyStats.characterAttackDamage.GetValue());
+
         yield break;
     }
 }
