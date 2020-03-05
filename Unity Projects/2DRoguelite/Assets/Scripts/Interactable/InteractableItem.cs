@@ -5,6 +5,7 @@ using UnityEngine;
 public class InteractableItem : MonoBehaviour
 {
     [SerializeField] protected int itemPrice;
+    [SerializeField] protected string itemName;
 
     private bool playerInRange;
 
@@ -35,5 +36,18 @@ public class InteractableItem : MonoBehaviour
 
         Debug.Log("No money, no buy!", gameObject);
         return false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            GameUIManager.currentInstance.ShowItemUI(transform.position, itemName, itemPrice);
+        }
+    }
+
+    private void OnTriggerExit2D()
+    {
+        GameUIManager.currentInstance.HideItemUI();
     }
 }

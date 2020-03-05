@@ -12,7 +12,11 @@ public class GameUIManager : MonoBehaviour
     }
 
     public Canvas gameCanvas;
+    public GameObject priceUIPrefab;
     [SerializeField] private GameObject loadingScreen;
+
+    private GameObject priceUIRef;
+    private ItemUIController itemUIController;
 
     public Effects effectsContainer;
     public static GameUIManager currentInstance;
@@ -23,6 +27,14 @@ public class GameUIManager : MonoBehaviour
             currentInstance = this;
         else
             Destroy(gameObject);
+    }
+
+    private void Start()
+    {
+        priceUIRef       = Instantiate(priceUIPrefab, transform.position, Quaternion.identity);
+        itemUIController = priceUIRef.GetComponent<ItemUIController>();
+        
+        HideItemUI();
     }
 
     public void DamageIndicator(Vector2 position, float damageAmount)
@@ -43,5 +55,17 @@ public class GameUIManager : MonoBehaviour
 
         string healText = "+" + healAmount;
         text.GetComponent<IndicatorText>().SetValues(healText, position);
+    }
+
+    public void ShowItemUI(Vector2 worldPosition, string itemName, int itemPrice)
+    {
+        priceUIRef.transform.position = worldPosition;
+        itemUIController.SetValues(itemName, itemPrice);
+        priceUIRef.SetActive(true);
+    }
+
+    public void HideItemUI()
+    {
+        priceUIRef.SetActive(false);
     }
 }
