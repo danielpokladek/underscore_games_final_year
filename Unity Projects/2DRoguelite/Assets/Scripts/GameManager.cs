@@ -40,10 +40,5 @@ public class GameManager : MonoBehaviour
         //    loadingFinishedCallback.Invoke();
     }
 
-    public int PlayerCurrency { get { return playerGems; } set { playerGems = value; } }
-
-    private void OnGUI()
-    {
-        GUI.Label(new Rect(10, 10, 80, 20), "Gems: " + playerGems);
-    }
+    public int GetPlayerGems { get { return playerGems; } set { playerGems = value; } }
 }

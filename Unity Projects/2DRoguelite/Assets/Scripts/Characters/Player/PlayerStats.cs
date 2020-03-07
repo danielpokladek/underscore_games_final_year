@@ -40,7 +40,7 @@ public class PlayerStats : CharacterStats
     {
         base.HealCharacter(healAmount);
 
-        playerController.onUIUpdateCallback.Invoke();
+        UIManager.current.updateUICallback();
     }
 
     override public void TakeDamage(float damageAmount)
@@ -59,8 +59,7 @@ public class PlayerStats : CharacterStats
         
         StartCoroutine(Damaged());
 
-        if (playerController.onUIUpdateCallback != null)
-            playerController.onUIUpdateCallback.Invoke();
+        UIManager.current.updateUICallback.Invoke();
         
         CameraShaker.Instance.ShakeOnce(2f, 2f, .01f, .1f);
     }

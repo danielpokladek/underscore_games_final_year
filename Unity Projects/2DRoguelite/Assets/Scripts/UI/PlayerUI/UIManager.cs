@@ -2,17 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-    [Header("UI Settings")]
-    public GameObject loadingScreen;
-    public Image playerPortrait;
-    public Image healthImage;
+    [Header("Player UI")]
     [Tooltip("This is the gradient that will be used to colour player's health bar, changing the currently set colours will work in game straight away. "
     + "If you'd like the colours to change quicker, move the sliders to the right, and if you'd like the colours to stay longer move them to right."
     + "Imagine the gradient slider as value between 0 and 1, and the lower is player's health the lower will be the value on the 0 to 1 scale.")]
     public Gradient healthGradient;
+    public TMP_Text gemText;
+
+    [Header("UI Settings")]
+    public GameObject loadingScreen;
+    public Image playerPortrait;
+    public Image healthImage;
     public Image skillOne, skillTwo, skillThree;
 
     private PlayerController playerRef;
@@ -27,8 +31,17 @@ public class UIManager : MonoBehaviour
             current = this;
         else
             Destroy(gameObject);
+
+        updateUICallback += UpdateUIFunction;
+        updateGemsUICallback += UpdateGemsUIFunction;
     }
     #endregion
+
+    public delegate void UpdateUI();
+    public UpdateUI updateUICallback;
+
+    public delegate void UpdateGemsUI();
+    public UpdateGemsUI updateGemsUICallback;
 
     public void PlayerSpawned()
     {
@@ -47,20 +60,25 @@ public class UIManager : MonoBehaviour
     {
         playerRef                     = GameManager.current.playerRef.GetComponent<PlayerController>();
         playerStats                   = playerRef.playerStats;
-        playerRef.onUIUpdateCallback += UpdateUI;
+
+        gemText.text = GameManager.current.GetPlayerGems.ToString("");
 
         playerPortrait.sprite = playerRef.characterPortrait;
         skillOne.sprite       = playerRef.skillOne;
         skillTwo.sprite       = playerRef.skillTwo;
         skillThree.sprite     = playerRef.skillThree;
 
-        UpdateUI();
+        UpdateUIFunction();
     }
 
-    private void UpdateUI()
+    private void UpdateUIFunction()
     {
         healthImage.fillAmount = playerStats.currentHealth / playerStats.characterHealth.GetValue();
-
         healthImage.color = healthGradient.Evaluate(playerStats.currentHealth / playerStats.characterHealth.GetValue());
+    }
+
+    private void UpdateGemsUIFunction()
+    {
+        gemText.text = GameManager.current.GetPlayerGems.ToString("");
     }
 }

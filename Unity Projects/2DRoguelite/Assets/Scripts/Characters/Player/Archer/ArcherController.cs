@@ -40,9 +40,6 @@ public class ArcherController : PlayerController
     {
         base.Update();
 
-        if (Input.GetKeyDown(KeyCode.O))
-            onUIUpdateCallback.Invoke();
-
         #region Primary Attack
         if (Input.GetButtonDown("LMB"))
         {

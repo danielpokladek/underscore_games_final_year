@@ -14,7 +14,8 @@ public class ShopAddHealth : InteractableItem
         PurchaseItem(itemPrice);
         
         playerController.playerStats.characterHealth.AddModifier(healthModifier);
-        playerController.onItemInteractCallback.Invoke();
+        playerController.playerStats.HealCharacter(healthModifier);
+        //playerController.onItemInteractCallback.Invoke();
         
         Destroy(gameObject);
     }

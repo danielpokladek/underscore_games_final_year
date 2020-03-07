@@ -11,11 +11,9 @@ public class ShopAdjustDamage : InteractableItem
         if (!CheckGems())
             return;
 
-        PurchaseItem(itemPrice);
-        
         playerController.playerStats.characterAttackDamage.AddModifier(damageModifier);
-        playerController.onUIUpdateCallback.Invoke();
         
+        PurchaseItem(itemPrice);
         Destroy(gameObject);
     }
 }
