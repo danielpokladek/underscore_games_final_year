@@ -46,8 +46,9 @@ public class InteractableItem : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D()
+    private void OnTriggerExit2D(Collider2D other)
     {
-        GameUIManager.currentInstance.HideItemUI();
+        if (other.CompareTag("Player"))
+            GameUIManager.currentInstance.HideItemUI();
     }
 }
