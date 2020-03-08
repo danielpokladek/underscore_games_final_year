@@ -36,6 +36,8 @@ public class ArcherController : PlayerController
     private bool bowFullyCharged = false;
     private bool rapidFire = false;
 
+
+
     override protected void Update()
     {
         base.Update();
@@ -105,10 +107,7 @@ public class ArcherController : PlayerController
             SecondAbility();
 
         if (Input.GetKeyDown(KeyCode.E) && _abilityThreeCooldown >= playerStats.abilityThreeCooldown.GetValue() && !rapidFire)
-        {
             ThirdAbility();
-            rapidFire = true;
-        }
 
         #endregion
 
@@ -130,11 +129,17 @@ public class ArcherController : PlayerController
         #endregion
 
         #region Cooldowns
-        if (_abilityTwoCooldown <= playerStats.abilityTwoCooldown.GetValue())
+        if (_abilityTwoCooldown < playerStats.abilityTwoCooldown.GetValue())
+        {
             _abilityTwoCooldown += Time.deltaTime;
+            UIManager.current.updateUICallback.Invoke();
+        }
 
-        if (_abilityThreeCooldown <= playerStats.abilityThreeCooldown.GetValue())
+        if (_abilityThreeCooldown < playerStats.abilityThreeCooldown.GetValue())
+        {
             _abilityThreeCooldown += Time.deltaTime;
+            UIManager.current.updateUICallback.Invoke();
+        }
         #endregion
     }
 
@@ -167,6 +172,8 @@ public class ArcherController : PlayerController
         if (rapidFire)
             return;
 
+        rapidFire = true;
+
         StartCoroutine(RapidFire());
     }
 
@@ -178,7 +185,6 @@ public class ArcherController : PlayerController
             proj.GetComponent<Rigidbody2D>().AddForce(firePoint.up * 10, ForceMode2D.Impulse);
 
         _abilityThreeCooldown = 0;
-        rapidFire = false;
     }
 
     // -- RAPID FIRE COROUTINE -- //
@@ -188,7 +194,7 @@ public class ArcherController : PlayerController
         {
             GameObject proj = ObjectPooler.instance.PoolItem("playerNormal", firePoint.position, firePoint.rotation);
                 proj.GetComponent<Projectile>().SetDamage(playerStats.characterAttackDamage.GetValue());
-                proj.GetComponent<Rigidbody2D>().AddForce(firePoint.up * 10, ForceMode2D.Impulse);
+                proj.GetComponent<Rigidbody2D>().AddForce(firePoint.up * 15, ForceMode2D.Impulse);
 
             yield return new WaitForSeconds(0.15f);
         }
@@ -198,7 +204,6 @@ public class ArcherController : PlayerController
 
         yield break;
     }
-
 
     private float CalculateDamage()
     {

@@ -1804,6 +1804,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameCanvas: {fileID: 803665264}
+  priceUIPrefab: {fileID: 0}
   loadingScreen: {fileID: 1416665239}
   effectsContainer:
     damageIndicator: {fileID: 1978375247680260081, guid: 5c0bddda2192d1e48a71ac6cf8a9127d,

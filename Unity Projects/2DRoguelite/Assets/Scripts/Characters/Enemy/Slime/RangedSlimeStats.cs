@@ -14,6 +14,8 @@ public class RangedSlimeStats : EnemyStats
         Instantiate(meleeSlime, transform.position + new Vector3(rand1, rand2, 0.0f), Quaternion.identity);
         Instantiate(meleeSlime, transform.position + new Vector3(rand3, rand4, 0.0f), Quaternion.identity);
 
+        GetComponent<EnemyController>().DeathEffect();
+
         base.CharacterDeath();
     }
 }

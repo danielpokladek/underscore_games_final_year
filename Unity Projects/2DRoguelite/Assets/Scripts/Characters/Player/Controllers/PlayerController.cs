@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(PlayerMovement))]
@@ -9,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [Header("Character UI")]
     public Sprite characterPortrait;
     public Sprite skillOne, skillTwo, skillThree;
+    public Sprite skillOneBack, skillTwoBack, skillThreeBack;
     [Tooltip("This is player's 'arm' which will be used to aiming, shooting, etc. It rotates towards the mouse.")]
     [SerializeField] protected GameObject playerArm;
 
@@ -21,6 +23,7 @@ public class PlayerController : MonoBehaviour
         "This animator is most likely placed on the object used as a weapon/fists.")]
     public Animator attackAnim;
     public SpriteRenderer playerSprite;
+    public GameObject minimapThing;
 
     // --- --- ---
     [HideInInspector] public float  projectileSizeMultiplier = 1; 
@@ -44,8 +47,11 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public PlayerStats playerStats;
     [HideInInspector] public Animator playerAnim;
 
+    private List<GameObject> powerupBalls;
+
     // --- MANAGERS --- //
     protected GameUIManager gameUIManager;
+    protected GameManager gameManager;
     private LineRenderer lineRenderer;
 
     public delegate void OnGUIUpdate();
@@ -68,6 +74,9 @@ public class PlayerController : MonoBehaviour
         playerMovement      = GetComponent<PlayerMovement>();
         playerCamera        = Camera.main;
 
+        gameManager   = GameManager.current;
+        gameUIManager = GameUIManager.currentInstance;
+
         InitiatePlayer();
         UIManager.current.PlayerSpawned();
     }
@@ -76,11 +85,16 @@ public class PlayerController : MonoBehaviour
     {
         playerAlive   = true;
 
-        gameUIManager = GameUIManager.currentInstance;
-
-        GameManager.current.playerRef = gameObject;
+        gameUIManager         = GameUIManager.currentInstance;
+        gameManager.playerRef = gameObject;
         
-       // minimapThing.SetActive(false);
+        _abilityOneCooldown   = playerStats.abilityOneCooldown.GetValue();
+        _abilityTwoCooldown   = playerStats.abilityTwoCooldown.GetValue();
+        _abilityThreeCooldown = playerStats.abilityThreeCooldown.GetValue();
+
+        powerupBalls = new List<GameObject>();
+
+        minimapThing.SetActive(false);
     }
 
     virtual protected void Update()
@@ -94,29 +108,29 @@ public class PlayerController : MonoBehaviour
             }
 
             DebugInputs();
-            
-            //if (LevelManager.instance.currentState == LevelManager.DayState.Night ||
-            //    LevelManager.instance.currentState == LevelManager.DayState.Midnight)
-            //{
-            //    portalIndicator.SetActive(true);
+        }
+    }
 
-            //    if (foundPortal)
-            //    {
-            //        Vector3 diff = GameManager.current.bossPortalRef.transform.position - transform.position;
-            //        diff.Normalize();
+    public void AddEnergyBall(GameObject energyBall)
+    {
+        powerupBalls.Add(energyBall);
 
-            //        float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
-            //        portalIndicator.transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
-            //    }
-            //    else
-            //    {
-            //        minimapThing.transform.RotateAround(portalIndicator.transform.position, new Vector3(0, 0, 1), 10);
-            //    }
-            //}
-            //else
-            //{
-            //    minimapThing.SetActive(false);
-            //}
+        float angle = 0;
+        float angleStep = (0 - 360) / powerupBalls.Count;
+
+        for (int i = 0; i < powerupBalls.Count; i++)
+        {
+            powerupBalls[i].transform.position = Vector3.zero;
+
+            float dirX = transform.position.x + Mathf.Sin((angle * Mathf.PI) / 180.0f);
+            float dirY = transform.position.y + Mathf.Cos((angle * Mathf.PI) / 180.0f);
+
+            Vector3 moveVector = new Vector3(dirX, dirY, 0.0f);
+            Vector2 dir = (moveVector - transform.position).normalized;
+
+            powerupBalls[i].transform.position += new Vector3(dirX, dirY, 0);
+
+            angle += angleStep;
         }
     }
 
@@ -127,6 +141,10 @@ public class PlayerController : MonoBehaviour
     virtual protected void SecAttack()    { /* Only declaration for the function, needs to be defined per character. */
                                             throw new System.NotImplementedException(); }
     #endregion
+
+    public float GetSkillOneCooldown() { return _abilityOneCooldown; }
+    public float GetSkillTwoCooldown() { return _abilityTwoCooldown; }
+    public float GetSkillThreeCooldown() { return _abilityThreeCooldown; }
 
     private void DebugInputs()
     {

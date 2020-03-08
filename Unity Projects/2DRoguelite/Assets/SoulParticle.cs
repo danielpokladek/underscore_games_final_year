@@ -19,6 +19,7 @@ public class SoulParticle : MonoBehaviour
         if (other.CompareTag("Portal"))
         {
             LevelManager.instance.AddSoul();
+            UIManager.current.updateGemsUICallback();
 
             Destroy(gameObject);
         }

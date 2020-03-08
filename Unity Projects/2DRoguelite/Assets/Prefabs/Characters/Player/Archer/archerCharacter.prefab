@@ -352,7 +352,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7368213390279314161}
   - component: {fileID: 7368213390279314162}
-  - component: {fileID: 7368213390279314163}
   - component: {fileID: 727236342}
   - component: {fileID: 3129229698477711625}
   - component: {fileID: 7322336239146054419}
@@ -407,32 +406,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &7368213390279314163
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7368213390279314166}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1.5}
-  m_EdgeRadius: 0
 --- !u!95 &727236342
 Animator:
   serializedVersion: 3
@@ -493,9 +466,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterHealth:
-    baseValue: 50
+    baseValue: 30
   characterSpeed:
-    baseValue: 5
+    baseValue: 9
   characterAttackDamage:
     baseValue: 4
   characterAttackDelay:
@@ -503,9 +476,9 @@ MonoBehaviour:
   abilityOneCooldown:
     baseValue: 0.5
   abilityTwoCooldown:
-    baseValue: 1.5
+    baseValue: 3
   abilityThreeCooldown:
-    baseValue: 1.5
+    baseValue: 4.5
   damageCooldown:
     baseValue: 0.4
   godMode: 0
@@ -523,13 +496,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterPortrait: {fileID: 21300000, guid: 059465cf959995741b9f9bbb60cdf183, type: 3}
-  skillOne: {fileID: 21300000, guid: 4fb4290613c97c4469cddd7d2a78e1d9, type: 3}
-  skillTwo: {fileID: 21300000, guid: 0e4c61af82e495846b4a715371c8ebed, type: 3}
-  skillThree: {fileID: 21300000, guid: fdfa705e577966e40a319a052de30f2e, type: 3}
+  skillOne: {fileID: 7851980117657340807, guid: 2771c4f46c434c84f9c56b2f5f30377b,
+    type: 3}
+  skillTwo: {fileID: 7568160483475942655, guid: 2771c4f46c434c84f9c56b2f5f30377b,
+    type: 3}
+  skillThree: {fileID: 45595323001357234, guid: 2771c4f46c434c84f9c56b2f5f30377b,
+    type: 3}
+  skillOneBack: {fileID: 5639883012323448272, guid: 20169f17e8612ce4abacd23f35f178a9,
+    type: 3}
+  skillTwoBack: {fileID: -2205725033080298104, guid: 20169f17e8612ce4abacd23f35f178a9,
+    type: 3}
+  skillThreeBack: {fileID: 640094092113888607, guid: 20169f17e8612ce4abacd23f35f178a9,
+    type: 3}
   playerArm: {fileID: 7368213389689043494}
   powerUpContainer: {fileID: 8420646393169131963}
   attackAnim: {fileID: 1362232857}
   playerSprite: {fileID: 7368213391160484319}
+  minimapThing: {fileID: 1587711992144630986}
   projectileSizeMultiplier: 1
   foundPortal: 0
   playerMovement: {fileID: 0}
@@ -743,7 +726,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 15
   m_Sprite: {fileID: 297365192272268415, guid: dd0023236f7f09d4eb269b12908981c5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -857,6 +840,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 857793a4f2443bb4598b90c8e0a80800, type: 2}
+    - target: {fileID: 610008468608892533, guid: c34c6876a58b0634aaf758e40d3bac42,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c34c6876a58b0634aaf758e40d3bac42, type: 3}
 --- !u!4 &8138573753546262938 stripped

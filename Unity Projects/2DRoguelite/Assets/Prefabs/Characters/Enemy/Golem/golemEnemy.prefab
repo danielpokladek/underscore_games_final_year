@@ -252,10 +252,10 @@ GameObject:
   - component: {fileID: 929123855036181054}
   - component: {fileID: 929123855036181025}
   - component: {fileID: 929123855036181024}
-  - component: {fileID: 929123855036181027}
   - component: {fileID: 929123855036181026}
   - component: {fileID: 929123855036181029}
   - component: {fileID: 929123855036181055}
+  - component: {fileID: 2109065099}
   m_Layer: 0
   m_Name: golemEnemy
   m_TagString: Enemy
@@ -300,7 +300,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &929123855036181054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -379,28 +379,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   target: {fileID: 0}
---- !u!114 &929123855036181027
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 929123855036181028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c2a22d7e4ae58d4bb670110fc8d022f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterHealth:
-    baseValue: 999
-  characterSpeed:
-    baseValue: 1.2
-  characterAttackDamage:
-    baseValue: 0
-  characterAttackDelay:
-    baseValue: 4.5
-  soulParticle: {fileID: 8558200818212196397, guid: 155753f8135d24948b94998611d692c3,
-    type: 3}
 --- !u!114 &929123855036181026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -448,7 +426,8 @@ MonoBehaviour:
   - {fileID: 929123854436719512}
   - {fileID: 929123855100628793}
   groundAttackEffect: {fileID: 0}
-  spikething: {fileID: 0}
+  spikething: {fileID: 5194752389274685862, guid: 4149eb11d00cdf54f91658db9858a0d0,
+    type: 3}
 --- !u!60 &929123855036181055
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -479,6 +458,32 @@ PolygonCollider2D:
       - {x: -0.8033925, y: -0.7155871}
       - {x: 0.7976538, y: -0.7102554}
       - {x: 0.7969289, y: 0.70666623}
+--- !u!114 &2109065099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929123855036181028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c7eb0503b36fd043a1ee020beea3c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterHealth:
+    baseValue: 10
+  characterSpeed:
+    baseValue: 1.2
+  characterAttackDamage:
+    baseValue: 0
+  characterAttackDelay:
+    baseValue: 1.5
+  soulParticle: {fileID: 8558200818212196397, guid: 155753f8135d24948b94998611d692c3,
+    type: 3}
+  golemSpikeCooldown:
+    baseValue: 2.5
+  golemRockCooldown:
+    baseValue: 1.5
 --- !u!1 &929123855057299424
 GameObject:
   m_ObjectHideFlags: 0

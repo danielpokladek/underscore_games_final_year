@@ -21,7 +21,13 @@ public class Throwable : Projectile
         foreach (Collider2D coll in enemiesInRange)
         {
             if (coll.CompareTag("Enemy"))
+            {
                 coll.GetComponent<EnemyController>().enemyStats.TakeDamage(projectileDamage);
+                coll.GetComponent<EnemyController>().enemyStats.DamageOverTime(2.0f, projectileDamage);
+            }
+
+            if (coll.CompareTag("Player"))
+                coll.GetComponent<PlayerController>().playerStats.TakeDamage(projectileDamage);
         }
 
         CameraShaker.Instance.ShakeOnce(15.0f, 8.0f, .5f, .5f);

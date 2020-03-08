@@ -147,6 +147,6 @@ public class EnemyController : MonoBehaviour
 
     virtual public void DeathEffect()
     {
-        
+        StopAllCoroutines();
     }
 }

@@ -12,12 +12,14 @@ public class UIManager : MonoBehaviour
     + "Imagine the gradient slider as value between 0 and 1, and the lower is player's health the lower will be the value on the 0 to 1 scale.")]
     public Gradient healthGradient;
     public TMP_Text gemText;
+    public TMP_Text soulsText;
 
     [Header("UI Settings")]
     public GameObject loadingScreen;
     public Image playerPortrait;
     public Image healthImage;
     public Image skillOne, skillTwo, skillThree;
+    public Image skillOneBack, skillTwoBack, skillThreeBack;
 
     private PlayerController playerRef;
     private PlayerStats playerStats;
@@ -64,21 +66,32 @@ public class UIManager : MonoBehaviour
         gemText.text = GameManager.current.GetPlayerGems.ToString("");
 
         playerPortrait.sprite = playerRef.characterPortrait;
+
+        skillOneBack.sprite = playerRef.skillOne;
+        skillTwoBack.sprite = playerRef.skillTwoBack;
+        skillThreeBack.sprite = playerRef.skillThreeBack;
+
         skillOne.sprite       = playerRef.skillOne;
         skillTwo.sprite       = playerRef.skillTwo;
         skillThree.sprite     = playerRef.skillThree;
 
         UpdateUIFunction();
+        UpdateGemsUIFunction();
     }
 
     private void UpdateUIFunction()
     {
         healthImage.fillAmount = playerStats.currentHealth / playerStats.characterHealth.GetValue();
         healthImage.color = healthGradient.Evaluate(playerStats.currentHealth / playerStats.characterHealth.GetValue());
+
+        skillOne.fillAmount = playerRef.GetSkillOneCooldown() / playerStats.abilityOneCooldown.GetValue();
+        skillTwo.fillAmount = playerRef.GetSkillTwoCooldown() / playerStats.abilityTwoCooldown.GetValue();
+        skillThree.fillAmount = playerRef.GetSkillThreeCooldown() / playerStats.abilityThreeCooldown.GetValue();
     }
 
     private void UpdateGemsUIFunction()
     {
         gemText.text = GameManager.current.GetPlayerGems.ToString("");
+        soulsText.text = LevelManager.instance.enemyKills.ToString("");
     }
 }
