@@ -16,7 +16,7 @@ public class BossPortal : MonoBehaviour
 
     private void Update()
     {
-        portalCounter.text = LevelManager.instance.enemyKills.ToString("00");
+        portalCounter.text = LevelManager.instance.killsRequired.ToString("00");
     }
 
     private void OnTriggerEnter2D(Collider2D other)
