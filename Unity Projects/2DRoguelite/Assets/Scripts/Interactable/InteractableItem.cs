@@ -44,12 +44,16 @@ public class InteractableItem : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             GameUIManager.currentInstance.ShowItemUI(transform.position, itemName, itemPrice);
+            gameObject.GetComponent<SpriteRenderer>().material.SetFloat("_OutlineThickness", 5.0f);
         }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
+        {
             GameUIManager.currentInstance.HideItemUI();
+            gameObject.GetComponent<SpriteRenderer>().material.SetFloat("_OutlineThickness", 0.0f);
+        }
     }
 }
