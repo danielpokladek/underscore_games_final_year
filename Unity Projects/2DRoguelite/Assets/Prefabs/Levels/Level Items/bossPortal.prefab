@@ -172,7 +172,7 @@ SpriteRenderer:
   m_SortingOrder: 1
   m_Sprite: {fileID: -6934709400937191310, guid: 80c52c4f87ea58e47b7a024eeec4a381,
     type: 3}
-  m_Color: {r: 0.5137255, g: 0.3803922, b: 0.8588236, a: 1}
+  m_Color: {r: 0.41252643, g: 0.29125133, b: 0.7264151, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -199,7 +199,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1505993452
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5172,8 +5172,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soulsText: {fileID: 1782890378}
-  innerMaterial: {fileID: 2100000, guid: 9e78aa6f3e4392a42badbbf2a1a70229, type: 2}
   portalAnimator: {fileID: 1596619431}
+  innerMaterial: {fileID: 2100000, guid: 9e78aa6f3e4392a42badbbf2a1a70229, type: 2}
 --- !u!95 &1596619431
 Animator:
   serializedVersion: 3
@@ -10017,7 +10017,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 3
   m_Sprite: {fileID: 4456173311284835894, guid: eef6c105b39210f48a6181ffcf30067c,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

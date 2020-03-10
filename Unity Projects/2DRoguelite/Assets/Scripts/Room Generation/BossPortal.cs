@@ -6,8 +6,9 @@ using TMPro;
 public class BossPortal : MonoBehaviour
 {
     [SerializeField] private TMP_Text soulsText;
-    [SerializeField] private Material innerMaterial;
     [SerializeField] private Animator portalAnimator;
+
+    [SerializeField] private Material innerMaterial;
 
     private bool portalEnabled = false;
     private bool showInner;
