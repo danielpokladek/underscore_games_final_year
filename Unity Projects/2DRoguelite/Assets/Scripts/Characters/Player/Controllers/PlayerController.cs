@@ -95,6 +95,9 @@ public class PlayerController : MonoBehaviour
         powerupBalls = new List<GameObject>();
 
         minimapThing.SetActive(false);
+
+        if (UIManager.current.tutorialHud != null)
+            Instantiate(UIManager.current.tutorialHud, transform.position, Quaternion.identity);
     }
 
     virtual protected void Update()

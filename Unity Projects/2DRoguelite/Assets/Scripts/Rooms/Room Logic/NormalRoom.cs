@@ -57,7 +57,7 @@ public class NormalRoom : RoomManager
             if (isPortalRoom)
                 other.GetComponent<PlayerController>().foundPortal = true;
 
-            if (levelManager.GetCurrentState == "Day" && roomDiscovered)
+            if ((levelManager.GetCurrentState == "Day" || levelManager.GetCurrentState == "Boss") && roomDiscovered)
                 return;
 
             SpawnEnemies();

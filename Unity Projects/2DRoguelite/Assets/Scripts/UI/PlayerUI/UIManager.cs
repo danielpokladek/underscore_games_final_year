@@ -20,6 +20,7 @@ public class UIManager : MonoBehaviour
     public Image healthImage;
     public Image skillOne, skillTwo, skillThree;
     public Image skillOneBack, skillTwoBack, skillThreeBack;
+    public GameObject tutorialHud;
 
     private PlayerController playerRef;
     private PlayerStats playerStats;

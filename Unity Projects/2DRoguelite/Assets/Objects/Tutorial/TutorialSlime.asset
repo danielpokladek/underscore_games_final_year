@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acccfc24e5d16fa4483f0ac86e6665e2, type: 3}
+  m_Name: TutorialSlime
+  m_EditorClassIdentifier: 
+  enemyPrefabs:
+  - {fileID: 7237441685385855648, guid: c26a1e3e1c362a04397ddd87f435292f, type: 3}
+  - {fileID: 2279957945320878747, guid: bcc7f8584426c644cbdcdd4248aa5b01, type: 3}
