@@ -23,7 +23,7 @@ public class PlayerProjectile : Projectile
         {
             GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
             Destroy(effect, 0.4f);
-            Destroy(gameObject);
+            DestroyProjectile();
         }
     }
 

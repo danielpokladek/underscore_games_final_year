@@ -23,6 +23,6 @@ public class PiercingProjectile : PlayerProjectile
             Destroy(_hitEffect, 0.4f);
 
         if (arrowHits == maxHits)
-            Destroy(gameObject);
+            DestroyProjectile();
     }
 }

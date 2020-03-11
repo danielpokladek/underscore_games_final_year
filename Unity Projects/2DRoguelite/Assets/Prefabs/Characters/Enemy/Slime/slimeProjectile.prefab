@@ -95,7 +95,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitEffect: {fileID: 7583490791312444778, guid: f8dd09c622411ca4fa4f5eb4eef765f1,
     type: 3}
-  projectileDecay: 4
+  projectileDecay: 0
   projectileTag: slimeProj
 --- !u!1 &3986621933393652338
 GameObject:
@@ -107,7 +107,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8467709426342164371}
   - component: {fileID: 6236057193543175411}
-  - component: {fileID: 8455218333058032002}
   m_Layer: 13
   m_Name: sprite
   m_TagString: Untagged
@@ -180,22 +179,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &8455218333058032002
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3986621933393652338}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ef777fcd503673d48a93982739f7baa7, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0

@@ -170,7 +170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitEffect: {fileID: 7583490791312444778, guid: f8dd09c622411ca4fa4f5eb4eef765f1,
     type: 3}
-  projectileDecay: 5
+  projectileDecay: 0
   projectileTag: bossExplosive
   bulletHealth: 999
   projectile: {fileID: 3361406223139990898, guid: 990f5272a10f2a849a56cc7910529b62,

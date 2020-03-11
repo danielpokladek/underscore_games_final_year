@@ -6,6 +6,7 @@ public class GolemController : EnemyRanged
 {
     [SerializeField] private GameObject[] golemRockAttackPoints;
     [SerializeField] private GameObject groundAttackEffect;
+    [SerializeField] private float golemAttackDistance;
 
     public GameObject spikething;
 
@@ -45,7 +46,10 @@ public class GolemController : EnemyRanged
     private IEnumerator GolemAttack()
     {
         _rockCooldown = 0;
-        
+
+        if (!CheckDistance())
+            yield break;
+
         int i = 0;
 
         foreach (GameObject _attackPoint in golemRockAttackPoints)
@@ -69,9 +73,20 @@ public class GolemController : EnemyRanged
     {
         _spikeCooldown = 0;
 
+        if (!CheckDistance())
+            yield break;
+
         GameObject spike = Instantiate(spikething, enemyMovement.playerTrans.position, Quaternion.identity);
         spike.GetComponent<GolemSpikeAttack>().SpikeAttack(enemyStats.characterAttackDamage.GetValue());
 
         yield break;
+    }
+
+    private bool CheckDistance()
+    {
+        if (Vector2.Distance(enemyMovement.playerTrans.position, transform.position) < golemAttackDistance)
+            return true;
+
+        return false;
     }
 }

@@ -4,7 +4,7 @@ public class Projectile : MonoBehaviour, IPooledObject
 {
     [Header("Bullet Settings")] 
     [SerializeField] protected GameObject hitEffect;
-    [Tooltip("This is the time after which the projectile will destroy itself.")]
+    [Tooltip("This is the time after which the projectile will destroy itself. Set this to zero and the decay won't be enabled.")]
     [SerializeField] protected float projectileDecay;
     [Tooltip("This is the tag which is used in object pooling, it should be the same as in object pooling script.")]
     [SerializeField] protected string projectileTag;
@@ -16,7 +16,9 @@ public class Projectile : MonoBehaviour, IPooledObject
     public void OnObjectSpawn()
     {
         gameObject.SetActive(true);
-        Invoke("DestroyProjectile", projectileDecay);
+
+        if (projectileDecay != 0)
+            Invoke("DestroyProjectile", projectileDecay);
     }
 
     private void Start()
