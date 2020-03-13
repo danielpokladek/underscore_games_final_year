@@ -23,7 +23,6 @@ public class ArcherController : PlayerController
     [SerializeField] private GameObject normalProjectile;
     [SerializeField] private GameObject specialProjectile;
 
-
     [Header("Particle System")]
     [SerializeField] private ParticleSystem[] chargeParticles;
     [SerializeField] private ParticleSystem[] aimParticles;
@@ -31,6 +30,10 @@ public class ArcherController : PlayerController
     [SerializeField] private Color particlesDraw;
     [SerializeField] private Color particlesFullyDrawn;
     [SerializeField] private int rapidArrowAmnt = 20;
+
+    [Header("SFX")]
+    [SerializeField] private AudioClip normalShot;
+    [SerializeField] private AudioClip heavyShot;
 
     // ---
     private bool bowFullyCharged = false;
@@ -41,6 +44,9 @@ public class ArcherController : PlayerController
     override protected void Update()
     {
         base.Update();
+
+        if (!playerAlive)
+            return;
 
         #region Primary Attack
         if (Input.GetButtonDown("LMB"))
@@ -154,10 +160,12 @@ public class ArcherController : PlayerController
         {
             proj = ObjectPooler.instance.PoolItem("playerPiercing", firePoint.position, firePoint.rotation);
             proj.GetComponent<TrailRenderer>().enabled = true;
+            AudioManager.current.PlaySFX(heavyShot);
         }
         else
         {
             proj = ObjectPooler.instance.PoolItem("playerNormal", firePoint.position, firePoint.rotation);
+            AudioManager.current.PlaySFX(normalShot);
         }
 
         proj.GetComponent<Rigidbody2D>().AddForce(firePoint.up * 20, ForceMode2D.Impulse);

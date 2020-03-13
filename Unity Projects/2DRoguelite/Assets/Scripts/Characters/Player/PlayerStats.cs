@@ -14,6 +14,7 @@ public class PlayerStats : CharacterStats
     public bool godMode;
     public bool canTakeDamage = true;
     [Tooltip("Cooldown for the first ability of player, in all cases this is the dash.")]
+    public AudioClip deathMusic;
 
     private PlayerController playerController;
 
@@ -56,12 +57,11 @@ public class PlayerStats : CharacterStats
 
         // --- --- ---
         base.TakeDamage(damageAmount);
-        
-        StartCoroutine(Damaged());
 
         UIManager.current.updateUICallback.Invoke();
-        
         CameraShaker.Instance.ShakeOnce(2f, 2f, .01f, .1f);
+        
+        StartCoroutine(Damaged());
     }
 
     private IEnumerator Damaged()
@@ -82,7 +82,15 @@ public class PlayerStats : CharacterStats
 
     override protected void CharacterDeath()
     {
-        gameObject.SetActive(false);
+        LevelManager.instance.playerDead = true;
+        UIManager.current.PlayerDead();
+
+        AudioManager.current.PlayMusic(deathMusic);
+        AudioManager.current.PlaySFX(deathSound);
+
+        //gameObject.SetActive(false);
+        playerController.playerSprite.enabled = false;
+        playerController.playerAlive = false;
     }
 
     public void SetHealth(float value)

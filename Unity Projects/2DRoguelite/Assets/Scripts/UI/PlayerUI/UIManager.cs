@@ -13,9 +13,12 @@ public class UIManager : MonoBehaviour
     public Gradient healthGradient;
     public TMP_Text gemText;
     public TMP_Text soulsText;
+    public TMP_Text gemCollected;
+    public TMP_Text enemyKilled;
 
     [Header("UI Settings")]
     public GameObject loadingScreen;
+    public GameObject deathScreen;
     public Image playerPortrait;
     public Image healthImage;
     public Image skillOne, skillTwo, skillThree;
@@ -37,6 +40,8 @@ public class UIManager : MonoBehaviour
 
         updateUICallback += UpdateUIFunction;
         updateGemsUICallback += UpdateGemsUIFunction;
+
+        deathScreen.SetActive(false);
     }
     #endregion
 
@@ -54,6 +59,14 @@ public class UIManager : MonoBehaviour
             GameManager.current.loadingFinishedCallback.Invoke();
     }
 
+    public void PlayerDead()
+    {
+        enemyKilled.text  = GameManager.current.enemyKilled.ToString("");
+        gemCollected.text = GameManager.current.gemsCollected.ToString("");
+
+        deathScreen.SetActive(true);
+    }
+
     private void Start()
     {
         GameManager.current.loadingFinishedCallback += AssignImages;
@@ -64,7 +77,7 @@ public class UIManager : MonoBehaviour
         playerRef                     = GameManager.current.playerRef.GetComponent<PlayerController>();
         playerStats                   = playerRef.playerStats;
 
-        gemText.text = GameManager.current.GetPlayerGems.ToString("");
+        gemText.text = GameManager.current.PlayerGems.ToString("");
 
         playerPortrait.sprite = playerRef.characterPortrait;
 
@@ -92,7 +105,7 @@ public class UIManager : MonoBehaviour
 
     private void UpdateGemsUIFunction()
     {
-        gemText.text = GameManager.current.GetPlayerGems.ToString("");
+        gemText.text = GameManager.current.PlayerGems.ToString("");
         soulsText.text = LevelManager.instance.enemyKills.ToString("");
     }
 }

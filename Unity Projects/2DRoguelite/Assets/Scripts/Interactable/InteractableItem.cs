@@ -16,7 +16,7 @@ public class InteractableItem : MonoBehaviour
 
     protected void PurchaseItem(int gemAmount)
     {
-        GameManager.current.GetPlayerGems -= gemAmount;
+        GameManager.current.PlayerGems -= gemAmount;
         UIManager.current.updateUICallback.Invoke();
     }
 
@@ -32,7 +32,7 @@ public class InteractableItem : MonoBehaviour
         if (itemPrice == 0)
             return true;
 
-        if ((GameManager.current.GetPlayerGems - itemPrice) >= 0)
+        if ((GameManager.current.PlayerGems - itemPrice) >= 0)
             return true;
 
         Debug.Log("No money, no buy!", gameObject);

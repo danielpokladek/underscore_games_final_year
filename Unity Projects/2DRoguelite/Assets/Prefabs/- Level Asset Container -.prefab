@@ -131,6 +131,7 @@ Transform:
   - {fileID: 738848401628039113}
   - {fileID: 738848401905935615}
   - {fileID: 8666182913837162273}
+  - {fileID: 8746420454053212091}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -490,6 +491,11 @@ MonoBehaviour:
   nightColor: {r: 0.3764706, g: 0.5294118, b: 0.8980392, a: 0}
   minLightIntensity: 0.65
   maxLightIntensity: 1
+  dayMusic: {fileID: 0}
+  nightMusic: {fileID: 0}
+  bossStage: {fileID: 0}
+  deathMusic: {fileID: 0}
+  playerDead: 0
 --- !u!1 &738848401905935614
 GameObject:
   m_ObjectHideFlags: 0
@@ -543,6 +549,49 @@ MonoBehaviour:
       type: 3}
     healIndicator: {fileID: 2420070503547430374, guid: 19d30e4b1030852419538097924d12b3,
       type: 3}
+--- !u!1 &4496284072874395683
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8746420454053212091}
+  - component: {fileID: 8246461324956414815}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8746420454053212091
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4496284072874395683}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 738848400251114198}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8246461324956414815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4496284072874395683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e1d2a2b1088ba34cbc5807941725038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6535215481899123773
 GameObject:
   m_ObjectHideFlags: 0

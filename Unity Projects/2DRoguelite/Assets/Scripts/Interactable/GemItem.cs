@@ -12,8 +12,10 @@ public class GemItem : InteractableItem
 
     override public void Interact(PlayerController playerController)
     {
-        GameManager.current.GetPlayerGems += gemWorth;
+        GameManager.current.PlayerGems += gemWorth;
+        GameManager.current.gemsCollected += gemWorth;
         UIManager.current.updateGemsUICallback.Invoke();
+
         Destroy(gameObject);
     }
 }

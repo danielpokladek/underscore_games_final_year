@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     // --- --- ---
     [HideInInspector] public float  projectileSizeMultiplier = 1; 
     [HideInInspector] public bool   foundPortal = false;
+    [HideInInspector] public bool   playerDead  = false;
 
     // --- --- ---
     protected Camera    playerCamera;
@@ -37,7 +38,7 @@ public class PlayerController : MonoBehaviour
     protected float _abilityOneCooldown;
     protected float _abilityTwoCooldown;
     protected float _abilityThreeCooldown;
-    protected bool playerAlive { get; set; }
+    [HideInInspector] public bool playerAlive { get; set; }
 
     //[SerializeField] protected GameObject portalIndicator;
 
@@ -102,15 +103,15 @@ public class PlayerController : MonoBehaviour
 
     virtual protected void Update()
     {
-        if (playerAlive)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                if (onInteractCallback != null)
-                    onInteractCallback.Invoke();
-            }
+        DebugInputs();
 
-            DebugInputs();
+        if (!playerAlive)
+            return;
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (onInteractCallback != null)
+                onInteractCallback.Invoke();
         }
     }
 
@@ -164,6 +165,12 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.I))
                 LevelManager.instance.AddSoul();
+
+            if (Input.GetKeyDown(KeyCode.F5))
+                LevelManager.instance.LoadBossBattle();
+
+            if (Input.GetKeyDown(KeyCode.R))
+                LevelManager.instance.Restart();
         }
     }
 }

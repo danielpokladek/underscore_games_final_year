@@ -473,6 +473,7 @@ MonoBehaviour:
     baseValue: 4
   characterAttackDelay:
     baseValue: 0.9
+  deathSound: {fileID: 8300000, guid: 5b9f983605ad6b542a2af938874d251e, type: 3}
   abilityOneCooldown:
     baseValue: 0.5
   abilityTwoCooldown:
@@ -483,6 +484,7 @@ MonoBehaviour:
     baseValue: 0.4
   godMode: 0
   canTakeDamage: 1
+  deathMusic: {fileID: 8300000, guid: 610e7345717b74246a80c6b03c4c8468, type: 3}
 --- !u!114 &6928827130408796320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -539,6 +541,8 @@ MonoBehaviour:
   particlesDraw: {r: 0, g: 0.80784315, b: 1, a: 1}
   particlesFullyDrawn: {r: 1, g: 0, b: 0, a: 1}
   rapidArrowAmnt: 5
+  normalShot: {fileID: 8300000, guid: 0d211b0bf101dfa4898b536da46cfe73, type: 3}
+  heavyShot: {fileID: 8300000, guid: 7484c4e52d791f5419fda44d66aab6b3, type: 3}
 --- !u!58 &1951736116
 CircleCollider2D:
   m_ObjectHideFlags: 0

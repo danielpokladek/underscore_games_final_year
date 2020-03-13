@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    public int enemyKilled;
+    public int gemsCollected;
+
     public int levelCounter = 0;
 
     public GameObject playerPrefab;
@@ -40,5 +43,5 @@ public class GameManager : MonoBehaviour
         //    loadingFinishedCallback.Invoke();
     }
 
-    public int GetPlayerGems { get { return playerGems; } set { playerGems = value; } }
+    public int PlayerGems { get { return playerGems; } set { playerGems = value; } }
 }

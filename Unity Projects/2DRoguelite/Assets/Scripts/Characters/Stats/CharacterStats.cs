@@ -12,6 +12,8 @@ public class CharacterStats : MonoBehaviour
     [Tooltip("The delay between the attacks (in seconds).")]
     public Stat characterAttackDelay;
 
+    [SerializeField] protected AudioClip deathSound;
+
     protected GameUIManager gameUI;
     
     private void Awake()
@@ -51,5 +53,5 @@ public class CharacterStats : MonoBehaviour
     }
     #endregion
 
-    virtual protected void CharacterDeath() { }
+    virtual protected void CharacterDeath() { AudioManager.current.PlaySFX(deathSound); }
 }

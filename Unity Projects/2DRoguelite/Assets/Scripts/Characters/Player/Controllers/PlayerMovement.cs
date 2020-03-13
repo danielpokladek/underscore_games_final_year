@@ -30,12 +30,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (!playerController.playerAlive)
+            return;
+
         GetMouseInput();
         ArmDrawLayer();
     }
 
     void FixedUpdate()
     {
+        if (!playerController.playerAlive)
+            return;
+
         GetPlayerInput();
         MoveCharacter(playerInput);
         PlayerAim();

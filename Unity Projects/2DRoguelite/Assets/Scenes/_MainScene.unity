@@ -439,6 +439,11 @@ MonoBehaviour:
   nightColor: {r: 0.3764706, g: 0.5294118, b: 0.8980392, a: 1}
   minLightIntensity: 0.7
   maxLightIntensity: 1
+  dayMusic: {fileID: 0}
+  nightMusic: {fileID: 0}
+  bossStage: {fileID: 0}
+  deathMusic: {fileID: 0}
+  playerDead: 0
 --- !u!1 &289711201
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,6 +524,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f35e8196ad2d2b4cb262e36a5250b33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyKilled: 0
+  gemsCollected: 0
   levelCounter: 0
   playerPrefab: {fileID: 7368213390279314166, guid: ec5d65a572afc014b972d4823372553d,
     type: 3}
@@ -836,12 +843,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8911461689809716835, guid: 2c21f76cefd30d74a864de5e42068316,
-        type: 3}
-      propertyPath: tutorialHud
-      value: 
-      objectReference: {fileID: 8775989837491472392, guid: 777298c2cb12e6d409e371ccefaf8893,
-        type: 3}
     - target: {fileID: 8911461689809716836, guid: 2c21f76cefd30d74a864de5e42068316,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1151,6 +1152,26 @@ PrefabInstance:
       propertyPath: ambientLight
       value: 
       objectReference: {fileID: 598736748}
+    - target: {fileID: 738848401628039118, guid: 22d9457d4126bbb46a41a4fd1b99acdf,
+        type: 3}
+      propertyPath: dayMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: 57fbae5a894aae547ae689fff931f015, type: 3}
+    - target: {fileID: 738848401628039118, guid: 22d9457d4126bbb46a41a4fd1b99acdf,
+        type: 3}
+      propertyPath: nightMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: d09abb8e818a9df42a9ccd6d5a1b274f, type: 3}
+    - target: {fileID: 738848401628039118, guid: 22d9457d4126bbb46a41a4fd1b99acdf,
+        type: 3}
+      propertyPath: deathMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: 610e7345717b74246a80c6b03c4c8468, type: 3}
+    - target: {fileID: 738848401628039118, guid: 22d9457d4126bbb46a41a4fd1b99acdf,
+        type: 3}
+      propertyPath: bossStage
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 738848401905935612, guid: 22d9457d4126bbb46a41a4fd1b99acdf,
         type: 3}
       propertyPath: loadingScreen

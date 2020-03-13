@@ -56,12 +56,20 @@ public class LevelManager : MonoBehaviour
         "Avoid making this value too high, as it can cause the light to become too bright and result in white scene.")]
     [SerializeField] private float maxLightIntensity = 1.0f;
 
+    [Header("Music Settings")]
+    [SerializeField] private AudioClip dayMusic;
+    [SerializeField] private AudioClip nightMusic;
+    [SerializeField] private AudioClip bossStage;
+    [SerializeField] private AudioClip deathMusic;
+
     // -------------------------------------
     public delegate void OnDayStateChange();
     public OnDayStateChange onDayStateChangeCallback;
 
     public delegate void PortalCharged();
     public PortalCharged portalChargedCallback;
+
+    [HideInInspector] public bool playerDead = false;
 
     private string currentStateString = "N/A";
     private float stateTimer;
@@ -71,17 +79,16 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        if (currentState == DayState.PlayerSel || currentState == DayState.Boss)
+        if (currentState == DayState.Boss)
+        {
+            AudioManager.current.CrossFadeMusicClips(bossStage);
             return;
+        }
 
         currentState       = DayState.Day;
         currentStateString = "Day";
 
-        //if (currentState == DayState.Boss)
-        //{
-        //    GameObject tempPlayer = Instantiate(GameManager.current.playerPrefab, new Vector3(-11, -6, 0), Quaternion.identity);
-        //    GameManager.current.playerRef = tempPlayer;
-        //}
+        AudioManager.current.PlayMusic(dayMusic);
     }
 
     public void LoadBossBattle()
@@ -97,15 +104,6 @@ public class LevelManager : MonoBehaviour
     private void Update()
     {
         UpdateDayState();
-
-        if (Debug.isDebugBuild)
-        {
-            if (Input.GetKeyDown(KeyCode.F5))
-                LoadBossBattle();
-
-            if (Input.GetKeyDown(KeyCode.Backspace))
-                Restart();
-        }
 
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
@@ -201,6 +199,11 @@ public class LevelManager : MonoBehaviour
         currentStateString = stateString;
         currentState       = state;
         stateTimer         = 0;
+
+        if (state == DayState.Day && !LevelManager.instance.playerDead)
+            AudioManager.current.CrossFadeMusicClips(dayMusic);
+        else if (state == DayState.Night && !LevelManager.instance.playerDead)
+            AudioManager.current.CrossFadeMusicClips(nightMusic);
 
         if (onDayStateChangeCallback != null)
             onDayStateChangeCallback.Invoke();

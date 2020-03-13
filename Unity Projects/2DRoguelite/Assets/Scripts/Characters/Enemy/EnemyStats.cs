@@ -63,6 +63,8 @@ public class EnemyStats : CharacterStats
 
     override protected void CharacterDeath()
     {
+        base.CharacterDeath();
+
         if (enemyController.onEnemyDeathCallback != null)
             enemyController.onEnemyDeathCallback.Invoke();
 
@@ -71,7 +73,9 @@ public class EnemyStats : CharacterStats
                 Instantiate(soulParticle, transform.position, Quaternion.identity);
 
         Instantiate(enemyController.gemDrops[Random.Range(0, enemyController.gemDrops.Length -1)], transform.position, Quaternion.Euler(0, 0, Random.Range(-45, 45)));
-        
+
+        GameManager.current.enemyKilled += 1;
+
         Destroy(gameObject);
     }
 }
