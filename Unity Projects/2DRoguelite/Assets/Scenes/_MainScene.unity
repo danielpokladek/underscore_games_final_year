@@ -1177,6 +1177,16 @@ PrefabInstance:
       propertyPath: loadingScreen
       value: 
       objectReference: {fileID: 1911678580}
+    - target: {fileID: 4496284072874395683, guid: 22d9457d4126bbb46a41a4fd1b99acdf,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8246461324956414815, guid: 22d9457d4126bbb46a41a4fd1b99acdf,
+        type: 3}
+      propertyPath: playSFX
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22d9457d4126bbb46a41a4fd1b99acdf, type: 3}
 --- !u!4 &908527204 stripped

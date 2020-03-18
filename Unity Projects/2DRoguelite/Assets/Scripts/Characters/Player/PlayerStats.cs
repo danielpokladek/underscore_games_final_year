@@ -17,24 +17,18 @@ public class PlayerStats : CharacterStats
     public AudioClip deathMusic;
 
     private PlayerController playerController;
+    [SerializeField] private bool lowHealth = false;
 
     override protected void Start()
     {
         base.Start();
 
+        StartCoroutine(LowHealthCoroutine());
+
         playerController = GetComponent<PlayerController>();
         playerController.onItemInteractCallback += OnItemInteract;
          
         LevelManager.instance.LoadPlayerStats();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Equals))
-            HealCharacter(10);
-
-        if (Input.GetKeyDown(KeyCode.Minus))
-            TakeDamage(10);
     }
 
     public override void HealCharacter(float healAmount)
@@ -58,21 +52,20 @@ public class PlayerStats : CharacterStats
         // --- --- ---
         base.TakeDamage(damageAmount);
 
+        if (currentHealth < ((characterHealth.GetValue() / 100) * 40))
+        {
+            lowHealth = true;
+            StartCoroutine(LowHealthCoroutine());
+        }
+        else
+        {
+            lowHealth = false;
+        }
+
         UIManager.current.updateUICallback.Invoke();
         CameraShaker.Instance.ShakeOnce(2f, 2f, .01f, .1f);
         
         StartCoroutine(Damaged());
-    }
-
-    private IEnumerator Damaged()
-    {
-        playerController.playerSprite.color = Color.red;
-        canTakeDamage = false;
-
-        yield return new WaitForSeconds(damageCooldown.GetValue());
-
-        playerController.playerSprite.color = Color.white;
-        canTakeDamage = true;
     }
 
     private void OnItemInteract()
@@ -97,5 +90,30 @@ public class PlayerStats : CharacterStats
     {
         currentHealth = value;
         playerController.onUIUpdateCallback.Invoke();
+    }
+
+    private IEnumerator Damaged()
+    {
+        playerController.playerSprite.color = Color.red;
+        canTakeDamage = false;
+
+        yield return new WaitForSeconds(damageCooldown.GetValue());
+
+        playerController.playerSprite.color = Color.white;
+        canTakeDamage = true;
+    }
+
+    private IEnumerator LowHealthCoroutine()
+    {
+        while (lowHealth == true)
+        {
+            playerController.playerSprite.color = Color.red;
+
+            yield return new WaitForSeconds(.55f);
+
+            playerController.playerSprite.color = Color.white;
+
+            yield return new WaitForSeconds(.55f);
+        }
     }
 }

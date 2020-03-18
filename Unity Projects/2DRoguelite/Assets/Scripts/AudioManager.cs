@@ -7,6 +7,9 @@ public class AudioManager : MonoBehaviour
     #region Singleton
     public static AudioManager current = null;
 
+    [SerializeField] private bool playMusic;
+    [SerializeField] private bool playSFX;
+
     private void Awake()
     {
         if (current == null)
@@ -40,6 +43,9 @@ public class AudioManager : MonoBehaviour
 
     public void PlayMusic(AudioClip musicClip)
     {
+        if (!playMusic)
+            return;
+
         AudioSource activeSource = (firstSourceBusy) ? musicSource : musicSource2;
 
         activeSource.clip = musicClip;
@@ -49,6 +55,9 @@ public class AudioManager : MonoBehaviour
 
     public void FadeToNewMusicClip(AudioClip newClip, float fadeOut = 1.0f, float fadeIn = 1.0f)
     {
+        if (!playMusic)
+            return;
+
         AudioSource activeSource = (firstSourceBusy) ? musicSource : musicSource2;
 
         StartCoroutine(FadeMusicClips(activeSource, newClip, fadeOut, fadeIn));
@@ -56,6 +65,9 @@ public class AudioManager : MonoBehaviour
 
     public void CrossFadeMusicClips(AudioClip newClip, float fadeTime = 1.0f)
     {
+        if (!playMusic)
+            return;
+
         AudioSource activeSource = (firstSourceBusy) ? musicSource : musicSource2;
         AudioSource secondSource = (firstSourceBusy) ? musicSource2 : musicSource;
 
@@ -109,11 +121,17 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySFX(AudioClip clip)
     {
+        if (!playSFX)
+            return;
+
         sfxSource.PlayOneShot(clip, sfxVolume);
     }
 
     public void SetMusicVolume(float volume)
     {
+        if (!playSFX)
+            return;
+
         musicVolume = volume;
 
         musicSource.volume = musicVolume;
@@ -122,6 +140,9 @@ public class AudioManager : MonoBehaviour
 
     public void SetSFXVolume(float volume)
     {
+        if (!playSFX)
+            return;
+
         sfxVolume = volume;
 
         sfxSource.volume = sfxVolume;
