@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     public Animator attackAnim;
     public SpriteRenderer playerSprite;
     public GameObject minimapThing;
+    public ParticleSystem abilityOne, abilityTwo, abilityThree;
 
     // --- --- ---
     [HideInInspector] public float  projectileSizeMultiplier = 1; 
@@ -101,12 +102,63 @@ public class PlayerController : MonoBehaviour
             Instantiate(UIManager.current.tutorialHud, transform.position, Quaternion.identity);
     }
 
+    protected bool a1 = false;
+    protected bool a2 = false;
+    protected bool a3 = false;
+
     virtual protected void Update()
     {
         DebugInputs();
 
         if (!playerAlive)
             return;
+
+        #region Cooldowns (only look here if you dare)
+        if (_abilityOneCooldown <= playerStats.abilityOneCooldown.GetValue())
+        {
+            _abilityOneCooldown += Time.deltaTime;
+            UIManager.current.updateUICallback.Invoke();
+
+            a1 = false;
+        }
+        else if (_abilityOneCooldown >= playerStats.abilityOneCooldown.GetValue() && !a1)
+        {
+            abilityOne.Stop();
+            abilityOne.Play();
+
+            a1 = true;
+        }
+
+        if (_abilityTwoCooldown <= playerStats.abilityTwoCooldown.GetValue())
+        {
+            _abilityTwoCooldown += Time.deltaTime;
+            UIManager.current.updateUICallback.Invoke();
+
+            a2 = false;
+        }
+        else if (_abilityTwoCooldown >= playerStats.abilityTwoCooldown.GetValue() && !a2)
+        {
+            abilityTwo.Stop();
+            abilityTwo.Play();
+
+            a2 = true;
+        }
+
+        if (_abilityThreeCooldown <= playerStats.abilityThreeCooldown.GetValue())
+        {
+            _abilityThreeCooldown += Time.deltaTime;
+            UIManager.current.updateUICallback.Invoke();
+
+            a3 = false;
+        }
+        else if (_abilityThreeCooldown >= playerStats.abilityThreeCooldown.GetValue() && !a3)
+        {
+            abilityThree.Stop();
+            abilityThree.Play();
+
+            a3 = true;
+        }
+        #endregion
 
         if (Input.GetKeyDown(KeyCode.Space))
         {

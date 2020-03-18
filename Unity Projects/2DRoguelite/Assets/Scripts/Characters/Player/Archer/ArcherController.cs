@@ -43,10 +43,10 @@ public class ArcherController : PlayerController
 
     override protected void Update()
     {
-        base.Update();
-
         if (!playerAlive)
             return;
+
+        base.Update();
 
         #region Primary Attack
         if (Input.GetButtonDown("LMB"))
@@ -109,43 +109,18 @@ public class ArcherController : PlayerController
         #endregion
 
         #region Specials
+        if (Input.GetButtonDown("RMB") && _abilityOneCooldown >= playerStats.abilityOneCooldown.GetValue())
+        {
+            StartCoroutine(playerMovement.PlayerDash());
+            _abilityOneCooldown = 0;
+        }
+        
         if (Input.GetKeyDown(KeyCode.Q) && _abilityTwoCooldown >= playerStats.abilityTwoCooldown.GetValue())
             SecondAbility();
 
         if (Input.GetKeyDown(KeyCode.E) && _abilityThreeCooldown >= playerStats.abilityThreeCooldown.GetValue() && !rapidFire)
             ThirdAbility();
 
-        #endregion
-
-        #region Dodge
-
-        if (_abilityOneCooldown >= playerStats.abilityOneCooldown.GetValue())
-        {
-            if (Input.GetButtonDown("RMB"))
-            {
-                StartCoroutine(playerMovement.PlayerDash());
-                _abilityOneCooldown = 0;
-            }
-        }
-        else if (_abilityOneCooldown <= playerStats.abilityOneCooldown.GetValue())
-        {
-            _abilityOneCooldown += Time.deltaTime;
-        }
-
-        #endregion
-
-        #region Cooldowns
-        if (_abilityTwoCooldown < playerStats.abilityTwoCooldown.GetValue())
-        {
-            _abilityTwoCooldown += Time.deltaTime;
-            UIManager.current.updateUICallback.Invoke();
-        }
-
-        if (_abilityThreeCooldown < playerStats.abilityThreeCooldown.GetValue())
-        {
-            _abilityThreeCooldown += Time.deltaTime;
-            UIManager.current.updateUICallback.Invoke();
-        }
         #endregion
     }
 
@@ -181,6 +156,7 @@ public class ArcherController : PlayerController
             return;
 
         rapidFire = true;
+        _abilityTwoCooldown = 0;
 
         StartCoroutine(RapidFire());
     }
@@ -207,7 +183,6 @@ public class ArcherController : PlayerController
             yield return new WaitForSeconds(0.15f);
         }
 
-        _abilityTwoCooldown = 0;
         rapidFire = false;
 
         yield break;
