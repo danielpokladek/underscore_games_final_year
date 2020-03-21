@@ -6,8 +6,18 @@ public class InteractableItem : MonoBehaviour
 {
     [SerializeField] protected int itemPrice;
     [SerializeField] protected string itemName;
+    [SerializeField] protected bool isDungeonItem = false;
+
+    protected bool isDungeonChest;
 
     private bool playerInRange;
+
+    public void Item(string _itemName, int _itemPrice, bool _isDungeonItem = false)
+    {
+        itemPrice = _itemPrice;
+        itemName  = _itemName;
+        isDungeonItem = _isDungeonItem;
+    }
 
     virtual public void Interact(PlayerController playerController)
     {
@@ -39,16 +49,16 @@ public class InteractableItem : MonoBehaviour
         return false;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    virtual protected void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            GameUIManager.currentInstance.ShowItemUI(transform.position, itemName, itemPrice);
+            GameUIManager.currentInstance.ShowItemUI(transform.position, itemName, itemPrice, isDungeonItem);
             gameObject.GetComponent<SpriteRenderer>().material.SetFloat("_OutlineThickness", 5.0f);
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    virtual protected void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {

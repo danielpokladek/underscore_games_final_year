@@ -1,19 +1,30 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ItemUIController : MonoBehaviour
 {
-    [SerializeField] private TMPro.TMP_Text itemNameText;
-    [SerializeField] private TMPro.TMP_Text itemPriceText;
+    [SerializeField] private TMP_Text itemNameText;
+    [SerializeField] private TMP_Text itemPriceText;
+    [SerializeField] private Image gemIcon;
 
-    private string itemName;
-    private int itemPrice;
-
-    public void SetValues(string _itemName, int _itemPrice)
+    public void SetValues(string _itemName, int _itemPrice, bool _dungeonChest = false)
     {
-        itemNameText.text = _itemName + ": ";
-        itemPriceText.text = _itemPrice.ToString("");
+        if (!_dungeonChest)
+        {
+            itemNameText.text  = _itemName + ":";
+            itemPriceText.text = _itemPrice.ToString("");
+
+            gemIcon.enabled = true;
+            itemPriceText.enabled = true;
+        }
+        else
+        {
+            itemNameText.text  = _itemName;
+            itemPriceText.text = "0";
+
+            gemIcon.enabled = false;
+            itemPriceText.enabled = false;
+        }
     }
 }

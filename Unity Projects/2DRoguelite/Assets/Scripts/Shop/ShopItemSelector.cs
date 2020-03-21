@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShopItemSelector : MonoBehaviour
 {
-    [SerializeField] public ShopItemsContainer itemContainer;
+    [SerializeField] public ItemContainer itemContainer;
     [SerializeField] public GameObject[] itemsList;
     [SerializeField] public GameObject[] itemPlaces;
 
@@ -12,11 +12,10 @@ public class ShopItemSelector : MonoBehaviour
     {
         foreach (GameObject _go in itemPlaces)
         {
-            //int rand = Random.Range(0, itemsList.Length);
+            Item tempItem = itemContainer.GetItem();
+            GameObject tempShopObject = Instantiate(tempItem.item, _go.transform.position, Quaternion.identity);
 
-            GameObject tempShopObject = itemContainer.GetShopItem();
-
-            Instantiate(tempShopObject, _go.transform.position, Quaternion.identity);
+            tempShopObject.GetComponent<InteractableItem>().Item(tempItem.itemName, tempItem.itemPrice, false);
         }
     }
 }

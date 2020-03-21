@@ -12,19 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cf4883dd6a4cbd4180c81a0a0bd4ea0, type: 3}
   m_Name: Shop Items
   m_EditorClassIdentifier: 
-  shopItems:
-  - itemName: Boots
+  itemsList:
+  - itemName: Health Potion
+    itemPrice: 35
+    item: {fileID: 9192763116810499149, guid: c888d4b38bc69a74eb8171b8df6c7fac, type: 3}
+    probability: 85
+  - itemName: Chicken Leg
+    itemPrice: 35
+    item: {fileID: 454252773840436067, guid: 8e059ebf1d2d4af459f05f5b752a4353, type: 3}
+    probability: 85
+  - itemName: Boots o' Haste
+    itemPrice: 45
     item: {fileID: 5340756134382215767, guid: e7b3c692de78ec849a47eb9ddb9cc501, type: 3}
     probability: 55
-  - itemName: Potion
-    item: {fileID: 9192763116810499149, guid: c888d4b38bc69a74eb8171b8df6c7fac, type: 3}
-    probability: 100
-  - itemName: Gloves
+  - itemName: Damage Gloves
+    itemPrice: 45
     item: {fileID: 7516699949196089331, guid: 9ecc32eb9a214064e955698d232d4358, type: 3}
-    probability: 45
-  - itemName: Chicken
-    item: {fileID: 454252773840436067, guid: 8e059ebf1d2d4af459f05f5b752a4353, type: 3}
     probability: 55
-  - itemName: Ball
+  - itemName: Energy Ball
+    itemPrice: 65
     item: {fileID: 3320512020800361812, guid: e8c351d5ed488b24daac5cd919b64bf6, type: 3}
-    probability: 10
+    probability: 60

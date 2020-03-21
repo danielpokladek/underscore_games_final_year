@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DungeonChest : InteractableItem
 {
+    public ItemContainer itemContainer;
+
     private Animator anim;
 
     [Tooltip("RoomManager script of the dungeon.")]
@@ -15,6 +17,7 @@ public class DungeonChest : InteractableItem
     private void Start()
     {
         anim = GetComponent<Animator>();
+        isDungeonChest = true;
     }
 
     override public void Interact(PlayerController playerController)
@@ -27,13 +30,48 @@ public class DungeonChest : InteractableItem
 
     private void OpenChest()
     {
-        GameObject temp = ItemsManager.current.tempChestItems.items[Random.Range(0, ItemsManager.current.tempChestItems.items.Length)];
-        GameObject item = Instantiate(temp, itemParent.position, Quaternion.identity);
-        
-        item.transform.SetParent(itemParent);
-        lootRoomManager.ChestOpened();
+        Item tempItem = itemContainer.GetItem();
+        GameObject itemGO = Instantiate(tempItem.item, itemParent.position, Quaternion.identity);
 
+        itemGO.GetComponent<InteractableItem>().Item(tempItem.itemName, tempItem.itemPrice, true);
+        itemGO.transform.SetParent(itemParent);
+
+        lootRoomManager.ChestOpened();
         anim.SetTrigger("openChest");
         chestOpened = true;
+
+        //itemGO.GetComponent<Animator>().SetTrigger("gemJump");
+    }
+
+    override protected void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            if (!chestOpened)
+            {
+                GameUIManager.currentInstance.ShowItemUI(transform.position, itemName, itemPrice, isDungeonItem);
+                gameObject.GetComponent<SpriteRenderer>().material.SetFloat("_OutlineThickness", 5.0f);
+            }
+            else
+            {
+                gameObject.GetComponent<SpriteRenderer>().material.SetFloat("_OutlineThickness", 0.0f);
+            }
+        }
+    }
+
+    override protected void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            if (!chestOpened)
+            {
+                GameUIManager.currentInstance.HideItemUI();
+                gameObject.GetComponent<SpriteRenderer>().material.SetFloat("_OutlineThickness", 0.0f);
+            }
+            else
+            {
+                gameObject.GetComponent<SpriteRenderer>().material.SetFloat("_OutlineThickness", 0.0f);
+            }
+        }
     }
 }
