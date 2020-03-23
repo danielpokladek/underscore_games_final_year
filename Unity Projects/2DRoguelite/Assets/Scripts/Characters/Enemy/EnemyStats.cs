@@ -7,7 +7,8 @@ public class EnemyStats : CharacterStats
 {
     [SerializeField] private GameObject soulParticle;
 
-    private bool  isBleeding = false;
+    private bool isBleeding = false;
+    private bool isDead = false;
     private float bleedingDamage;
 
     private EnemyController enemyController;
@@ -63,16 +64,33 @@ public class EnemyStats : CharacterStats
 
     override protected void CharacterDeath()
     {
+        if (isDead)
+            return;
+
+        isDead = true;
+
         base.CharacterDeath();
 
         if (enemyController.onEnemyDeathCallback != null)
             enemyController.onEnemyDeathCallback.Invoke();
 
         if (soulParticle != null)
+        {
             if (GameManager.current.bossPortalRef != null)
                 Instantiate(soulParticle, transform.position, Quaternion.identity);
+            else
+                LevelManager.instance.AddSoul();
+        }
+        else
+        {
+            Debug.LogError("Could not find soul particle for: " + gameObject.name + "." +
+                "Please make sure soul particle has been assigned.", gameObject);
+        }
 
         Instantiate(enemyController.gemDrops[Random.Range(0, enemyController.gemDrops.Length -1)], transform.position, Quaternion.Euler(0, 0, Random.Range(-45, 45)));
+
+        if (LevelManager.instance.onEnemyKilledCallback != null)
+            LevelManager.instance.onEnemyKilledCallback.Invoke();
 
         GameManager.current.enemyKilled += 1;
 

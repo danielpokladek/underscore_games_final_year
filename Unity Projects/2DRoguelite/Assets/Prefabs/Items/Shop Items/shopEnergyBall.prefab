@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3320512020800361835}
   - component: {fileID: 3320512020800361834}
-  - component: {fileID: 3320512020800361813}
   - component: {fileID: 668038582}
+  - component: {fileID: 777033903}
   m_Layer: 0
   m_Name: shopEnergyBall
   m_TagString: Interactable
@@ -83,22 +83,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3320512020800361813
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3320512020800361812}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccda8ba46138a5b479495fa62b6664e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemPrice: 0
-  itemName: Energy Ball
-  energyBall: {fileID: 2435077796528052884, guid: 6ab3fcc37f4edde4c8d6b424b06de07e,
-    type: 3}
 --- !u!61 &668038582
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -125,3 +109,26 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &777033903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3320512020800361812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a1275f6bac67bd4094c2975e749b8bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemPrice: 35
+  itemName: Energy Ball
+  isDungeonItem: 0
+  maximumHealth: 0
+  currentHealth: 0
+  movementSpeed: 0
+  attackDamage: 0
+  attackSpeed: 0
+  addsItem: 1
+  itemToAdd: {fileID: 2435077796528052884, guid: 6ab3fcc37f4edde4c8d6b424b06de07e,
+    type: 3}

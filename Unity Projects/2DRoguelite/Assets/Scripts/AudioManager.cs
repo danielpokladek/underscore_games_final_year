@@ -9,6 +9,10 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField] private bool playMusic;
     [SerializeField] private bool playSFX;
+    [Range(0, 1)]
+    [SerializeField] private float musicVolume   = 0.15f;
+    [Range(0, 1)]
+    [SerializeField] private float sfxVolume     = 1.0f;
 
     private void Awake()
     {
@@ -38,8 +42,6 @@ public class AudioManager : MonoBehaviour
     private AudioSource sfxSource;
 
     private bool firstSourceBusy;
-    private float musicVolume   = 0.15f;
-    private float sfxVolume     = 1.0f;
 
     public void PlayMusic(AudioClip musicClip)
     {

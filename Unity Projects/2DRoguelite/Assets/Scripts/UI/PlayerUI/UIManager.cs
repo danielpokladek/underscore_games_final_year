@@ -25,7 +25,7 @@ public class UIManager : MonoBehaviour
     public Image skillOneBack, skillTwoBack, skillThreeBack;
     public GameObject tutorialHud;
 
-    private PlayerController playerRef;
+    [SerializeField] private PlayerController playerRef;
     private PlayerStats playerStats;
 
     #region Singleton
@@ -51,12 +51,16 @@ public class UIManager : MonoBehaviour
     public delegate void UpdateGemsUI();
     public UpdateGemsUI updateGemsUICallback;
 
-    public void PlayerSpawned()
+    public void PlayerSpawned(PlayerController playerRef)
     {
         //loadingScreen.SetActive(false);
 
+        this.playerRef = playerRef;
+
         if (GameManager.current.loadingFinishedCallback != null)
             GameManager.current.loadingFinishedCallback.Invoke();
+
+        AssignImages();
     }
 
     public void PlayerDead()
@@ -67,15 +71,14 @@ public class UIManager : MonoBehaviour
         deathScreen.SetActive(true);
     }
 
-    private void Start()
-    {
-        GameManager.current.loadingFinishedCallback += AssignImages;
-    }
+    //private void Start()
+    //{
+    //    GameManager.current.loadingFinishedCallback += AssignImages;
+    //}
 
     private void AssignImages()
     {
-        playerRef                     = GameManager.current.playerRef.GetComponent<PlayerController>();
-        playerStats                   = playerRef.playerStats;
+        playerStats = playerRef.playerStats;
 
         gemText.text = GameManager.current.PlayerGems.ToString("");
 
@@ -95,8 +98,8 @@ public class UIManager : MonoBehaviour
 
     private void UpdateUIFunction()
     {
-        healthImage.fillAmount = playerStats.currentHealth / playerStats.characterHealth.GetValue();
-        healthImage.color = healthGradient.Evaluate(playerStats.currentHealth / playerStats.characterHealth.GetValue());
+        //healthImage.fillAmount = playerStats.currentHealth / playerStats.characterHealth.GetValue();
+        //healthImage.color = healthGradient.Evaluate(playerStats.currentHealth / playerStats.characterHealth.GetValue());
 
         skillOne.fillAmount = playerRef.GetSkillOneCooldown() / playerStats.abilityOneCooldown.GetValue();
         skillTwo.fillAmount = playerRef.GetSkillTwoCooldown() / playerStats.abilityTwoCooldown.GetValue();

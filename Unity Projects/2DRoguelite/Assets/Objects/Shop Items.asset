@@ -32,4 +32,12 @@ MonoBehaviour:
   - itemName: Energy Ball
     itemPrice: 65
     item: {fileID: 3320512020800361812, guid: e8c351d5ed488b24daac5cd919b64bf6, type: 3}
-    probability: 60
+    probability: 35
+  - itemName: Explosive
+    itemPrice: 65
+    item: {fileID: 6326776421759921290, guid: 86f4252a003bfe140a55d8f0746b8fc7, type: 3}
+    probability: 35
+  - itemName: Sword Barrier
+    itemPrice: 65
+    item: {fileID: 3320512020800361812, guid: e8c351d5ed488b24daac5cd919b64bf6, type: 3}
+    probability: 25

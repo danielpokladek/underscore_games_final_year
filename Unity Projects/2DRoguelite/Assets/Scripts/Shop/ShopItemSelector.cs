@@ -5,7 +5,6 @@ using UnityEngine;
 public class ShopItemSelector : MonoBehaviour
 {
     [SerializeField] public ItemContainer itemContainer;
-    [SerializeField] public GameObject[] itemsList;
     [SerializeField] public GameObject[] itemPlaces;
 
     void Start()

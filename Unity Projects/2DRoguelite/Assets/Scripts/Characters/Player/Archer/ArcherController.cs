@@ -13,12 +13,6 @@ using EZCameraShake;
 public class ArcherController : PlayerController
 {
     [Header("Attacks")]
-    #if UNITY_EDITOR
-    [Help(  "Attack    : LMB - Normal Attack\n" +
-            "Ability 1 : RMB - Dash\n" +
-            "Ability 2 : Q   - Piercing Shot\n" +
-            "Ability 3 : E   - Throwable\n", UnityEditor.MessageType.None)]
-    #endif
     [SerializeField] private Transform  firePoint;
     [SerializeField] private GameObject normalProjectile;
     [SerializeField] private GameObject specialProjectile;
@@ -43,10 +37,10 @@ public class ArcherController : PlayerController
 
     override protected void Update()
     {
+        base.Update();
+
         if (!playerAlive)
             return;
-
-        base.Update();
 
         #region Primary Attack
         if (Input.GetButtonDown("LMB"))

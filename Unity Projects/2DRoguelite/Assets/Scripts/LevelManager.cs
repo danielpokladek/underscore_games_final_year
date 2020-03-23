@@ -63,6 +63,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private AudioClip deathMusic;
 
     // -------------------------------------
+    public delegate void OnEnemyKilled();
+    public OnEnemyKilled onEnemyKilledCallback;
+
     public delegate void OnDayStateChange();
     public OnDayStateChange onDayStateChangeCallback;
 

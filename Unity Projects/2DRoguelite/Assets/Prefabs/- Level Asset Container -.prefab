@@ -1,5 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1426612795
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1426612796}
+  - component: {fileID: 1426612797}
+  m_Layer: 0
+  m_Name: ItemManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1426612796
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426612795}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 738848400251114198}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1426612797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426612795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2df981a8ee274424d84e5cde818ebc25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tempChestItems: {fileID: 11400000, guid: a73bc917acfb6d040bdf5f9ea71bfc0e, type: 2}
 --- !u!1 &738848399975669544
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,6 +175,7 @@ Transform:
   - {fileID: 738848401628039113}
   - {fileID: 738848401905935615}
   - {fileID: 8666182913837162273}
+  - {fileID: 1426612796}
   - {fileID: 8746420454053212091}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -180,7 +225,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   data:
-    dataString: UEsDBBQAAAgIAAAAIewb8bOuSQIAAPYEAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQF1VE1z2jAQ/SuMzqVjGCjQW2sI6SEJE5rJxRfZWmMNsuTRR/ga/ntXso0dOjkh9r1dvbe78oVwaSrIrNJrzdmTYkB+Dog/k2+DDnyEI90pueVnaDnvnNnCk2jgvFLLFcZHPs2oEqzm2S+5E54cYdBJnitdrtgOYmWswXBOhQGEtLI+W2LoMiBH/BkufMoJT+OZP53xtIgGVzxmIC3ojtoSW1rNcjITtKyAeckdeRS1dDwFokQ7DcdLz5QQ3DRaiD1VwWtMK+PQCRIYp+gtCPD8AviusF5nP/klzw3YRpSmpyXX2KK6Kvmt6r6V1OxrZR9UOH/PePojaKqLPv2HD0cBzrUqH9t7a0e24Nn+lZ4yamyvsf3w8rNwJw9U7Gkq4L0A+azWWjnJELTa+VRnYLzs/t6sxQVk+y5eS70Luurr8XgP1+D+GAteph76PqkDW6FCv8PwQeNk/qDgsBqmKYFRr+LNwF+66+9QAzxwbSxCjUvp5aXKaU8lq9Az78bZWGkJul+hAkmFPW2wjr2f4R32ddYD9c+lub3B2ldwlxLCHT+K7qCNOtymZQp1eAJTvDgruISu1R54xkbFSsp6xfqW2rSt0znNemk7x9nn3SLpdAo5m0/nUxgt5hEM2WQyWoxmGU3TWZTmQMLycYk+qdjUQpv24NhkV1ziorVfkcFa0yqsO9P0sObnUvUFcpmrbaYB5Etd4qYcNN6C75KtGMcObcFaLsPEySUhQmV7YMntziRYXR2tpklXJSEV/1DWRxISh+9GQq7k+g9QSwMEFAAACAgAAAAh7NYu/SZtAAAAeAAAAAkAJABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQGrVipLLSrOzM9TslIw0TPSMzTSUVBKL0osyCgGihiCOKWZKSB2tFKSqWlqWoqFqYVpqqGlhUGqboqJiaGloXlyYlKSuUFSWqpSLFB9SWVBql9ibipET0BiSUZaZl5KZl66nntRZoo7yGil2FoAUEsBAi0AFAAACAgAAAAh7Bvxs65JAgAA9gQAAAsAJAAAAAAAAAAAAAAAAAAAAGdyYXBoMC5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsBAi0AFAAACAgAAAAh7NYu/SZtAAAAeAAAAAkAJAAAAAAAAAAAAAAAlgIAAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLBQYAAAAAAgACALgAAABOAwAAAAA=
+    dataString: UEsDBBQAAAgIAAAAIewquU3cSwIAAPYEAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQF1VE1z2jAQ/SuMzk3HMFBCb61DSA/5mNBMLr7I0trWIEsefQRIhv/elWxjh05OiH1vV+/trvxBhLINMKfNxgh+rzmQnxMSzuTbZADv4EBLrbbiHXrOq+CuCiQaOc/UCY3xaUizugZnBPulShnICQa9EoU29ZqXkGrrLIYLKi0gZLQL2QpDHxNywJ+rVUg54mm2DKd3PK2SyQmPDJQDM1B7Yk9rWV4xSesGeJA8kJdJT8dTJCq003GCdKalFLbTQtyxiV5T2liPTpDABUVvUUDgVyDKygWd4+THorDgOlGGHm+EwRa1Vclv3fatpnbXKnuj0od7ZosfUVNb9P4//Goa4cLo+q6/dxoduUqw3TM9MmrdqLHj8M1n4V7tqdzRXMJrBepBb4z2iiPojA+p3sLsZvh7tpZWwHZDvJV6EfTN1+MJHk7R/SGVos4D9H3eBrZSx37H4YPByfxBwXE1bFcCo0HFi4W/tBzvUAfcCmMdQp1LFeTl2ptAJevYs+DGu1QbBWZcoQFFpTs+YR13OcML7OusWxqeS3d7h/Wv4CIlhgd+klxAT3p/npat9P4ebPXonRQKhlYH4AEblWql2hUbW+rTtt4UlI3SSi/4590i+WIBBb9eXC9gurpO4IrP59PVdMloni+TvAASl08o9EnlUyu0aw+OTQ3FFS5a/xWZbAxt4rpzQ/cb8V7rsUChCr1lBkA9tiXOysHgLfgu+ZoL7NAWnBMqTpx8ZERqtgOene/MotX1wRmaDVUy0og37UIkI2n8bmTkRE7/AFBLAwQUAAAICAAAACHs1i79Jm0AAAB4AAAACQAkAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAatWKkstKs7Mz1OyUjDRM9IzNNJRUEovSizIKAaKGII4pZkpIHa0UpKpaWpaioWphWmqoaWFQapuiomJoaWheXJiUpK5QVJaqlIsUH1JZUGqX2JuKkRPQGJJRlpmXkpmXrqee1FmijvIaKXYWgBQSwECLQAUAAAICAAAACHsKrlN3EsCAAD2BAAACwAkAAAAAAAAAAAAAAAAAAAAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwECLQAUAAAICAAAACHs1i79Jm0AAAB4AAAACQAkAAAAAAAAAAAAAACYAgAAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsFBgAAAAACAAIAuAAAAFADAAAAAA==
     upgradeData: 
     file_cachedStartup: {fileID: 0}
     data_cachedStartup: 
@@ -297,13 +342,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 757e7c7eede832d46bf0858650488ff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableGeneration: 0
-  mapRoot: {fileID: 0}
-  roomPref: {fileID: 0}
+  enableGeneration: 1
+  mapRoot: {fileID: 4435059777202375510}
+  roomPref: {fileID: 2447372284656423943, guid: b47346f9540082642ae922a8ce8cd2cb,
+    type: 3}
   worldSize: {x: 4, y: 4}
-  numberOfRooms: 20
-  roomSizeX: 0
-  roomSizeY: 0
+  numberOfRooms: 10
+  roomSizeX: 69
+  roomSizeY: 59
 --- !u!1 &738848401281829791
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,20 +465,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab42d7d80f9b5404e8f1ad4cfc328697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dayLength: 15
-  nightLength: 15
-  midnightLength: 15
+  dayLength: 50
+  nightLength: 50
+  midnightLength: 20
   currentState: 1
-  portalPrefab: {fileID: 0}
-  shopPrefab: {fileID: 0}
-  minimapBoss: {fileID: 0}
-  minimapShop: {fileID: 0}
-  killsRequired: 1
-  enableSunProgress: 0
+  portalPrefab: {fileID: 5899671452077304352, guid: 820fce2142e78ad4ca329e6276b278b4,
+    type: 3}
+  shopPrefab: {fileID: 2210486828147292234, guid: a08214f56b7ee7d44873a5cb322163ea,
+    type: 3}
+  minimapBoss: {fileID: 2605526240753731375, guid: ec1084493e3b25446b9dded2acdec101,
+    type: 3}
+  minimapShop: {fileID: 1231099883081015952, guid: 2b784f7445a02fb4ea6abf78badfc02e,
+    type: 3}
+  killsRequired: 15
+  enableSunProgress: 1
   ambientLight: {fileID: 0}
   dayToNightGradient:
     serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
+    key0: {r: 1, g: 0.9019608, b: 0.827451, a: 1}
     key1: {r: 0.8980392, g: 0.5921569, b: 0.36078432, a: 1}
     key2: {r: 0.3764706, g: 0.5294118, b: 0.8980392, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
@@ -488,13 +538,13 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
-  nightColor: {r: 0.3764706, g: 0.5294118, b: 0.8980392, a: 0}
-  minLightIntensity: 0.65
+  nightColor: {r: 0.3764706, g: 0.5294118, b: 0.8980392, a: 1}
+  minLightIntensity: 0.7
   maxLightIntensity: 1
-  dayMusic: {fileID: 0}
-  nightMusic: {fileID: 0}
+  dayMusic: {fileID: 8300000, guid: 57fbae5a894aae547ae689fff931f015, type: 3}
+  nightMusic: {fileID: 8300000, guid: d09abb8e818a9df42a9ccd6d5a1b274f, type: 3}
   bossStage: {fileID: 0}
-  deathMusic: {fileID: 0}
+  deathMusic: {fileID: 8300000, guid: 610e7345717b74246a80c6b03c4c8468, type: 3}
   playerDead: 0
 --- !u!1 &738848401905935614
 GameObject:
@@ -578,7 +628,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 738848400251114198}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8246461324956414815
 MonoBehaviour:
@@ -592,6 +642,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e1d2a2b1088ba34cbc5807941725038, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playMusic: 1
+  playSFX: 1
 --- !u!1 &6535215481899123773
 GameObject:
   m_ObjectHideFlags: 0

@@ -2310,7 +2310,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 31.85
+  m_fontSize: 31.65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2764,7 +2764,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 31.85
+  m_fontSize: 31.65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3695,6 +3695,7 @@ MonoBehaviour:
   skillThreeBack: {fileID: 8911461689382245254}
   tutorialHud: {fileID: 8775989837491472392, guid: 777298c2cb12e6d409e371ccefaf8893,
     type: 3}
+  playerRef: {fileID: 0}
 --- !u!1 &8911461689926389084
 GameObject:
   m_ObjectHideFlags: 0
@@ -4008,7 +4009,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8911461691250206908
 RectTransform:
   m_ObjectHideFlags: 0

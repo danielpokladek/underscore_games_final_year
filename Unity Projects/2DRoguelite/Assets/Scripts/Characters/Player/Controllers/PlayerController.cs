@@ -13,12 +13,14 @@ public class PlayerController : MonoBehaviour
     public Sprite skillOneBack, skillTwoBack, skillThreeBack;
     [Tooltip("This is player's 'arm' which will be used to aiming, shooting, etc. It rotates towards the mouse.")]
     [SerializeField] protected GameObject playerArm;
+    public PlayerHearts playerHearts;
 
     [Header("Character Settings")]
     [Tooltip("This is container for the powerups, this should be a empty gameobject placed on the player." +
         "This ensures a clearner hierarchy, and makes it so the objects follow player." +
         "This is only requried for powerups that spawn in world, for example energy balls.")]
     public Transform powerUpContainer;
+    public Transform powerupIcons;
     [Tooltip("This is the animator that controls the attack animations." +
         "This animator is most likely placed on the object used as a weapon/fists.")]
     public Animator attackAnim;
@@ -56,6 +58,10 @@ public class PlayerController : MonoBehaviour
     protected GameManager gameManager;
     private LineRenderer lineRenderer;
 
+    /* ITEM CALLBACKS */
+    public delegate void OnTakeDamage();
+    public OnTakeDamage onTakeDamageCallback;
+
     public delegate void OnGUIUpdate();
     public OnGUIUpdate onUIUpdateCallback;
 
@@ -80,7 +86,7 @@ public class PlayerController : MonoBehaviour
         gameUIManager = GameUIManager.currentInstance;
 
         InitiatePlayer();
-        UIManager.current.PlayerSpawned();
+        UIManager.current.PlayerSpawned(this);
     }
 
     private void InitiatePlayer()
@@ -96,7 +102,7 @@ public class PlayerController : MonoBehaviour
 
         powerupBalls = new List<GameObject>();
 
-        minimapThing.SetActive(false);
+        //minimapThing.SetActive(false);
 
         if (UIManager.current.tutorialHud != null)
             Instantiate(UIManager.current.tutorialHud, transform.position, Quaternion.identity);
@@ -123,8 +129,8 @@ public class PlayerController : MonoBehaviour
         }
         else if (_abilityOneCooldown >= playerStats.abilityOneCooldown.GetValue() && !a1)
         {
-            abilityOne.Stop();
-            abilityOne.Play();
+            //abilityOne.Stop();
+            //abilityOne.Play();
 
             a1 = true;
         }
@@ -180,6 +186,9 @@ public class PlayerController : MonoBehaviour
 
             float dirX = transform.position.x + Mathf.Sin((angle * Mathf.PI) / 180.0f);
             float dirY = transform.position.y + Mathf.Cos((angle * Mathf.PI) / 180.0f);
+
+            //dirX += 5.0f;
+            //dirY += 5.0f;
 
             Vector3 moveVector = new Vector3(dirX, dirY, 0.0f);
             Vector2 dir = (moveVector - transform.position).normalized;

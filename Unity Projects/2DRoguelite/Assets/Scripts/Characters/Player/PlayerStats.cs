@@ -1,10 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using EZCameraShake;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerStats : CharacterStats
 {
+    public PlayerHearts playerHearts;
     public Stat abilityOneCooldown;
     [Tooltip("Cooldown for the second ability of player.")]
     public Stat abilityTwoCooldown;
@@ -16,30 +19,51 @@ public class PlayerStats : CharacterStats
     [Tooltip("Cooldown for the first ability of player, in all cases this is the dash.")]
     public AudioClip deathMusic;
 
+    [HideInInspector] public bool lowHealth = false;
+    [HideInInspector] public bool hasElixir = false;
+
     private PlayerController playerController;
-    [SerializeField] private bool lowHealth = false;
+    private CanvasGroup heartCanvasGroup;
+
+    private event EventHandler OnStatChange;
 
     override protected void Start()
     {
         base.Start();
 
-        StartCoroutine(LowHealthCoroutine());
-
-        playerController = GetComponent<PlayerController>();
-        playerController.onItemInteractCallback += OnItemInteract;
-         
+        playerController = GetComponent<PlayerController>();    
         LevelManager.instance.LoadPlayerStats();
+
+        PlayerHeartSystem heartSystem = new PlayerHeartSystem((int)characterHealth.GetValue() / 10);
+        playerHearts.SetHeartSystem(heartSystem);
+
+        heartCanvasGroup = playerHearts.GetComponent<CanvasGroup>();
+
+        OnStatChange += PlayerStats_OnStatChange;
+
+        OnStatChange(this, EventArgs.Empty);
     }
 
     public override void HealCharacter(float healAmount)
     {
+        OnStatChange(this, EventArgs.Empty);
+
         base.HealCharacter(healAmount);
 
+        if (currentHealth > ((characterHealth.GetValue() / 100) * 40))
+            lowHealth = false;
+
         UIManager.current.updateUICallback();
+        playerHearts.heartSystem.Heal(healAmount / 10);
     }
 
     override public void TakeDamage(float damageAmount)
     {
+        if (!playerController.playerAlive)
+            return;
+
+        OnStatChange(this, EventArgs.Empty);
+
         if (!canTakeDamage)
             return;
 
@@ -57,24 +81,28 @@ public class PlayerStats : CharacterStats
             lowHealth = true;
             StartCoroutine(LowHealthCoroutine());
         }
-        else
-        {
-            lowHealth = false;
-        }
+
+        if(playerController.onTakeDamageCallback != null)
+            playerController.onTakeDamageCallback.Invoke();
 
         UIManager.current.updateUICallback.Invoke();
         CameraShaker.Instance.ShakeOnce(2f, 2f, .01f, .1f);
+
+        playerHearts.heartSystem.Damage(damageAmount / 10);
         
         StartCoroutine(Damaged());
     }
 
-    private void OnItemInteract()
-    {
-        playerController.onUIUpdateCallback.Invoke();
-    }
-
     override protected void CharacterDeath()
     {
+        if (hasElixir)
+        {
+            hasElixir = false;
+            currentHealth = characterHealth.GetValue();
+
+            return;
+        }
+
         LevelManager.instance.playerDead = true;
         UIManager.current.PlayerDead();
 
@@ -89,7 +117,7 @@ public class PlayerStats : CharacterStats
     public void SetHealth(float value)
     {
         currentHealth = value;
-        playerController.onUIUpdateCallback.Invoke();
+        UIManager.current.updateUICallback();
     }
 
     private IEnumerator Damaged()
@@ -105,7 +133,7 @@ public class PlayerStats : CharacterStats
 
     private IEnumerator LowHealthCoroutine()
     {
-        while (lowHealth == true)
+        while (lowHealth)
         {
             playerController.playerSprite.color = Color.red;
 
@@ -115,5 +143,56 @@ public class PlayerStats : CharacterStats
 
             yield return new WaitForSeconds(.55f);
         }
+
+        yield break;
+    }
+
+    private void PlayerStats_OnStatChange(object sender, System.EventArgs e)
+    {
+        StopCoroutine(HeartsFade());
+        StartCoroutine(HeartsFade());
+    }
+
+    bool animate = false;
+
+    private IEnumerator HeartsFade()
+    {
+        animate = true;
+
+        while (animate)
+        {
+            for (float t = 0.01f; t < 1.5f;)
+            {
+                t += Time.deltaTime;
+                t = Mathf.Min(t, 1.5f);
+
+                heartCanvasGroup.alpha = Mathf.Lerp(0, 1, Mathf.Min(1, t / 1.5f));
+
+                yield return null;
+            }
+
+            animate = false;
+        }
+
+        yield return new WaitForSeconds(1.0f);
+
+        animate = true;
+
+        while (animate)
+        {
+            for (float t = 0.01f; t < 1.5f;)
+            {
+                t += Time.deltaTime;
+                t = Mathf.Min(t, 1.5f);
+
+                heartCanvasGroup.alpha = Mathf.Lerp(1, 0, Mathf.Min(1, t / 1.5f));
+
+                yield return null;
+            }
+
+            animate = false;
+        }
+
+        yield break;
     }
 }

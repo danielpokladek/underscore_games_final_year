@@ -43,7 +43,13 @@ public class InteractableItem : MonoBehaviour
             return true;
 
         if ((GameManager.current.PlayerGems - itemPrice) >= 0)
+        {
+            GameManager.current.PlayerGems -= itemPrice;
+            UIManager.current.updateUICallback.Invoke();
+
+            Debug.Log("Item purchased: " + itemName);
             return true;
+        }
 
         Debug.Log("No money, no buy!", gameObject);
         return false;

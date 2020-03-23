@@ -39,5 +39,6 @@ public class PlayerInteractions : MonoBehaviour
             return;
 
         currentItem.Interact(playerController);
+        UIManager.current.updateUICallback.Invoke();
     }
 }
