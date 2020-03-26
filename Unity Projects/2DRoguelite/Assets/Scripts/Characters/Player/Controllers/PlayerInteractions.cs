@@ -9,7 +9,7 @@ public class PlayerInteractions : MonoBehaviour
 
     private bool onItem;
 
-    private void Awake()
+    private void Start()
     {
         playerController = GetComponent<PlayerController>();
         playerController.onInteractCallback += PlayerInteract;

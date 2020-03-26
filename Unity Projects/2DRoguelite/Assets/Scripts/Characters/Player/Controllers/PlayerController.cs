@@ -75,6 +75,11 @@ public class PlayerController : MonoBehaviour
     public delegate void OnItemInteract();
     public OnItemInteract onItemInteractCallback;
 
+    private void Awake()
+    {
+        GameManager.current.playerRef = gameObject;
+    }
+
     virtual protected void Start()
     {
         playerAnim          = GetComponent<Animator>();
@@ -105,8 +110,8 @@ public class PlayerController : MonoBehaviour
 
         //minimapThing.SetActive(false);
 
-        if (UIManager.current.tutorialHud != null)
-            Instantiate(UIManager.current.tutorialHud, transform.position, Quaternion.identity);
+        //if (UIManager.current.tutorialHud != null)
+        //    Instantiate(UIManager.current.tutorialHud, transform.position, Quaternion.identity);
     }
 
     protected bool a1 = false;
@@ -229,10 +234,18 @@ public class PlayerController : MonoBehaviour
                 LevelManager.instance.AddSoul();
 
             if (Input.GetKeyDown(KeyCode.F5))
-                gameManager.LoadScene((int)SceneIndexes.MAIN, (int)SceneIndexes.BOSS);
+            {
+                if (SceneManager.GetActiveScene().buildIndex + 2 < SceneManager.sceneCountInBuildSettings)
+                    gameManager.LoadScene(SceneManager.GetActiveScene().buildIndex, SceneManager.GetActiveScene().buildIndex + 1);
+                else
+                    gameManager.LoadScene(SceneManager.GetActiveScene().buildIndex, (int)SceneIndexes.MAIN);
+            }
 
             if (Input.GetKeyDown(KeyCode.R))
-                LevelManager.instance.Restart();
+                gameManager.LoadScene(SceneManager.GetActiveScene().buildIndex, SceneManager.GetActiveScene().buildIndex);
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+                Application.Quit();
         }
     }
 }

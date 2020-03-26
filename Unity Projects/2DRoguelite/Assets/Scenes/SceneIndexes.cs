@@ -7,5 +7,6 @@ public enum SceneIndexes
     TITLE_SCREEN = 1,
     TUTORIAL = 2,
     MAIN = 3,
-    BOSS = 4
+    BOSS = 4,
+    TEST = 5
 }

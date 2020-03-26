@@ -239,7 +239,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5622505445692198450
 Transform:
   m_ObjectHideFlags: 0
@@ -412,7 +412,7 @@ MonoBehaviour:
     m_Bits: 4096
   dropPercentage: 75
   gemDrops:
-  - {fileID: 0}
+  - {fileID: 7583637798381323171, guid: 9610630251d8314478d351ab2781218f, type: 3}
   weaponSprite: {fileID: 5622505444740196227}
   enemySprite: {fileID: 5622505444839126162}
   enemyMovement: {fileID: 0}

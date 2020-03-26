@@ -31,9 +31,9 @@ public class GameUIManager : MonoBehaviour
 
     private void Start()
     {
-        priceUIRef       = Instantiate(priceUIPrefab, transform.position, Quaternion.identity);
+        priceUIRef = Instantiate(priceUIPrefab, transform.position, Quaternion.identity);
         itemUIController = priceUIRef.GetComponent<ItemUIController>();
-        
+
         HideItemUI();
     }
 

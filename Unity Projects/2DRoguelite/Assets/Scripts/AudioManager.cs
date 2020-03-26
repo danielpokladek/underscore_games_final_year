@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    #region Singleton
-    public static AudioManager current = null;
 
     [SerializeField] private bool playMusic;
     [SerializeField] private bool playSFX;
@@ -14,14 +12,14 @@ public class AudioManager : MonoBehaviour
     [Range(0, 1)]
     [SerializeField] private float sfxVolume     = 1.0f;
 
+    #region Singleton
+    public static AudioManager current = null;
     private void Awake()
     {
         if (current == null)
             current = this;
         else
             Destroy(gameObject);
-
-        DontDestroyOnLoad(this.gameObject);
 
         musicSource = this.gameObject.AddComponent<AudioSource>();
         musicSource2 = this.gameObject.AddComponent<AudioSource>();

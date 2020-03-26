@@ -14,10 +14,10 @@ public class GameManager : MonoBehaviour
         else
             Destroy(gameObject);
 
-        //DontDestroyOnLoad(gameObject);
-
-        SceneManager.LoadSceneAsync((int)SceneIndexes.TITLE_SCREEN, LoadSceneMode.Additive);
-        loadingScreen.gameObject.SetActive(false);
+        SceneManager.sceneLoaded += SceneLoaded;
+        
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+            SceneManager.LoadSceneAsync((int)SceneIndexes.TITLE_SCREEN, LoadSceneMode.Additive);
     }
     #endregion
 
@@ -29,29 +29,39 @@ public class GameManager : MonoBehaviour
     public int levelCounter = 0;
 
     public GameObject playerPrefab;
-    public GameObject playerRef;
     public GameObject bossPortalRef;
     
     [SerializeField] private int playerGems;
 
+    [HideInInspector] public GameObject playerRef;
 
     public delegate void LoadingFinished();
     public LoadingFinished loadingFinishedCallback;
 
     private void Start()
     {
-        playerRef = GameObject.FindGameObjectWithTag("Player");
+        if (loadingScreen != null)
+            loadingScreen.SetActive(false);
     }
 
     public int PlayerGems { get { return playerGems; } set { playerGems = value; } }
 
     List<AsyncOperation> scenesLoading = new List<AsyncOperation>();
+    Scene _sceneToLoad;
+
+    private void SceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        SceneManager.SetActiveScene(scene);
+    }
+
     public void LoadTutorial()
     {
         loadingScreen.gameObject.SetActive(true);
 
         scenesLoading.Add(SceneManager.UnloadSceneAsync((int)SceneIndexes.TITLE_SCREEN));
         scenesLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndexes.TUTORIAL, LoadSceneMode.Additive));
+
+        _sceneToLoad = SceneManager.GetSceneByBuildIndex((int)SceneIndexes.TUTORIAL);
 
         StartCoroutine(GetLoadProgress());
     }
@@ -70,10 +80,8 @@ public class GameManager : MonoBehaviour
     {
         loadingScreen.gameObject.SetActive(true);
 
-        scenesLoading.Add(SceneManager.LoadSceneAsync(sceneToLoad, LoadSceneMode.Additive));
         scenesLoading.Add(SceneManager.UnloadSceneAsync(sceneToUnload));
-
-        SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(sceneToLoad));
+        scenesLoading.Add(SceneManager.LoadSceneAsync(sceneToLoad, LoadSceneMode.Additive));
 
         StartCoroutine(GetLoadProgress());
     }
@@ -82,13 +90,13 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < scenesLoading.Count; i++)
         {
-            yield return new WaitForEndOfFrame();
-
             while (!scenesLoading[i].isDone)
             {
                 yield return null;
             }
         }
+
+        yield return new WaitForSeconds(0.1f);
 
         loadingScreen.gameObject.SetActive(false);
     }
