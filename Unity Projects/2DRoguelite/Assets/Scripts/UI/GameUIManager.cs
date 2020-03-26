@@ -61,11 +61,10 @@ public class GameUIManager : MonoBehaviour
     {
         priceUIRef.transform.position = _worldPosition;
         itemUIController.SetValues(_itemName, _itemPrice, _isDungeonItem);
-        priceUIRef.SetActive(true);
     }
 
     public void HideItemUI()
     {
-        priceUIRef.SetActive(false);
+        itemUIController.Hide();
     }
 }

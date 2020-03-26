@@ -7,6 +7,7 @@ public class ItemUIController : MonoBehaviour
     [SerializeField] private TMP_Text itemNameText;
     [SerializeField] private TMP_Text itemPriceText;
     [SerializeField] private Image gemIcon;
+    [SerializeField] private GameObject UIContainer;
 
     public void SetValues(string _itemName, int _itemPrice, bool _dungeonChest = false)
     {
@@ -26,5 +27,12 @@ public class ItemUIController : MonoBehaviour
             gemIcon.enabled = false;
             itemPriceText.enabled = false;
         }
+
+        UIContainer.SetActive(true);
+    }
+
+    public void Hide()
+    {
+        UIContainer.SetActive(false);
     }
 }
