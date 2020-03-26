@@ -75,11 +75,6 @@ public class PlayerController : MonoBehaviour
     public delegate void OnItemInteract();
     public OnItemInteract onItemInteractCallback;
 
-    private void Awake()
-    {
-        GameManager.current.playerRef = gameObject;
-    }
-
     virtual protected void Start()
     {
         playerAnim          = GetComponent<Animator>();
@@ -93,6 +88,8 @@ public class PlayerController : MonoBehaviour
 
         InitiatePlayer();
         UIManager.current.PlayerSpawned(this);
+
+        GameManager.current.playerRef = gameObject;
     }
 
     private void InitiatePlayer()
