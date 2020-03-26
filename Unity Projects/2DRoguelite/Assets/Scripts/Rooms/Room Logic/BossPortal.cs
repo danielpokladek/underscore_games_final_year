@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class BossPortal : MonoBehaviour
@@ -17,6 +18,7 @@ public class BossPortal : MonoBehaviour
 
     private void Start()
     {
+        GameManager.current.bossPortalRef = gameObject;
         LevelManager.instance.portalChargedCallback += EnablePortal;
         portalAnimator = GetComponent<Animator>();
     }
@@ -42,8 +44,10 @@ public class BossPortal : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (portalEnabled)
-                LevelManager.instance.LoadBossBattle();
+            //if (portalEnabled)
+                //GameManager.current.LoadScene(SceneManager.GetActiveScene(), (int)SceneIndexes.BOSS);
+
+                //LevelManager.instance.LoadBossBattle();
         }
     }
 

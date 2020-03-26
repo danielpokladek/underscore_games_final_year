@@ -54,7 +54,11 @@ public class GolemController : EnemyRanged
 
         foreach (GameObject _attackPoint in golemRockAttackPoints)
         {
-            GameObject proj = ObjectPooler.instance.PoolItem("golemNormal", _attackPoint.transform.position, Quaternion.identity);
+            GameObject proj = ObjectPooler.instance.PoolItem("golemNormal",
+                _attackPoint.transform.position, Quaternion.identity);
+
+            proj.GetComponent<Projectile>().SetDamage(enemyStats.characterAttackDamage.GetValue());
+
             projList[i] = proj;
             i++;
         }

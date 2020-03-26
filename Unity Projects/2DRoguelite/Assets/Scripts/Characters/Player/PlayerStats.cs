@@ -46,7 +46,6 @@ public class PlayerStats : CharacterStats
 
     public override void HealCharacter(float healAmount)
     {
-        OnStatChange(this, EventArgs.Empty);
 
         base.HealCharacter(healAmount);
 
@@ -55,6 +54,8 @@ public class PlayerStats : CharacterStats
 
         UIManager.current.updateUICallback();
         playerHearts.heartSystem.Heal(healAmount / 10);
+
+        OnStatChange(this, EventArgs.Empty);
     }
 
     override public void TakeDamage(float damageAmount)
@@ -62,16 +63,14 @@ public class PlayerStats : CharacterStats
         if (!playerController.playerAlive)
             return;
 
-        OnStatChange(this, EventArgs.Empty);
-
         if (!canTakeDamage)
             return;
 
         if (godMode)
-        {
-            gameUI.DamageIndicator(transform.position, damageAmount);
             return;
-        }
+
+        if (damageAmount != 0)
+            gameUI.DamageIndicator(transform.position, damageAmount);
 
         // --- --- ---
         base.TakeDamage(damageAmount);
@@ -89,8 +88,11 @@ public class PlayerStats : CharacterStats
         CameraShaker.Instance.ShakeOnce(2f, 2f, .01f, .1f);
 
         playerHearts.heartSystem.Damage(damageAmount / 10);
-        
-        StartCoroutine(Damaged());
+
+        OnStatChange(this, EventArgs.Empty);
+
+        if (playerController.playerAlive)
+            StartCoroutine(Damaged());
     }
 
     override protected void CharacterDeath()
@@ -135,6 +137,8 @@ public class PlayerStats : CharacterStats
     {
         while (lowHealth)
         {
+            heartCanvasGroup.alpha = 1.0f;
+
             playerController.playerSprite.color = Color.red;
 
             yield return new WaitForSeconds(.55f);
@@ -144,29 +148,43 @@ public class PlayerStats : CharacterStats
             yield return new WaitForSeconds(.55f);
         }
 
+        OnStatChange(this, EventArgs.Empty);
+
         yield break;
     }
 
+    bool animate = false;
+    Coroutine routine = null;
+
     private void PlayerStats_OnStatChange(object sender, System.EventArgs e)
     {
-        StopCoroutine(HeartsFade());
-        StartCoroutine(HeartsFade());
-    }
+        if (lowHealth)
+            return;
 
-    bool animate = false;
+        animate = false;
+
+        if (routine != null)
+            StopCoroutine(routine);
+
+        routine = StartCoroutine(HeartsFade());
+    }
 
     private IEnumerator HeartsFade()
     {
+        if (lowHealth)
+            yield break;
+
+        float alpha = heartCanvasGroup.alpha;
         animate = true;
 
-        while (animate)
+        while (animate && !lowHealth)
         {
-            for (float t = 0.01f; t < 1.5f;)
+            for (float t = 0.01f; t < 1.0f;)
             {
                 t += Time.deltaTime;
-                t = Mathf.Min(t, 1.5f);
+                t = Mathf.Min(t, 1.0f);
 
-                heartCanvasGroup.alpha = Mathf.Lerp(0, 1, Mathf.Min(1, t / 1.5f));
+                heartCanvasGroup.alpha = Mathf.Lerp(alpha, 1, Mathf.Min(1, t / 1.0f));
 
                 yield return null;
             }
@@ -174,18 +192,19 @@ public class PlayerStats : CharacterStats
             animate = false;
         }
 
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(2.0f);
 
+        alpha = heartCanvasGroup.alpha;
         animate = true;
 
-        while (animate)
+        while (animate && !lowHealth)
         {
             for (float t = 0.01f; t < 1.5f;)
             {
                 t += Time.deltaTime;
                 t = Mathf.Min(t, 1.5f);
 
-                heartCanvasGroup.alpha = Mathf.Lerp(1, 0, Mathf.Min(1, t / 1.5f));
+                heartCanvasGroup.alpha = Mathf.Lerp(alpha, 0, Mathf.Min(1, t / 1.5f));
 
                 yield return null;
             }
@@ -193,6 +212,7 @@ public class PlayerStats : CharacterStats
             animate = false;
         }
 
+        animate = false;
         yield break;
     }
 }

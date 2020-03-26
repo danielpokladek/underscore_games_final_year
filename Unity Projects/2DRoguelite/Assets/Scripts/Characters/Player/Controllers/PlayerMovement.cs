@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     // --- --- ---
     private Rigidbody2D playerRB;
     private Vector2 playerInput;
+    private Vector2 playerInputNorm;
     private Vector2 mousePosition;
     private Vector2 mouseVector;
     private Vector2 moveVector;
@@ -53,11 +54,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void GetPlayerInput()
     {
-        if (enableMovement)
-        {
-            playerInput.x = Input.GetAxisRaw("Horizontal");
-            playerInput.y = Input.GetAxisRaw("Vertical");
-        }
+        playerInput.x = Input.GetAxisRaw("Horizontal");
+        playerInput.y = Input.GetAxisRaw("Vertical");
+        playerInputNorm = playerInput.normalized;
     }
 
     private void MoveCharacter(Vector2 _playerInput)
@@ -66,7 +65,8 @@ public class PlayerMovement : MonoBehaviour
         moveVector.Normalize();
         moveVector *= playerController.playerStats.characterSpeed.GetValue();
 
-        playerRB.MovePosition((Vector2)transform.position + (moveVector * Time.deltaTime));
+        if (enableMovement)
+            playerRB.MovePosition((Vector2)transform.position + (moveVector * Time.deltaTime));
     }
 
     private void GetMouseInput()
@@ -98,22 +98,17 @@ public class PlayerMovement : MonoBehaviour
 
     public IEnumerator PlayerDash()
     {
-        enableMovement = false;
-        playerController.playerStats.characterSpeed.AddModifier(15);
-        playerController.playerStats.canTakeDamage = false;
+        StartCoroutine(AddForce(playerInputNorm, 20, .3f));
 
-        yield return new WaitForSeconds(dashDuration);
-
-        playerController.playerStats.canTakeDamage = true;
-        playerController.playerStats.characterSpeed.RemoveModifier(15);
-        enableMovement = true;
+        yield break;
     }
 
     public IEnumerator AddForce(Vector2 forceDirection, float forceStrength, float moveDelay)
     {
         enableMovement = false;
 
-        playerRB.AddForce(forceDirection * forceStrength);
+        playerRB.velocity = Vector2.zero;
+        playerRB.AddForce(forceDirection * forceStrength, ForceMode2D.Impulse);
         yield return new WaitForSeconds(moveDelay);
 
         enableMovement = true;

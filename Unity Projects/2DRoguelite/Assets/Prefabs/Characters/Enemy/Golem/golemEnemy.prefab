@@ -352,6 +352,7 @@ MonoBehaviour:
     baseValue: 10
   characterAttackDelay:
     baseValue: 1.5
+  deathSound: {fileID: 0}
   soulParticle: {fileID: 8558200818212196397, guid: 155753f8135d24948b94998611d692c3,
     type: 3}
   golemSpikeCooldown:

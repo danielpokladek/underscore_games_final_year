@@ -71,11 +71,6 @@ public class UIManager : MonoBehaviour
         deathScreen.SetActive(true);
     }
 
-    //private void Start()
-    //{
-    //    GameManager.current.loadingFinishedCallback += AssignImages;
-    //}
-
     private void AssignImages()
     {
         playerStats = playerRef.playerStats;

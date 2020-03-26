@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(PlayerMovement))]
@@ -228,7 +229,7 @@ public class PlayerController : MonoBehaviour
                 LevelManager.instance.AddSoul();
 
             if (Input.GetKeyDown(KeyCode.F5))
-                LevelManager.instance.LoadBossBattle();
+                gameManager.LoadScene((int)SceneIndexes.MAIN, (int)SceneIndexes.BOSS);
 
             if (Input.GetKeyDown(KeyCode.R))
                 LevelManager.instance.Restart();
