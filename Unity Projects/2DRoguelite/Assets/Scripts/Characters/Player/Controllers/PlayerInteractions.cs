@@ -6,8 +6,9 @@ public class PlayerInteractions : MonoBehaviour
     private PlayerController playerController;
 
     private InteractableItem currentItem;
-
     private bool onItem;
+
+    private DialogueTrigger currentNPC;
 
     private void Start()
     {
@@ -22,23 +23,38 @@ public class PlayerInteractions : MonoBehaviour
             currentItem = other.gameObject.GetComponent<InteractableItem>();
             currentItem.PlayerInRange = true;
         }
+
+        if (other.CompareTag("NPC"))
+        {
+            currentNPC = other.gameObject.GetComponent<DialogueTrigger>();
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (currentItem == null)
-            return;
+        if (other.CompareTag("Interactable") && currentItem != null)
+        {
+            onItem = false;
+            currentItem = null;
+        }
 
-        onItem      = false;
-        currentItem = null;
+        if (other.CompareTag("NPC") && currentNPC != null)
+        {
+            currentNPC = null;
+        }
     }
 
     private void PlayerInteract()
     {
-        if (currentItem == null)
-            return;
+        if (currentItem != null)
+        {
+            currentItem.Interact(playerController);
+            UIManager.current.updateUICallback.Invoke();
+        }
 
-        currentItem.Interact(playerController);
-        UIManager.current.updateUICallback.Invoke();
+        if (currentNPC != null)
+        {
+            currentNPC.StartDialogue();
+        }
     }
 }

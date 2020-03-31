@@ -28,6 +28,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private PlayerController playerRef;
     private PlayerStats playerStats;
 
+    public DialogueController dialogueController;
+
     #region Singleton
     public static UIManager current;
 
@@ -54,6 +56,7 @@ public class UIManager : MonoBehaviour
     public void PlayerSpawned(PlayerController playerRef)
     {
         //loadingScreen.SetActive(false);
+        dialogueController.gameObject.SetActive(false);
 
         this.playerRef = playerRef;
 
@@ -61,6 +64,17 @@ public class UIManager : MonoBehaviour
             GameManager.current.loadingFinishedCallback.Invoke();
 
         AssignImages();
+    }
+
+    public void StartDialogue(Dialogue dialogue)
+    {
+        dialogueController.gameObject.SetActive(true);
+        dialogueController.StartDialogue(dialogue);
+    }
+
+    public void EndDialogue()
+    {
+        dialogueController.gameObject.SetActive(false);
     }
 
     public void PlayerDead()
