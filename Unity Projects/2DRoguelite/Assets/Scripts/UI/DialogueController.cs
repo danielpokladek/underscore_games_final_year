@@ -10,14 +10,34 @@ public class DialogueController : MonoBehaviour
     [SerializeField] private TMP_Text dialText;
 
     private Queue<string> sentenceQueue;
+    private bool inConvo;
 
-    void Start()
+    private TutorialRoom rm;
+
+    public delegate void OnFinishDialogue();
+    public OnFinishDialogue onFinishDialogueCallback;
+
+    private void Awake()
     {
         sentenceQueue = new Queue<string>();
+        inConvo = false;
+    }
+
+    private void Update()
+    {
+        if (inConvo && Input.GetKeyDown(KeyCode.Space))
+        {
+            DisplayNextSentence();
+        }
     }
 
     public void StartDialogue(Dialogue dialogue)
     {
+        if (inConvo)
+            return;
+
+        inConvo = true;
+
         Debug.Log("Starting conversation with: " + dialogue.NPCName);
 
         dialName.text = dialogue.NPCName;
@@ -59,6 +79,12 @@ public class DialogueController : MonoBehaviour
     private void EndDialogue()
     {
         Debug.Log("End of dialogue");
+
+        //rm.DialFinished();
+
+        if (onFinishDialogueCallback != null) onFinishDialogueCallback.Invoke();
+
+        inConvo = false;
         UIManager.current.EndDialogue();
     }
 }

@@ -66,7 +66,7 @@ public class UIManager : MonoBehaviour
         AssignImages();
     }
 
-    public void StartDialogue(Dialogue dialogue)
+    public void StartDialogue(Dialogue dialogue, TutorialRoom roomManager)
     {
         dialogueController.gameObject.SetActive(true);
         dialogueController.StartDialogue(dialogue);
