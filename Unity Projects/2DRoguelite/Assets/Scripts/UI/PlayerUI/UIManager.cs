@@ -23,12 +23,17 @@ public class UIManager : MonoBehaviour
     public Image healthImage;
     public Image skillOne, skillTwo, skillThree;
     public Image skillOneBack, skillTwoBack, skillThreeBack;
+    public Image clockImage;
     public GameObject tutorialHud;
 
     [SerializeField] private PlayerController playerRef;
     private PlayerStats playerStats;
 
     public DialogueController dialogueController;
+
+    private float startClockRotation;
+    private float endClockRotation;
+    private float clockRotation;
 
     #region Singleton
     public static UIManager current;
@@ -64,6 +69,9 @@ public class UIManager : MonoBehaviour
             GameManager.current.loadingFinishedCallback.Invoke();
 
         AssignImages();
+
+        startClockRotation = clockImage.transform.eulerAngles.z;
+        endClockRotation = startClockRotation + 360.0f;
     }
 
     public void StartDialogue(Dialogue dialogue, TutorialRoom roomManager)
@@ -83,6 +91,14 @@ public class UIManager : MonoBehaviour
         gemCollected.text = GameManager.current.gemsCollected.ToString("");
 
         deathScreen.SetActive(true);
+    }
+
+    private void Update()
+    {
+        clockRotation = Mathf.Lerp(startClockRotation, endClockRotation,
+            LevelManager.instance.dayTimer / LevelManager.instance.dayLength) % 360.0f;
+
+        clockImage.transform.eulerAngles = new Vector3(0.0f, 0.0f, clockRotation);
     }
 
     private void AssignImages()

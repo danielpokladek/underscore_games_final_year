@@ -292,9 +292,9 @@ GameObject:
   - component: {fileID: 1710612036}
   - component: {fileID: 1710612037}
   - component: {fileID: 1710612041}
-  - component: {fileID: 1164917392}
   - component: {fileID: 4658188287768153925}
   - component: {fileID: 1195040954}
+  - component: {fileID: 6085567310539011865}
   m_Layer: 0
   m_Name: shadowEnemy
   m_TagString: Enemy
@@ -379,13 +379,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterHealth:
-    baseValue: 10
+    baseValue: 8
   characterSpeed:
     baseValue: 6
   characterAttackDamage:
     baseValue: 10
   characterAttackDelay:
     baseValue: 1.5
+  deathSound: {fileID: 0}
   soulParticle: {fileID: 8558200818212196397, guid: 155753f8135d24948b94998611d692c3,
     type: 3}
 --- !u!114 &1710612035
@@ -480,38 +481,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   target: {fileID: 0}
---- !u!114 &1164917392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4061175498704331343}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 393b05f536116b44cb1d606c23b21ac0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDummy: 0
-  armPivot: {fileID: 4061175498567040628}
-  attackPoint: {fileID: 4061175498176216846}
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 4096
-  dropPercentage: 0
-  gemDrops:
-  - {fileID: 7583637798381323171, guid: 9610630251d8314478d351ab2781218f, type: 3}
-  - {fileID: 4004655409075409955, guid: d69f6de288d498a478ed639fedca87c6, type: 3}
-  - {fileID: 4138267978564711883, guid: e99803d428e8d7d4a87e6abaf73e59b6, type: 3}
-  weaponSprite: {fileID: 1189285195}
-  enemySprite: {fileID: 1204499678317855343}
-  enemyMovement: {fileID: 0}
-  enemyStats: {fileID: 0}
-  enemyProjectile: {fileID: 3361406223139990898, guid: 990f5272a10f2a849a56cc7910529b62,
-    type: 3}
-  wandAnimator: {fileID: 4658188287768153925}
-  wandTrans: {fileID: 1864890264}
-  attackCharge: 1.5
 --- !u!95 &4658188287768153925
 Animator:
   serializedVersion: 3
@@ -547,6 +516,35 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &6085567310539011865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4061175498704331343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 937bea3ddd5400a469cd1f38936ca480, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDummy: 0
+  armPivot: {fileID: 4061175498567040628}
+  attackPoint: {fileID: 4061175498176216846}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 4096
+  dropPercentage: 90
+  gemDrops:
+  - {fileID: 7583637798381323171, guid: 9610630251d8314478d351ab2781218f, type: 3}
+  weaponSprite: {fileID: 1189285195}
+  enemySprite: {fileID: 1204499678317855343}
+  enemyMovement: {fileID: 0}
+  enemyStats: {fileID: 0}
+  enemyProjectile: {fileID: 0}
+  wandAnimator: {fileID: 4658188287768153925}
+  wandTrans: {fileID: 806475308}
+  attackCharge: 0.5
 --- !u!1 &4061175499316730696
 GameObject:
   m_ObjectHideFlags: 0

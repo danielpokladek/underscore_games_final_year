@@ -2,6 +2,9 @@
 
 public class NormalRoom : RoomManager
 {
+    public GameObject exitBlock;
+    private int enemiesKilled = 0;
+
     override protected void SpawnBossPortal()
     {
         base.SpawnBossPortal();
@@ -29,25 +32,6 @@ public class NormalRoom : RoomManager
         Instantiate(GameManager.current.playerPrefab, transform.position, Quaternion.identity);
     }
 
-    override protected void UpdateRoomState()
-    {
-        switch (levelManager.currentState)
-        {
-            case LevelManager.DayState.Day:
-                if (isPortalRoom)
-                    DisplayBoss(false);
-                break;
-
-            case LevelManager.DayState.Night:
-                if (isPortalRoom)
-                    DisplayBoss(true);
-                break;
-
-            case LevelManager.DayState.Midnight:
-                break;
-        }
-    }
-
     override protected void OnTriggerEnter2D(Collider2D other)
     {
         base.OnTriggerEnter2D(other);
@@ -57,11 +41,23 @@ public class NormalRoom : RoomManager
             if (isPortalRoom)
                 other.GetComponent<PlayerController>().foundPortal = true;
 
-            if ((levelManager.GetCurrentState == "Day" || levelManager.GetCurrentState == "Boss") && roomDiscovered)
-                return;
+            if ((levelManager.GetCurrentState == "Night"))
+                //exitBlock.SetActive(true);
+
+            if ((levelManager.GetCurrentState == "Day" || levelManager.GetCurrentState == "Boss"))
+                if (roomDiscovered)
+                    return;
 
             SpawnEnemies();
             roomDiscovered = true;
         }
+    }
+
+    protected override void OnEnemyDeath()
+    {
+        enemiesKilled += 1;
+
+        //if (enemiesKilled == enemiesSpawned)
+            //exitBlock.SetActive(false);
     }
 }

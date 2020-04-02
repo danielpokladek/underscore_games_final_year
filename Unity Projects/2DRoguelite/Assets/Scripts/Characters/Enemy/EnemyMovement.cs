@@ -16,10 +16,10 @@ public class EnemyMovement : MonoBehaviour
     public bool enableMovement;
 
     // --- --- ---
-    private AIPath aiPath;
-    private AIDestinationSetter aiDest;
-    private EnemyStats enemyStats;
-    private Rigidbody2D enemyRB;
+    protected AIPath aiPath;
+    protected AIDestinationSetter aiDest;
+    protected EnemyStats enemyStats;
+    protected Rigidbody2D enemyRB;
 
     private void Start()
     {

@@ -8,7 +8,7 @@ public class DialogueTrigger : MonoBehaviour
     public TutorialRoom roomManager;
 
     public bool changesObjectState;
-    public GameObject objectToChange;
+    public GameObject[] objectsToChange;
 
     public void StartDialogue()
     {
@@ -28,7 +28,12 @@ public class DialogueTrigger : MonoBehaviour
         toggled = true;
 
         if (changesObjectState)
-            objectToChange.SetActive(!objectToChange.activeInHierarchy);
+        {
+            foreach(GameObject _object in objectsToChange)
+            {
+                _object.SetActive(!_object.activeInHierarchy);
+            }
+        }
 
         Destroy(gameObject);
     }

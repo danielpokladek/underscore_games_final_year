@@ -19,9 +19,9 @@ public class LevelManager : MonoBehaviour
     #endregion
 
     [Header("State Settings")]
-    [SerializeField] private float dayLength;
-    [SerializeField] private float nightLength;
-    [SerializeField] private float midnightLength;
+    [SerializeField] private float dayStateLength;
+    [SerializeField] private float nightStateLength;
+    [SerializeField] private float midStateLength;
     public enum DayState { PlayerSel, Day, Night, Midnight, Boss };
     public DayState currentState;
 
@@ -44,17 +44,14 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Light2D  ambientLight;
     [Tooltip("Gradient which will be used on the progression from day to night." +
         "Start of the gradient will represent the daytime, and end of the gradient will represent night.")]
-    [SerializeField] private Gradient dayToNightGradient;
-    [Tooltip("The same as 'dayToNightGradient' but in this case the colours are reversed.")]
-    [SerializeField] private Gradient nightToDayGradient;
-    [Tooltip("Colour which will be used at night.")]
-    [SerializeField] private Color nightColor;
+    [SerializeField] private Gradient dayGradient;
     [Tooltip("Minimum sun intensity, this will be used at night; lower this value to create darker night. " +
         "Avoid making this value too low, as it can cause the light to become too dark and result in a black scene.")]
     [SerializeField] private float minLightIntensity = 0.7f;
     [Tooltip("Maximum sun intensity, this will be used at day; increase this value to create brighter day. " +
         "Avoid making this value too high, as it can cause the light to become too bright and result in white scene.")]
     [SerializeField] private float maxLightIntensity = 1.0f;
+    [SerializeField] private float sunFade = 3.0f;
 
     [Header("Music Settings")]
     [SerializeField] private AudioClip dayMusic;
@@ -73,10 +70,16 @@ public class LevelManager : MonoBehaviour
     public PortalCharged portalChargedCallback;
 
     [HideInInspector] public bool playerDead = false;
+    [HideInInspector] public float dayLength;
+    [HideInInspector] public float dayTimer;
 
     private string currentStateString = "N/A";
     private float stateTimer;
-    private float dayTimer;
+
+    // Day to night (& vice versa) fade times;
+    private float d2nFade;
+    private float n2dFade;
+    private float fadeTimer;
 
     [HideInInspector] public float enemyKills { get; private set; }
 
@@ -88,10 +91,20 @@ public class LevelManager : MonoBehaviour
             return;
         }
 
-        currentState       = DayState.Day;
-        currentStateString = "Day";
-
+        SetLightValues();
         AudioManager.current.PlayMusic(dayMusic);
+    }
+
+    private void SetLightValues()
+    {
+        dayLength = dayStateLength + nightStateLength + midStateLength;
+        stateTimer += (sunFade + 2.0f);
+
+        ambientLight.intensity = maxLightIntensity;
+        ambientLight.color = dayGradient.Evaluate(0);
+
+        currentState = DayState.Day;
+        currentStateString = "Day";
     }
 
     public void LoadBossBattle()
@@ -140,6 +153,9 @@ public class LevelManager : MonoBehaviour
 
     private void UpdateDayState()
     {
+        dayTimer += Time.deltaTime;
+        stateTimer += Time.deltaTime;
+
         switch (currentState)
         {
             case DayState.PlayerSel:
@@ -151,47 +167,51 @@ public class LevelManager : MonoBehaviour
             
             // Handle Day.
             case DayState.Day:
-                if (stateTimer >= dayLength)
+                if (stateTimer > dayStateLength)
                     SetState(DayState.Night, "Night");
-
-                stateTimer += Time.deltaTime;
-                dayTimer += Time.deltaTime;
 
                 if (!enableSunProgress)
                     break;
 
-                ambientLight.intensity = Mathf.Lerp(maxLightIntensity, minLightIntensity, (stateTimer / dayLength));
-                ambientLight.color = dayToNightGradient.Evaluate(stateTimer / dayLength);
+                if (stateTimer < sunFade)
+                {
+                    fadeTimer += Time.deltaTime;
+                    ambientLight.intensity = Mathf.Lerp(ambientLight.intensity, maxLightIntensity, (fadeTimer / sunFade));
+                    ambientLight.color = dayGradient.Evaluate(fadeTimer / sunFade);
+                }
 
                 break;
 
             // Handle Night.
             case DayState.Night:
-                if (stateTimer >= nightLength)
+                if (stateTimer >= nightStateLength)
                     SetState(DayState.Midnight, "Midnight");
-
-                stateTimer += Time.deltaTime;
 
                 if (!enableSunProgress)
                     break;
 
-                ambientLight.intensity = minLightIntensity;
-                ambientLight.color = nightColor;
+                if (stateTimer < sunFade)
+                {
+                    fadeTimer += Time.deltaTime;
+                    ambientLight.intensity = Mathf.Lerp(ambientLight.intensity, minLightIntensity, (fadeTimer / sunFade));
+                    ambientLight.color = dayGradient.Evaluate(Mathf.Clamp(1 - (fadeTimer / sunFade), 0, 1));
+                }
 
                 break;
 
             // Handle Midnight.
             case DayState.Midnight:
-                if (stateTimer >= midnightLength)
+                if (stateTimer >= midStateLength)
+                {
+                    dayTimer = 0;
                     SetState(DayState.Day, "Day");
-
-                stateTimer += Time.deltaTime;
+                }
 
                 if (!enableSunProgress)
                     break;
 
-                ambientLight.intensity = Mathf.Lerp(minLightIntensity, maxLightIntensity, (stateTimer / dayLength));
-                ambientLight.color = nightToDayGradient.Evaluate(stateTimer / dayLength);
+                ambientLight.intensity = minLightIntensity;
+                ambientLight.color = dayGradient.Evaluate(1);
 
                 break;
         }
@@ -202,6 +222,7 @@ public class LevelManager : MonoBehaviour
         currentStateString = stateString;
         currentState       = state;
         stateTimer         = 0;
+        fadeTimer          = 0;
 
         if (state == DayState.Day && !LevelManager.instance.playerDead)
             AudioManager.current.CrossFadeMusicClips(dayMusic);
