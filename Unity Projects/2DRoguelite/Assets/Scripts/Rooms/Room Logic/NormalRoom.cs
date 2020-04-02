@@ -44,9 +44,8 @@ public class NormalRoom : RoomManager
             if ((levelManager.GetCurrentState == "Night"))
                 //exitBlock.SetActive(true);
 
-            if ((levelManager.GetCurrentState == "Day" || levelManager.GetCurrentState == "Boss"))
-                if (roomDiscovered)
-                    return;
+            if ((levelManager.GetCurrentState == "Day" || levelManager.GetCurrentState == "Boss") && roomDiscovered)
+                return;
 
             SpawnEnemies();
             roomDiscovered = true;
@@ -57,7 +56,7 @@ public class NormalRoom : RoomManager
     {
         enemiesKilled += 1;
 
-        //if (enemiesKilled == enemiesSpawned)
-            //exitBlock.SetActive(false);
+        if (enemiesKilled == enemiesSpawned && exitBlock != null)
+            exitBlock.SetActive(false);
     }
 }

@@ -8,10 +8,15 @@ public class ShadowController : EnemyRanged
     [SerializeField] private Transform wandTrans;
     [SerializeField] private float attackCharge;
 
-    private bool wandAim = false;
+    private bool inShot = false;
 
     override protected void AttackPlayer()
     {
+        if (inShot)
+            return;
+
+        inShot = true;
+
         StartCoroutine(ShadowAttackCoroutine());
         canAttack = false;
     }
@@ -23,19 +28,17 @@ public class ShadowController : EnemyRanged
         yield return new WaitForSeconds(attackCharge);
 
         wandAnimator.SetTrigger("chargeFinished");
-
-        wandAim = true;
+        
         canAttack = false;
 
         wandAnimator.ResetTrigger("chargingShot");
-
-        wandAim = true;
-
         yield break;
     }
 
     public void ShadowAttack()
     {
+        Debug.Log("s attack");
+
         wandAnimator.ResetTrigger("chargingShot");
         wandAnimator.ResetTrigger("chargeFinished");
 
@@ -47,7 +50,7 @@ public class ShadowController : EnemyRanged
 
         _attackDelay = 0;
         canAttack   = false;
-        wandAim     = false;
+        inShot     = false;
     }
 
     override public void DeathEffect()

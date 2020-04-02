@@ -9,6 +9,10 @@ public class GameManager : MonoBehaviour
     public static GameManager current = null;
     private void Awake()
     {
+        #if UNITY_EDITOR
+        UnityEditor.SceneView.FocusWindowIfItsOpen(typeof(UnityEditor.SceneView));
+        #endif
+
         if (current == null)
             current = this;
         else
