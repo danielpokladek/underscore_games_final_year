@@ -69,6 +69,7 @@ public class LevelManager : MonoBehaviour
     public delegate void PortalCharged();
     public PortalCharged portalChargedCallback;
 
+    [HideInInspector] public bool countTime = true;
     [HideInInspector] public bool playerDead = false;
     [HideInInspector] public float dayLength;
     [HideInInspector] public float dayTimer;
@@ -99,12 +100,6 @@ public class LevelManager : MonoBehaviour
     {
         dayLength = dayStateLength + nightStateLength + midStateLength;
         stateTimer += (sunFade + 2.0f);
-
-        ambientLight.intensity = maxLightIntensity;
-        ambientLight.color = dayGradient.Evaluate(0);
-
-        currentState = DayState.Day;
-        currentStateString = "Day";
     }
 
     public void LoadBossBattle()
@@ -120,12 +115,6 @@ public class LevelManager : MonoBehaviour
     private void Update()
     {
         UpdateDayState();
-
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            SavePlayerStats();
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        }
     }
 
     public void AddSoul()
@@ -153,8 +142,11 @@ public class LevelManager : MonoBehaviour
 
     private void UpdateDayState()
     {
-        dayTimer += Time.deltaTime;
-        stateTimer += Time.deltaTime;
+        if (countTime)
+        {
+            dayTimer += Time.deltaTime;
+            stateTimer += Time.deltaTime;
+        }
 
         switch (currentState)
         {

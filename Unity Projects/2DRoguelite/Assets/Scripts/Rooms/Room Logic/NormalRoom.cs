@@ -41,8 +41,11 @@ public class NormalRoom : RoomManager
             if (isPortalRoom)
                 other.GetComponent<PlayerController>().foundPortal = true;
 
-            if ((levelManager.GetCurrentState == "Night"))
-                //exitBlock.SetActive(true);
+            if ((levelManager.GetCurrentState == "Night") && spawnEnemies)
+            {
+                exitBlock.SetActive(true);
+                levelManager.countTime = false;
+            }
 
             if ((levelManager.GetCurrentState == "Day" || levelManager.GetCurrentState == "Boss") && roomDiscovered)
                 return;
@@ -57,6 +60,9 @@ public class NormalRoom : RoomManager
         enemiesKilled += 1;
 
         if (enemiesKilled == enemiesSpawned && exitBlock != null)
+        {
             exitBlock.SetActive(false);
+            levelManager.countTime = false;
+        }
     }
 }
