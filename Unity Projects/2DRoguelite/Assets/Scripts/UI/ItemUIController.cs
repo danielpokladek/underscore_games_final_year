@@ -9,8 +9,11 @@ public class ItemUIController : MonoBehaviour
     [SerializeField] private Image gemIcon;
     [SerializeField] private GameObject UIContainer;
 
-    public void SetValues(string _itemName, int _itemPrice, bool _dungeonChest = false)
+    public void SetValues(string _itemName, int _itemPrice, Color textColor, bool _dungeonChest = false)
     {
+        itemNameText.color = textColor;
+        itemPriceText.color = textColor;
+
         if (!_dungeonChest)
         {
             itemNameText.text  = _itemName + ":";

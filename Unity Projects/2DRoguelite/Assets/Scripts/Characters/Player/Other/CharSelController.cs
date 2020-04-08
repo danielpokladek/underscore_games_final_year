@@ -22,8 +22,5 @@ public class CharSelController : PlayerController
     override protected void Update()
     {
         base.Update();
-
-        if (Input.GetKeyDown(KeyCode.H))
-            LevelManager.instance.StartGame();
     }
 }

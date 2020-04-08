@@ -56,6 +56,7 @@ public class LevelManager : MonoBehaviour
     [Header("Music Settings")]
     [SerializeField] private AudioClip dayMusic;
     [SerializeField] private AudioClip nightMusic;
+    [SerializeField] private AudioClip caveMusic;
     [SerializeField] private AudioClip bossStage;
     [SerializeField] private AudioClip deathMusic;
 
@@ -82,6 +83,8 @@ public class LevelManager : MonoBehaviour
     private float n2dFade;
     private float fadeTimer;
 
+    private bool gameTime = true;
+
     [HideInInspector] public float enemyKills { get; private set; }
 
     private void Start()
@@ -102,19 +105,25 @@ public class LevelManager : MonoBehaviour
         stateTimer += (sunFade + 2.0f);
     }
 
-    public void LoadBossBattle()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
-    }
-
-    public void StartGame()
-    {
-        SceneManager.LoadScene(1);
-    }
-
     private void Update()
     {
         UpdateDayState();
+
+        if (gameTime && !PauseMenu.GameIsPaused)
+            GameManager.current.gameTime += Time.deltaTime;
+    }
+
+    public void PlayCaveMusic()
+    {
+        AudioManager.current.CrossFadeMusicClips(caveMusic, .5f);
+    }
+
+    public void PlayNormalMusic()
+    {
+        if (currentState == DayState.Day)
+            AudioManager.current.CrossFadeMusicClips(dayMusic, .5f);
+        else if (currentState == DayState.Night)
+            AudioManager.current.CrossFadeMusicClips(nightMusic, .5f);
     }
 
     public void AddSoul()

@@ -174,6 +174,8 @@ public class ArcherController : PlayerController
                 proj.GetComponent<Projectile>().SetDamage(playerStats.characterAttackDamage.GetValue());
                 proj.GetComponent<Rigidbody2D>().AddForce(firePoint.up * 15, ForceMode2D.Impulse);
 
+            AudioManager.current.PlaySFX(heavyShot);
+
             yield return new WaitForSeconds(0.15f);
         }
 

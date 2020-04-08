@@ -24,12 +24,6 @@ public class InteractableItem : MonoBehaviour
         Debug.Log("It just works! - Todd Howard");
     }
 
-    protected void PurchaseItem(int gemAmount)
-    {
-        GameManager.current.PlayerGems -= gemAmount;
-        UIManager.current.updateUICallback.Invoke();
-    }
-
     public bool PlayerInRange { get; set; }
 
     /// <summary>
@@ -46,6 +40,7 @@ public class InteractableItem : MonoBehaviour
         {
             GameManager.current.PlayerGems -= itemPrice;
             UIManager.current.updateUICallback.Invoke();
+            UIManager.current.updateGemsUICallback.Invoke();
 
             Debug.Log("Item purchased: " + itemName);
             return true;
@@ -59,7 +54,11 @@ public class InteractableItem : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GameUIManager.currentInstance.ShowItemUI(transform.position, itemName, itemPrice, isDungeonItem);
+            if ((GameManager.current.PlayerGems - itemPrice) >= 0)
+                GameUIManager.currentInstance.ShowItemUI(transform.position, itemName, itemPrice, Color.white, isDungeonItem);
+            else
+                GameUIManager.currentInstance.ShowItemUI(transform.position, itemName, itemPrice, Color.red, isDungeonItem);
+
             gameObject.GetComponent<SpriteRenderer>().material.SetFloat("_OutlineThickness", 5.0f);
         }
     }

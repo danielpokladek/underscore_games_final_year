@@ -28,7 +28,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject loadingScreen;
 
     public int enemyKilled;
-    public int gemsCollected;
 
     public int levelCounter = 0;
 
@@ -41,6 +40,9 @@ public class GameManager : MonoBehaviour
 
     public delegate void LoadingFinished();
     public LoadingFinished loadingFinishedCallback;
+
+    public float gameTime;
+    public float gameScore;
 
     private void Start()
     {
@@ -85,7 +87,8 @@ public class GameManager : MonoBehaviour
         loadingScreen.gameObject.SetActive(true);
 
         scenesLoading.Add(SceneManager.UnloadSceneAsync(sceneToUnload));
-        scenesLoading.Add(SceneManager.LoadSceneAsync(sceneToLoad, LoadSceneMode.Additive));
+        scenesLoading.Add(SceneManager.LoadSceneAsync((int)sceneToLoad, LoadSceneMode.Additive));
+
 
         StartCoroutine(GetLoadProgress());
     }

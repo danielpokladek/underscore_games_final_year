@@ -111,12 +111,9 @@ public class RoomManager : MonoBehaviour
 
     }
 
-    virtual protected void OnTriggerEnter2D(Collider2D other)
+    virtual protected void OnTriggerEnter2D(Collider2D coll)
     {
-        //if (isSpawnRoom)
-        //    return;
-
-        if (other.CompareTag("Player"))
+        if (coll.CompareTag("Player"))
             UpdateRoomMinimap();
     }
 

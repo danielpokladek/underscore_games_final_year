@@ -144,7 +144,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemPrice: 0
+  itemName: 
+  isDungeonItem: 0
   gemWorth: 10
+  gemSound: {fileID: 8300000, guid: c1726da2ae3d8be45a6ab306cd5c8041, type: 3}
 --- !u!1 &7874313310282477638
 GameObject:
   m_ObjectHideFlags: 0

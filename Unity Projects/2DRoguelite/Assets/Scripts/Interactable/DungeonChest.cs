@@ -49,7 +49,7 @@ public class DungeonChest : InteractableItem
         {
             if (!chestOpened)
             {
-                GameUIManager.currentInstance.ShowItemUI(transform.position, itemName, itemPrice, isDungeonItem);
+                GameUIManager.currentInstance.ShowItemUI(transform.position, itemName, itemPrice, Color.white, isDungeonItem);
                 gameObject.GetComponent<SpriteRenderer>().material.SetFloat("_OutlineThickness", 5.0f);
             }
             else

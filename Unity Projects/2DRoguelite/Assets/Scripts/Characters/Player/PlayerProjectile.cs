@@ -12,7 +12,10 @@ public class PlayerProjectile : Projectile
     protected GameObject _hitEffect;
 
     private void OnTriggerEnter2D(Collider2D other)
-    {     
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("WaterLayer"))
+            return;
+
         if (other.gameObject.CompareTag("Enemy"))
         {
             EnemyController enemyController = other.GetComponent<EnemyController>();

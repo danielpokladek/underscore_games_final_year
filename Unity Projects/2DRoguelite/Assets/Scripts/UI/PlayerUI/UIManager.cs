@@ -17,10 +17,10 @@ public class UIManager : MonoBehaviour
     public TMP_Text enemyKilled;
 
     [Header("UI Settings")]
-    public GameObject loadingScreen;
-    public GameObject deathScreen;
-    public Image playerPortrait;
-    public Image healthImage;
+    public GameObject gamePanel;
+    public PauseMenu pausePanel;
+    public InfoMenu infoPanel;
+    public GameObject deathPanel;
     public Image skillOne, skillTwo, skillThree;
     public Image skillOneBack, skillTwoBack, skillThreeBack;
     public Image clockImage;
@@ -48,7 +48,7 @@ public class UIManager : MonoBehaviour
         updateUICallback += UpdateUIFunction;
         updateGemsUICallback += UpdateGemsUIFunction;
 
-        deathScreen.SetActive(false);
+        deathPanel.SetActive(false);
     }
     #endregion
 
@@ -88,9 +88,9 @@ public class UIManager : MonoBehaviour
     public void PlayerDead()
     {
         enemyKilled.text  = GameManager.current.enemyKilled.ToString("");
-        gemCollected.text = GameManager.current.gemsCollected.ToString("");
+        gemCollected.text = GameManager.current.PlayerGems.ToString("");
 
-        deathScreen.SetActive(true);
+        deathPanel.SetActive(true);
     }
 
     private void Update()
@@ -99,6 +99,20 @@ public class UIManager : MonoBehaviour
             LevelManager.instance.dayTimer / LevelManager.instance.dayLength) % 360.0f;
 
         clockImage.transform.eulerAngles = new Vector3(0.0f, 0.0f, clockRotation);
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            pausePanel.Pause();
+        }
+
+        if (!PauseMenu.GameIsPaused)
+        {
+            if (Input.GetKey(KeyCode.Tab))
+                infoPanel.Show();
+            
+            if (Input.GetKeyUp(KeyCode.Tab))
+                infoPanel.Hide();
+        }
     }
 
     private void AssignImages()
@@ -106,8 +120,6 @@ public class UIManager : MonoBehaviour
         playerStats = playerRef.playerStats;
 
         gemText.text = GameManager.current.PlayerGems.ToString("");
-
-        playerPortrait.sprite = playerRef.characterPortrait;
 
         skillOneBack.sprite = playerRef.skillOne;
         skillTwoBack.sprite = playerRef.skillTwoBack;

@@ -6,6 +6,6 @@ public class TestingScriptThing : MonoBehaviour
 {
     private void Start()
     {
-        GameManager.current.gemsCollected += 1000;
+        GameManager.current.PlayerGems += 1000;
     }
 }

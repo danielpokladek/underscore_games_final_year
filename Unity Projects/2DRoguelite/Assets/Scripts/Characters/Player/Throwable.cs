@@ -4,6 +4,7 @@ using EZCameraShake;
 public class Throwable : Projectile
 {
     [SerializeField] private float explosionRadius;
+    [SerializeField] private AudioClip explosionSound;
 
     private void Update()
     {
@@ -21,10 +22,7 @@ public class Throwable : Projectile
         foreach (Collider2D coll in enemiesInRange)
         {
             if (coll.CompareTag("Enemy"))
-            {
-                coll.GetComponent<EnemyController>().enemyStats.TakeDamage(projectileDamage);
                 coll.GetComponent<EnemyController>().enemyStats.DamageOverTime(2.0f, projectileDamage);
-            }
 
             if (coll.CompareTag("Player"))
                 coll.GetComponent<PlayerController>().playerStats.TakeDamage(projectileDamage);

@@ -57,10 +57,10 @@ public class GameUIManager : MonoBehaviour
         text.GetComponent<IndicatorText>().SetValues(healText, position);
     }
 
-    public void ShowItemUI(Vector2 _worldPosition, string _itemName, int _itemPrice, bool _isDungeonItem = false)
+    public void ShowItemUI(Vector2 _worldPosition, string _itemName, int _itemPrice, Color textColor, bool _isDungeonItem = false)
     {
         priceUIRef.transform.position = _worldPosition;
-        itemUIController.SetValues(_itemName, _itemPrice, _isDungeonItem);
+        itemUIController.SetValues(_itemName, _itemPrice, textColor, _isDungeonItem);
     }
 
     public void HideItemUI()

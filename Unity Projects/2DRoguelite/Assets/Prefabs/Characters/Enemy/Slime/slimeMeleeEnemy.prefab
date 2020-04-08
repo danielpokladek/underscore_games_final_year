@@ -150,7 +150,7 @@ GameObject:
   - component: {fileID: 707840785}
   - component: {fileID: 707840784}
   - component: {fileID: 1805620143}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: slimeMeleeEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -362,6 +362,7 @@ MonoBehaviour:
     baseValue: 10
   characterAttackDelay:
     baseValue: 1.2
+  deathSound: {fileID: 0}
   soulParticle: {fileID: 8558200818212196397, guid: 155753f8135d24948b94998611d692c3,
     type: 3}
 --- !u!58 &1805620143
@@ -389,7 +390,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7237441685667743327}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: armPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -420,7 +421,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7237441685940826247}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: firePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -452,7 +453,7 @@ GameObject:
   - component: {fileID: 7237441686002728856}
   - component: {fileID: 7237441686002728863}
   - component: {fileID: 6354221238628648523}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: enemyBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -553,7 +554,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7237441686851900796}
   - component: {fileID: 7237441686851900797}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: gunSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

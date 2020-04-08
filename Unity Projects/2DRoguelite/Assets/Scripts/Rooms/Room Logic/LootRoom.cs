@@ -22,4 +22,18 @@ public class LootRoom : RoomManager
         if (enemiesKilled == enemiesSpawned)
             doorTilemap.SetActive(false);
     }
+
+    protected override void OnTriggerEnter2D(Collider2D coll)
+    {
+        base.OnTriggerEnter2D(coll);
+
+        if (coll.CompareTag("Player"))
+            LevelManager.instance.PlayCaveMusic();
+    }
+
+    private void OnTriggerExit2D(Collider2D coll)
+    {
+        if (coll.CompareTag("Player"))
+            LevelManager.instance.PlayNormalMusic();
+    }
 }

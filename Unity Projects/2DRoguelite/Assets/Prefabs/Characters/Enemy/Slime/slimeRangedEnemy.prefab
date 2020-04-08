@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2279957944466416967}
   - component: {fileID: 2279957944466416966}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: gunSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2279957944711942051}
   - component: {fileID: 2279957944711942052}
-  m_Layer: 9
+  - component: {fileID: 575591602}
+  m_Layer: 0
   m_Name: enemyBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,7 +154,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: f3f84dee6404a424a95135de7c48a099, type: 3}
+  m_Sprite: {fileID: -1980227309959650389, guid: 2543d62b99addf74787c0eccf80034a9,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -164,6 +166,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &575591602
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2279957944711942050}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 81b024ef59eac874f9ae3c41e9a558ac, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2279957944767479995
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,7 +194,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2279957944767479996}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: firePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -208,12 +229,11 @@ GameObject:
   - component: {fileID: 2279957945320878751}
   - component: {fileID: 2279957945320878749}
   - component: {fileID: 2279957945320878748}
-  - component: {fileID: 4763069743746865410}
   - component: {fileID: 7903142550016793368}
   - component: {fileID: -8981709038908924148}
   - component: {fileID: 287138525}
   - component: {fileID: 1150019122}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: slimeRangedEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -363,25 +383,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   target: {fileID: 0}
---- !u!95 &4763069743746865410
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2279957945320878747}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3fdf07694aceb7e43ab8b6df35500d6b, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &7903142550016793368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -416,6 +417,7 @@ MonoBehaviour:
     baseValue: 10
   characterAttackDelay:
     baseValue: 1.2
+  deathSound: {fileID: 0}
   soulParticle: {fileID: 8558200818212196397, guid: 155753f8135d24948b94998611d692c3,
     type: 3}
   meleeSlime: {fileID: 7237441685385855648, guid: 77a98fa9c78ebda41882322605a43cfb,
@@ -474,7 +476,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2279957945586153060}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: armPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}

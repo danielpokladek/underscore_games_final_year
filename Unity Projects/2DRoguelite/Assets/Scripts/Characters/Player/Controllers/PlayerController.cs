@@ -77,6 +77,8 @@ public class PlayerController : MonoBehaviour
 
     virtual protected void Start()
     {
+        GameManager.current.playerRef = gameObject;
+
         playerAnim          = GetComponent<Animator>();
         playerStats         = GetComponent<PlayerStats>();
         playerInteractions  = GetComponent<PlayerInteractions>();
@@ -88,8 +90,6 @@ public class PlayerController : MonoBehaviour
 
         InitiatePlayer();
         UIManager.current.PlayerSpawned(this);
-
-        GameManager.current.playerRef = gameObject;
     }
 
     private void InitiatePlayer()

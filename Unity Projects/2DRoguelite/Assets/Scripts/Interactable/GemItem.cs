@@ -3,6 +3,7 @@
 public class GemItem : InteractableItem
 {
     [SerializeField] private int gemWorth;
+    [SerializeField] private AudioClip gemSound;
 
     private void OnTriggerEnter2D(Collider2D coll)
     {
@@ -12,8 +13,9 @@ public class GemItem : InteractableItem
 
     override public void Interact(PlayerController playerController)
     {
+        AudioManager.current.PlaySFX(gemSound);
+
         GameManager.current.PlayerGems += gemWorth;
-        GameManager.current.gemsCollected += gemWorth;
         UIManager.current.updateGemsUICallback.Invoke();
 
         Destroy(gameObject);
