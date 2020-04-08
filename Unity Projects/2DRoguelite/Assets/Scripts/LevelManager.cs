@@ -78,6 +78,8 @@ public class LevelManager : MonoBehaviour
     private string currentStateString = "N/A";
     private float stateTimer;
 
+    private bool inDungeon;
+
     // Day to night (& vice versa) fade times;
     private float d2nFade;
     private float n2dFade;
@@ -116,10 +118,13 @@ public class LevelManager : MonoBehaviour
     public void PlayCaveMusic()
     {
         AudioManager.current.CrossFadeMusicClips(caveMusic, .5f);
+        inDungeon = true;
     }
 
     public void PlayNormalMusic()
     {
+        inDungeon = false;
+
         if (currentState == DayState.Day)
             AudioManager.current.CrossFadeMusicClips(dayMusic, .5f);
         else if (currentState == DayState.Night)
@@ -225,13 +230,16 @@ public class LevelManager : MonoBehaviour
         stateTimer         = 0;
         fadeTimer          = 0;
 
+        if (onDayStateChangeCallback != null)
+            onDayStateChangeCallback.Invoke();
+
+        if (inDungeon)
+            return;
+
         if (state == DayState.Day && !LevelManager.instance.playerDead)
             AudioManager.current.CrossFadeMusicClips(dayMusic);
         else if (state == DayState.Night && !LevelManager.instance.playerDead)
             AudioManager.current.CrossFadeMusicClips(nightMusic);
-
-        if (onDayStateChangeCallback != null)
-            onDayStateChangeCallback.Invoke();
     }
 
     public string GetCurrentState { get { return currentStateString; } }

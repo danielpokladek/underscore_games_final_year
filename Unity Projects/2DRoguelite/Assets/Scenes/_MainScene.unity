@@ -830,6 +830,21 @@ PrefabInstance:
       propertyPath: nightMusic
       value: 
       objectReference: {fileID: 8300000, guid: 79de2c790d9bca244bbc4fe72104f4a9, type: 3}
+    - target: {fileID: 738848401628039118, guid: 22d9457d4126bbb46a41a4fd1b99acdf,
+        type: 3}
+      propertyPath: dayStateLength
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 738848401628039118, guid: 22d9457d4126bbb46a41a4fd1b99acdf,
+        type: 3}
+      propertyPath: nightStateLength
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 738848401628039118, guid: 22d9457d4126bbb46a41a4fd1b99acdf,
+        type: 3}
+      propertyPath: midStateLength
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 738848401905935612, guid: 22d9457d4126bbb46a41a4fd1b99acdf,
         type: 3}
       propertyPath: loadingScreen
