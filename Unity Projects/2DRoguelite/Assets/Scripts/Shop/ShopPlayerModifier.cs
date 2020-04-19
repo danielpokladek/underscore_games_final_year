@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ShopPlayerModifier : InteractableItem
 {
@@ -8,7 +6,7 @@ public class ShopPlayerModifier : InteractableItem
     [Tooltip("This value adds maximum health to the player. When players interact with this item, " +
         "the number specified here will be automatically added to their max health. To remove health, " +
         "add a '-' before the number, this will remove max health from the player.")]
-    [SerializeField] private float maximumHealth;
+    [SerializeField] private int maximumHealth;
     [Tooltip("This value adds player's current health. When players interact with this item, " +
         "the number specified here will be automatically added to their current health. To deduct health, " +
         "add a '-' before the number, this will deduct from player's current health.")]
@@ -36,11 +34,22 @@ public class ShopPlayerModifier : InteractableItem
 
     public override void Interact(PlayerController playerController)
     {
+        if (!activated)
+        {
+            UIManager.current.ShowItemUI(itemName, itemDesc, 2.0f);
+            playerController.ItemPickedUp(this);
+        }
+    }
+
+    public void AddEffect(PlayerController playerController)
+    {
         if (!CheckGems())
             return;
 
+        activated = true;
+
         if (maximumHealth != 0)
-            playerController.playerStats.characterHealth.AddModifier(maximumHealth);
+            playerController.playerStats.AddHealth(maximumHealth);
 
         if (currentHealth != 0)
             playerController.playerStats.HealCharacter(currentHealth);
@@ -66,7 +75,5 @@ public class ShopPlayerModifier : InteractableItem
 
             playerController.AddEnergyBall(itemToAdd);
         }
-
-        Destroy(gameObject);
     }
 }

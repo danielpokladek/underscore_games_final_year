@@ -68,8 +68,6 @@ public class BossController : MonoBehaviour
 
     public void BossDeath()
     {
-        Debug.Log("Boss is dead. Congrats!");
-
         ParticleSystem deathParticle = Instantiate(deathParticles, transform.position, Quaternion.identity);
 
         SaveManager.current.Save();

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class PlayerStats : CharacterStats
 {
-    public PlayerHearts playerHearts;
+    public PlayerHearts[] playerHearts;
     public Stat abilityOneCooldown;
     [Tooltip("Cooldown for the second ability of player.")]
     public Stat abilityTwoCooldown;
@@ -23,7 +23,7 @@ public class PlayerStats : CharacterStats
     [HideInInspector] public bool hasElixir = false;
 
     private PlayerController playerController;
-    private CanvasGroup heartCanvasGroup;
+    public CanvasGroup heartCanvasGroup;
 
     private event EventHandler OnStatChange;
 
@@ -31,29 +31,63 @@ public class PlayerStats : CharacterStats
     {
         base.Start();
 
-        playerController = GetComponent<PlayerController>();    
-        LevelManager.instance.LoadPlayerStats();
+        playerController = GetComponent<PlayerController>();
+    }
 
-        PlayerHeartSystem heartSystem = new PlayerHeartSystem((int)characterHealth.GetValue() / 10);
-        playerHearts.SetHeartSystem(heartSystem);
+    public void Init()
+    {
+        PlayerHeartSystem heartSystem = null;
 
-        heartCanvasGroup = playerHearts.GetComponent<CanvasGroup>();
+        if (GameManager.current.loadStats)
+        {
+            heartSystem = new PlayerHeartSystem(
+                (int)characterHealth.GetValue() / 10, currentHealth / 10);
+        }
+        else
+        {
+            heartSystem = new PlayerHeartSystem(
+                (int)characterHealth.GetValue() / 10, characterHealth.GetValue() / 10);
+        }
+
+        foreach (PlayerHearts ph in playerHearts)
+        {
+            ph.SetHeartSystem(heartSystem);
+
+            if (heartCanvasGroup == null)
+                heartCanvasGroup = ph.GetComponent<CanvasGroup>();
+        }
 
         OnStatChange += PlayerStats_OnStatChange;
 
         OnStatChange(this, EventArgs.Empty);
     }
 
+    public void AddHealth(int amount)
+    {
+        foreach (PlayerHearts ph in playerHearts)
+        {
+            ph.heartSystem.AddHeart();
+        }
+
+        characterHealth.AddModifier(amount * 10);
+        currentHealth += amount * 10;
+
+        OnStatChange(this, EventArgs.Empty);
+    }
+
     public override void HealCharacter(float healAmount)
     {
-
         base.HealCharacter(healAmount);
 
         if (currentHealth > ((characterHealth.GetValue() / 100) * 40))
             lowHealth = false;
 
         UIManager.current.updateUICallback();
-        playerHearts.heartSystem.Heal(healAmount / 10);
+
+        foreach (PlayerHearts ph in playerHearts)
+        {
+            ph.heartSystem.Heal(healAmount / 10);
+        }
 
         OnStatChange(this, EventArgs.Empty);
     }
@@ -87,7 +121,10 @@ public class PlayerStats : CharacterStats
         UIManager.current.updateUICallback.Invoke();
         CameraShaker.Instance.ShakeOnce(2f, 2f, .01f, .1f);
 
-        playerHearts.heartSystem.Damage(damageAmount / 10);
+        foreach (PlayerHearts ph in playerHearts)
+        {
+            ph.heartSystem.Damage(damageAmount / 10);
+        }
 
         OnStatChange(this, EventArgs.Empty);
 
@@ -120,6 +157,11 @@ public class PlayerStats : CharacterStats
     {
         currentHealth = value;
         UIManager.current.updateUICallback();
+
+        foreach (PlayerHearts ph in playerHearts)
+        {
+            ph.RefreshAllHearts();
+        }
     }
 
     private IEnumerator Damaged()

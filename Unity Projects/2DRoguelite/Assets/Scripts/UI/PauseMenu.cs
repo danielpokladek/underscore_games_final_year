@@ -43,7 +43,7 @@ public class PauseMenu : MonoBehaviour
     public void ReturnToMenu()
     {
         GameManager.current.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex,
-            (int)SceneIndexes.TITLE_SCREEN);
+            (int)SceneIndexes.MENU);
     }
 
     public void OptionsMenu()

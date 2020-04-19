@@ -85,10 +85,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void ArmDrawLayer()
     {
-        armSprite.sortingOrder = 5 - 1;
+        armSprite.sortingOrder = 15 - 1;
 
         if (armAngle > 0)
-            armSprite.sortingOrder = 5 + 1;
+            armSprite.sortingOrder = 15 + 1;
     }
 
     #region External

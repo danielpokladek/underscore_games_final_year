@@ -25,6 +25,7 @@ public class UIManager : MonoBehaviour
     public Image skillOneBack, skillTwoBack, skillThreeBack;
     public Image clockImage;
     public GameObject tutorialHud;
+    public ItemPickupUI itemUI;
 
     [SerializeField] private PlayerController playerRef;
     private PlayerStats playerStats;
@@ -74,6 +75,20 @@ public class UIManager : MonoBehaviour
         endClockRotation = startClockRotation + 360.0f;
     }
 
+    public void ShowItemUI(string itemName, string itemDesc, float length)
+    {
+        StartCoroutine(ShowItemCoroutine(itemName, itemDesc, length));
+    }
+
+    private IEnumerator ShowItemCoroutine(string itemName, string itemDesc, float length)
+    {
+        itemUI.ShowUI(itemName, itemDesc);
+
+        yield return new WaitForSeconds(length);
+
+        itemUI.HideUI();
+    }
+
     public void StartDialogue(Dialogue dialogue, TutorialRoom roomManager)
     {
         dialogueController.gameObject.SetActive(true);
@@ -87,7 +102,7 @@ public class UIManager : MonoBehaviour
 
     public void PlayerDead()
     {
-        enemyKilled.text  = GameManager.current.enemyKilled.ToString("");
+        enemyKilled.text  = GameManager.current.EnemyCount.ToString("");
         gemCollected.text = GameManager.current.PlayerGems.ToString("");
 
         deathPanel.SetActive(true);

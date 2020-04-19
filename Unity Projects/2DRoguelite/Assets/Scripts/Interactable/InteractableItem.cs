@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class InteractableItem : MonoBehaviour
 {
+    public string itemName;
+    [TextArea(2, 5)]
+    public string itemDesc;
     [SerializeField] protected int itemPrice;
-    [SerializeField] protected string itemName;
     [SerializeField] protected bool isDungeonItem = false;
 
     protected bool isDungeonChest;
-
-    private bool playerInRange;
+    protected bool activated = false;
 
     public void Item(string _itemName, int _itemPrice, bool _isDungeonItem = false)
     {
@@ -24,13 +25,6 @@ public class InteractableItem : MonoBehaviour
         Debug.Log("It just works! - Todd Howard");
     }
 
-    public bool PlayerInRange { get; set; }
-
-    /// <summary>
-    /// Check if player has enough gems to purchase the item.
-    /// </summary>
-    /// <returns>Returns true if player has enough gems to purchase the item.
-    /// If price is '0', check is ignored and returns true.</returns>
     protected bool CheckGems()
     {
         if (itemPrice == 0)
@@ -42,11 +36,9 @@ public class InteractableItem : MonoBehaviour
             UIManager.current.updateUICallback.Invoke();
             UIManager.current.updateGemsUICallback.Invoke();
 
-            Debug.Log("Item purchased: " + itemName);
             return true;
         }
 
-        Debug.Log("No money, no buy!", gameObject);
         return false;
     }
 

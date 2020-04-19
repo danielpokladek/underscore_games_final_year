@@ -4,11 +4,13 @@ using UnityEngine;
 public enum SceneIndexes
 {
     INIT = 0,
-    TITLE_SCREEN = 1,
-    TUTORIAL = 2,
-    TUTORIAL_2 = 3,
-    MAIN = 4,
-    BOSS = 5,
-    TEST = 6
+    SPLASH = 1,
+    STORY = 2,
+    MENU = 3,
+    TUTORIAL = 4,
+    TUTORIAL_2 = 5,
+    MAIN = 6,
+    BOSS = 7,
+    TEST = 8
 
 }

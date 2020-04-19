@@ -8,11 +8,14 @@ public class MainMenu : MonoBehaviour
     public AudioClip musicTheme;
     public GameObject mainMenuPanel;
     public GameObject startPanel;
+    public GameObject settingsPanel;
 
     private void Start()
     {
         mainMenuPanel.SetActive(true);
+
         startPanel.SetActive(false);
+        settingsPanel.SetActive(false);
 
         AudioManager.current.PlayMusic(musicTheme);
     }
@@ -33,21 +36,37 @@ public class MainMenu : MonoBehaviour
     {
         mainMenuPanel.SetActive(false);
         startPanel.SetActive(true);
+
+        GameManager.current.enableLoadingText = true;
     }
 
     public void BTN_PlayTutorial()
     {
-        GameManager.current.LoadTutorial();
+        GameManager.current.LoadScene((int)SceneIndexes.MENU, (int)SceneIndexes.TUTORIAL);
     }
 
     public void BTN_PlayGame()
     {
-        GameManager.current.LoadMain();
+        GameManager.current.LoadScene((int)SceneIndexes.MENU, (int)SceneIndexes.MAIN);
+    }
+
+    public void BTN_Options()
+    {
+        mainMenuPanel.SetActive(false);
+        settingsPanel.SetActive(true);
+    }
+
+    public void BTN_RETURN()
+    {
+        mainMenuPanel.SetActive(true);
+
+        startPanel.SetActive(false);
+        settingsPanel.SetActive(false);
     }
 
     public void BTN_TestScene()
     {
-        GameManager.current.LoadScene((int)SceneIndexes.TITLE_SCREEN, (int)SceneIndexes.TEST);
+        GameManager.current.LoadScene((int)SceneIndexes.MENU, (int)SceneIndexes.TEST);
     }
 
     public void BTN_Quit()

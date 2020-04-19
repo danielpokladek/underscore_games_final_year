@@ -37,8 +37,6 @@ public class ShadowController : EnemyRanged
 
     public void ShadowAttack()
     {
-        Debug.Log("s attack");
-
         wandAnimator.ResetTrigger("chargingShot");
         wandAnimator.ResetTrigger("chargeFinished");
 

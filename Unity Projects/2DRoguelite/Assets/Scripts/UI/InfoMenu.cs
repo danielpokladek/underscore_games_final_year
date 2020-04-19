@@ -52,11 +52,11 @@ public class InfoMenu : MonoBehaviour
     {
         gemsNo.text = GameManager.current.PlayerGems.ToString("");
         soulsNo.text = LevelManager.instance.enemyKills.ToString("");
-        levelNo.text = GameManager.current.levelCounter.ToString("");
+        levelNo.text = GameManager.current.LevelCount.ToString("");
 
-        var temp = TimeSpan.FromSeconds(GameManager.current.gameTime);
+        var temp = TimeSpan.FromSeconds(GameManager.current.GameTime);
 
         gameTime.text = string.Format("{0:00} : {1:00} : {2:00}", temp.Hours, temp.Minutes, temp.Seconds);
-        gameScore.text = GameManager.current.gameScore.ToString("");
+        gameScore.text = GameManager.current.GameScore.ToString("");
     }
 }

@@ -33,8 +33,6 @@ public class ArcherController : PlayerController
     private bool bowFullyCharged = false;
     private bool rapidFire = false;
 
-
-
     override protected void Update()
     {
         base.Update();

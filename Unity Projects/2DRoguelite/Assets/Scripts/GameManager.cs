@@ -21,28 +21,36 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded += SceneLoaded;
         
         if (SceneManager.GetActiveScene().buildIndex == 0)
-            SceneManager.LoadSceneAsync((int)SceneIndexes.TITLE_SCREEN, LoadSceneMode.Additive);
+            SceneManager.LoadSceneAsync((int)SceneIndexes.SPLASH, LoadSceneMode.Additive);
     }
     #endregion
 
     [SerializeField] private GameObject loadingScreen;
-
-    public int enemyKilled;
-
-    public int levelCounter = 0;
-
-    public GameObject playerPrefab;
-    public GameObject bossPortalRef;
-    
+    [SerializeField] private GameObject loadingText;
     [SerializeField] private int playerGems;
 
-    [HideInInspector] public GameObject playerRef;
+    public GameObject playerPrefab;
 
     public delegate void LoadingFinished();
     public LoadingFinished loadingFinishedCallback;
 
-    public float gameTime;
-    public float gameScore;
+    private float gameTime;
+    private float gameScore;
+    private int enemyKilled;
+    private int levelCounter = 0;
+
+    [HideInInspector] public GameObject playerRef;
+    [HideInInspector] public GameObject bossPortalRef;
+    [HideInInspector] public bool enableLoadingText;
+    public bool loadStats;
+
+    private List<AsyncOperation> scenesLoading = new List<AsyncOperation>();
+
+    public int LevelCount { get { return levelCounter; } }
+    public int PlayerGems { get { return playerGems; } set { playerGems = value; } }
+    public int EnemyCount { get { return enemyKilled; } set { enemyKilled = value; } }
+    public float GameTime { get { return gameTime; } set { gameTime = value; } }
+    public float GameScore { get { return gameScore; } set { gameScore = value; } }
 
     private void Start()
     {
@@ -50,40 +58,22 @@ public class GameManager : MonoBehaviour
             loadingScreen.SetActive(false);
     }
 
-    public int PlayerGems { get { return playerGems; } set { playerGems = value; } }
-
-    List<AsyncOperation> scenesLoading = new List<AsyncOperation>();
-    Scene _sceneToLoad;
-
-    private void SceneLoaded(Scene scene, LoadSceneMode mode)
+    public void NextLevel(int currentScene)
     {
-        SceneManager.SetActiveScene(scene);
-    }
+        levelCounter += 1;
 
-    public void LoadTutorial()
-    {
-        loadingScreen.gameObject.SetActive(true);
+        SaveManager.current.Save();
 
-        scenesLoading.Add(SceneManager.UnloadSceneAsync((int)SceneIndexes.TITLE_SCREEN));
-        scenesLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndexes.TUTORIAL, LoadSceneMode.Additive));
-
-        _sceneToLoad = SceneManager.GetSceneByBuildIndex((int)SceneIndexes.TUTORIAL);
-
-        StartCoroutine(GetLoadProgress());
-    }
-
-    public void LoadMain()
-    {
-        loadingScreen.gameObject.SetActive(true);
-
-        scenesLoading.Add(SceneManager.LoadSceneAsync((int)SceneIndexes.MAIN, LoadSceneMode.Additive));
-        scenesLoading.Add(SceneManager.UnloadSceneAsync((int)SceneIndexes.TITLE_SCREEN));
-
-        StartCoroutine(GetLoadProgress());
+        LoadScene(currentScene, currentScene + 1);
     }
 
     public void LoadScene(int sceneToUnload, int sceneToLoad)
     {
+        if (enableLoadingText)
+            loadingText.SetActive(true);
+        else
+            loadingText.SetActive(false);
+
         loadingScreen.gameObject.SetActive(true);
 
         scenesLoading.Add(SceneManager.UnloadSceneAsync(sceneToUnload));
@@ -91,6 +81,11 @@ public class GameManager : MonoBehaviour
 
 
         StartCoroutine(GetLoadProgress());
+    }
+
+    private void SceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        SceneManager.SetActiveScene(scene);
     }
 
     private IEnumerator GetLoadProgress()

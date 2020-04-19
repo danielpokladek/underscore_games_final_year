@@ -21,16 +21,6 @@ public class SaveManager : MonoBehaviour
     private GameObject playerRef;
     private PlayerStats playerStats;
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.V))
-            Save();
-
-        if (Input.GetKeyDown(KeyCode.C))
-            Load();
-
-    }
-
     public void Save()
     {
         playerRef = GameManager.current.playerRef;
@@ -90,8 +80,6 @@ public class SaveManager : MonoBehaviour
 
     private void LoadPlayer(SaveData data)
     {
-        Debug.Log(data.playerData.CurrentHealth);
-
         playerStats.SetHealth(data.playerData.CurrentHealth);
         playerStats.characterHealth.LoadValue(data.playerData.MaxHealth);
         playerStats.characterSpeed.LoadValue(data.playerData.MoveSpeed);

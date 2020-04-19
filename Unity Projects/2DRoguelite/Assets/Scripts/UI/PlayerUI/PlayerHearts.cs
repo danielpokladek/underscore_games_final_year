@@ -33,6 +33,19 @@ public class PlayerHearts : MonoBehaviour
 
         heartSystem.OnDamaged += HeartSystem_OnDamaged;
         heartSystem.OnHealed += HeartSystem_OnHealed;
+        heartSystem.OnRefresh += HeartSystem_OnRefresh;
+        heartSystem.OnAddHeart += HeartSystem_OnAddHeart;
+    }
+
+    private void HeartSystem_OnAddHeart(object sender, System.EventArgs e)
+    {
+        CreateHeartImage().SetHeartLevel(1);
+        RefreshAllHearts();
+    }
+
+    private void HeartSystem_OnRefresh(object sender, System.EventArgs e)
+    {
+        RefreshAllHearts();
     }
 
     private void HeartSystem_OnDamaged(object sender, System.EventArgs e)
@@ -45,7 +58,7 @@ public class PlayerHearts : MonoBehaviour
         RefreshAllHearts();
     }
 
-    private void RefreshAllHearts()
+    public void RefreshAllHearts()
     {
         List<PlayerHeartSystem.Heart> heartList = heartSystem.GetHeartList();
 

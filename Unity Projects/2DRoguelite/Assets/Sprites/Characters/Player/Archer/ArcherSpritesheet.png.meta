@@ -65,6 +65,57 @@ TextureImporter:
   - first:
       213: 610659743226205952
     second: up2
+  - first:
+      213: 5269660608271411075
+    second: dashLeft
+  - first:
+      213: 5438555503155485055
+    second: dashRight
+  - first:
+      213: 290469282534441460
+    second: dashDown
+  - first:
+      213: 8660072855516760521
+    second: dashUp
+  - first:
+      213: -2696955067812692392
+    second: ArcherSpritesheet_4
+  - first:
+      213: -1139143575926293716
+    second: ArcherSpritesheet_5
+  - first:
+      213: 5852698617370750348
+    second: ArcherSpritesheet_6
+  - first:
+      213: 2777844801480291725
+    second: ArcherSpritesheet_7
+  - first:
+      213: 908772994652584676
+    second: ArcherSpritesheet_8
+  - first:
+      213: 5789719103152664260
+    second: ArcherSpritesheet_9
+  - first:
+      213: 2715043165404239989
+    second: ArcherSpritesheet_10
+  - first:
+      213: 1735957483279630243
+    second: ArcherSpritesheet_11
+  - first:
+      213: 837919528228168165
+    second: ArcherSpritesheet_12
+  - first:
+      213: -2932999532871953315
+    second: ArcherSpritesheet_13
+  - first:
+      213: 8756892691362823551
+    second: ArcherSpritesheet_14
+  - first:
+      213: 4517774473449792858
+    second: ArcherSpritesheet_15
+  - first:
+      213: -6254960894510464860
+    second: itemPose
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -396,6 +447,111 @@ TextureImporter:
       bones: []
       spriteID: f71d903a3e7ffea478688b412b49c343
       internalID: 610659743226205952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dashLeft
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 387e2e24768912940800000000000000
+      internalID: 5269660608271411075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dashRight
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7914d85a61a97b40800000000000000
+      internalID: 5438555503155485055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dashDown
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f1c0a30644f70400800000000000000
+      internalID: 290469282534441460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dashUp
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c9441a0162ce2870800000000000000
+      internalID: 8660072855516760521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: itemPose
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a08eb6e43ae139a0800000000000000
+      internalID: -6254960894510464860
       vertices: []
       indices: 
       edges: []

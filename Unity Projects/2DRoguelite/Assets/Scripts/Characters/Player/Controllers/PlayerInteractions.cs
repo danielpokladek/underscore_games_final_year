@@ -21,7 +21,6 @@ public class PlayerInteractions : MonoBehaviour
         if (other.CompareTag("Interactable"))
         {
             currentItem = other.gameObject.GetComponent<InteractableItem>();
-            currentItem.PlayerInRange = true;
         }
 
         if (other.CompareTag("NPC"))

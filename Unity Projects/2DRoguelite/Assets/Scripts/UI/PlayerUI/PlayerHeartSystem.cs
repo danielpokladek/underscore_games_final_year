@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Diagnostics;
 
 public class PlayerHeartSystem
 {
@@ -9,23 +8,56 @@ public class PlayerHeartSystem
 
     public event EventHandler OnDamaged;
     public event EventHandler OnHealed;
+    public event EventHandler OnRefresh;
+    public event EventHandler OnAddHeart;
 
     private List<Heart> heartList;
 
-    public PlayerHeartSystem(int heartAmount)
+    public PlayerHeartSystem(int heartAmount, float playerHealth)
     {
+        float it = 0;
+
         heartList = new List<Heart>();
 
         for (int i = 0; i < heartAmount; i++)
         {
-            Heart heart = new Heart(1);
-            heartList.Add(heart);
+            if (it < playerHealth)
+            {
+                Heart heart = new Heart(1);
+                heartList.Add(heart);
+            }
+            else
+            {
+                Heart heart = new Heart(0);
+                heartList.Add(heart);
+            }
+
+            it += 1;
         }
     }
 
     public List<Heart> GetHeartList()
     {
         return heartList;
+    }
+
+    public void AddHeart()
+    {
+        Heart heart = new Heart(1);
+        Heart lastHeart = heartList[heartList.Count - 1];
+
+        if (lastHeart.GetHeartLevel() < 1)
+        {
+            heart.SetHeartLevel(lastHeart.GetHeartLevel());
+            lastHeart.SetHeartLevel(1);
+            heartList.Add(heart);
+        }
+        else if (lastHeart.GetHeartLevel() >= 1)
+        {
+            heartList.Insert(0, heart);
+        }
+
+        if (OnAddHeart != null) OnAddHeart(this, EventArgs.Empty); 
     }
 
     public void Damage(float damageAmount)
@@ -80,7 +112,7 @@ public class PlayerHeartSystem
             this.heartLevel = heartLevel;
         }
 
-        public void SetHeartLevel(int heartLevel)
+        public void SetHeartLevel(float heartLevel)
         {
             this.heartLevel = heartLevel;
         }

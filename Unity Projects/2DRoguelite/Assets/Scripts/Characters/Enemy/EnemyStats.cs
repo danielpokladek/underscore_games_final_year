@@ -92,7 +92,7 @@ public class EnemyStats : CharacterStats
         if (LevelManager.instance.onEnemyKilledCallback != null)
             LevelManager.instance.onEnemyKilledCallback.Invoke();
 
-        GameManager.current.enemyKilled += 1;
+        GameManager.current.EnemyCount += 1;
 
         Destroy(gameObject);
     }

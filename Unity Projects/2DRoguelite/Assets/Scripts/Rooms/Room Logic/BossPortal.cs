@@ -45,7 +45,7 @@ public class BossPortal : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             if (portalEnabled)
-                GameManager.current.LoadScene(SceneManager.GetActiveScene().buildIndex, (int)SceneIndexes.BOSS);
+                GameManager.current.NextLevel(SceneManager.GetActiveScene().buildIndex);
         }
     }
 

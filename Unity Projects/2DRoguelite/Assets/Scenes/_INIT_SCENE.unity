@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e1d2a2b1088ba34cbc5807941725038, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 76d6fd63af505fd459a6d017d8428b44, type: 2}
   playMusic: 1
   playSFX: 1
   musicVolume: 0.15
@@ -171,6 +172,12 @@ Transform:
 --- !u!1 &294098809 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4272773920589557628, guid: 8bc0232827bdcb040863c60c6ba4937e,
+    type: 3}
+  m_PrefabInstance: {fileID: 4272773920346388485}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &633379424 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4272773922136987156, guid: 8bc0232827bdcb040863c60c6ba4937e,
     type: 3}
   m_PrefabInstance: {fileID: 4272773920346388485}
   m_PrefabAsset: {fileID: 0}
@@ -270,14 +277,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadingScreen: {fileID: 294098809}
+  loadingText: {fileID: 633379424}
   enemyKilled: 0
-  gemsCollected: 0
   levelCounter: 0
   playerPrefab: {fileID: 7368213390279314166, guid: ec5d65a572afc014b972d4823372553d,
     type: 3}
   bossPortalRef: {fileID: 0}
   playerGems: 0
   playerRef: {fileID: 0}
+  gameTime: 0
+  gameScore: 0
 --- !u!4 &1570627137
 Transform:
   m_ObjectHideFlags: 0

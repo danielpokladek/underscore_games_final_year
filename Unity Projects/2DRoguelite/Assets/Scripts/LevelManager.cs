@@ -111,8 +111,11 @@ public class LevelManager : MonoBehaviour
     {
         UpdateDayState();
 
+        // Probably should grab the time when level started,
+        //  and deduct the time when level finished to get better performance.
+        //  But will do for now, unless game grinds to halt.
         if (gameTime && !PauseMenu.GameIsPaused)
-            GameManager.current.gameTime += Time.deltaTime;
+            GameManager.current.GameTime += Time.deltaTime;
     }
 
     public void PlayCaveMusic()
@@ -140,18 +143,6 @@ public class LevelManager : MonoBehaviour
             if (portalChargedCallback != null)
                 portalChargedCallback.Invoke();
         }
-    }
-
-    public void SavePlayerStats()
-    {
-        if (GameManager.current.levelCounter > 0)
-            SaveManager.current.Save();
-    }
-
-    public void LoadPlayerStats()
-    {
-        if (GameManager.current.levelCounter > 0)
-            SaveManager.current.Load();
     }
 
     private void UpdateDayState()
@@ -244,14 +235,4 @@ public class LevelManager : MonoBehaviour
 
     public string GetCurrentState { get { return currentStateString; } }
     public float GetStateTimer { get { return stateTimer; } }
-
-    public void LevelComplete()
-    {
-        GameManager.current.levelCounter += 1;
-    }
-
-    public void Restart()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
 }

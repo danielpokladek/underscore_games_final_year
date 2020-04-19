@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour
     public SpriteRenderer playerSprite;
     public GameObject minimapThing;
     public ParticleSystem abilityOne, abilityTwo, abilityThree;
+    public Transform itemPickup;
 
     // --- --- ---
     [HideInInspector] public float  projectileSizeMultiplier = 1; 
@@ -105,10 +107,20 @@ public class PlayerController : MonoBehaviour
 
         powerupBalls = new List<GameObject>();
 
-        //minimapThing.SetActive(false);
+        if (gameManager.loadStats)
+        {
+            Debug.Log("Load playerStats");
 
-        //if (UIManager.current.tutorialHud != null)
-        //    Instantiate(UIManager.current.tutorialHud, transform.position, Quaternion.identity);
+            SaveManager.current.Load();
+            playerStats.Init();
+        }
+        else if (!gameManager.loadStats)
+        {
+            Debug.Log("Don't load player stats");
+
+            playerStats.Init();
+            gameManager.loadStats = true;
+        }
     }
 
     protected bool a1 = false;
@@ -176,6 +188,28 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void ItemPickedUp(ShopPlayerModifier item)
+    {
+        StartCoroutine(ItemCoroutine(item));
+    }
+
+    private IEnumerator ItemCoroutine(ShopPlayerModifier item)
+    {
+        playerMovement.EnableMovement = false;
+        playerAnim.SetBool("itemPose", true);
+
+        item.transform.SetParent(itemPickup);
+        item.transform.localPosition = new Vector3(0, 0, 0);
+
+        yield return new WaitForSeconds(2.0f);
+
+        item.AddEffect(this);
+
+        Destroy(item.gameObject);
+        playerAnim.SetBool("itemPose", false);
+        playerMovement.EnableMovement = true;
+    }
+
     public void AddEnergyBall(GameObject energyBall)
     {
         powerupBalls.Add(energyBall);
@@ -218,6 +252,12 @@ public class PlayerController : MonoBehaviour
     {
         if (Debug.isDebugBuild)
         {
+            if (Input.GetKeyDown(KeyCode.G))
+                SaveManager.current.Save();
+
+            if (Input.GetKeyDown(KeyCode.H))
+                SaveManager.current.Load();
+
             if (Input.GetKeyDown(KeyCode.P))
                 playerStats.HealCharacter(10);
 
@@ -238,7 +278,7 @@ public class PlayerController : MonoBehaviour
                     gameManager.LoadScene(SceneManager.GetActiveScene().buildIndex, (int)SceneIndexes.MAIN);
             }
 
-            if (Input.GetKeyDown(KeyCode.R))
+            if (Input.GetKeyDown(KeyCode.R) && !playerAlive)
                 gameManager.LoadScene(SceneManager.GetActiveScene().buildIndex, SceneManager.GetActiveScene().buildIndex);
 
             if (Input.GetKeyDown(KeyCode.Escape))

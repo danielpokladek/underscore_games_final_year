@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class DialogueController : MonoBehaviour
@@ -37,8 +36,6 @@ public class DialogueController : MonoBehaviour
             return;
 
         inConvo = true;
-
-        Debug.Log("Starting conversation with: " + dialogue.NPCName);
 
         dialName.text = dialogue.NPCName;
         sentenceQueue.Clear();
@@ -78,10 +75,6 @@ public class DialogueController : MonoBehaviour
 
     private void EndDialogue()
     {
-        Debug.Log("End of dialogue");
-
-        //rm.DialFinished();
-
         if (onFinishDialogueCallback != null) onFinishDialogueCallback.Invoke();
 
         inConvo = false;
