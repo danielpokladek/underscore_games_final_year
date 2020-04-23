@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class InteractableItem : MonoBehaviour
 {
+    public PlayerItem playerItem;
+    public int itemID;
     public string itemName;
     [TextArea(2, 5)]
     public string itemDesc;
@@ -13,11 +13,24 @@ public class InteractableItem : MonoBehaviour
     protected bool isDungeonChest;
     protected bool activated = false;
 
+    private void Start()
+    {
+        if (itemID == 0)
+            Debug.LogError("ItemID not set on: " + gameObject.name + ". Item won't be saved, causing errors!");
+
+        playerItem.SetItem(itemName, itemDesc, itemID);
+    }
+
     public void Item(string _itemName, int _itemPrice, bool _isDungeonItem = false)
     {
         itemPrice = _itemPrice;
         itemName  = _itemName;
         isDungeonItem = _isDungeonItem;
+    }
+
+    virtual public PlayerItem LoadItem()
+    {
+        return null;
     }
 
     virtual public void Interact(PlayerController playerController)

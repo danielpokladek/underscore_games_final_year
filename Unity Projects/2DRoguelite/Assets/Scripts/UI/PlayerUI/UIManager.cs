@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class UIManager : MonoBehaviour
 {
@@ -36,6 +37,9 @@ public class UIManager : MonoBehaviour
     private float endClockRotation;
     private float clockRotation;
 
+    private float clockRotationLength;
+    private float clockRotationTimer;
+
     #region Singleton
     public static UIManager current;
 
@@ -50,6 +54,17 @@ public class UIManager : MonoBehaviour
         updateGemsUICallback += UpdateGemsUIFunction;
 
         deathPanel.SetActive(false);
+
+        LevelManager.instance.OnStateChange += LevelManager_OnStateChange;
+    }
+
+    private void LevelManager_OnStateChange(object sender, LevelManager.OnStateChangeEventArgs e)
+    {
+        startClockRotation = clockImage.transform.eulerAngles.z;
+        endClockRotation = startClockRotation + 90.0f;
+
+        clockRotationLength = e.stateLength;
+        clockRotationTimer = 0;
     }
     #endregion
 
@@ -70,9 +85,6 @@ public class UIManager : MonoBehaviour
             GameManager.current.loadingFinishedCallback.Invoke();
 
         AssignImages();
-
-        startClockRotation = clockImage.transform.eulerAngles.z;
-        endClockRotation = startClockRotation + 360.0f;
     }
 
     public void ShowItemUI(string itemName, string itemDesc, float length)
@@ -110,10 +122,7 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        clockRotation = Mathf.Lerp(startClockRotation, endClockRotation,
-            LevelManager.instance.dayTimer / LevelManager.instance.dayLength) % 360.0f;
-
-        clockImage.transform.eulerAngles = new Vector3(0.0f, 0.0f, clockRotation);
+        UpdateClock();
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -128,6 +137,16 @@ public class UIManager : MonoBehaviour
             if (Input.GetKeyUp(KeyCode.Tab))
                 infoPanel.Hide();
         }
+    }
+
+    private void UpdateClock()
+    {
+        clockRotationTimer += Time.deltaTime;
+
+        clockRotation = Mathf.Lerp(startClockRotation, endClockRotation,
+            clockRotationTimer / clockRotationLength) % 360.0f;
+
+        clockImage.transform.eulerAngles = new Vector3(0.0f, 0.0f, clockRotation);
     }
 
     private void AssignImages()
@@ -150,9 +169,6 @@ public class UIManager : MonoBehaviour
 
     private void UpdateUIFunction()
     {
-        //healthImage.fillAmount = playerStats.currentHealth / playerStats.characterHealth.GetValue();
-        //healthImage.color = healthGradient.Evaluate(playerStats.currentHealth / playerStats.characterHealth.GetValue());
-
         skillOne.fillAmount = playerRef.GetSkillOneCooldown() / playerStats.abilityOneCooldown.GetValue();
         skillTwo.fillAmount = playerRef.GetSkillTwoCooldown() / playerStats.abilityTwoCooldown.GetValue();
         skillThree.fillAmount = playerRef.GetSkillThreeCooldown() / playerStats.abilityThreeCooldown.GetValue();

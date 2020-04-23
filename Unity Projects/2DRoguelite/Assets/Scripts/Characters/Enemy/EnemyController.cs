@@ -93,7 +93,7 @@ public class EnemyController : MonoBehaviour
 
     private void NightBuff()
     {
-        if (levelManager.currentState == LevelManager.DayState.Midnight)
+        if (levelManager.currentState == LevelManager.DayState.Night)
             enemyStats.characterAttackDamage.AddModifier(enemyStats.characterAttackDamage.GetValue() * 2);
         else
             enemyStats.characterAttackDamage.RemoveModifier(enemyStats.characterAttackDamage.GetValue() * 2);

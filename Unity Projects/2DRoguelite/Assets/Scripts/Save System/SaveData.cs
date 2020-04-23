@@ -21,13 +21,15 @@ public class PlayerData
     public float MoveSpeed          { get; set; }
     public float AttackDamage       { get; set; }
     public float AttackDelay        { get; set; }
+    public string ItemsList         { get; set; }
 
-    public PlayerData(float pCurrHealth, float pMaxHealth, float pSpeed, float pAttackDmg, float pAttackDelay)
+    public PlayerData(float pCurrHealth, float pMaxHealth, float pSpeed, float pAttackDmg, float pAttackDelay, string itemList = "")
     {
         this.CurrentHealth    = pCurrHealth;
         this.MaxHealth        = pMaxHealth;
         this.MoveSpeed        = pSpeed;
         this.AttackDamage     = pAttackDmg;
         this.AttackDelay      = pAttackDelay;
+        this.ItemsList        = itemList;
     }
 }

@@ -121,13 +121,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a1275f6bac67bd4094c2975e749b8bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemPrice: 30
+  playerItem: {fileID: 11400000, guid: f379b3c76dd1faf409c06bfe677a88ce, type: 2}
+  itemID: 5
   itemName: Runner Boots
+  itemDesc: 
+  itemPrice: 30
   isDungeonItem: 0
   maximumHealth: 0
   currentHealth: 0
   movementSpeed: 5
   attackDamage: 0
   attackSpeed: 0
+  playerCollider: 0
   addsItem: 0
   itemToAdd: {fileID: 0}

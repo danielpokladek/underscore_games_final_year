@@ -121,8 +121,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a1275f6bac67bd4094c2975e749b8bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemPrice: 55
+  playerItem: {fileID: 11400000, guid: f379b3c76dd1faf409c06bfe677a88ce, type: 2}
+  itemID: 2
   itemName: Sword Barrier
+  itemDesc: 
+  itemPrice: 55
   isDungeonItem: 0
   maximumHealth: 0
   currentHealth: 0

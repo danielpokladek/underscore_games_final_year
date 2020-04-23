@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using EZCameraShake;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerStats : CharacterStats
 {
@@ -60,6 +58,15 @@ public class PlayerStats : CharacterStats
         OnStatChange += PlayerStats_OnStatChange;
 
         OnStatChange(this, EventArgs.Empty);
+    }
+
+    public void LoadStats(float currentHealth, float maxHealth, float moveSpeed, float attackDamage, float attackDelay)
+    {
+        this.currentHealth = currentHealth;
+        characterHealth.LoadValue(maxHealth);
+        characterSpeed.LoadValue(moveSpeed);
+        characterAttackDamage.LoadValue(attackDamage);
+        characterAttackDelay.LoadValue(attackDelay);
     }
 
     public void AddHealth(int amount)

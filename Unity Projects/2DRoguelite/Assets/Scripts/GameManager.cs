@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int playerGems;
 
     public GameObject playerPrefab;
+    public MasterItemList masterItemList;
 
     public delegate void LoadingFinished();
     public LoadingFinished loadingFinishedCallback;

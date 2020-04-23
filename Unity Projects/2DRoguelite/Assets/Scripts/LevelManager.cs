@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Experimental.Rendering.Universal;
+using System;
+using UnityEditorInternal;
 
 public class LevelManager : MonoBehaviour
 {
@@ -19,10 +21,20 @@ public class LevelManager : MonoBehaviour
     #endregion
 
     [Header("State Settings")]
+    [SerializeField] private float dawnStateLength;
     [SerializeField] private float dayStateLength;
+    [SerializeField] private float duskStateLength;
     [SerializeField] private float nightStateLength;
-    [SerializeField] private float midStateLength;
-    public enum DayState { PlayerSel, Day, Night, Midnight, Boss };
+
+    public enum DayState
+    {
+        PlayerSel,
+        Dawn,
+        Day,
+        Dusk,
+        Night,
+        Boss 
+    };
     public DayState currentState;
 
     public GameObject portalPrefab;
@@ -61,6 +73,12 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private AudioClip deathMusic;
 
     // -------------------------------------
+    public event EventHandler<OnStateChangeEventArgs> OnStateChange;
+    public class OnStateChangeEventArgs : EventArgs
+    {
+        public float stateLength;
+    }
+
     public delegate void OnEnemyKilled();
     public OnEnemyKilled onEnemyKilledCallback;
 
@@ -77,6 +95,7 @@ public class LevelManager : MonoBehaviour
 
     private string currentStateString = "N/A";
     private float stateTimer;
+    private float stateLength;
 
     private bool inDungeon;
 
@@ -97,14 +116,11 @@ public class LevelManager : MonoBehaviour
             return;
         }
 
-        SetLightValues();
         AudioManager.current.PlayMusic(dayMusic);
-    }
+        dayLength = dawnStateLength + dayStateLength + duskStateLength + nightStateLength;
 
-    private void SetLightValues()
-    {
-        dayLength = dayStateLength + nightStateLength + midStateLength;
-        stateTimer += (sunFade + 2.0f);
+        OnStateChange?.Invoke(
+            this, new OnStateChangeEventArgs { stateLength = dayStateLength });
     }
 
     private void Update()
@@ -128,9 +144,9 @@ public class LevelManager : MonoBehaviour
     {
         inDungeon = false;
 
-        if (currentState == DayState.Day)
+        if (currentState == DayState.Dawn)
             AudioManager.current.CrossFadeMusicClips(dayMusic, .5f);
-        else if (currentState == DayState.Night)
+        else if (currentState == DayState.Dusk)
             AudioManager.current.CrossFadeMusicClips(nightMusic, .5f);
     }
 
@@ -159,53 +175,75 @@ public class LevelManager : MonoBehaviour
                 break;
             
             case DayState.Boss:
-                // No day/night transition in the boss battle stage.
+                break; 
+
+            case DayState.Dawn:
+                if (stateTimer >= dawnStateLength)
+                {
+                    SetState(DayState.Day, "Day");
+                    OnStateChange?.Invoke(
+                        this, new OnStateChangeEventArgs { stateLength = dayStateLength });
+                }
+
+                if (!enableSunProgress)
+                    break;
+
+                if (stateTimer <= dawnStateLength)
+                {
+                    fadeTimer += Time.deltaTime;
+                    ambientLight.intensity = Mathf.Lerp(ambientLight.intensity, maxLightIntensity, (fadeTimer / dawnStateLength));
+                    ambientLight.color = dayGradient.Evaluate(Mathf.Clamp(1 - (fadeTimer / dawnStateLength), 0, 1));
+                }
+
                 break;
-            
-            // Handle Day.
+
             case DayState.Day:
                 if (stateTimer > dayStateLength)
+                {
+                    SetState(DayState.Dusk, "Dusk");
+                    OnStateChange?.Invoke(
+                        this, new OnStateChangeEventArgs { stateLength = duskStateLength });
+                }
+
+                if (!enableSunProgress)
+                    return;
+
+                ambientLight.intensity = maxLightIntensity;
+                ambientLight.color = dayGradient.Evaluate(0);
+
+                break;
+
+
+            case DayState.Dusk:
+                if (stateTimer >= duskStateLength)
+                {
                     SetState(DayState.Night, "Night");
+                    OnStateChange?.Invoke(
+                        this, new OnStateChangeEventArgs { stateLength = nightStateLength });
+                }
 
                 if (!enableSunProgress)
                     break;
 
-                if (stateTimer < sunFade)
+                if (stateTimer <= duskStateLength)
                 {
                     fadeTimer += Time.deltaTime;
-                    ambientLight.intensity = Mathf.Lerp(ambientLight.intensity, maxLightIntensity, (fadeTimer / sunFade));
-                    ambientLight.color = dayGradient.Evaluate(fadeTimer / sunFade);
+                    ambientLight.intensity = Mathf.Lerp(ambientLight.intensity, minLightIntensity, (fadeTimer / duskStateLength));
+                    ambientLight.color = dayGradient.Evaluate(fadeTimer / duskStateLength);
                 }
 
                 break;
 
-            // Handle Night.
             case DayState.Night:
                 if (stateTimer >= nightStateLength)
-                    SetState(DayState.Midnight, "Midnight");
-
-                if (!enableSunProgress)
-                    break;
-
-                if (stateTimer < sunFade)
                 {
-                    fadeTimer += Time.deltaTime;
-                    ambientLight.intensity = Mathf.Lerp(ambientLight.intensity, minLightIntensity, (fadeTimer / sunFade));
-                    ambientLight.color = dayGradient.Evaluate(Mathf.Clamp(1 - (fadeTimer / sunFade), 0, 1));
-                }
-
-                break;
-
-            // Handle Midnight.
-            case DayState.Midnight:
-                if (stateTimer >= midStateLength)
-                {
-                    dayTimer = 0;
-                    SetState(DayState.Day, "Day");
+                    SetState(DayState.Dawn, "Dawn");
+                    OnStateChange?.Invoke(
+                        this, new OnStateChangeEventArgs { stateLength = dawnStateLength });
                 }
 
                 if (!enableSunProgress)
-                    break;
+                    return;
 
                 ambientLight.intensity = minLightIntensity;
                 ambientLight.color = dayGradient.Evaluate(1);
@@ -221,15 +259,14 @@ public class LevelManager : MonoBehaviour
         stateTimer         = 0;
         fadeTimer          = 0;
 
-        if (onDayStateChangeCallback != null)
-            onDayStateChangeCallback.Invoke();
+        onDayStateChangeCallback?.Invoke();
 
         if (inDungeon)
             return;
 
-        if (state == DayState.Day && !LevelManager.instance.playerDead)
+        if (state == DayState.Dawn && !LevelManager.instance.playerDead)
             AudioManager.current.CrossFadeMusicClips(dayMusic);
-        else if (state == DayState.Night && !LevelManager.instance.playerDead)
+        else if (state == DayState.Dusk && !LevelManager.instance.playerDead)
             AudioManager.current.CrossFadeMusicClips(nightMusic);
     }
 

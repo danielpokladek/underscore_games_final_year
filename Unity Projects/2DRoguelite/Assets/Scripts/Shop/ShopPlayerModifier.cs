@@ -38,7 +38,25 @@ public class ShopPlayerModifier : InteractableItem
         {
             UIManager.current.ShowItemUI(itemName, itemDesc, 2.0f);
             playerController.ItemPickedUp(this);
+
+            PlayerItem tempItem = Instantiate(playerItem);
+            tempItem.SetItem(itemName, itemDesc, itemID);
+            tempItem.name = itemName;
+
+            playerController.itemsList.Add(playerItem);
         }
+    }
+
+    override public PlayerItem LoadItem()
+    {
+        if (!addsItem)
+            return null;
+
+        PlayerItem tempItem = Instantiate(playerItem);
+        tempItem.name = itemName;
+        tempItem.SetItem(itemName, itemDesc, itemID);
+
+        return playerItem;
     }
 
     public void AddEffect(PlayerController playerController)

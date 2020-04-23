@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: cb16572305fea6940b7526c2b07df713, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 36324f99b6bed614d9955a07651dd63e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -100,7 +100,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.2857143, y: 1.2857143}
+    oldSize: {x: 1.125, y: 1.125}
     newSize: {x: 0.1, y: 0.11}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -121,13 +121,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a1275f6bac67bd4094c2975e749b8bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerItem: {fileID: 11400000, guid: f379b3c76dd1faf409c06bfe677a88ce, type: 2}
+  itemID: 7
+  itemName: Lost Heart
+  itemDesc: Increased characters maximum health!
   itemPrice: 10
-  itemName: Heal Potion
   isDungeonItem: 0
-  maximumHealth: 0
-  currentHealth: 10
+  maximumHealth: 1
+  currentHealth: 0
   movementSpeed: 0
   attackDamage: 0
   attackSpeed: 0
+  playerCollider: 0
   addsItem: 0
   itemToAdd: {fileID: 0}

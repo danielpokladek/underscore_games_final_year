@@ -121,8 +121,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a1275f6bac67bd4094c2975e749b8bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemPrice: 55
+  playerItem: {fileID: 11400000, guid: f379b3c76dd1faf409c06bfe677a88ce, type: 2}
+  itemID: 14
   itemName: Cursed Skull
+  itemDesc: 
+  itemPrice: 55
   isDungeonItem: 0
   maximumHealth: 0
   currentHealth: 0
@@ -131,5 +134,5 @@ MonoBehaviour:
   attackSpeed: 0
   playerCollider: 0
   addsItem: 1
-  itemToAdd: {fileID: 791734244881393241, guid: 9ab81507aee43c747bca361cd267ce3e,
+  itemToAdd: {fileID: 5503099216105354264, guid: aec1d8bcb0386194a9d86e7c7629b088,
     type: 3}

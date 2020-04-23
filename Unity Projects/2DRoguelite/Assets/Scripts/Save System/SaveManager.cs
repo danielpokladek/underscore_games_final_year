@@ -1,8 +1,7 @@
 ﻿using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class SaveManager : MonoBehaviour
 {
@@ -70,6 +69,13 @@ public class SaveManager : MonoBehaviour
 
     private void SavePlayer(SaveData data)
     {
+        //string itemList = "";
+
+        //foreach (PlayerItem item in playerRef.GetComponent<PlayerController>().itemsList)
+        //{
+        //    itemList = itemList + item.itemID + ",";
+        //}
+
         data.playerData = new PlayerData(
             playerStats.currentHealth,
             playerStats.characterHealth.GetValue(),
@@ -80,10 +86,34 @@ public class SaveManager : MonoBehaviour
 
     private void LoadPlayer(SaveData data)
     {
-        playerStats.SetHealth(data.playerData.CurrentHealth);
-        playerStats.characterHealth.LoadValue(data.playerData.MaxHealth);
-        playerStats.characterSpeed.LoadValue(data.playerData.MoveSpeed);
-        playerStats.characterAttackDamage.LoadValue(data.playerData.AttackDamage);
-        playerStats.characterAttackDelay.LoadValue(data.playerData.AttackDelay);
+        //string[] split = data.playerData.ItemsList.Split(","[0]);
+        //PlayerItem tempItem;
+
+        //foreach (string str in split)
+        //{
+        //    Debug.Log(str);
+
+        //    foreach (ShopPlayerModifier item in GameManager.current.masterItemList.playerItems)
+        //    {
+        //        if (str == item.itemID.ToString())
+        //        {
+        //            tempItem = item.LoadItem();
+        //            tempItem.name = item.itemName;
+
+        //            playerRef.GetComponent<PlayerController>().itemsList.Add(tempItem);
+
+        //            Debug.Log("Item found: " + item.itemName);
+        //            break;
+        //        }
+
+        //    }
+        //}
+
+        playerStats.LoadStats(
+            data.playerData.CurrentHealth,
+            data.playerData.MaxHealth,
+            data.playerData.MoveSpeed,
+            data.playerData.AttackDamage,
+            data.playerData.AttackDelay);
     }
 }

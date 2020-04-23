@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(PlayerInteractions))]
 [RequireComponent(typeof(PlayerStats))]
+
 public class PlayerController : MonoBehaviour
 {
     [Header("Character UI")]
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour
     public Transform itemPickup;
 
     // --- --- ---
+    public List<PlayerItem> itemsList;
     [HideInInspector] public float  projectileSizeMultiplier = 1; 
     [HideInInspector] public bool   foundPortal = false;
     [HideInInspector] public bool   playerDead  = false;
@@ -92,6 +94,8 @@ public class PlayerController : MonoBehaviour
 
         InitiatePlayer();
         UIManager.current.PlayerSpawned(this);
+
+        itemsList = new List<PlayerItem>();
     }
 
     private void InitiatePlayer()
@@ -109,15 +113,12 @@ public class PlayerController : MonoBehaviour
 
         if (gameManager.loadStats)
         {
-            Debug.Log("Load playerStats");
-
             SaveManager.current.Load();
+
             playerStats.Init();
         }
         else if (!gameManager.loadStats)
-        {
-            Debug.Log("Don't load player stats");
-
+        { 
             playerStats.Init();
             gameManager.loadStats = true;
         }
