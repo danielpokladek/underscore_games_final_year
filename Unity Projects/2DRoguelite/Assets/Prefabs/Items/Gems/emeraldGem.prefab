@@ -143,8 +143,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70aa11c24cb9e4a489a23566c3bfc5d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerItem: {fileID: 0}
+  itemID: 99
+  itemName: Gem
+  itemDesc: Gem
   itemPrice: 0
-  itemName: 
   isDungeonItem: 0
   gemWorth: 10
   gemSound: {fileID: 8300000, guid: c1726da2ae3d8be45a6ab306cd5c8041, type: 3}

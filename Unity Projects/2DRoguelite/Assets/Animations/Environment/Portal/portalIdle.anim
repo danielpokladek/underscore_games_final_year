@@ -29,6 +29,14 @@ AnimationClip:
     path: portalGraphic
     classID: 212
     script: {fileID: 0}
+  - curve:
+    - time: 0
+      value: {fileID: 4070041279414081554, guid: 0bc5214c69c7f4a49a1b7915fb7515a7,
+        type: 3}
+    attribute: m_LightCookieSprite
+    path: portalGraphicLight
+    classID: 114
+    script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
   m_SampleRate: 6
   m_WrapMode: 0
   m_Bounds:
@@ -43,9 +51,17 @@ AnimationClip:
       typeID: 212
       customType: 23
       isPPtrCurve: 1
+    - serializedVersion: 2
+      path: 2581809509
+      attribute: 993967319
+      script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+      typeID: 114
+      customType: 0
+      isPPtrCurve: 1
     pptrCurveMapping:
     - {fileID: 4456173311284835894, guid: eef6c105b39210f48a6181ffcf30067c, type: 3}
     - {fileID: 4456173311284835894, guid: eef6c105b39210f48a6181ffcf30067c, type: 3}
+    - {fileID: 4070041279414081554, guid: 0bc5214c69c7f4a49a1b7915fb7515a7, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
