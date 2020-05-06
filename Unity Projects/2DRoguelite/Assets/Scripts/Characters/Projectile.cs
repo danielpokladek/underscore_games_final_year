@@ -36,7 +36,7 @@ public class Projectile : MonoBehaviour, IPooledObject
         projectileDamage = damage;
     }
 
-    virtual protected void DestroyProjectile()
+    virtual public void DestroyProjectile()
     {
         projectileRB.velocity = Vector3.zero;
         ObjectPooler.instance.AddItem(projectileTag, this.gameObject);

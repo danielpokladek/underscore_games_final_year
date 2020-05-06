@@ -4,11 +4,19 @@ using UnityEngine;
 
 public class DialogueTrigger : MonoBehaviour
 {
+    public bool isStoryIntro;
+    public DialogueController dialogueController;
     public Dialogue dialogue;
     public TutorialRoom roomManager;
 
     public bool changesObjectState;
     public GameObject[] objectsToChange;
+
+    private void Start()
+    {
+        if (isStoryIntro)
+            dialogueController.StartDialogue(dialogue);
+    }
 
     public void StartDialogue()
     {

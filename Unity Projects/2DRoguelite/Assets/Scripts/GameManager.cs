@@ -70,6 +70,8 @@ public class GameManager : MonoBehaviour
 
     public void LoadScene(int sceneToUnload, int sceneToLoad)
     {
+        //SaveManager.current.Save();
+
         if (enableLoadingText)
             loadingText.SetActive(true);
         else

@@ -11,7 +11,7 @@ public class Throwable : Projectile
         transform.RotateAround(transform.position, new Vector3(0, 0, 1), 120 * Time.deltaTime);
     }
 
-    override protected void DestroyProjectile()
+    override public void DestroyProjectile()
     {
         GameObject fx = Instantiate(hitEffect, transform.position, Quaternion.identity);
         Destroy(fx, 0.6f);

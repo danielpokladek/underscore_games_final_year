@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Experimental.Rendering.Universal;
 using System;
-using UnityEditorInternal;
 
 public class LevelManager : MonoBehaviour
 {

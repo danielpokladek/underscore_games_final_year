@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UIElements;
 
 public class DialogueController : MonoBehaviour
 {
@@ -24,7 +25,8 @@ public class DialogueController : MonoBehaviour
 
     private void Update()
     {
-        if (inConvo && Input.GetKeyDown(KeyCode.Space))
+        if (inConvo && Input.GetKeyDown(KeyCode.Space) ||
+            inConvo && Input.GetMouseButtonDown(0))
         {
             DisplayNextSentence();
         }
@@ -75,9 +77,11 @@ public class DialogueController : MonoBehaviour
 
     private void EndDialogue()
     {
-        if (onFinishDialogueCallback != null) onFinishDialogueCallback.Invoke();
+        onFinishDialogueCallback?.Invoke();
 
         inConvo = false;
-        UIManager.current.EndDialogue();
+
+        if (UIManager.current)
+            UIManager.current.EndDialogue();
     }
 }

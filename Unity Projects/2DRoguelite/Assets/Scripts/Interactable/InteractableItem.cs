@@ -15,10 +15,10 @@ public class InteractableItem : MonoBehaviour
 
     private void Start()
     {
-        if (itemID == 0)
-            Debug.LogError("ItemID not set on: " + gameObject.name + ". Item won't be saved, causing errors!");
+        //if (itemID == 0)
+        //    Debug.LogError("ItemID not set on: " + gameObject.name + ". Item won't be saved, causing errors!");
 
-        playerItem.SetItem(itemName, itemDesc, itemID);
+        //playerItem.SetItem(itemName, itemDesc, itemID);
     }
 
     public void Item(string _itemName, int _itemPrice, bool _isDungeonItem = false)

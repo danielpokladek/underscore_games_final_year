@@ -120,7 +120,7 @@ public class PlayerController : MonoBehaviour
         else if (!gameManager.loadStats)
         { 
             playerStats.Init();
-            gameManager.loadStats = true;
+            //gameManager.loadStats = true;
         }
     }
 

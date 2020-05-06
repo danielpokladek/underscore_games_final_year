@@ -10,7 +10,7 @@ public class GolemController : EnemyRanged
 
     public GameObject spikething;
 
-    GameObject[] projList;
+    GameObject[] projectileList;
 
     private float _spikeCooldown;
     private float _rockCooldown;
@@ -21,7 +21,7 @@ public class GolemController : EnemyRanged
     {
         base.Start();
 
-        projList = new GameObject[golemRockAttackPoints.Length];
+        projectileList = new GameObject[golemRockAttackPoints.Length];
     }
 
     override protected void Update()
@@ -59,13 +59,13 @@ public class GolemController : EnemyRanged
 
             proj.GetComponent<Projectile>().SetDamage(enemyStats.characterAttackDamage.GetValue());
 
-            projList[i] = proj;
+            projectileList[i] = proj;
             i++;
         }
 
         yield return new WaitForSeconds(.5f);
 
-        foreach (GameObject _proj in projList)
+        foreach (GameObject _proj in projectileList)
         {
             _proj.GetComponent<Rigidbody2D>().AddForce(attackPoint.up * 19, ForceMode2D.Impulse);
         }
@@ -92,5 +92,15 @@ public class GolemController : EnemyRanged
             return true;
 
         return false;
+    }
+
+    public override void DeathEffect()
+    {
+        base.DeathEffect();
+
+        foreach (GameObject proj in projectileList)
+        {
+            proj.GetComponent<Projectile>().DestroyProjectile();
+        }
     }
 }

@@ -24,7 +24,7 @@ public class StoryIntro : MonoBehaviour
             NextImage();
 
         if (Input.GetKeyDown(KeyCode.Escape))
-            LoadMenu();
+            StartCoroutine(LoadMenu());
     }
 
     public void NextImage()
